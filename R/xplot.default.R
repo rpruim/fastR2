@@ -1,0 +1,5 @@
+xplot.default <-
+function (...) 
+{
+    plot(...)
+}
