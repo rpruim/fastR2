@@ -11,7 +11,6 @@
 #' @param which A numeric vector indicating which plots to produce
 #' @param panel.default default panel function
 #' @param sub.caption secondary caption
-#' @param to be documented
 #' @param main, to be documented
 #' @param type, to be documented
 #' @param pch, to be documented
@@ -58,12 +57,13 @@ function (...)
 
 
 #' @rdname xplot
-#' @method xplot default
+#' @method xplot lm
 #' @export
 xplot.lm <-
 function (x, which = c(1L:3, 5), caption = list("Residuals vs Fitted", 
     "Normal Q-Q", "Scale-Location", "Cook's distance", "Residuals vs Leverage", 
-    "Cook's distance vs Leverage"), panel.default = if (add.smooth) panel.xyplotsmooth else panel.xyplotpoints, 
+    "Cook's distance vs Leverage"), 
+	panel.default = if (add.smooth) panel.xyplotsmooth else panel.xyplotpoints, 
     sub.caption = NULL, main = "", print.plots = TRUE, ask = 1 < 
         length(which) && dev.interactive(), type = "p", pch = trellis.par.get("plot.symbol")$pch, 
     addline.col = trellis.par.get("add.line")$col, line.col = trellis.par.get("plot.line")$col, 

@@ -13,7 +13,6 @@
 #' @references R. Pruim, \cite{Foundations and Applicaitons of Statistics: An
 #' Introduction Using R}, AMS, 2011.
 #' @keywords package 
-#' @export
 #' @examples
 #' 
 #' require(fastR)
