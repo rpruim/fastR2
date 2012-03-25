@@ -1,0 +1,3 @@
+#! /bin/bash
+bin/roxy -p "." --clean
+R CMD Rd2pdf --force --output=fastR-manual.pdf --title="fastR Manual" --internals "."
