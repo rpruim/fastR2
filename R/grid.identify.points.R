@@ -1,3 +1,4 @@
+#' @export
 grid.identify.points <-
 function (x, y, ind, offset = 0.03, labels = 1L:length(x), cex = 0.65, 
     col = trellis.par.get("add.text")$col, adj.x = TRUE, adj.y = FALSE) 

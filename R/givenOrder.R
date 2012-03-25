@@ -1,3 +1,4 @@
+#' @export
 givenOrder <-
 function (x) 
 {

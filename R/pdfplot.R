@@ -1,3 +1,4 @@
+#' @export
 pdfplot <-
 function (pdf = dnorm, xlim = c(0, 1), xlab, ylab, col, lwd = 2, 
     ...) 

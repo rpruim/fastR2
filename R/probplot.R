@@ -1,3 +1,4 @@
+#' @export
 probplot <-
 function (x, qdist = qnorm, probs = NULL, line = TRUE, xlab = NULL, 
     ylab = "Percentile", ...) 

@@ -1,3 +1,4 @@
+#' @export
 panel.smooth <-
 function (x, y, col = trellis.par.get("plot.symbol")$col, col.smooth = trellis.par.get("add.line")$col, 
     bg = NA, pch = trellis.par.get("plot.symbol")$pch, cex = 1, 

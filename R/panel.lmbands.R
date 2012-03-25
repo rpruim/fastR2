@@ -1,3 +1,4 @@
+#' @export
 panel.lmbands <-
 function (x, y, interval = "confidence", level = 0.95, model = lm(y ~ 
     x), pred.col = trellis.par.get("superpose.line")$col[2], 

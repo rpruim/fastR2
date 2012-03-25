@@ -1,3 +1,4 @@
+#' @export
 tdf <-
 function (sd1, sd2, n1, n2) 
 {

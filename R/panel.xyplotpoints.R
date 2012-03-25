@@ -1,3 +1,4 @@
+#' @export
 panel.xyplotpoints <-
 function (x, y, type = c("p"), ...) 
 {

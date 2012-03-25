@@ -1,13 +1,70 @@
 Package: fastR
 Type: Package
-Title: Data sets and utilities for Foundations and Applications of Statistics by R Pruim
-Version: 0.2-14
-Date: 2011-05-06
+Title: Data sets and utilities for Foundations and Applications of Statistics
+    by R Pruim
+Version: 0.3-1
+Date: 2012-03-24
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
-Description: Data sets and utilities for Foundations and Applications of Statistics:an Introduction using R by R Pruim
+Description: Data sets and utilities for Foundations and Applications of
+    Statistics:an Introduction using R by R Pruim
 License: GPL (>=2)
-Depends: lattice, grid, mosaic
-Suggests: MASS, faraway, Hmisc, DAAG, multcomp, vcd, car, alr3, corrgram, BradleyTerry2, cubature, Devore6
+Depends:
+    lattice,
+    grid,
+    mosaic
+Suggests:
+    MASS,
+    faraway,
+    Hmisc,
+    DAAG,
+    multcomp,
+    vcd,
+    car,
+    alr3,
+    corrgram,
+    BradleyTerry2,
+    cubature,
+    Devore6
 LazyLoad: yes
 LazyData: yes
+Collate:
+    'col.fastR.R'
+    'col.perc.R'
+    'fastR-internal.R'
+    'fastR-package.R'
+    'funplot.R'
+    'funvec.R'
+    'geolm.R'
+    'givenOrder.R'
+    'grid.identify.points.R'
+    'make.rm.R'
+    'multirandom.R'
+    'nlmax.R'
+    'nlmin.R'
+    'ntigram.R'
+    'panel.lm.R'
+    'panel.lmbands.R'
+    'panel.smooth.R'
+    'panel.xyplotpoints.R'
+    'panel.xyplotsmooth.R'
+    'pdfplot.R'
+    'pmfhistogram.R'
+    'pmfplot.R'
+    'print.stemplot.R'
+    'probplot.R'
+    'snippet.R'
+    'stemplot.data.frame.R'
+    'stemplot.numeric.R'
+    'stemplot.R'
+    'summary.nlmax.R'
+    'summary.nlmin.R'
+    'tdf.R'
+    'to2d.R'
+    'vaov.formula.R'
+    'vaov.R'
+    'wald.ci.R'
+    'wilson.ci.R'
+    'xplot.R'
+    'datasets.R'
+    'undocumented.R'

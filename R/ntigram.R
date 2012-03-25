@@ -1,3 +1,4 @@
+#' @export
 ntigram <-
 function (x, bins = 12, name = deparse(substitute(x)), ...) 
 {

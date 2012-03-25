@@ -1,3 +1,4 @@
+#' @export
 wald.ci <-
 function (x, n = 100, conf.level = 0.95) 
 {

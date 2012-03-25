@@ -1,3 +1,4 @@
+#' @export
 make.rm <-
 function (constant, repeated, data, contrasts) 
 {

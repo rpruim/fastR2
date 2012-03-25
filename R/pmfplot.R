@@ -1,3 +1,4 @@
+#' @export
 pmfplot <-
 function (pmf = dnorm, xlab, ylab, col, ...) 
 {

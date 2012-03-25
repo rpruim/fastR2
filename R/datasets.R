@@ -7,6 +7,7 @@
 #' 
 #' 
 #' @name Jordan8687
+#' @rdname Jordan8687
 #' @docType data
 #' @format A data frame with 82 observations on the following 2 variables.
 #' \describe{ \item{list("Game")}{a numeric vector} \item{list("Points")}{a
@@ -29,6 +30,7 @@ NULL
 #' 
 #' 
 #' @name actgpa
+#' @rdname actgpa
 #' @docType data
 #' @format A data frame with 26 observations on the following 2 variables.
 #' \describe{ \item{list("ACT")}{a numeric vector} \item{list("GPA")}{a numeric
@@ -51,6 +53,7 @@ NULL
 #' 
 #' 
 #' @name airlineArrival
+#' @rdname airlineArrival
 #' @docType data
 #' @format A data frame with 11000 observations on the following 3 variables.
 #' \describe{ \item{list("Airport")}{a factor with levels \code{LosAngeles}
@@ -84,6 +87,7 @@ NULL
 #' 
 #' 
 #' @name airpollution
+#' @rdname airpollution
 #' @docType data
 #' @format A data frame with 6 observations on the following 2 variables.
 #' \describe{ \item{list("pollution")}{a numeric vector}
@@ -110,6 +114,7 @@ NULL
 #' 
 #' 
 #' @name balldrop
+#' @rdname balldrop
 #' @docType data
 #' @format A data frame with 30 observations on the following 2 variables.
 #' \describe{ \item{list("height")}{height in meters} \item{list("time")}{time
@@ -132,6 +137,7 @@ NULL
 #' 
 #' 
 #' @name batting
+#' @rdname batting
 #' @docType data
 #' @format A data frame with 8062 observations on the following 22 variables.
 #' \describe{ \item{list("player")}{unique identifier for each player}
@@ -166,6 +172,7 @@ NULL
 #' 
 #' 
 #' @name births78
+#' @rdname births78
 #' @docType data
 #' @format A data frame with 365 observations on the following 3 variables.
 #' \describe{ \item{list("date")}{date (as a factor)}
@@ -193,6 +200,7 @@ NULL
 #' 
 #' 
 #' @name buckthorn
+#' @rdname buckthorn
 #' @docType data
 #' @format A data frame with 165 observations on the following 3 variables.
 #' \describe{ \item{list("shoots")}{number of new shoots coming from stump}
@@ -221,6 +229,7 @@ NULL
 #' 
 #' 
 #' @name bugs
+#' @rdname bugs
 #' @docType data
 #' @format A data frame with 24 observations on the following 2 variables.
 #' \describe{ \item{list("Color")}{color of card; one of \code{B}(lue)
@@ -229,7 +238,9 @@ NULL
 #' @source M. C. Wilson and R. E. Shade, Relative attractiveness of various
 #' luminescent colors to the cereal leaf beetle and the meadow spittlebug,
 #' \emph{Journal of Economic Entomology} 60 (1967), 578--580.
+#'
 #' @keywords datasets
+#'
 #' @examples
 #' 
 #' data(bugs)
@@ -250,6 +261,7 @@ NULL
 #' 
 #' 
 #' @name concrete
+#' @rdname concrete
 #' @aliases concreteAll concrete28
 #' @docType data
 #' @format \code{concreteAll} is a data frame with the following 9 variables.
@@ -267,7 +279,7 @@ NULL
 #' Research}, Vol. 28, No. 12, pp. 1797-1808.
 #' @source Data were obtained from the Machine Learning Repository
 #' (\url{http://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
-#' Yeh (icyeh@chu.edu.tw) who retains the copyright for these data.
+#' Yeh (\email{icyeh at chu.edu.tw}) who retains the copyright for these data.
 #' @keywords datasets
 #' @examples
 #' 
@@ -290,6 +302,7 @@ NULL
 #' adjacent plots, accounting for 11 pairs of "split" plots.
 #' 
 #' @name corn
+#' @rdname corn
 #' @docType data
 #' @format A data frame with 11 observations on the following 2 variables.
 #' \describe{ \item{list("reg")}{yield of regular corn (lbs/acre)}
@@ -322,6 +335,7 @@ NULL
 #' 
 #' 
 #' @name cuckoo
+#' @rdname cuckoo
 #' @docType data
 #' @format A data frame with 120 observations on the following 2 variables.
 #' \describe{ \item{list("length")}{length of egg (mm)}
@@ -350,6 +364,7 @@ NULL
 #' 
 #' 
 #' @name deathPenalty
+#' @rdname deathPenalty
 #' @aliases deathPenalty deathPen
 #' @docType data
 #' @format A data frame with 326 observations.  The factors are coded more
@@ -384,6 +399,7 @@ NULL
 #' 
 #' 
 #' @name drag
+#' @rdname drag
 #' @docType data
 #' @format A data frame with 42 observations on the following 5 variables.
 #' \describe{ \item{list("time")}{time (in seconds) to travel between two
@@ -427,6 +443,7 @@ NULL
 #' The study was conducted in a double-blind manner with crossover.
 #' 
 #' @name endurance
+#' @rdname endurance
 #' @docType data
 #' @format A data frame with 15 observations on the following 5 variables.
 #' \describe{ \item{list("Vitamin")}{number of repetitions until reaching 50%
@@ -463,6 +480,7 @@ NULL
 #' 
 #' 
 #' @name familySmoking
+#' @rdname familySmoking
 #' @docType data
 #' @format A data frame with 5375 observations on the following 2 variables.
 #' \describe{ \item{list("Student")}{a factor with levels \code{DoesNotSmoke}
@@ -498,6 +516,7 @@ NULL
 #' yes\cr }
 #' 
 #' @name fastR-package
+#' @rdname fastR-package
 #' @aliases fastR-package fastR
 #' @docType package
 #' @author Randall Pruim
@@ -526,6 +545,7 @@ NULL
 #' these fumbles were recovered by the team that fumbled.
 #' 
 #' @name fumbles
+#' @rdname fumbles
 #' @docType data
 #' @format A data frame with 120 observations on the following 7 variables.
 #' \describe{ \item{list("team")}{NCAA football team} \item{list("rank")}{rank
@@ -581,6 +601,7 @@ NULL
 #' 
 #' 
 #' @name pheno
+#' @rdname fumbles
 #' @aliases pheno fusion1 fusion2
 #' @docType data
 #' @format Data frames with the following variables.  \describe{
@@ -642,6 +663,7 @@ NULL
 #' 
 #' 
 #' @name golfballs
+#' @rdname fumbles
 #' @docType data
 #' @format The format is: num [1:4] 137 138 107 104
 #' @source Data collected by Allan Rossman in Carlisle, PA.
@@ -664,6 +686,7 @@ NULL
 #' 
 #' 
 #' @name gpa
+#' @rdname gpa
 #' @docType data
 #' @format A data frame with 271 observations on the following 4 variables.
 #' \describe{ \item{list("satm")}{SAT mathematics score}
@@ -690,6 +713,7 @@ NULL
 #' 
 #' 
 #' @name heliumFootballs
+#' @rdname heliumFootballs
 #' @docType data
 #' @format A data frame with 39 observations on the following 3 variables.
 #' \describe{ \item{list("Trial")}{trial number} \item{list("Air")}{distance
@@ -753,6 +777,7 @@ NULL
 #' of recovery} }
 #' 
 #' @name ice
+#' @rdname ice
 #' @docType data
 #' @source Dykstra, J. H., Hill, H. M., Miller, M. G., Michael T. J., Cheatham,
 #' C. C., and Baker, R.J., Comparisons of cubed ice, crushed ice, and wetted
@@ -778,6 +803,7 @@ NULL
 #' 
 #' 
 #' @name inflation
+#' @rdname inflation
 #' @docType data
 #' @format A data frame with 23 observations on the following 5 variables.
 #' \describe{ \item{list("country")}{country where data were collected}
@@ -814,6 +840,7 @@ NULL
 #' 
 #' 
 #' @name kids
+#' @rdname kids
 #' @docType data
 #' @format A data frame with 478 observations on the following 11 variables.
 #' \describe{ \item{list("Gender")}{a factor with levels \code{boy}
@@ -857,6 +884,7 @@ NULL
 #' 
 #' 
 #' @name littleSurvey
+#' @rdname littleSurvey
 #' @docType data
 #' @format A data frame with 279 observations on the following 20 variables.
 #' \describe{ \item{list("number")}{a number between 1 and 30}
@@ -905,6 +933,7 @@ NULL
 #' 
 #' 
 #' @name mathnoise
+#' @rdname mathnoise
 #' @docType data
 #' @format A data frame with 40 observations on the following 3 variables.
 #' \describe{ \item{list("score")}{score on a mathematics test}
@@ -933,6 +962,7 @@ NULL
 #' 
 #' 
 #' @name miaa05
+#' @rdname miaa05
 #' @docType data
 #' @format A data frame with 134 observations on the following 27 variables.
 #' \describe{ \item{list("Number")}{jersey number}
@@ -971,6 +1001,7 @@ NULL
 #' 
 #' 
 #' @name mlb2004
+#' @rdname mlb2004
 #' @docType data
 #' @format A data frame with 30 observations on the following 20 variables.
 #' \describe{ \item{list("Team")}{team city, a factor}
@@ -1005,6 +1036,7 @@ NULL
 #' 
 #' 
 #' @name ncaa2010
+#' @rdname ncaa2010
 #' @aliases ncaa2010 ncaa2009 ncaa2008
 #' @docType data
 #' @format Seven variables describing NCAA Division I basketball games.
@@ -1043,6 +1075,7 @@ NULL
 #' 
 #' 
 #' @name nfl2007
+#' @rdname nfl2007
 #' @docType data
 #' @format A data frame with 267 observations on the following 7 variables.
 #' \describe{ \item{list("Date")}{date on which game was played}
@@ -1079,6 +1112,7 @@ NULL
 #' 
 #' 
 #' @name noise
+#' @rdname noise
 #' @docType data
 #' @format A data frame with 50 observations on the following 5 variables.
 #' \describe{ \item{list("id")}{subject identifier} \item{list("score")}{score
@@ -1112,6 +1146,7 @@ NULL
 #' 
 #' 
 #' @name palettes
+#' @rdname palettes
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
 #' \describe{ \item{list("palettes")}{number of palettes repaired}
@@ -1180,6 +1215,7 @@ NULL
 #' experiment was found.
 #' 
 #' @name paperplanes
+#' @rdname paperplanes
 #' @docType data
 #' @format A data frame with 16 observations on the following 5 variables.
 #' \describe{ \item{list("distance")}{distance plane traveled (cm)}
@@ -1210,6 +1246,7 @@ NULL
 #' 
 #' 
 #' @name pendulum
+#' @rdname pendulum
 #' @docType data
 #' @format A data frame with 27 observations on the following 3 variables.
 #' \describe{ \item{list("length")}{length of the pendulum (in meters)}
@@ -1240,6 +1277,7 @@ NULL
 #' during the task was used as a measure of stress.
 #' 
 #' @name petstress
+#' @rdname petstress
 #' @docType data
 #' @format A data frame with 45 observations on the following 2 variables.
 #' \describe{ \item{list("Group")}{a factor with levels \code{C}ontrol,
@@ -1304,6 +1342,7 @@ NULL
 #' numeric codes above to pig configurations.
 #' 
 #' @name pigs
+#' @rdname pigs
 #' @aliases pigs pigConfig
 #' @docType data
 #' @format A data frame with 6000 observations on the following 6 variables.
@@ -1316,7 +1355,7 @@ NULL
 #' which pigs were rolled (5 or 8 inches)} \item{list("start")}{starting
 #' position of the pigs (0 = both pigs backwards, 1 = one bacwards one
 #' forwards, 2 = both forwards)} }
-#' @source John C. Kern II, Duquesne University (kern@mathcs.duq.edu)
+#' @source John C. Kern II, Duquesne University (\email{kern at mathcs.duq.edu})
 #' @keywords datasets
 #' @examples
 #' 
@@ -1335,6 +1374,7 @@ NULL
 #' 
 #' 
 #' @name pitching2005
+#' @rdname pitching2005
 #' @docType data
 #' @format A data frame with 653 observations on the following 27 variables.
 #' \describe{ \item{list("playerID")}{unique identifier for each player}
@@ -1376,6 +1416,7 @@ NULL
 #' 
 #' 
 #' @name poison
+#' @rdname poison
 #' @docType data
 #' @format A data frame with 48 observations on the following 3 variables.
 #' \describe{ \item{list("Poison")}{type of poison (1, 2, or 3)}
@@ -1421,6 +1462,7 @@ NULL
 #' 
 #' 
 #' @name punting
+#' @rdname punting
 #' @docType data
 #' @format A data frame with 13 observations on the following 7 variables.
 #' \describe{ \item{list("distance")}{mean distance for 10 punts (feet) }
@@ -1455,6 +1497,7 @@ NULL
 #' 
 #' 
 #' @name ratpoison
+#' @rdname ratpoison
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
 #' \describe{ \item{list("consumption")}{a numeric vector}
@@ -1480,6 +1523,7 @@ NULL
 #' 
 #' 
 #' @name rgolfballs
+#' @rdname rgolfballs
 #' @docType data
 #' @keywords datasets
 #' @examples
@@ -1499,6 +1543,7 @@ NULL
 #' 
 #' 
 #' @name rubberband
+#' @rdname rubberband
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \describe{ \item{list("Stretch")}{amount rubber band was stretched before
@@ -1522,6 +1567,7 @@ NULL
 #' 
 #' 
 #' @name scent
+#' @rdname scent
 #' @docType data
 #' @format A data frame with 21 observations on the following 12 variables.
 #' \describe{ \item{list("id")}{ID number} \item{list("sex")}{a factor with
@@ -1573,6 +1619,7 @@ NULL
 #' piece went down the plughole.
 #' 
 #' @name soap
+#' @rdname soap
 #' @docType data
 #' @format A data frame with 15 observations on the following 3 variables.
 #' \describe{ \item{list("Date")}{} \item{list("Day")}{days since start of soap
@@ -1599,6 +1646,7 @@ NULL
 #' 
 #' 
 #' @name spheres
+#' @rdname spheres
 #' @docType data
 #' @format A data frame with 12 observations on the following 2 variables.
 #' \describe{ \item{list("diameter")}{diameter of bearing (m)}
@@ -1639,6 +1687,7 @@ NULL
 #' block.
 #' 
 #' @name step
+#' @rdname step
 #' @docType data
 #' @format A data frame with 30 observations on the following 7 variables.
 #' \describe{ \item{list("order")}{performance order}
@@ -1672,6 +1721,7 @@ NULL
 #' 
 #' 
 #' @name stereogram
+#' @rdname stereogram
 #' @docType data
 #' @format A data frame with 78 observations on the following 2 variables.
 #' \describe{ \item{list("Time")}{time until subject was able to fuse a random
@@ -1702,6 +1752,7 @@ NULL
 #' 
 #' 
 #' @name students
+#' @rdname students
 #' @docType data
 #' @format A data frame with 1000 observations on the following 6 variables.
 #' \describe{ \item{list("ACT")}{ACT score} \item{list("SAT")}{SAT score}
@@ -1735,6 +1786,7 @@ NULL
 #' for the group.
 #' 
 #' @name tastetest
+#' @rdname tastetest
 #' @aliases tastetest taste1
 #' @docType data
 #' @format A data frame with 16 observations on 2 (\code{taste1}) or 4
@@ -1768,6 +1820,7 @@ NULL
 #' 
 #' 
 #' @name tirewear
+#' @rdname tirewear
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \describe{ \item{list("weight")}{estimated wear (1000's of miles) base on
@@ -1799,6 +1852,7 @@ NULL
 #' 
 #' 
 #' @name traffic
+#' @rdname traffic
 #' @docType data
 #' @format A data frame with 9 observations on the following 6 variables.
 #' \describe{ \item{list("year")}{a year from 1951 to 1959}
@@ -1839,6 +1893,7 @@ NULL
 #' 
 #' 
 #' @name trebuchet
+#' @rdname trebuchet
 #' @aliases trebuchet trebuchet1 trebuchet2
 #' @docType data
 #' @format Data frames with the following variables.  \describe{
@@ -1866,23 +1921,6 @@ NULL
 
 
 
-#' Undocumented functions
-#' 
-#' Documentation is still pending for this functions
-#' 
-#' 
-#' @aliases tdf dotPlot panel.dotPlot funplot grid.identify.points ntigram
-#' panel.lm panel.lmbands panel.smooth panel.xyplotpoints panel.xyplotsmooth
-#' pdfplot pmfhistogram pmfplot probplot stemplot stemplot.data.frame
-#' stemplot.numeric funvec givenOrder make.rm multirandom nlmax nlmin
-#' summary.nlmax summary.nlmin print.stemplot show.fumbles show.poisson
-#' statTally surround
-#' @author Randall Pruim
-NULL
-
-
-
-
 
 #' Utilities bills
 #' 
@@ -1890,6 +1928,7 @@ NULL
 #' 
 #' 
 #' @name utilities
+#' @rdname utilities
 #' @aliases utilities utilities2
 #' @docType data
 #' @format A data frame the following variables.  \describe{
@@ -1926,37 +1965,6 @@ NULL
 
 
 
-#' Vector functions
-#' 
-#' These functions simplify working with vectors.
-#' 
-#' 
-#' @aliases dot vlength project
-#' @param u a numeric vector
-#' @param x a numeric vector
-#' @param y a numeric vector
-#' @param type one of \code{c("vector","length")} indicating whether the
-#' projection should be returned as a vector (the default) or a length.
-#' @return \code{dot} returns the dot product of two vectors.
-#' 
-#' \code{vlength} returns the length of a vector.
-#' 
-#' \code{project(x,u)} returns the vector (or its length) that results from
-#' projecting \code{x} in the direction of \code{u}. It is not necessary that
-#' \code{u} be a unit vector.
-#' @author Randall Pruim
-#' @keywords utilities
-#' @examples
-#' 
-#' v <- c(1,1,1,1)
-#' x <- c(1,2,3,4)
-#' vlength(v)
-#' dot(x,v)
-#' dot(x,v) / vlength(x)^2
-#' project(x,v)
-#' 
-NULL
-
 
 
 #' Women in the workforce
@@ -1969,6 +1977,7 @@ NULL
 #' 1968 # # The Data: #
 #' 
 #' @name workingWomen
+#' @rdname workingWomen
 #' @docType data
 #' @format A data frame with 19 observations on the following 3 variables.
 #' \describe{ \item{list("city")}{name of a U.S. city (coded as a factor with

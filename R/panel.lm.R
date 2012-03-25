@@ -1,3 +1,4 @@
+#' @export
 panel.lm <-
 function (x, y, model, fits, ...) 
 {

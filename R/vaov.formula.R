@@ -1,3 +1,4 @@
+#' @export
 vaov.formula <-
 function (x, data = parent.frame(), ...) 
 {

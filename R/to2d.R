@@ -1,3 +1,4 @@
+#' @export
 to2d <-
 function (x, y, z, type = NULL, xas = c(0.4, -0.3), yas = c(1, 
     0), zas = c(0, 1)) 

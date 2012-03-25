@@ -1,3 +1,4 @@
+#' @export
 panel.xyplotsmooth <-
 function (x, y, type = c("p", "smooth"), ...) 
 {

@@ -1,3 +1,4 @@
+#' @export
 funplot <-
 function (fun, xlim, ylim, args = list(), lty = 1, lwd = 2, col = trellis.par.get("plot.line")$col, 
     buffer = 0, n = 50, ...) 

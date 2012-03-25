@@ -1,3 +1,4 @@
+#' @export
 multirandom <-
 function (n = 100, samples = 6, rdist = rnorm, ...) 
 {

@@ -1,5 +1,25 @@
-col.fastR <-
-function (bw = FALSE, lty = 1:7) 
+#' Lattice Theme
+#' 
+#' A theme for use with lattice graphics.
+#' 
+#' 
+#' @param bw whether color scheme should be "black and white"
+#' @param lty vector of line type codes
+#' @return Returns a list that can be supplied as the \code{theme} to
+#' \code{\link{trellis.par.set}()}.
+#' @note This theme was used in the production of the book \cite{Foundations
+#' and Applications of Statistics}
+#' @author Randall Pruim
+#' @seealso \code{\link{trellis.par.set}}, \code{\link{show.settings}}
+#' @keywords graphics
+#' @export
+#' @examples
+#' 
+#' trellis.par.set(theme=col.fastR(bw=TRUE))
+#' show.settings()
+#' trellis.par.set(theme=col.fastR())
+#' show.settings()
+col.fastR <- function (bw = FALSE, lty = 1:7) 
 {
     aBlue <- colorRampPalette(c("white", "navy"))(10)[8]
     paleBlue <- colorRampPalette(c("white", "navy"))(10)[6]

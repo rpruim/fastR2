@@ -1,3 +1,4 @@
+#' @export
 pmfhistogram <-
 function (dist, x = 0:10, argsForDist = list(), breaks, scale, 
     ...) 

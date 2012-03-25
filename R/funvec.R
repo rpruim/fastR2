@@ -1,3 +1,4 @@
+#' @export
 funvec <-
 function (x, data = parent.frame(), fun = mean, groups = NULL, 
     subset = TRUE, ...) 
