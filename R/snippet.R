@@ -37,7 +37,7 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
     lib.loc = NULL, character.only = FALSE) 
 {
     package <- "fastR"
-    paths <- .find.package(package, lib.loc, verbose = verbose)
+    paths <- find.package(package, lib.loc, verbose = verbose)
     paths <- paths[file_test("-d", file.path(paths, "snippet"))]
     if (missing(name)) {
         noName = TRUE
