@@ -1,3 +1,6 @@
+tryCatch(utils::globalVariables(c('gp')),
+         error=function(e) message('Looks like you should update R.'))
+
 #' Geometric representation of linear model
 #' 
 #' \code{geolm} create a graphical representation of the fit of a linear model.
@@ -60,8 +63,7 @@ function (formula, data = parent.env(), type = "xz", version = 1,
     if (version == 1) {
         pts <- cbind(pts, rep(0, nrow(pts)))
     }
-    d <- data.frame(x = pts[, 1], y = pts[, 2], z = pts[, 3], 
-        gp = rep(letters[1:6], each = 2))
+    d <- data.frame(x = pts[, 1], y = pts[, 2], z = pts[, 3], gp = rep(letters[1:6], each = 2))
     aspect <- c(diff(range(d$y))/diff(range(d$x)), diff(range(d$z))/diff(range(d$x)))
     if (plot) {
         if (version == 1) {
