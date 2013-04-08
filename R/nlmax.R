@@ -6,7 +6,7 @@
 #' The \code{summary} method for the resulting objects provides output that is easier 
 #' for humnans to read.
 #' 
-#' @aliases nlmax, nlmin, summary.nlmax, summary.nlmin
+#' @aliases nlmax, nlmin
 #' @param f a function to optimize
 #' @param object an object returned from \code{nlmin} or \code{nlmax}
 #' @param nsmall a numeric passed through to \code{\link{format}}
@@ -40,6 +40,7 @@ function (f, ...)
 }
 
 #' @rdname nlmax
+#' @method summary nlmax
 #' @export
 summary.nlmax <-
 function (object, nsmall = 4, ...) 
@@ -61,6 +62,7 @@ function (object, nsmall = 4, ...)
 }
 
 #' @rdname nlmax
+#' @method summary nlmin
 #' @export
 summary.nlmin <-
 function (object, nsmall = 4, ...) 
