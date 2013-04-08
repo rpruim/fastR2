@@ -1,4 +1,21 @@
+#' Plot confidence and prediction interval bands for linear models
+#' 
+#' \code{panel.lmbands} is a drop-in replacement for \code{panel.xyplot} and adds 
+#' bands showing confidence interval and prediction interval width.
+#' @param x numeric vector
+#' @param y numeric vecotor
+#' @param interval character, currently ignored
+#' @param level numeric confidence level
+#' @param model a model object returned from \code{lm}
+#' @param pred.col color for prediction interval bands
+#' @param conf.col color for confidence interval bands
+#' @param pred.lty numeric line type for precition interval bands
+#' @param conf.lty numeric line type for confidence interval bands
+#' @param \dots additional arguments passed on to \code{panel.xyplot}
+#' 
 #' @export
+#' @examples
+#' xyplot( width ~ length, KidsFeet, panel=panel.lmbands)
 panel.lmbands <-
 function (x, y, interval = "confidence", level = 0.95, model = lm(y ~ 
     x), pred.col = trellis.par.get("superpose.line")$col[2], 

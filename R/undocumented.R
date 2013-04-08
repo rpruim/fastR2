@@ -16,7 +16,7 @@
 #' @name undocumented
 #'
 #' @aliases funplot grid.identify.points ntigram
-#' panel.lm panel.lmbands panel.smooth panel.xyplotpoints panel.xyplotsmooth
+#' panel.lm panel.smooth panel.xyplotpoints panel.xyplotsmooth
 #' pdfplot pmfhistogram pmfplot probplot stemplot stemplot.data.frame
 #' stemplot.numeric funvec make.rm multirandom
 #' print.stemplot show.fumbles show.poisson
