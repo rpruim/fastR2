@@ -1,8 +1,8 @@
 #' Confidence Intervals for Proportions
 #' 
-#' Alternatives to codeprop.test() and \code{binom.test()}.
+#' Alternatives to \code{prop.test} and \code{binom.test}.
 #' 
-#' \code{wald.ci()} produces Wald confidence intervals. \code{wilson.ci()}
+#' \code{wald.ci} produces Wald confidence intervals. \code{wilson.ci}
 #' produces Wilson confidence intervals (also called ``plus-4'' confidence
 #' intervals) which are Wald intervals computed from data formed by adding 2
 #' successes and 2 failures.  The Wilson confidence intervals have better

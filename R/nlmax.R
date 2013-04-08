@@ -1,4 +1,21 @@
+#' Nonlinear maximization and minimization
+#' 
+#' \code{nlmin} and \code{nlmax} are thin wrappers around \code{\link{nlm}}, a non-linear minimizer.
+#' \code{nlmax} avoids the necessity of modifying the function to construct a minimization problem
+#' from a problem that is naturally a maximization problem.
+#' The \code{summary} method for the resulting objects provides output that is easier 
+#' for humnans to read.
+#' 
+#' @aliases nlmax, nlmin, summary.nlmax, summary.nlmin
+#' @param f a function to optimize
+#' @param object an object returned from \code{nlmin} or \code{nlmax}
+#' @param nsmall a numeric passed through to \code{\link{format}}
+#' @param \dots additional arguments passed to \code{nlm}.  Note that \code{p} is a required
+#' argument for \code{nlm}.  See the help for \code{\link{nlm}} for details.
+#' 
 #' @export
+#' @examples
+#' summary( nlmax( function(x) 5 - 3*x - 5*x^2, p=0 ) )
 nlmax <-
 function (f, ...) 
 {
@@ -12,7 +29,7 @@ function (f, ...)
     return(result)
 }
 
-
+#' @rdname nlmax
 #' @export
 nlmin <-
 function (f, ...) 
@@ -22,7 +39,7 @@ function (f, ...)
     return(result)
 }
 
-
+#' @rdname nlmax
 #' @export
 summary.nlmax <-
 function (object, nsmall = 4, ...) 
@@ -43,7 +60,7 @@ function (object, nsmall = 4, ...)
     cat("\n")
 }
 
-
+#' @rdname nlmax
 #' @export
 summary.nlmin <-
 function (object, nsmall = 4, ...) 
