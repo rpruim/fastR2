@@ -602,7 +602,7 @@ NULL
 #' 
 #' 
 #' @name pheno
-#' @rdname fumbles
+#' @rdname fusion 
 #' @aliases pheno fusion1 fusion2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
@@ -664,7 +664,7 @@ NULL
 #' 
 #' 
 #' @name golfballs
-#' @rdname fumbles
+#' @rdname golfballs
 #' @docType data
 #' @format The format is: num [1:4] 137 138 107 104
 #' @source Data collected by Allan Rossman in Carlisle, PA.
