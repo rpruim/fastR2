@@ -25,9 +25,11 @@ Suggests:
     corrgram,
     BradleyTerry2,
     cubature,
-    Devore6
+    Devore6,
+    knitr
 LazyLoad: yes
 LazyData: yes
+VignetteBuilder: knitr
 Collate:
     'col.fastR.R'
     'col.perc.R'
