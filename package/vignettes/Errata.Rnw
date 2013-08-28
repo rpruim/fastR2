@@ -1,0 +1,111 @@
+
+%\VignetteIndexEntry{Errata}
+%\VignettePackage{fastR}
+%\VignetteKeywords{fastR, vignettes}
+%\VignetteEngine{knitr::knitr} 
+
+\documentclass[11pt]{article}
+\usepackage{hyperref} 
+\usepackage[margin=.8in]{geometry}
+\usepackage{longtable}
+\usepackage{probstat}
+%\usepackage[parfill]{parskip}
+\hypersetup{pdftitle={Errata for Foundations and Applications of Statistics}, colorlinks=true, linkcolor=black, citecolor=black}
+
+%\frenchspacing{}
+
+\title{Errata for Foundations and Applications of Statistics}
+\author{Randall Pruim\thanks{rpruim@calvin.edu}
+\\ \footnotesize Calvin College \\
+\footnotesize Grand Rapids, MI
+}
+\date{August, 2013}
+
+\renewcommand{\arraystretch}{1.55}
+\begin{document}
+
+\maketitle
+
+If you find an error not listed here, please send an email to \verb!rpruim@calvin.edu! with subject line ``FAST Errata''.
+
+%\tableofcontents
+
+\begin{longtable}{p{1.3in}p{5in}}
+	\hline
+	location & issue 
+	\\
+	\hline
+	\endhead
+	28, \P -1 & missing comma in ``will be assigned large numbers \fbox{,} and events \dots"
+	\\
+	29, \P -1 & ``even a simply" should be ``even a simple"
+	\\
+	155, caption & ``jn'' should be ``An''
+	\\
+	211, Lem 4.6.8 & ``If'' should be ``Let"
+	\\
+	239 & ``fit the model'' should be ``fit a model''
+	\\
+	252, Ex 5.1.1 & Second ``$\pi = 1/3$" should be ``$\pi = 1/5$"
+	\\ 
+	271, 
+	formula -2 & $(x - \overline{x})^2$ should be 
+	                               $(x_i - \overline{x})^2$ 
+	\\
+	286, Thm 5.4.1 & 
+	$\Prob( \chi^2 \ge X^2 )$ should be $\Prob( \chi^2 \le X^2 )$ 
+	\\
+	287, Ex 5.4.9 & ``fits'' should be ``fit''
+	\\
+	315, Prob 5.2 & 0.078 should be 0.78 (but the problem can be done either way)
+	\\
+	317, Prob 5.16 & The data appear in Problem 5.15 (not 5.14)
+	\\
+	331, line -1 & ``for any other vector'' should be ``for any other vector in the model space''
+	\\
+	336 & It would be clearer to write 
+	$\alpha_0 \vec{1} + \beta_1(\vec x - \vec{\mean x}) + \vec{\varepsilon}$
+	instead of 
+	$\alpha_0 + \beta_1(\vec x - \vec{\mean x}) + \vec{\varepsilon}$
+	\\
+	338 & \texttt{v0} should be \texttt{v1} in defintion of \texttt{u1}.
+	\\
+	348 & In Figure 6.5, the residual vector should be denoted $\vec E$ rather than $\vec \varepsilon$.
+	\\
+	349,
+	formula 1 & The denominator of the rightmost side should be blue, not red.
+	\\
+	383 & $-0.0444$ should be $-0.444$ in the confidence intervals for $\beta_1$ and $e^{\beta_1}$
+	\\
+	388, Table 6.2 & Some hats are missing on $\beta_1$ in the estimator column.
+	\\
+	398, Prob 6.42 & $SSE$ should be $SSM$ in both displayed equations.
+	\\
+	438 & $\vec Y$ should be $\vec y$ in the bottom half of the page.
+	\\
+	446 & \texttt{tukeyHSD()} should be  \texttt{TukeyHSD()}
+	\\
+	457 & Formula for $C_2$ is a duplicate of formula for $C_1$.  It should be 
+	$C_2 = \frac{ \mu_{11} + \mu_{21} }{2} - \frac{ \mu_{12} + \mu_{22}}{2}$.
+
+	Also, the first term for $C_3$ shoudl be $\mu_{11}$, not $\mu_{22}$.
+	\\
+	\\
+	566, Ex C.2.1 & $2 \pair{1,1} + 3 \pair{2,3}$ should be 
+	      $-4 \pair{1,1} + 3 \pair{2,3}$.
+		  \\
+	580, item 2 & unnecessary paren at end of item
+	\\
+
+	595, Sol 5.36 & $n$ should be atop the product symbol rather than behind it.  Furthermore, 
+		the wrong prior has been used.
+		\\
+	610 & confidence interval should also reference page 202
+	\\
+
+\\
+	\hline
+\end{longtable}
+
+
+\end{document}

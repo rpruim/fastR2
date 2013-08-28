@@ -1,0 +1,338 @@
+
+%\VignetteIndexEntry{Updates to R Programming in FASt}
+%\VignettePackage{fastR}
+%\VignetteKeywords{mosaic, fastR, vignettes, resources}
+%\VignetteEngine{knitr::knitr} 
+
+\documentclass[11pt]{article}
+\usepackage{hyperref} 
+\usepackage[margin=.8in]{geometry}
+\usepackage{longtable}
+%\usepackage[parfill]{parskip}
+\hypersetup{pdftitle={Updates to R Programming in Foundations and Applications of Statistics}, colorlinks=true, linkcolor=black, citecolor=black}
+
+\usepackage{probstat}
+\usepackage{language}
+%\def\pkg#1{\texttt{#1}}
+%\def\function#1{\texttt{#1}}
+%\def\dataframe#1{\texttt{#1}}
+
+%\frenchspacing{}
+
+\title{Updates to R Programming in Foundations and Applications of Statistics}
+\author{Randall Pruim\thanks{rpruim@calvin.edu}
+\\ \footnotesize Calvin College \\
+\footnotesize Grand Rapids, MI
+}
+\date{August, 2013}
+
+\begin{document}
+
+<<include=FALSE,message=FALSE>>=
+require(fastR)
+require(knitr)
+opts_chunk$set(
+			   fig.show="hold",
+			   fig.width=7, fig.height=4,
+			   out.width=".47\\textwidth"
+			   )
+@
+
+\maketitle
+
+%\tableofcontents
+
+Since the publication of \emph{Foundations and Applications of Statistics}, I have been working with colleagues from 
+the NSF-funded Project MOSAIC to create and improve the \pkg{mosaic} package.  Many functions originally in the \pkg{fastR}
+package have been moved to the \pkg{mosaic} package; some of these have subsequently been improved.  Additional functionality
+has been added to the \pkg{mosaic} package over time that I would have used in \emph{Foundations and Applications of Statistics},
+had they existed at the time the book was written.  This vignette points out some of these features for students and intructors
+who might prefer these alternative approaches.
+
+
+
+\section{Chapter 1: Summarizing Data}
+
+\subsection{Taking Advantage of Formulas}
+
+One of the big changes in \pkg{mosaic} is the wider support for formula interfaces.  Several instances of this approach could be used
+in Chapter 1.  The use of a formula interface has several advantages, the chief among them being a systematization of numerical summaries, 
+graphical summaries, and linear models into a common syntactic template:
+
+<<eval=FALSE>>=
+function( formula, data=mydata, ...)
+@
+Common formula shapes include the following
+<<eval=FALSE>>=
+function( ~ x,  data=mydata)       # for single variable summaries
+function( y ~ x, data=mydata)      # for two-variable summaries and linear models
+function( y ~ x | z, data=mydata)  # for multi-variable summaries and faceting in plots
+@
+The function name typically names the goal for the computation (e.g., \function{histogram()}, \function{mean()}, \function{tally()}, etc.).
+The formula is described using variables in data frame \dataframe{mydata} (and removing the need for otherwise required \texttt{\$} operator
+or \function{with()} constructions).
+
+\subsubsection{\texttt{tally()}}
+
+The \function{tally()} function provides a formula interface for constructing tables.
+
+
+<<>>=
+require(fastR)
+trellis.par.set(theme=col.mosaic())   # change default colors, etc.
+table( iris $ Species )
+tally( ~ Species, data=iris )
+@
+By default, \function{tally()} adds marginal totals, but these can be turned off, if desired:
+<<>>=
+tally( ~ Species, data=iris, margins=FALSE )
+@
+Tallies can be presented as counts, proportions, or percents:
+<<>>=
+tally( ~ Species, data=iris, format="count")
+tally( ~ Species, data=iris, format="percent")
+tally( ~ Species, data=iris, format="proportion")
+@
+The default format is chosen based on the shape of the formula.
+
+\subsubsection{\texttt{Numerical Summaries}}
+The \pkg{mosaic} package provides a formula interface for a number of numerical summary functions.
+<<>>=
+mean( ~ Sepal.Length, data=iris )
+median( ~ Sepal.Length, data=iris )
+sd( ~ Sepal.Length, data=iris )
+iqr( ~ Sepal.Length, data=iris )
+@
+Furthermore, the use of a formula with left and right sides allows us to 
+summarize within groups without using the \function{summary()} function:
+<<>>=
+mean( Sepal.Length ~ Species, data=iris )
+@
+
+Use
+<<eval=FALSE, tidy=FALSE>>=
+?mean
+@
+\noindent
+to get a list of additional functions that take advantage of the formula interface.
+\subsection{Treating data like distributions}
+
+In analogy to functions like \function{pnorm()} and \function{qnorm()}, the \pkg{mosaic} package provides 
+\function{pdata()} and \function{qdata()}.
+<<>>=
+qdata( .5, Sepal.Length, data=iris )
+median( ~ Sepal.Length, data=iris )
+pdata( 5, Sepal.Length, data=iris )
+tally( ~ (Sepal.Length <= 5), data=iris, format="proportion")
+@
+
+\subsection{More plots}
+
+\subsubsection{\texttt{bargraph()}}
+
+The \pkg{mosaic} function \function{barchart()} requires the user to first tally the data to be plotted.
+The \function{barplot()} function makes it easy to create barplots in the same way other lattice plots are 
+created.
+<<>>=
+bargraph( ~substance, data=HELPrct)
+bargraph( ~substance, data=HELPrct, groups=sex )
+@
+
+\subsubsection{Augmented \texttt{histogram()}}
+
+The \pkg{mosaic} package adds several features to the \pkg{histogram()} function (taking advantage of some new features 
+in the \pkg{lattice} package to change the default panel and prepanel functions used).  
+With these changes, \function{xhistogram()} has been deprecated and \pkg{histogram()} has all the functionality
+of \pkg{xhistogram()}.
+
+For example, one can choose the bins used for a histogram by setting values for \texttt{center} (defaults to 0) 
+and \texttt{width}.  Setting \texttt{width} to 1 is often useful for histograms of integer data with relatively 
+few possible values.
+<<>>=
+histogram( ~ week1, data=fumbles, width=1 )
+@
+Here are some additional features:
+<<>>=
+histogram( ~ Sepal.Length, data=iris, groups = Sepal.Length > 5, h=c(.1,.2) )
+histogram( ~ Sepal.Length | Species, data=iris, fit="normal", v=6 )
+@
+
+
+\subsubsection{\texttt{mPlot()}}
+
+For RStudio users, the \pkg{mosaic} package provides an interactive interface for creating a wide variety of 
+\pkg{lattice} and \pkg{ggplot2} graphics using the \function{mPlot()} function.  The code used to create these 
+plots can subsequently be exported to the console and copied and pasted into other documents.  \function{mPlot()} 
+requires a data frame and a default plot to produce (scatter plot if none is specified) and allows the user to 
+select variables and several other properties of the plots.
+
+<<eval=FALSE>>=
+mPlot(iris)
+mPlot(HELPrct, "density")
+@
+
+
+\section{Chapter 2: Probabilty and Random Variables}
+
+\subsection{The Lady Tasting Tea, \texttt{rflip()}, and \texttt{do()}}
+
+For those who want to introduce randomization methods early, the \texttt{rflip()} function provides a natural way to simulate
+coin tosses, and the \function{do()} function does things repeatedly and stores the results in a useful format.
+For example, the Lady Tasting Tea example can be handled using the following commands.
+
+<<>>=
+rflip(10)
+do(3) * rflip(10)
+Flips <- do(1000) * rflip(10)
+tally( ~heads, data=Flips )
+histogram( ~ heads, data=Flips, width=1 )
+@
+
+\subsection{Plotting Distributions}
+
+We can use \function{plotDist()} to plot discrete and continuous distributions in a number of ways.
+
+<<>>=
+plotDist("binom", params=list(size=10,prob=.5))
+plotDist("binom", params=list(size=10,prob=.5), kind='cdf')
+@
+<<>>=
+plotDist("binom", params=list(size=10,prob=.5), kind='hist')
+plotDist("binom", params=list(size=10,prob=.5), kind='qq')
+@
+<<>>=
+plotDist("chisq", params=list(df=4)) 
+plotDist("chisq", params=list(df=4), kind='cdf')
+@
+
+\subsection{Formulas for \texttt{binom.test()}}
+
+<<>>=
+binom.test( ~ sex, data=HELPrct )
+@
+
+Also, if you only want to extract the p-value or a confidence interval from a hypothesis test object, the \function{pval()} and 
+\function{confint()} functions will do this for you.
+<<>>=
+pval( binom.test( ~ sex, data=HELPrct ) )
+confint( binom.test( ~ sex, data=HELPrct ) )
+@
+
+\section{Chapter 3: Continuous Distributions}
+
+\subsection{\texttt{makeFun()}}
+
+For functions that are essentially algebraic in nature, the \pkg{mosaic} package
+provides a simplified method of defining functions via \function{makeFun()}.
+<<>>=
+f <- makeFun( x^2 ~ x )
+f(3)
+g <- makeFun( A*x^2 + B*x + C ~ x, A=1, B=2, C=3 )
+g(2)
+g(2, A=3, B=2, C=1)
+@
+
+\subsection{Calculus with \texttt{D()} and \texttt{antiD()}}
+
+The \pkg{mosaic} package provides functions for computing derivatives and antiderivates.  Each of these functions
+returns a \emph{function}, which can then be evaluated as needed.   This is often easier than working with, 
+for example, \function{integrate()} which returns an object from which the value of the integral must be extracted.
+
+<<>>=
+fprime <- D(f(x) ~ x)
+fprime(2)
+fprime
+gprime <- D(g(x) ~ x)
+gprime(3)
+gprime(3, A=3, B=2, C=1)
+h <- makeFun( sin(x^2) ~ x )
+hprime <- D( h(x) ~ x )
+plotFun(hprime(x) ~ x, col="red", x.lim=c(0,pi))
+plotFun( h(x) ~ x, x.lim=c(0,pi), add=TRUE )
+@
+
+Antiderivatives work similarly.
+<<>>=
+plotFun(f(x) ~ x, type="h")
+F <- antiD( f(x) ~ x )
+F(1) - F(0)
+@
+
+\section{Chapter 4: Parameter Estimation and Testing}
+
+\subsection{\texttt{t.test()}}
+
+As was the case for \function{binom.test()}, we can now use formulas for the 1-sample t-test:
+<<>>=
+t.test( ~ age, data=HELPrct )
+@
+
+\subsection{Simulations with \texttt{do()}}
+
+The simulations done using \function{replicate()} can be done with \function{do()} instead.  \function{do()} is slower because
+it does more packaging up of the results, but the format of the data returned is often easier to work with. 
+Here's some code that could replace the code in Example 4.3.3.
+
+<<>>=
+snippet("mom-beta01")   # to define beta.mom
+results <- do(1000) * beta.mom( rbeta(50,2,5) )
+head(results, 2)
+histogram( ~shape1, data=results, type='density', v=2 )
+histogram( ~shape2, data=results, type='density', v=5 )
+@
+
+The advantages of using \function{do()} are even more pronounced when working with \function{lm()}.  
+See
+\url{https://github.com/rpruim/mosaic/blob/master/inst/PDFs/Resampling-vignette.pdf?raw=true}
+for more examples using \function{do()}.
+
+
+\section{Chapter 5: Likelihood-Based Statistics}
+
+\subsection{Zermelo's Algorithm}
+
+Section 5.6 focuses on the main ideas of the Bradley-Terry model and uses software to do the fitting.
+But it is not difficult to simplify the (large) system of partial differential equations involved in
+the maximum likelihood estimation into a form that leads to both a natural characterization of the MLE
+and an iterative algorithm for approximating the MLE that go back to Zermelo.
+
+
+\section{Chapter 6: Introduction to Linear Models}
+
+\subsection{Converting models to functions with \texttt{makeFun()}}
+
+\function{makeFun()} can convert models made with \function{lm()} and \function{glm()} into
+functions.  In both cases the functions produced is a wrapper around \function{predict()}.
+These functions take care of any transformations of the explanatory variables \emph{but not
+transformations of the response variable}.  In the case of \function{glm()} models, the default type
+is \texttt{"response"} rather than \texttt{"link"} since this is more natural for beginners.
+
+<<>>=
+ball.model <- lm( time ~ sqrt(height), data=balldrop)
+time <- makeFun(ball.model)
+time( height = 0.8 )
+time( height = 0.8, interval="confidence" )
+@
+
+\subsection{And adding fitted functions to plots with \texttt{plotFun()}}
+
+We can add the model fit function to our scatter plot using \function{plotFun()}.
+<<>>=
+xyplot( time ~ height, data=balldrop )
+plotFun( time(height) ~ height, add=TRUE )
+@
+
+\section{Chapter 7: More Linear Models}
+
+\subsection{\texttt{TukeyHSD()} no longer requires use of \texttt{aov()}}
+
+<<>>=
+# TukeyHSD() can take a model created by lm()
+model <- lm( pollution ~ location, data=airpollution)
+TukeyHSD(model)
+# we can even let TukeyHSD build the model for us
+TukeyHSD( pollution ~ location, data=airpollution)
+@
+
+
+\end{document}
