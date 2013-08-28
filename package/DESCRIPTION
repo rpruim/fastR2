@@ -10,10 +10,10 @@ Description: Data sets and utilities for Foundations and Applications of
     Statistics:an Introduction using R by R Pruim
 License: GPL (>=2)
 Depends:
-    lattice,
-    grid,
     mosaic
 Suggests:
+    lattice,
+    grid,
     MASS,
     faraway,
     Hmisc,
