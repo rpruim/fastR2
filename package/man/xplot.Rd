@@ -1,0 +1,88 @@
+\name{xplot}
+\alias{xplot}
+\alias{xplot.default}
+\alias{xplot.lm}
+\title{Augmented functions}
+\usage{
+  xplot(x, ...)
+
+  \method{xplot}{default} (...)
+
+  \method{xplot}{lm} (x, which = c(1L:3, 5),
+    caption = captions,
+    panel.default = if (add.smooth) panel.xyplotsmooth else panel.xyplotpoints,
+    sub.caption = NULL, main = "", print.plots = TRUE,
+    ask = 1 < length(which) && dev.interactive(),
+    type = "p", pch = trellis.par.get("plot.symbol")$pch,
+    addline.col = trellis.par.get("add.line")$col,
+    line.col = trellis.par.get("plot.line")$col,
+    symbol.col = trellis.par.get("plot.symbol")$col,
+    lty = trellis.par.get("superpose.line")$lty, ...,
+    id.n = 3, labels.id = names(residuals(x)),
+    cex.id = 0.7, qqline = TRUE, cook.levels = c(0.5, 1),
+    add.smooth = TRUE, label.pos = c("left", "right"),
+    cex.caption = 1)
+}
+\arguments{
+  \item{\dots}{arguments passed to other functions.}
+
+  \item{x}{A numeric vector or formula.}
+
+  \item{which}{A numeric vector indicating which plots to
+  produce}
+
+  \item{panel.default}{default panel function}
+
+  \item{sub.caption}{secondary caption}
+
+  \item{main}{as in \code{xyplot}}
+
+  \item{type}{as in \code{xyplot}}
+
+  \item{pch}{as in \code{xyplot}}
+
+  \item{lty}{as in \code{xyplot}}
+
+  \item{qqline}{a logical}
+
+  \item{caption}{caption for the plot}
+
+  \item{print.plots}{a logical}
+
+  \item{ask}{a logical}
+
+  \item{addline.col}{color for added lines}
+
+  \item{line.col}{color for lines}
+
+  \item{symbol.col}{color for symbols}
+
+  \item{id.n}{a numeric}
+
+  \item{labels.id}{a character vector of labels}
+
+  \item{cex.id}{cex for ids}
+
+  \item{cook.levels}{a logical}
+
+  \item{add.smooth}{a logical}
+
+  \item{label.pos}{position for labels, one of
+  \code{"left"} or \code{"right"}}
+
+  \item{cex.caption}{cex for the caption}
+
+  \item{panel}{a panel function}
+}
+\description{
+  These functions all behave similarly to the functions
+  with the initial \code{x} removed from their names.
+}
+\examples{
+x <- runif(20)
+xplot( lm ( 2*x + 5 + rnorm(20) ~ x ) )
+}
+\seealso{
+  \code{\link{plot}}.
+}
+

@@ -1,0 +1,17 @@
+\docType{data}
+\name{gpa}
+\alias{gpa}
+\title{GPA, ACT, and SAT scores}
+\format{A data frame with 271 observations on the following 4 variables.
+\itemize{ \item{satm}{SAT mathematics score}
+\item{satv}{SAT verbal score} \item{act}{ACT score}
+\item{gpa}{college grade point average} }}
+\description{
+  GPA, ACT, and SAT scores for a sample of students.
+}
+\examples{
+data(gpa)
+splom(gpa)
+}
+\keyword{datasets}
+

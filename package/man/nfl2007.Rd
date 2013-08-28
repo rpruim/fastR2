@@ -1,0 +1,28 @@
+\docType{data}
+\name{nfl2007}
+\alias{nfl2007}
+\title{NFL 2007 season}
+\format{A data frame with 267 observations on the following 7 variables.
+\itemize{ \item{Date}{date on which game was played}
+\item{Visitor}{visiting team} \item{VisitorScore}{score for
+visiting team} \item{Home}{home team} \item{HomeScore}{score
+for home team} \item{Line}{`betting line'}
+\item{TotalLine}{'over/under' line (for combined score of both
+teams)} }}
+\description{
+  Results of National Football League games (2007 season,
+  including playoffs)
+}
+\examples{
+data(nfl2007); nfl <- nfl2007
+nfl$dscore <- nfl$HomeScore - nfl$VisitorScore
+w <- which(nfl$dscore > 0)
+nfl$winner <- nfl$Visitor; nfl$winner[w] <- nfl$Home[w]
+nfl$loser <- nfl$Home; nfl$loser[w] <- nfl$Visitor[w]
+# did the home team win?
+nfl$homeTeamWon <- nfl$dscore > 0
+table(nfl$homeTeamWon)
+table(nfl$dscore > nfl$line)
+}
+\keyword{datasets}
+

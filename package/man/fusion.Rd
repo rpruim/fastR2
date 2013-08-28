@@ -1,0 +1,60 @@
+\docType{data}
+\name{pheno}
+\alias{fusion1}
+\alias{fusion2}
+\alias{pheno}
+\title{FUSION type 2 diabetes study}
+\format{Data frames with the following variables.  \itemize{
+\item{id}{subject ID number for matching between data sets}
+\item{t2d}{a factor with levels \code{case} \code{control}}
+\item{bmi}{body mass index} \item{sex}{a factor with levels
+\code{F} \code{M}} \item{age}{age of subject at time phenotypes were
+colelcted} \item{smoker}{a factor with levels \code{former}
+\code{never} \code{occasional} \code{regular}} \item{chol}{total
+cholesterol} \item{waist}{waist circumference (cm)}
+\item{weight}{weight (kg) } \item{height}{height (cm) }
+\item{whr}{waist hip ratio } \item{sbp}{systolic blood
+pressure} \item{dbp}{diastolic blood pressure}
+\item{marker}{RS name of SNP} \item{markerID}{numeric ID for
+SNP} \item{allele1}{first allele coded as 1=A, 2=C, 3=G, 4=T}
+\item{allele2}{second allele coded as 1=A, 2=C, 3=G, 4=T}
+\item{genotype}{both alleles coded as a factor}
+\item{Adose}{number of A alleles} \item{Cdose}{number of C
+alleles} \item{Gdose}{number of G alleles}
+\item{Tdose}{number of T alleles} }}
+\source{
+  Similar to the data presented in
+
+  Laura J. Scott, Karen L. Mohlke, Lori L. Bonnycastle,
+  Cristen J. Willer, Yun Li, William L. Duren, Michael R.
+  Erdos, Heather M. Stringham, Pe- ter S. Chines, Anne U.
+  Jackson, Ludmila Prokunina-Olsson, Chia-Jen J. Ding, Amy
+  J. Swift, Narisu Narisu, Tianle Hu, Randall Pruim, Rui
+  Xiao, Xiao- Yi Y. Li, Karen N. Conneely, Nancy L. Riebow,
+  Andrew G. Sprau, Maurine Tong, Peggy P. White, Kurt N.
+  Hetrick, Michael W. Barnhart, Craig W. Bark, Janet L.
+  Goldstein, Lee Watkins, Fang Xiang, Jouko Saramies,
+  Thomas A.  Buchanan, Richard M. Watanabe, Timo T. Valle,
+  Leena Kinnunen, Goncalo R.  Abecasis, Elizabeth W. Pugh,
+  Kimberly F. Doheny, Richard N. Bergman, Jaakko
+  Tuomilehto, Francis S. Collins, and Michael Boehnke, A
+  genome-wide association study of type 2 diabetes in Finns
+  detects multiple susceptibility vari- ants,
+  \emph{Science} (2007).
+}
+\description{
+  Phenotype and genotype data from the Finland United
+  States Investigation of NIDDM (type 2) Diabetes (FUSION)
+  study.
+}
+\examples{
+data(pheno); data(fusion1); data(fusion2)
+fusion1m <- merge(fusion1, pheno, by="id", all.x=FALSE, all.y=FALSE)
+xtabs(~t2d + genotype, fusion1m)
+xtabs(~t2d + Gdose, fusion1m)
+chisq.test( xtabs( ~t2d + genotype, fusion1m ) )
+f1.glm <- glm( factor(t2d) ~ Gdose, fusion1m, family=binomial)
+summary(f1.glm)
+}
+\keyword{datasets}
+

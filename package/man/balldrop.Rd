@@ -1,0 +1,20 @@
+\docType{data}
+\name{balldrop}
+\alias{balldrop}
+\title{Ball dropping data}
+\format{A data frame with 30 observations on the following 2 variables.
+\itemize{ \item{height}{height in meters} \item{time}{time
+in seconds} }}
+\source{
+  Steve Plath, Calvin College Physics Department
+}
+\description{
+  Undergraduate students in a physics lab recorded the
+  height from which a ball was dropped and the time it took
+  to reach the floor.
+}
+\examples{
+xyplot(time ~ height, balldrop)
+}
+\keyword{datasets}
+

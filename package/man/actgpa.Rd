@@ -1,0 +1,16 @@
+\docType{data}
+\name{actgpa}
+\alias{actgpa}
+\title{ACT scores and GPA}
+\format{A data frame with 26 observations on the following 2 variables.
+\itemize{ \item{ACT}{a numeric vector} \item{GPA}{a numeric
+vector} }}
+\description{
+  ACT scores and college GPA for a small sample of college
+  students.
+}
+\examples{
+xyplot(GPA ~ ACT, actgpa)
+}
+\keyword{datasets}
+

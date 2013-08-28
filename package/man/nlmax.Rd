@@ -1,0 +1,42 @@
+\name{nlmax}
+\alias{nlmax}
+\alias{nlmax,}
+\alias{nlmin}
+\alias{summary.nlmax}
+\alias{summary.nlmin}
+\title{Nonlinear maximization and minimization}
+\usage{
+  nlmax(f, ...)
+
+  nlmin(f, ...)
+
+  \method{summary}{nlmax} (object, nsmall = 4, ...)
+
+  \method{summary}{nlmin} (object, nsmall = 4, ...)
+}
+\arguments{
+  \item{f}{a function to optimize}
+
+  \item{object}{an object returned from \code{nlmin} or
+  \code{nlmax}}
+
+  \item{nsmall}{a numeric passed through to
+  \code{\link{format}}}
+
+  \item{\dots}{additional arguments passed to \code{nlm}.
+  Note that \code{p} is a required argument for \code{nlm}.
+  See the help for \code{\link{nlm}} for details.}
+}
+\description{
+  \code{nlmin} and \code{nlmax} are thin wrappers around
+  \code{\link{nlm}}, a non-linear minimizer. \code{nlmax}
+  avoids the necessity of modifying the function to
+  construct a minimization problem from a problem that is
+  naturally a maximization problem. The \code{summary}
+  method for the resulting objects provides output that is
+  easier for humnans to read.
+}
+\examples{
+summary( nlmax( function(x) 5 - 3*x - 5*x^2, p=0 ) )
+}
+
