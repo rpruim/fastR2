@@ -11,27 +11,25 @@
 #' @param which A numeric vector indicating which plots to produce
 #' @param panel.default default panel function
 #' @param sub.caption secondary caption
-#' @param main, to be documented
-#' @param type, to be documented
-#' @param pch, to be documented
-#' @param lty, to be documented
-#' @param qqline, to be documented
-#' @param caption, to be documented
-#' @param print.plots, to be documented
-#' @param ask, to be documented
-#' @param addline.col, to be documented
-#' @param line.col, to be documented
-#' @param symbol.col, to be documented
-#' @param id.n, to be documented
-#' @param labels.id, to be documented
-#' @param cex.id, to be documented
-#' @param cook.levels, to be documented
-#' @param add.smooth, to be documented
-#' @param label.pos, to be documented
-#' @param cex.caption, to be documented
-#' @param plot, to be documented
-#' @param panel to be documented
-#' @author Randall Pruim
+#' @param main as in \code{xyplot}
+#' @param type as in \code{xyplot}
+#' @param pch as in \code{xyplot}
+#' @param lty as in \code{xyplot}
+#' @param qqline a logical
+#' @param caption caption for the plot
+#' @param print.plots a logical
+#' @param ask a logical
+#' @param addline.col color for added lines
+#' @param line.col color for lines
+#' @param symbol.col color for symbols
+#' @param id.n a numeric
+#' @param labels.id a character vector of labels 
+#' @param cex.id cex for ids
+#' @param cook.levels a logical
+#' @param add.smooth a logical
+#' @param label.pos position for labels, one of \code{"left"} or \code{"right"}
+#' @param cex.caption cex for the caption
+#' @param panel a panel function
 #' @seealso \code{\link{plot}}.
 #' @examples
 #' 
@@ -60,9 +58,8 @@ function (...)
 #' @method xplot lm
 #' @export
 xplot.lm <-
-function (x, which = c(1L:3, 5), caption = list("Residuals vs Fitted", 
-    "Normal Q-Q", "Scale-Location", "Cook's distance", "Residuals vs Leverage", 
-    "Cook's distance vs Leverage"), 
+function (x, which = c(1L:3, 5), 
+		  caption = captions,
 	panel.default = if (add.smooth) panel.xyplotsmooth else panel.xyplotpoints, 
     sub.caption = NULL, main = "", print.plots = TRUE, ask = 1 < 
         length(which) && dev.interactive(), type = "p", pch = trellis.par.get("plot.symbol")$pch, 
@@ -72,6 +69,14 @@ function (x, which = c(1L:3, 5), caption = list("Residuals vs Fitted",
     qqline = TRUE, cook.levels = c(0.5, 1), add.smooth = TRUE, 
     label.pos = c("left", "right"), cex.caption = 1) 
 {
+	# if you don't like this style, complain to CRAN about 90-character line limits or to
+	# roxygen about inserting natural line breaks.
+	captions <- list("Residuals vs Fitted", 
+    				 "Normal Q-Q", 
+					 "Scale-Location", 
+					 "Cook's distance", 
+					 "Residuals vs Leverage", 
+                     "Cook's distance vs Leverage")
     lty = rep(lty, 5)
     old.theme <- trellis.par.get()
     trellis.par.set(list(superpose.line = list(lty = lty), add.line = list(col = addline.col), 
