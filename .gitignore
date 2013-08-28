@@ -14,8 +14,6 @@
 *.log
 builds/*gz
 *.Rcheck
-man/*.Rd
-NAMESPACE
 .Rd2dvi*
 vignettes/*/*.tex
 fastR.Rproj
