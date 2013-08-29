@@ -131,7 +131,7 @@ tally( ~ (Sepal.Length <= 5), data=iris, format="proportion")
 \subsubsection{\texttt{bargraph()}}
 
 The \pkg{mosaic} function \function{barchart()} requires the user to first tally the data to be plotted.
-The \function{barplot()} function makes it easy to create barplots in the same way other lattice plots are 
+The \function{bargraph()} function makes it easy to create bar graphs in the same way other lattice plots are 
 created.
 <<>>=
 bargraph( ~substance, data=HELPrct)
@@ -172,7 +172,7 @@ mPlot(HELPrct, "density")
 @
 
 
-\section{Chapter 2: Probabilty and Random Variables}
+\section{Chapter 2: Probability and Random Variables}
 
 \subsection{The Lady Tasting Tea, \texttt{rflip()}, and \texttt{do()}}
 
