@@ -3,8 +3,8 @@
 \alias{tirewear}
 \title{Estimating tirewear}
 \format{A data frame with 16 observations on the following 2 variables.
-\itemize{ \item{weight}{estimated wear (1000's of miles) base on
-weight loss} \item{groove}{estimated wear (1000's of miles) based on
+\itemize{ \item{weight}{ estimated wear (1000's of miles) base on
+weight loss} \item{groove}{ estimated wear (1000's of miles) based on
 groove wear} }}
 \source{
   These data are available at DASL, the Data and Story

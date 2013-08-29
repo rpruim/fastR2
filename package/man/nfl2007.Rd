@@ -3,11 +3,11 @@
 \alias{nfl2007}
 \title{NFL 2007 season}
 \format{A data frame with 267 observations on the following 7 variables.
-\itemize{ \item{Date}{date on which game was played}
-\item{Visitor}{visiting team} \item{VisitorScore}{score for
-visiting team} \item{Home}{home team} \item{HomeScore}{score
-for home team} \item{Line}{`betting line'}
-\item{TotalLine}{'over/under' line (for combined score of both
+\itemize{ \item{Date}{ date on which game was played}
+\item{Visitor}{ visiting team} \item{VisitorScore}{ score for
+visiting team} \item{Home}{ home team} \item{HomeScore}{ score
+for home team} \item{Line}{ `betting line'}
+\item{TotalLine}{ 'over/under' line (for combined score of both
 teams)} }}
 \description{
   Results of National Football League games (2007 season,

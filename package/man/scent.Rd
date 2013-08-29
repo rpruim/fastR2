@@ -3,17 +3,17 @@
 \alias{scent}
 \title{Maze tracing and scents}
 \format{A data frame with 21 observations on the following 12 variables.
-\itemize{ \item{id}{ID number} \item{sex}{a factor with
-levels \code{F} and\code{M}} \item{smoker}{a factor with levels
-\code{N}, \code{Y}} \item{opinion}{opinion of the odor
-(\code{indiff}, \code{neg}, or \code{pos}}) \item{age}{age of
-subject (in years)} \item{first}{which treatment was first,
-\code{scented} or \code{unscented}} \item{u1}{time (in seconds) in
-first unscented trial} \item{u2}{time (in seconds) in second
-unscented trial} \item{u3}{time (in seconds) in third unscented
-trial} \item{s1}{time (in seconds) in first scented trial}
-\item{s2}{time (in seconds) in second scented trial}
-\item{s3}{time (in seconds) in third scented trial} }}
+\itemize{ \item{id}{ ID number} \item{sex}{ a factor with
+levels \code{F} and\code{M}} \item{smoker}{ a factor with levels
+\code{N}, \code{Y}} \item{opinion}{ opinion of the odor
+(\code{indiff}, \code{neg}, or \code{pos}}) \item{age}{ age of
+subject (in years)} \item{first}{ which treatment was first,
+\code{scented} or \code{unscented}} \item{u1}{ time (in seconds) in
+first unscented trial} \item{u2}{ time (in seconds) in second
+unscented trial} \item{u3}{ time (in seconds) in third unscented
+trial} \item{s1}{ time (in seconds) in first scented trial}
+\item{s2}{ time (in seconds) in second scented trial}
+\item{s3}{ time (in seconds) in third scented trial} }}
 \source{
   These data are also available at DASL, the data and story
   library (\url{http://lib.stat.cmu.edu/DASL/}).

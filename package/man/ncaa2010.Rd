@@ -5,11 +5,11 @@
 \alias{ncaa2010}
 \title{NCAA Division I Basketball Results}
 \format{Seven variables describing NCAA Division I basketball games.
-\itemize{ \item{date}{date on which game was played}
-\item{away}{visiting team} \item{ascore}{visiting team's
-score} \item{home}{home team} \item{hscore}{home team's
-score} \item{notes}{code indicting games played at neutral sites (n
-or N) or in tournaments (T)} \item{location}{where game was played}
+\itemize{ \item{date}{ date on which game was played}
+\item{away}{ visiting team} \item{ascore}{ visiting team's
+score} \item{home}{ home team} \item{hscore}{ home team's
+score} \item{notes}{ code indicting games played at neutral sites (n
+or N) or in tournaments (T)} \item{location}{ where game was played}
 }}
 \source{
   \url{kenpom.com}

@@ -3,8 +3,8 @@
 \alias{spheres}
 \title{Measuring spheres}
 \format{A data frame with 12 observations on the following 2 variables.
-\itemize{ \item{diameter}{diameter of bearing (m)}
-\item{mass}{mass of the bearing (kg) } }}
+\itemize{ \item{diameter}{ diameter of bearing (m)}
+\item{mass}{ mass of the bearing (kg) } }}
 \source{
   These data were collected by Calvin College physics
   students under the direction of Steve Plath.

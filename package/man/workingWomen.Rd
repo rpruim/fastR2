@@ -3,9 +3,9 @@
 \alias{workingWomen}
 \title{Women in the workforce}
 \format{A data frame with 19 observations on the following 3 variables.
-\itemize{ \item{city}{name of a U.S. city (coded as a factor with
-19 levels)} \item{labor72}{percent of women in labor force in 1972}
-\item{labor68}{percent of women in labor force in 1968} }}
+\itemize{ \item{city}{ name of a U.S. city (coded as a factor with
+19 levels)} \item{labor72}{ percent of women in labor force in 1972}
+\item{labor68}{ percent of women in labor force in 1968} }}
 \source{
   These data are from the United States Department of Labor
   Statistics and are also available at DASL, the Data and

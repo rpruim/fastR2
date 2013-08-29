@@ -3,8 +3,8 @@
 \alias{soap}
 \title{Dwindling soap}
 \format{A data frame with 15 observations on the following 3 variables.
-\itemize{ \item{Date}{} \item{Day}{days since start of soap
-usage and data collection} \item{Weight}{weight of bar of soap (in
+\itemize{ \item{Date}{ } \item{Day}{ days since start of soap
+usage and data collection} \item{Weight}{ weight of bar of soap (in
 grams) } }}
 \source{
   Data collected by Rex Boggs and available from OzDASL

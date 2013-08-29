@@ -5,23 +5,23 @@
 \alias{pheno}
 \title{FUSION type 2 diabetes study}
 \format{Data frames with the following variables.  \itemize{
-\item{id}{subject ID number for matching between data sets}
-\item{t2d}{a factor with levels \code{case} \code{control}}
-\item{bmi}{body mass index} \item{sex}{a factor with levels
-\code{F} \code{M}} \item{age}{age of subject at time phenotypes were
-colelcted} \item{smoker}{a factor with levels \code{former}
-\code{never} \code{occasional} \code{regular}} \item{chol}{total
-cholesterol} \item{waist}{waist circumference (cm)}
-\item{weight}{weight (kg) } \item{height}{height (cm) }
-\item{whr}{waist hip ratio } \item{sbp}{systolic blood
-pressure} \item{dbp}{diastolic blood pressure}
-\item{marker}{RS name of SNP} \item{markerID}{numeric ID for
-SNP} \item{allele1}{first allele coded as 1=A, 2=C, 3=G, 4=T}
-\item{allele2}{second allele coded as 1=A, 2=C, 3=G, 4=T}
-\item{genotype}{both alleles coded as a factor}
-\item{Adose}{number of A alleles} \item{Cdose}{number of C
-alleles} \item{Gdose}{number of G alleles}
-\item{Tdose}{number of T alleles} }}
+\item{id}{ subject ID number for matching between data sets}
+\item{t2d}{ a factor with levels \code{case} \code{control}}
+\item{bmi}{ body mass index} \item{sex}{ a factor with levels
+\code{F} \code{M}} \item{age}{ age of subject at time phenotypes were
+colelcted} \item{smoker}{ a factor with levels \code{former}
+\code{never} \code{occasional} \code{regular}} \item{chol}{ total
+cholesterol} \item{waist}{ waist circumference (cm)}
+\item{weight}{ weight (kg) } \item{height}{ height (cm) }
+\item{whr}{ waist hip ratio } \item{sbp}{ systolic blood
+pressure} \item{dbp}{ diastolic blood pressure}
+\item{marker}{ RS name of SNP} \item{markerID}{ numeric ID for
+SNP} \item{allele1}{ first allele coded as 1=A, 2=C, 3=G, 4=T}
+\item{allele2}{ second allele coded as 1=A, 2=C, 3=G, 4=T}
+\item{genotype}{ both alleles coded as a factor}
+\item{Adose}{ number of A alleles} \item{Cdose}{ number of C
+alleles} \item{Gdose}{ number of G alleles}
+\item{Tdose}{ number of T alleles} }}
 \source{
   Similar to the data presented in
 

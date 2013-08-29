@@ -3,8 +3,8 @@
 \alias{airpollution}
 \title{Air pollution measurements}
 \format{A data frame with 6 observations on the following 2 variables.
-\itemize{ \item{pollution}{a numeric vector}
-\item{location}{a factor with levels \code{Hill Suburb} \code{Plains
+\itemize{ \item{pollution}{ a numeric vector}
+\item{location}{ a factor with levels \code{Hill Suburb} \code{Plains
 Suburb} \code{Urban City}} }}
 \source{
   David J. Saville and Graham R. Wood, \emph{Statistical

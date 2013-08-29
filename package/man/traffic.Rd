@@ -3,11 +3,11 @@
 \alias{traffic}
 \title{New England traffic fatalities (1951-1959)}
 \format{A data frame with 9 observations on the following 6 variables.
-\itemize{ \item{year}{a year from 1951 to 1959}
-\item{cn.deaths}{number of traffic deaths in Connecticut}
-\item{ny}{deaths per 100,000 in New York} \item{cn}{deaths
-per 100,000 in Connecticut} \item{ma}{deaths per 100,000 in
-Massachusetts} \item{ri}{deaths per 100,000 in in Rhode Island} }}
+\itemize{ \item{year}{ a year from 1951 to 1959}
+\item{cn.deaths}{ number of traffic deaths in Connecticut}
+\item{ny}{ deaths per 100,000 in New York} \item{cn}{ deaths
+per 100,000 in Connecticut} \item{ma}{ deaths per 100,000 in
+Massachusetts} \item{ri}{ deaths per 100,000 in in Rhode Island} }}
 \source{
   Tufte, E. R.  \emph{The Visual Display of Quantitative
   Information}, 2nd ed. Graphics Press, 2001.

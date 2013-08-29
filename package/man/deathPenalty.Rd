@@ -5,10 +5,10 @@
 \title{Death Penalty and Race}
 \format{A data frame with 326 observations.  The factors are coded more
 succinctly in \code{deathPen}, but otherwise the data are the same.
-\itemize{ \item{DeathPenalty}{a factor with levels \code{Yes}
-\code{No}} \item{Penalty}{a factor with levels \code{Death}
-\code{Not}} \item{Victim}{a factor with levels \code{Black}
-\code{White} (or \code{Bl} \code{Wh})} \item{Defendant}{a factor
+\itemize{ \item{DeathPenalty}{ a factor with levels \code{Yes}
+\code{No}} \item{Penalty}{ a factor with levels \code{Death}
+\code{Not}} \item{Victim}{ a factor with levels \code{Black}
+\code{White} (or \code{Bl} \code{Wh})} \item{Defendant}{ a factor
 with levels \code{Black} \code{White} (or \code{Bl} \code{Wh})} }}
 \source{
   Radelet, M. (1981). Racial characteristics and imposition

@@ -3,13 +3,13 @@
 \alias{punting}
 \title{American football punting}
 \format{A data frame with 13 observations on the following 7 variables.
-\itemize{ \item{distance}{mean distance for 10 punts (feet) }
-\item{hang}{mean hang time (seconds) }
-\item{rStrength}{right leg strength (pounds)}
-\item{lStrength}{left leg strength (pounds)}
-\item{rFlexibility}{right leg flexibility (degrees)}
-\item{lFlexibility}{left leg flexibility (degrees)}
-\item{oStrength}{overall leg strength (foot-pounds)} }}
+\itemize{ \item{distance}{ mean distance for 10 punts (feet) }
+\item{hang}{ mean hang time (seconds) }
+\item{rStrength}{ right leg strength (pounds)}
+\item{lStrength}{ left leg strength (pounds)}
+\item{rFlexibility}{ right leg flexibility (degrees)}
+\item{lFlexibility}{ left leg flexibility (degrees)}
+\item{oStrength}{ overall leg strength (foot-pounds)} }}
 \source{
   These data are also available at OzDASL
   (\url{http://www.statsci.org}).

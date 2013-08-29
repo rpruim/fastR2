@@ -3,11 +3,11 @@
 \alias{drag}
 \title{Drag force experiment}
 \format{A data frame with 42 observations on the following 5 variables.
-\itemize{ \item{time}{time (in seconds) to travel between two
-sensors} \item{mass}{net mass (in kg) of falling object}
-\item{height}{distance (in meters) between two sensors}
-\item{velocity}{average velocity (in m/s) computed from \code{time}
-and \code{height}} \item{force.drag}{calculated drag force (in N,
+\itemize{ \item{time}{ time (in seconds) to travel between two
+sensors} \item{mass}{ net mass (in kg) of falling object}
+\item{height}{ distance (in meters) between two sensors}
+\item{velocity}{ average velocity (in m/s) computed from \code{time}
+and \code{height}} \item{force.drag}{ calculated drag force (in N,
 \code{force.drag = mass * 9.8}) using the fact that at terminal velocity,
 the drag force is equal to the force of gravity} }}
 \source{

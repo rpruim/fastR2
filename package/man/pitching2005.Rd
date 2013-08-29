@@ -3,24 +3,24 @@
 \alias{pitching2005}
 \title{Major League Baseball 2005 pitching}
 \format{A data frame with 653 observations on the following 27 variables.
-\itemize{ \item{playerID}{unique identifier for each player}
-\item{yearID}{year} \item{stint}{for players who played with
+\itemize{ \item{playerID}{ unique identifier for each player}
+\item{yearID}{ year} \item{stint}{ for players who played with
 multiple teams in the same season, \code{stint} is increased by one each
-time the player joins a new team} \item{teamID}{three-letter
-identifier for team} \item{lgID}{league team plays in, coded as
-\code{AL} or \code{NL}} \item{W}{wins} \item{L}{losses}
-\item{G}{games played in} \item{GS}{games started}
-\item{CG}{complete games} \item{SHO}{shut outs}
-\item{SV}{saves recorded} \item{IPouts}{outs recorded
+time the player joins a new team} \item{teamID}{ three-letter
+identifier for team} \item{lgID}{ league team plays in, coded as
+\code{AL} or \code{NL}} \item{W}{ wins} \item{L}{ losses}
+\item{G}{ games played in} \item{GS}{ games started}
+\item{CG}{ complete games} \item{SHO}{ shut outs}
+\item{SV}{ saves recorded} \item{IPouts}{ outs recorded
 (innings pitched, measured in outs rather than innings)}
-\item{H}{hits allowed} \item{ER}{earned runs allowed}
-\item{HR}{home runs allowed} \item{BB}{walks (bases on
-balls) allowed} \item{SO}{strike outs} \item{BAOpp}{opposing
-hitters' batting average} \item{ERA}{earned run average}
-\item{IBB}{intentional walks} \item{WP}{wild pitches}
-\item{HBP}{number of batters hit by pitch} \item{BK}{balks}
-\item{BFP}{batters faced pitching} \item{GF}{ratio of ground
-balls to fly balls} \item{R}{runs allowed} }}
+\item{H}{ hits allowed} \item{ER}{ earned runs allowed}
+\item{HR}{ home runs allowed} \item{BB}{ walks (bases on
+balls) allowed} \item{SO}{ strike outs} \item{BAOpp}{ opposing
+hitters' batting average} \item{ERA}{ earned run average}
+\item{IBB}{ intentional walks} \item{WP}{ wild pitches}
+\item{HBP}{ number of batters hit by pitch} \item{BK}{ balks}
+\item{BFP}{ batters faced pitching} \item{GF}{ ratio of ground
+balls to fly balls} \item{R}{ runs allowed} }}
 \description{
   Major League Baseball pitching statistics for the 2005
   season.

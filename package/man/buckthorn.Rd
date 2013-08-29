@@ -3,9 +3,9 @@
 \alias{buckthorn}
 \title{Buckthorn}
 \format{A data frame with 165 observations on the following 3 variables.
-\itemize{ \item{shoots}{number of new shoots coming from stump}
-\item{conc}{concentration of glyphosate applied}
-\item{dead}{weather the stump was considered dead} }}
+\itemize{ \item{shoots}{ number of new shoots coming from stump}
+\item{conc}{ concentration of glyphosate applied}
+\item{dead}{ weather the stump was considered dead} }}
 \source{
   David Dornbos, Calvin College
 }

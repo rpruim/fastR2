@@ -33,29 +33,29 @@
   the temperatures 12 minutes and 30 seconds after the ice
   had been removed.
 
-  Variables include \itemize{ \item{Subject}{identification
-  number} \item{Sex}{a factor with levels \code{female}
-  \code{male}} \item{Weight}{weight of subject (kg)}
-  \item{Height}{height of subject (cm)}
-  \item{Skinfold}{skinfold thickness} \item{Calf}{calf
-  diameter (cm)} \item{Age}{age of subject}
-  \item{Location}{a factor with levels \code{intramuscular}
-  \code{surface}} \item{Treatment}{a factor with levels
-  \code{crushed} \code{cubed} \code{wet}}
-  \item{B0}{baseline temperature at time 0}
-  \item{B30}{baseline temperature 30 seconds after start}
-  \item{B100}{baseline temperature 1 minute after start}
-  \item{B1930}{baseline temperature 19 minutes 30 seconds
-  start} \item{T0}{treatment temperature at beginning of
-  treatment} \item{T30}{treatment temperature 30 seconds
-  after start of treatment} \item{T100}{treatment
+  Variables include \itemize{ \item{Subject}{
+  identification number} \item{Sex}{ a factor with levels
+  \code{female} \code{male}} \item{Weight}{ weight of
+  subject (kg)} \item{Height}{ height of subject (cm)}
+  \item{Skinfold}{ skinfold thickness} \item{Calf}{ calf
+  diameter (cm)} \item{Age}{ age of subject}
+  \item{Location}{ a factor with levels
+  \code{intramuscular} \code{surface}} \item{Treatment}{ a
+  factor with levels \code{crushed} \code{cubed}
+  \code{wet}} \item{B0}{ baseline temperature at time 0}
+  \item{B30}{ baseline temperature 30 seconds after start}
+  \item{B100}{ baseline temperature 1 minute after start}
+  \item{B1930}{ baseline temperature 19 minutes 30 seconds
+  start} \item{T0}{ treatment temperature at beginning of
+  treatment} \item{T30}{ treatment temperature 30 seconds
+  after start of treatment} \item{T100}{ treatment
   temperature 1 minute after start of treatment}
-  \item{T1930}{treatment temperature 19 minutes 30 seconds
-  after start of treatment} \item{R0}{recovery temperature
-  at start of recovery} \item{R30}{recovery temperature 30
-  seconds after start of recovery} \item{R100}{recovery
+  \item{T1930}{ treatment temperature 19 minutes 30 seconds
+  after start of treatment} \item{R0}{ recovery temperature
+  at start of recovery} \item{R30}{ recovery temperature 30
+  seconds after start of recovery} \item{R100}{ recovery
   temperature 1 minute after start of recovery}
-  \item{R12000}{recovery temperature 120 minutes after
+  \item{R12000}{ recovery temperature 120 minutes after
   start of recovery} }
 }
 \examples{

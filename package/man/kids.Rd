@@ -3,20 +3,20 @@
 \alias{kids}
 \title{Goals and popularity factors for school kids}
 \format{A data frame with 478 observations on the following 11 variables.
-\itemize{ \item{Gender}{a factor with levels \code{boy}
-\code{girl}} \item{Grade}{grade in school}
-\item{Age}{student age} \item{Race}{a factor with levels
-\code{Other} \code{White}} \item{Urban.Rural}{a factor with levels
-\code{Rural} \code{Suburban} \code{Urban}} \item{School}{a factor
+\itemize{ \item{Gender}{ a factor with levels \code{boy}
+\code{girl}} \item{Grade}{ grade in school}
+\item{Age}{ student age} \item{Race}{ a factor with levels
+\code{Other} \code{White}} \item{Urban.Rural}{ a factor with levels
+\code{Rural} \code{Suburban} \code{Urban}} \item{School}{ a factor
 with levels \code{Brentwood Elementary} \code{Brentwood Middle} \code{Brown
 Middle} \code{Elm} \code{Main} \code{Portage} \code{Ridge} \code{Sand}
-\code{Westdale Middle}} \item{Goals}{a factor with levels
-\code{Grades} \code{Popular} \code{Sports}} \item{Grades}{rank of
+\code{Westdale Middle}} \item{Goals}{ a factor with levels
+\code{Grades} \code{Popular} \code{Sports}} \item{Grades}{ rank of
 `make good grades' (1=most important for popularity; 4=least important)}
-\item{Sports}{rank of `beging good at sports' (1=most important for
-popularity; 4=least important)} \item{Looks}{rank of `beging
+\item{Sports}{ rank of `beging good at sports' (1=most important for
+popularity; 4=least important)} \item{Looks}{ rank of `beging
 handsome or pretty' (1=most important for popularity; 4=least important)}
-\item{Money}{rank of `having lots of money' (1=most important for
+\item{Money}{ rank of `having lots of money' (1=most important for
 popularity; 4=least important)} }}
 \source{
   These data are available at DASL, the data and story

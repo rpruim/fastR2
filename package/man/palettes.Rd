@@ -3,9 +3,9 @@
 \alias{palettes}
 \title{Palette repair data}
 \format{A data frame with 20 observations on the following 3 variables.
-\itemize{ \item{palettes}{number of palettes repaired}
-\item{employee}{a factor with levels \code{A} \code{B} \code{C}
-\code{D}} \item{day}{a factor with levels \code{day1} \code{day2}
+\itemize{ \item{palettes}{ number of palettes repaired}
+\item{employee}{ a factor with levels \code{A} \code{B} \code{C}
+\code{D}} \item{day}{ a factor with levels \code{day1} \code{day2}
 \code{day3} \code{day4} \code{day5}} }}
 \source{
   Michael Stob, Calvin College

@@ -3,8 +3,8 @@
 \alias{stereogram}
 \title{Stereogram fusion}
 \format{A data frame with 78 observations on the following 2 variables.
-\itemize{ \item{Time}{time until subject was able to fuse a random
-dot stereogram} \item{Group}{treatment group: \code{NV}(no visual
+\itemize{ \item{Time}{ time until subject was able to fuse a random
+dot stereogram} \item{Group}{ treatment group: \code{NV}(no visual
 instructions) \code{VV} (visual instructions)} }}
 \source{
   These data are available at DASL, the data and story

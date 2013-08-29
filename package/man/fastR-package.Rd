@@ -40,8 +40,7 @@ trellis.par.set(theme=col.fastR())
   Statistics: An Introduction Using R}, AMS, 2011.
 
   R. Pruim, \cite{Foundations and Applicaitons of
-  Statistics: An Introduction Using R}, AMS, 2011, to
-  appear.
+  Statistics: An Introduction Using R}, AMS, 2011.
 }
 \keyword{datasets}
 \keyword{package}

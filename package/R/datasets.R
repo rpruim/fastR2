@@ -34,7 +34,7 @@ NULL
 #' @rdname actgpa
 #' @docType data
 #' @format A data frame with 26 observations on the following 2 variables.
-#' \itemize{ \item{ACT}{a numeric vector} \item{GPA}{a numeric
+#' \itemize{ \item{ACT}{ a numeric vector} \item{GPA}{ a numeric
 #' vector} }
 #' @keywords datasets
 #' @examples
@@ -57,10 +57,10 @@ NULL
 #' @rdname airlineArrival
 #' @docType data
 #' @format A data frame with 11000 observations on the following 3 variables.
-#' \itemize{ \item{Airport}{a factor with levels \code{LosAngeles}
+#' \itemize{ \item{Airport}{ a factor with levels \code{LosAngeles}
 #' \code{Phoenix} \code{SanDiego} \code{SanFrancisco} \code{Seattle}}
-#' \item{Result}{a factor with levels \code{Delayed} \code{OnTime}}
-#' \item{Airline}{a factor with levels \code{Alaska}
+#' \item{Result}{ a factor with levels \code{Delayed} \code{OnTime}}
+#' \item{Airline}{ a factor with levels \code{Alaska}
 #' \code{AmericaWest}} }
 #' @references These and similar data appear in many text books under the topic
 #' of Simpson's paradox.
@@ -91,8 +91,8 @@ NULL
 #' @rdname airpollution
 #' @docType data
 #' @format A data frame with 6 observations on the following 2 variables.
-#' \itemize{ \item{pollution}{a numeric vector}
-#' \item{location}{a factor with levels \code{Hill Suburb} \code{Plains
+#' \itemize{ \item{pollution}{ a numeric vector}
+#' \item{location}{ a factor with levels \code{Hill Suburb} \code{Plains
 #' Suburb} \code{Urban City}} }
 #' @source David J. Saville and Graham R. Wood, \emph{Statistical methods: A
 #' geometric primer}, Springer, 1996.
@@ -118,7 +118,7 @@ NULL
 #' @rdname balldrop
 #' @docType data
 #' @format A data frame with 30 observations on the following 2 variables.
-#' \itemize{ \item{height}{height in meters} \item{time}{time
+#' \itemize{ \item{height}{ height in meters} \item{time}{ time
 #' in seconds} }
 #' @source Steve Plath, Calvin College Physics Department
 #' @keywords datasets
@@ -141,19 +141,19 @@ NULL
 #' @rdname batting
 #' @docType data
 #' @format A data frame with 8062 observations on the following 22 variables.
-#' \itemize{ \item{player}{unique identifier for each player}
-#' \item{year}{year} \item{stint}{for players who were traded
+#' \itemize{ \item{player}{ unique identifier for each player}
+#' \item{year}{ year} \item{stint}{ for players who were traded
 #' mid-season, indicates which portion of the season the data cover}
-#' \item{team}{three-letter code for team} \item{league}{a
-#' factor with levels \code{AA} \code{AL} \code{NL}} \item{G}{games}
-#' \item{AB}{at bats} \item{R}{runs} \item{H}{hits}
-#' \item{H2B}{doubles} \item{H3B}{triples}
-#' \item{HR}{home runs} \item{RBI}{runs batted in}
-#' \item{SB}{stolen bases} \item{CS}{caught stealing}
-#' \item{BB}{bases on balls (walks)} \item{SO}{strike outs}
-#' \item{IBB}{intentional base on balls} \item{HBP}{hit by
-#' pitch} \item{SH}{a numeric vector} \item{SF}{sacrifice fly}
-#' \item{GIDP}{grounded into double play} }
+#' \item{team}{ three-letter code for team} \item{league}{ a
+#' factor with levels \code{AA} \code{AL} \code{NL}} \item{G}{ games}
+#' \item{AB}{ at bats} \item{R}{ runs} \item{H}{ hits}
+#' \item{H2B}{ doubles} \item{H3B}{ triples}
+#' \item{HR}{ home runs} \item{RBI}{ runs batted in}
+#' \item{SB}{ stolen bases} \item{CS}{ caught stealing}
+#' \item{BB}{ bases on balls (walks)} \item{SO}{ strike outs}
+#' \item{IBB}{ intentional base on balls} \item{HBP}{ hit by
+#' pitch} \item{SH}{ a numeric vector} \item{SF}{ sacrifice fly}
+#' \item{GIDP}{ grounded into double play} }
 #' @keywords datasets
 #' @examples
 #' 
@@ -176,8 +176,8 @@ NULL
 #' @rdname births78
 #' @docType data
 #' @format A data frame with 365 observations on the following 3 variables.
-#' \itemize{ \item{date}{date (as a factor)}
-#' \item{births}{number of live births} \item{dayofyear}{number
+#' \itemize{ \item{date}{ date (as a factor)}
+#' \item{births}{ number of live births} \item{dayofyear}{ number
 #' of days since start of year} }
 #' @keywords datasets
 #' @examples
@@ -204,9 +204,9 @@ NULL
 #' @rdname buckthorn
 #' @docType data
 #' @format A data frame with 165 observations on the following 3 variables.
-#' \itemize{ \item{shoots}{number of new shoots coming from stump}
-#' \item{conc}{concentration of glyphosate applied}
-#' \item{dead}{weather the stump was considered dead} }
+#' \itemize{ \item{shoots}{ number of new shoots coming from stump}
+#' \item{conc}{ concentration of glyphosate applied}
+#' \item{dead}{ weather the stump was considered dead} }
 #' @source David Dornbos, Calvin College
 #' @keywords datasets
 #' @examples
@@ -233,8 +233,8 @@ NULL
 #' @rdname bugs
 #' @docType data
 #' @format A data frame with 24 observations on the following 2 variables.
-#' \itemize{ \item{Color}{color of card; one of \code{B}(lue)
-#' \code{G}(reen) \code{W}(hite) \code{Y}(ellow)} \item{NumTrap}{number
+#' \itemize{ \item{Color}{ color of card; one of \code{B}(lue)
+#' \code{G}(reen) \code{W}(hite) \code{Y}(ellow)} \item{NumTrap}{ number
 #' of insects trapped on the card} }
 #' @source M. C. Wilson and R. E. Shade, Relative attractiveness of various
 #' luminescent colors to the cereal leaf beetle and the meadow spittlebug,
@@ -266,14 +266,14 @@ NULL
 #' @aliases concreteAll concrete28
 #' @docType data
 #' @format \code{concreteAll} is a data frame with the following 9 variables.
-#' \itemize{ \item{cement}{amount of cement (kg/m^3)}
-#' \item{slag}{amount of blast furnace slag (kg/m^3)}
-#' \item{ash}{amount of fly ash(kg/m^3)} \item{water}{amount of
-#' water (kg/m^3)} \item{superP}{amount of superplasticizer (kg/m^3)}
-#' \item{coarseAg}{amount of coarse aggregate (kg/m^3)}
-#' \item{fineAg}{amount of fine aggregate (kg/m^3)}
-#' \item{age}{age of concrete in days }
-#' \item{strength}{compressive strength measured in MPa} }
+#' \itemize{ \item{cement}{ amount of cement (kg/m^3)}
+#' \item{slag}{ amount of blast furnace slag (kg/m^3)}
+#' \item{ash}{ amount of fly ash(kg/m^3)} \item{water}{ amount of
+#' water (kg/m^3)} \item{superP}{ amount of superplasticizer (kg/m^3)}
+#' \item{coarseAg}{ amount of coarse aggregate (kg/m^3)}
+#' \item{fineAg}{ amount of fine aggregate (kg/m^3)}
+#' \item{age}{ age of concrete in days }
+#' \item{strength}{ compressive strength measured in MPa} }
 #' \code{concrete28} is a subset of \code{concreteAll}.
 #' @references I-Cheng Yeh (1998), "Modeling of strength of high performance
 #' concrete using artificial neural networks," \cite{Cement and Concrete
@@ -306,8 +306,8 @@ NULL
 #' @rdname corn
 #' @docType data
 #' @format A data frame with 11 observations on the following 2 variables.
-#' \itemize{ \item{reg}{yield of regular corn (lbs/acre)}
-#' \item{kiln}{yield of kiln-dried corn (lbs/acre)} }
+#' \itemize{ \item{reg}{ yield of regular corn (lbs/acre)}
+#' \item{kiln}{ yield of kiln-dried corn (lbs/acre)} }
 #' @references W.S. Gosset, "The Probable Error of a Mean," Biometrika, 6
 #' (1908), pp 1-25.
 #' @source These data are also available at DASL, the data and story library
@@ -339,8 +339,8 @@ NULL
 #' @rdname cuckoo
 #' @docType data
 #' @format A data frame with 120 observations on the following 2 variables.
-#' \itemize{ \item{length}{length of egg (mm)}
-#' \item{species}{a factor with levels \code{hedge sparrow}
+#' \itemize{ \item{length}{ length of egg (mm)}
+#' \item{species}{ a factor with levels \code{hedge sparrow}
 #' \code{meadow pipet} \code{pied wagtail} \code{robin} \code{tree pipet}
 #' \code{wren}} }
 #' @references These data are also available from DASL, the data and story
@@ -370,10 +370,10 @@ NULL
 #' @docType data
 #' @format A data frame with 326 observations.  The factors are coded more
 #' succinctly in \code{deathPen}, but otherwise the data are the same.
-#' \itemize{ \item{DeathPenalty}{a factor with levels \code{Yes}
-#' \code{No}} \item{Penalty}{a factor with levels \code{Death}
-#' \code{Not}} \item{Victim}{a factor with levels \code{Black}
-#' \code{White} (or \code{Bl} \code{Wh})} \item{Defendant}{a factor
+#' \itemize{ \item{DeathPenalty}{ a factor with levels \code{Yes}
+#' \code{No}} \item{Penalty}{ a factor with levels \code{Death}
+#' \code{Not}} \item{Victim}{ a factor with levels \code{Black}
+#' \code{White} (or \code{Bl} \code{Wh})} \item{Defendant}{ a factor
 #' with levels \code{Black} \code{White} (or \code{Bl} \code{Wh})} }
 #' @source Radelet, M. (1981). Racial characteristics and imposition of the
 #' death penalty. \emph{American Sociological Review}, 46:918--927.
@@ -403,11 +403,11 @@ NULL
 #' @rdname drag
 #' @docType data
 #' @format A data frame with 42 observations on the following 5 variables.
-#' \itemize{ \item{time}{time (in seconds) to travel between two
-#' sensors} \item{mass}{net mass (in kg) of falling object}
-#' \item{height}{distance (in meters) between two sensors}
-#' \item{velocity}{average velocity (in m/s) computed from \code{time}
-#' and \code{height}} \item{force.drag}{calculated drag force (in N,
+#' \itemize{ \item{time}{ time (in seconds) to travel between two
+#' sensors} \item{mass}{ net mass (in kg) of falling object}
+#' \item{height}{ distance (in meters) between two sensors}
+#' \item{velocity}{ average velocity (in m/s) computed from \code{time}
+#' and \code{height}} \item{force.drag}{ calculated drag force (in N,
 #' \code{force.drag = mass * 9.8}) using the fact that at terminal velocity,
 #' the drag force is equal to the force of gravity} }
 #' @source Calvin College physics students under the supervision of Professor
@@ -447,10 +447,10 @@ NULL
 #' @rdname endurance
 #' @docType data
 #' @format A data frame with 15 observations on the following 5 variables.
-#' \itemize{ \item{Vitamin}{number of repetitions until reaching 50%
-#' maximal grip after taking viatimin} \item{First}{which treatment was
+#' \itemize{ \item{Vitamin}{ number of repetitions until reaching 50%
+#' maximal grip after taking viatimin} \item{First}{ which treatment was
 #' done first, a factor with levels \code{Placebo} \code{Vitamin}}
-#' \item{Placebo}{number of repetitions until reaching 50% maximal grip
+#' \item{Placebo}{ number of repetitions until reaching 50% maximal grip
 #' strength after taking placebo} }
 #' @references Keith, R. E., and Merrill, E. (1983).  The effects of vitamin C
 #' on maximum grip strength and muscular endurance.  \emph{Journal of Sports
@@ -484,8 +484,8 @@ NULL
 #' @rdname familySmoking
 #' @docType data
 #' @format A data frame with 5375 observations on the following 2 variables.
-#' \itemize{ \item{Student}{a factor with levels \code{DoesNotSmoke}
-#' \code{Smokes}} \item{Parents}{a factor with levels
+#' \itemize{ \item{Student}{ a factor with levels \code{DoesNotSmoke}
+#' \code{Smokes}} \item{Parents}{ a factor with levels
 #' \code{NeitherSmokes} \code{OneSmokes}} \code{BothSmoke} }
 #' @references The data also appear in
 #' 
@@ -510,7 +510,7 @@ NULL
 #' Data sets and utility functions to accompany \cite{Foundations and
 #' Applications of Statistics: An Introduction Using R} by Randall Pruim.
 #' 
-#' \tabular{ll}{ Package: \tab fastR\cr Type: \tab Package\cr Version: \tab
+#' \tabular{ll}{  Package: \tab fastR\cr Type: \tab Package\cr Version: \tab
 #' 0.2-9\cr Date: \tab 2010-12-29\cr Depends: \tab lattice, grid\cr Suggests:
 #' \tab MASS, faraway, Hmisc, DAAG, multcomp, vcd, car, alr3, corrgram,
 #' BradleyTerry \cr License: \tab GPL\cr LazyLoad: \tab yes\cr LazyData: \tab
@@ -524,7 +524,7 @@ NULL
 #' 
 #' Maintainer: Randall Pruim <rpruim@@calvin.edu>
 #' @references R. Pruim, \cite{Foundations and Applicaitons of Statistics: An
-#' Introduction Using R}, AMS, 2011, to appear.
+#' Introduction Using R}, AMS, 2011.
 #' @keywords package, datasets
 #' @examples
 #' 
@@ -549,13 +549,13 @@ NULL
 #' @rdname fumbles
 #' @docType data
 #' @format A data frame with 120 observations on the following 7 variables.
-#' \itemize{ \item{team}{NCAA football team} \item{rank}{rank
+#' \itemize{ \item{team}{ NCAA football team} \item{rank}{ rank
 #' based on fumbles per game through games on November 26, 2010}
-#' \item{W}{number of wins through games on November 26, 2010}
-#' \item{L}{number of losses through games on November 26, 2010}
-#' \item{week1}{number of fumbles on November 6, 2010}
-#' \item{week2}{number of fumbles on November 13, 2010}
-#' \item{week3}{number of fumbles on November 20, 2010} }
+#' \item{W}{ number of wins through games on November 26, 2010}
+#' \item{L}{ number of losses through games on November 26, 2010}
+#' \item{week1}{ number of fumbles on November 6, 2010}
+#' \item{week2}{ number of fumbles on November 13, 2010}
+#' \item{week3}{ number of fumbles on November 20, 2010} }
 #' @source
 #' \url{http://www.teamrankings.com/college-football/stat/fumbles-per-game}
 #' @keywords datasets
@@ -606,23 +606,23 @@ NULL
 #' @aliases pheno fusion1 fusion2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
-#' \item{id}{subject ID number for matching between data sets}
-#' \item{t2d}{a factor with levels \code{case} \code{control}}
-#' \item{bmi}{body mass index} \item{sex}{a factor with levels
-#' \code{F} \code{M}} \item{age}{age of subject at time phenotypes were
-#' colelcted} \item{smoker}{a factor with levels \code{former}
-#' \code{never} \code{occasional} \code{regular}} \item{chol}{total
-#' cholesterol} \item{waist}{waist circumference (cm)}
-#' \item{weight}{weight (kg) } \item{height}{height (cm) }
-#' \item{whr}{waist hip ratio } \item{sbp}{systolic blood
-#' pressure} \item{dbp}{diastolic blood pressure}
-#' \item{marker}{RS name of SNP} \item{markerID}{numeric ID for
-#' SNP} \item{allele1}{first allele coded as 1=A, 2=C, 3=G, 4=T}
-#' \item{allele2}{second allele coded as 1=A, 2=C, 3=G, 4=T}
-#' \item{genotype}{both alleles coded as a factor}
-#' \item{Adose}{number of A alleles} \item{Cdose}{number of C
-#' alleles} \item{Gdose}{number of G alleles}
-#' \item{Tdose}{number of T alleles} }
+#' \item{id}{ subject ID number for matching between data sets}
+#' \item{t2d}{ a factor with levels \code{case} \code{control}}
+#' \item{bmi}{ body mass index} \item{sex}{ a factor with levels
+#' \code{F} \code{M}} \item{age}{ age of subject at time phenotypes were
+#' colelcted} \item{smoker}{ a factor with levels \code{former}
+#' \code{never} \code{occasional} \code{regular}} \item{chol}{ total
+#' cholesterol} \item{waist}{ waist circumference (cm)}
+#' \item{weight}{ weight (kg) } \item{height}{ height (cm) }
+#' \item{whr}{ waist hip ratio } \item{sbp}{ systolic blood
+#' pressure} \item{dbp}{ diastolic blood pressure}
+#' \item{marker}{ RS name of SNP} \item{markerID}{ numeric ID for
+#' SNP} \item{allele1}{ first allele coded as 1=A, 2=C, 3=G, 4=T}
+#' \item{allele2}{ second allele coded as 1=A, 2=C, 3=G, 4=T}
+#' \item{genotype}{ both alleles coded as a factor}
+#' \item{Adose}{ number of A alleles} \item{Cdose}{ number of C
+#' alleles} \item{Gdose}{ number of G alleles}
+#' \item{Tdose}{ number of T alleles} }
 #' @source Similar to the data presented in
 #' 
 #' Laura J. Scott, Karen L. Mohlke, Lori L. Bonnycastle, Cristen J. Willer, Yun
@@ -690,9 +690,9 @@ NULL
 #' @rdname gpa
 #' @docType data
 #' @format A data frame with 271 observations on the following 4 variables.
-#' \itemize{ \item{satm}{SAT mathematics score}
-#' \item{satv}{SAT verbal score} \item{act}{ACT score}
-#' \item{gpa}{college grade point average} }
+#' \itemize{ \item{satm}{ SAT mathematics score}
+#' \item{satv}{ SAT verbal score} \item{act}{ ACT score}
+#' \item{gpa}{ college grade point average} }
 #' @keywords datasets
 #' @examples
 #' 
@@ -717,8 +717,8 @@ NULL
 #' @rdname heliumFootballs
 #' @docType data
 #' @format A data frame with 39 observations on the following 3 variables.
-#' \itemize{ \item{Trial}{trial number} \item{Air}{distance
-#' traveled by air-filled football (yards)} \item{Helium}{distance
+#' \itemize{ \item{Trial}{ trial number} \item{Air}{ distance
+#' traveled by air-filled football (yards)} \item{Helium}{ distance
 #' traveled by helium-filled football (yards)} }
 #' @references Lafferty, M. B. (1993), "OSU scientists get a kick out of sports
 #' controversy", \emph{The Columbus Dispatch} (November, 21, 1993), B7.
@@ -756,25 +756,25 @@ NULL
 #' seconds. For example, \code{R1230} contains the temperatures 12 minutes and
 #' 30 seconds after the ice had been removed.
 #' 
-#' Variables include \itemize{ \item{Subject}{identification number}
-#' \item{Sex}{a factor with levels \code{female} \code{male}}
-#' \item{Weight}{weight of subject (kg)} \item{Height}{height
-#' of subject (cm)} \item{Skinfold}{skinfold thickness}
-#' \item{Calf}{calf diameter (cm)} \item{Age}{age of subject}
-#' \item{Location}{a factor with levels \code{intramuscular}
-#' \code{surface}} \item{Treatment}{a factor with levels \code{crushed}
-#' \code{cubed} \code{wet}} \item{B0}{baseline temperature at time 0}
-#' \item{B30}{baseline temperature 30 seconds after start}
-#' \item{B100}{baseline temperature 1 minute after start}
-#' \item{B1930}{baseline temperature 19 minutes 30 seconds start}
-#' \item{T0}{treatment temperature at beginning of treatment}
-#' \item{T30}{treatment temperature 30 seconds after start of
-#' treatment} \item{T100}{treatment temperature 1 minute after start of
-#' treatment} \item{T1930}{treatment temperature 19 minutes 30 seconds
-#' after start of treatment} \item{R0}{recovery temperature at start of
-#' recovery} \item{R30}{recovery temperature 30 seconds after start of
-#' recovery} \item{R100}{recovery temperature 1 minute after start of
-#' recovery} \item{R12000}{recovery temperature 120 minutes after start
+#' Variables include \itemize{ \item{Subject}{ identification number}
+#' \item{Sex}{ a factor with levels \code{female} \code{male}}
+#' \item{Weight}{ weight of subject (kg)} \item{Height}{ height
+#' of subject (cm)} \item{Skinfold}{ skinfold thickness}
+#' \item{Calf}{ calf diameter (cm)} \item{Age}{ age of subject}
+#' \item{Location}{ a factor with levels \code{intramuscular}
+#' \code{surface}} \item{Treatment}{ a factor with levels \code{crushed}
+#' \code{cubed} \code{wet}} \item{B0}{ baseline temperature at time 0}
+#' \item{B30}{ baseline temperature 30 seconds after start}
+#' \item{B100}{ baseline temperature 1 minute after start}
+#' \item{B1930}{ baseline temperature 19 minutes 30 seconds start}
+#' \item{T0}{ treatment temperature at beginning of treatment}
+#' \item{T30}{ treatment temperature 30 seconds after start of
+#' treatment} \item{T100}{ treatment temperature 1 minute after start of
+#' treatment} \item{T1930}{ treatment temperature 19 minutes 30 seconds
+#' after start of treatment} \item{R0}{ recovery temperature at start of
+#' recovery} \item{R30}{ recovery temperature 30 seconds after start of
+#' recovery} \item{R100}{ recovery temperature 1 minute after start of
+#' recovery} \item{R12000}{ recovery temperature 120 minutes after start
 #' of recovery} }
 #' 
 #' @name ice
@@ -807,11 +807,11 @@ NULL
 #' @rdname inflation
 #' @docType data
 #' @format A data frame with 23 observations on the following 5 variables.
-#' \itemize{ \item{country}{country where data were collected}
-#' \item{ques}{questionnaire index of independence}
-#' \item{inf}{annual inflation rate, 1980-1989 (percent)}
-#' \item{legal}{legal index of independence}
-#' \item{dev}{developed (1) or developing (2) nation} }
+#' \itemize{ \item{country}{ country where data were collected}
+#' \item{ques}{ questionnaire index of independence}
+#' \item{inf}{ annual inflation rate, 1980-1989 (percent)}
+#' \item{legal}{ legal index of independence}
+#' \item{dev}{ developed (1) or developing (2) nation} }
 #' @references A. Cukierman, S.B. Webb, and B. Negapi, "Measuring the
 #' Independence of Central Banks and Its Effect on Policy Outcomes," World Bank
 #' Economic Review, Vol. 6 No. 3 (Sept 1992), 353-398.
@@ -844,20 +844,20 @@ NULL
 #' @rdname kids
 #' @docType data
 #' @format A data frame with 478 observations on the following 11 variables.
-#' \itemize{ \item{Gender}{a factor with levels \code{boy}
-#' \code{girl}} \item{Grade}{grade in school}
-#' \item{Age}{student age} \item{Race}{a factor with levels
-#' \code{Other} \code{White}} \item{Urban.Rural}{a factor with levels
-#' \code{Rural} \code{Suburban} \code{Urban}} \item{School}{a factor
+#' \itemize{ \item{Gender}{ a factor with levels \code{boy}
+#' \code{girl}} \item{Grade}{ grade in school}
+#' \item{Age}{ student age} \item{Race}{ a factor with levels
+#' \code{Other} \code{White}} \item{Urban.Rural}{ a factor with levels
+#' \code{Rural} \code{Suburban} \code{Urban}} \item{School}{ a factor
 #' with levels \code{Brentwood Elementary} \code{Brentwood Middle} \code{Brown
 #' Middle} \code{Elm} \code{Main} \code{Portage} \code{Ridge} \code{Sand}
-#' \code{Westdale Middle}} \item{Goals}{a factor with levels
-#' \code{Grades} \code{Popular} \code{Sports}} \item{Grades}{rank of
+#' \code{Westdale Middle}} \item{Goals}{ a factor with levels
+#' \code{Grades} \code{Popular} \code{Sports}} \item{Grades}{ rank of
 #' `make good grades' (1=most important for popularity; 4=least important)}
-#' \item{Sports}{rank of `beging good at sports' (1=most important for
-#' popularity; 4=least important)} \item{Looks}{rank of `beging
+#' \item{Sports}{ rank of `beging good at sports' (1=most important for
+#' popularity; 4=least important)} \item{Looks}{ rank of `beging
 #' handsome or pretty' (1=most important for popularity; 4=least important)}
-#' \item{Money}{rank of `having lots of money' (1=most important for
+#' \item{Money}{ rank of `having lots of money' (1=most important for
 #' popularity; 4=least important)} }
 #' @references Chase, M. A., and Dummer, G. M. (1992), "The Role of Sports as a
 #' Social Determinant for Children," Research Quarterly for Exercise and Sport,
@@ -888,31 +888,31 @@ NULL
 #' @rdname littleSurvey
 #' @docType data
 #' @format A data frame with 279 observations on the following 20 variables.
-#' \itemize{ \item{number}{a number between 1 and 30}
-#' \item{colorVer}{which version of the 'favorite color' question was
+#' \itemize{ \item{number}{ a number between 1 and 30}
+#' \item{colorVer}{ which version of the 'favorite color' question was
 #' on the survey. A factor with levels \code{v1} \code{v2}}
-#' \item{color}{favorite color if among predefined choices.  A factor
+#' \item{color}{ favorite color if among predefined choices.  A factor
 #' with levels \code{} \code{black} \code{green} \code{other} \code{purple}
-#' \code{red}} \item{otherColor}{favorite color if not among choices
-#' above.} \item{animalVer}{which version of the 'favorite color'
+#' \code{red}} \item{otherColor}{ favorite color if not among choices
+#' above.} \item{animalVer}{ which version of the 'favorite color'
 #' question was on the survey. A factor with levels \code{v1} \code{v2}}
-#' \item{animal}{favorite animal if among predefined choices.  A factor
+#' \item{animal}{ favorite animal if among predefined choices.  A factor
 #' with levels \code{} \code{elephant} \code{giraffe} \code{lion}
-#' \code{other}.} \item{otherAnimal}{favorite animal if not among the
-#' predefined choices.} \item{pulseVer}{which version of the 'pulse'
-#' question was on the survey} \item{pulse}{self-reported pulse}
-#' \item{TVver}{which of three versions of the TV question was on the
-#' survey} \item{tvBox}{a factor with levels \code{<1} \code{>4}
+#' \code{other}.} \item{otherAnimal}{ favorite animal if not among the
+#' predefined choices.} \item{pulseVer}{ which version of the 'pulse'
+#' question was on the survey} \item{pulse}{ self-reported pulse}
+#' \item{TVver}{ which of three versions of the TV question was on the
+#' survey} \item{tvBox}{ a factor with levels \code{<1} \code{>4}
 #' \code{>8} \code{1-2} \code{2-4} \code{4-8} \code{none} \code{other}}
-#' \item{tvHours}{a numeric vector} \item{surpriseVer}{which of
+#' \item{tvHours}{ a numeric vector} \item{surpriseVer}{ which of
 #' two versions of the 'surprise' question was on the survey}
-#' \item{surprise}{a factor with levels \code{no} \code{yes}}
-#' \item{playVer}{which of two versions of the 'play' question was on
-#' the survey} \item{play}{a factor with levels \code{no} \code{yes}}
-#' \item{diseaseVer}{which of two versions of the 'play' question was
-#' on the survey} \item{disease}{a factor with levels \code{A}
-#' \code{B}} \item{homeworkVer}{which of two versions of the 'homework'
-#' question was on the survey} \item{homework}{a factor with levels
+#' \item{surprise}{ a factor with levels \code{no} \code{yes}}
+#' \item{playVer}{ which of two versions of the 'play' question was on
+#' the survey} \item{play}{ a factor with levels \code{no} \code{yes}}
+#' \item{diseaseVer}{ which of two versions of the 'play' question was
+#' on the survey} \item{disease}{ a factor with levels \code{A}
+#' \code{B}} \item{homeworkVer}{ which of two versions of the 'homework'
+#' question was on the survey} \item{homework}{ a factor with levels
 #' \code{A} \code{B}} }
 #' @keywords datasets
 #' @examples
@@ -937,9 +937,9 @@ NULL
 #' @rdname mathnoise
 #' @docType data
 #' @format A data frame with 40 observations on the following 3 variables.
-#' \itemize{ \item{score}{score on a mathematics test}
-#' \item{noise}{a factor with levels \code{hi} \code{lo}}
-#' \item{group}{a factor with levels \code{control} \code{hyper}} }
+#' \itemize{ \item{score}{ score on a mathematics test}
+#' \item{noise}{ a factor with levels \code{hi} \code{lo}}
+#' \item{group}{ a factor with levels \code{control} \code{hyper}} }
 #' @source Sydney S. Zentall and Jandira H. Shaw, Effects of classroom noise on
 #' perfor- mance and activity of second-grade hyperactive and control children,
 #' \emph{Journal of Educational Psychology} 72 (1980), no. 6, 830.
@@ -966,22 +966,22 @@ NULL
 #' @rdname miaa05
 #' @docType data
 #' @format A data frame with 134 observations on the following 27 variables.
-#' \itemize{ \item{Number}{jersey number}
-#' \item{Player}{player's name} \item{GP}{games played}
-#' \item{GS}{games started} \item{Min}{minutes played}
-#' \item{AvgMin}{average minutes played per game}
-#' \item{FG}{field goals made} \item{FGA}{field goals
-#' attempted} \item{FGPct}{field goal percentage}
-#' \item{FG3}{3-point field goals made} \item{FG3A}{3-point
-#' field goals attempted} \item{FG3Pct}{3-point field goal percentage}
-#' \item{FT}{free throws made} \item{FTA}{free throws
-#' attempted} \item{FTPct}{free throw percentage}
-#' \item{Off}{offensive rebounds} \item{Def}{defensive
-#' rebounds} \item{Tot}{total rebounds } \item{RBG}{rebounds
-#' per game} \item{PF}{personal fouls} \item{FO}{games fouled
-#' out} \item{A}{assists} \item{TO}{turn overs}
-#' \item{Blk}{blocked shots} \item{Stl}{steals}
-#' \item{Pts}{points scored} \item{PTSG}{points per game} }
+#' \itemize{ \item{Number}{ jersey number}
+#' \item{Player}{ player's name} \item{GP}{ games played}
+#' \item{GS}{ games started} \item{Min}{ minutes played}
+#' \item{AvgMin}{ average minutes played per game}
+#' \item{FG}{ field goals made} \item{FGA}{ field goals
+#' attempted} \item{FGPct}{ field goal percentage}
+#' \item{FG3}{ 3-point field goals made} \item{FG3A}{ 3-point
+#' field goals attempted} \item{FG3Pct}{ 3-point field goal percentage}
+#' \item{FT}{ free throws made} \item{FTA}{ free throws
+#' attempted} \item{FTPct}{ free throw percentage}
+#' \item{Off}{ offensive rebounds} \item{Def}{ defensive
+#' rebounds} \item{Tot}{ total rebounds } \item{RBG}{ rebounds
+#' per game} \item{PF}{ personal fouls} \item{FO}{ games fouled
+#' out} \item{A}{ assists} \item{TO}{ turn overs}
+#' \item{Blk}{ blocked shots} \item{Stl}{ steals}
+#' \item{Pts}{ points scored} \item{PTSG}{ points per game} }
 #' @source MIAA sports archives (\url{http://www.miaa.org/})
 #' @keywords datasets
 #' @examples
@@ -1005,19 +1005,19 @@ NULL
 #' @rdname mlb2004
 #' @docType data
 #' @format A data frame with 30 observations on the following 20 variables.
-#' \itemize{ \item{Team}{team city, a factor}
-#' \item{League}{League, a factor with levels \code{AL} \code{NL}}
-#' \item{W}{number of wins} \item{L}{number of losses}
-#' \item{G}{number of games} \item{R}{number of runs scored}
-#' \item{OR}{oppnents' runs -- number of runs allowed}
-#' \item{Rdiff}{run difference -- \code{R - OR}}
-#' \item{AB}{number of at bats} \item{H}{number of hits}
-#' \item{DBL}{number of doubles} \item{TPL}{number of triples}
-#' \item{HR}{number of home runs} \item{BB}{number of walks
-#' (bases on balls)} \item{SO}{number of strike outs}
-#' \item{SB}{number of stolen bases} \item{CS}{number of times
-#' caught stealing} \item{BA}{batting average}
-#' \item{SLG}{slugging percentage} \item{OBA}{on base average}
+#' \itemize{ \item{Team}{ team city, a factor}
+#' \item{League}{ League, a factor with levels \code{AL} \code{NL}}
+#' \item{W}{ number of wins} \item{L}{ number of losses}
+#' \item{G}{ number of games} \item{R}{ number of runs scored}
+#' \item{OR}{ oppnents' runs -- number of runs allowed}
+#' \item{Rdiff}{ run difference -- \code{R - OR}}
+#' \item{AB}{ number of at bats} \item{H}{ number of hits}
+#' \item{DBL}{ number of doubles} \item{TPL}{ number of triples}
+#' \item{HR}{ number of home runs} \item{BB}{ number of walks
+#' (bases on balls)} \item{SO}{ number of strike outs}
+#' \item{SB}{ number of stolen bases} \item{CS}{ number of times
+#' caught stealing} \item{BA}{ batting average}
+#' \item{SLG}{ slugging percentage} \item{OBA}{ on base average}
 #' }
 #' @keywords datasets
 #' @examples
@@ -1041,11 +1041,11 @@ NULL
 #' @aliases ncaa2010 ncaa2009 ncaa2008
 #' @docType data
 #' @format Seven variables describing NCAA Division I basketball games.
-#' \itemize{ \item{date}{date on which game was played}
-#' \item{away}{visiting team} \item{ascore}{visiting team's
-#' score} \item{home}{home team} \item{hscore}{home team's
-#' score} \item{notes}{code indicting games played at neutral sites (n
-#' or N) or in tournaments (T)} \item{location}{where game was played}
+#' \itemize{ \item{date}{ date on which game was played}
+#' \item{away}{ visiting team} \item{ascore}{ visiting team's
+#' score} \item{home}{ home team} \item{hscore}{ home team's
+#' score} \item{notes}{ code indicting games played at neutral sites (n
+#' or N) or in tournaments (T)} \item{location}{ where game was played}
 #' }
 #' @source \url{kenpom.com}
 #' @keywords datasets
@@ -1079,11 +1079,11 @@ NULL
 #' @rdname nfl2007
 #' @docType data
 #' @format A data frame with 267 observations on the following 7 variables.
-#' \itemize{ \item{Date}{date on which game was played}
-#' \item{Visitor}{visiting team} \item{VisitorScore}{score for
-#' visiting team} \item{Home}{home team} \item{HomeScore}{score
-#' for home team} \item{Line}{`betting line'}
-#' \item{TotalLine}{'over/under' line (for combined score of both
+#' \itemize{ \item{Date}{ date on which game was played}
+#' \item{Visitor}{ visiting team} \item{VisitorScore}{ score for
+#' visiting team} \item{Home}{ home team} \item{HomeScore}{ score
+#' for home team} \item{Line}{ `betting line'}
+#' \item{TotalLine}{ 'over/under' line (for combined score of both
 #' teams)} }
 #' @keywords datasets
 #' @examples
@@ -1116,10 +1116,10 @@ NULL
 #' @rdname noise
 #' @docType data
 #' @format A data frame with 50 observations on the following 5 variables.
-#' \itemize{ \item{id}{subject identifier} \item{score}{score
-#' on the test} \item{condition}{numeric code for condition}
-#' \item{volume}{a factor with levels \code{high} \code{low}
-#' \code{none}} \item{frequency}{a factor with levels \code{continuous}
+#' \itemize{ \item{id}{ subject identifier} \item{score}{ score
+#' on the test} \item{condition}{ numeric code for condition}
+#' \item{volume}{ a factor with levels \code{high} \code{low}
+#' \code{none}} \item{frequency}{ a factor with levels \code{continuous}
 #' \code{intermittent} \code{none}} }
 #' @keywords datasets
 #' @examples
@@ -1150,9 +1150,9 @@ NULL
 #' @rdname palettes
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
-#' \itemize{ \item{palettes}{number of palettes repaired}
-#' \item{employee}{a factor with levels \code{A} \code{B} \code{C}
-#' \code{D}} \item{day}{a factor with levels \code{day1} \code{day2}
+#' \itemize{ \item{palettes}{ number of palettes repaired}
+#' \item{employee}{ a factor with levels \code{A} \code{B} \code{C}
+#' \code{D}} \item{day}{ a factor with levels \code{day1} \code{day2}
 #' \code{day3} \code{day4} \code{day5}} }
 #' @source Michael Stob, Calvin College
 #' @keywords datasets
@@ -1219,10 +1219,10 @@ NULL
 #' @rdname paperplanes
 #' @docType data
 #' @format A data frame with 16 observations on the following 5 variables.
-#' \itemize{ \item{distance}{distance plane traveled (cm)}
-#' \item{paper}{type of paper used} \item{angle}{a numeric
-#' vector} \item{design}{design of plane (\code{hi performance} or
-#' \code{simple})} \item{order}{order in which planes were thrown} }
+#' \itemize{ \item{distance}{ distance plane traveled (cm)}
+#' \item{paper}{ type of paper used} \item{angle}{ a numeric
+#' vector} \item{design}{ design of plane (\code{hi performance} or
+#' \code{simple})} \item{order}{ order in which planes were thrown} }
 #' @references Mackisack, M. S. (1994). What is the use of experiments
 #' conducted by statistics students? \emph{Journal of Statistics Education}, 2,
 #' no 1.
@@ -1250,9 +1250,9 @@ NULL
 #' @rdname pendulum
 #' @docType data
 #' @format A data frame with 27 observations on the following 3 variables.
-#' \itemize{ \item{length}{length of the pendulum (in meters)}
-#' \item{period}{average time of period (in seconds) over several
-#' swings of the pendulum} \item{delta.length}{an estimate of the
+#' \itemize{ \item{length}{ length of the pendulum (in meters)}
+#' \item{period}{ average time of period (in seconds) over several
+#' swings of the pendulum} \item{delta.length}{ an estimate of the
 #' accuracy of the length measurement} }
 #' @source Calvin College physics students under the direction of Professor
 #' Steve Plath.
@@ -1281,8 +1281,8 @@ NULL
 #' @rdname petstress
 #' @docType data
 #' @format A data frame with 45 observations on the following 2 variables.
-#' \itemize{ \item{Group}{a factor with levels \code{C}ontrol,
-#' \code{F}riend, or \code{P}et} \item{Rate}{average heart rate while
+#' \itemize{ \item{Group}{ a factor with levels \code{C}ontrol,
+#' \code{F}riend, or \code{P}et} \item{Rate}{ average heart rate while
 #' performing a stressful task} }
 #' @references These data also appear in
 #' 
@@ -1347,13 +1347,13 @@ NULL
 #' @aliases pigs pigConfig
 #' @docType data
 #' @format A data frame with 6000 observations on the following 6 variables.
-#' \itemize{ \item{roll}{roll number (1-6000)}
-#' \item{black}{numerical code for position of black pig}
-#' \item{blackF}{position of black pig coded as a factor}
-#' \item{pink}{numerical code for position of pink pig}
-#' \item{pinkF}{position of pink pig coded as a factor}
-#' \item{score}{score of the roll} \item{height}{height from
-#' which pigs were rolled (5 or 8 inches)} \item{start}{starting
+#' \itemize{ \item{roll}{ roll number (1-6000)}
+#' \item{black}{ numerical code for position of black pig}
+#' \item{blackF}{ position of black pig coded as a factor}
+#' \item{pink}{ numerical code for position of pink pig}
+#' \item{pinkF}{ position of pink pig coded as a factor}
+#' \item{score}{ score of the roll} \item{height}{ height from
+#' which pigs were rolled (5 or 8 inches)} \item{start}{ starting
 #' position of the pigs (0 = both pigs backwards, 1 = one bacwards one
 #' forwards, 2 = both forwards)} }
 #' @source John C. Kern II, Duquesne University (\email{kern at mathcs.duq.edu})
@@ -1378,24 +1378,24 @@ NULL
 #' @rdname pitching2005
 #' @docType data
 #' @format A data frame with 653 observations on the following 27 variables.
-#' \itemize{ \item{playerID}{unique identifier for each player}
-#' \item{yearID}{year} \item{stint}{for players who played with
+#' \itemize{ \item{playerID}{ unique identifier for each player}
+#' \item{yearID}{ year} \item{stint}{ for players who played with
 #' multiple teams in the same season, \code{stint} is increased by one each
-#' time the player joins a new team} \item{teamID}{three-letter
-#' identifier for team} \item{lgID}{league team plays in, coded as
-#' \code{AL} or \code{NL}} \item{W}{wins} \item{L}{losses}
-#' \item{G}{games played in} \item{GS}{games started}
-#' \item{CG}{complete games} \item{SHO}{shut outs}
-#' \item{SV}{saves recorded} \item{IPouts}{outs recorded
+#' time the player joins a new team} \item{teamID}{ three-letter
+#' identifier for team} \item{lgID}{ league team plays in, coded as
+#' \code{AL} or \code{NL}} \item{W}{ wins} \item{L}{ losses}
+#' \item{G}{ games played in} \item{GS}{ games started}
+#' \item{CG}{ complete games} \item{SHO}{ shut outs}
+#' \item{SV}{ saves recorded} \item{IPouts}{ outs recorded
 #' (innings pitched, measured in outs rather than innings)}
-#' \item{H}{hits allowed} \item{ER}{earned runs allowed}
-#' \item{HR}{home runs allowed} \item{BB}{walks (bases on
-#' balls) allowed} \item{SO}{strike outs} \item{BAOpp}{opposing
-#' hitters' batting average} \item{ERA}{earned run average}
-#' \item{IBB}{intentional walks} \item{WP}{wild pitches}
-#' \item{HBP}{number of batters hit by pitch} \item{BK}{balks}
-#' \item{BFP}{batters faced pitching} \item{GF}{ratio of ground
-#' balls to fly balls} \item{R}{runs allowed} }
+#' \item{H}{ hits allowed} \item{ER}{ earned runs allowed}
+#' \item{HR}{ home runs allowed} \item{BB}{ walks (bases on
+#' balls) allowed} \item{SO}{ strike outs} \item{BAOpp}{ opposing
+#' hitters' batting average} \item{ERA}{ earned run average}
+#' \item{IBB}{ intentional walks} \item{WP}{ wild pitches}
+#' \item{HBP}{ number of batters hit by pitch} \item{BK}{ balks}
+#' \item{BFP}{ batters faced pitching} \item{GF}{ ratio of ground
+#' balls to fly balls} \item{R}{ runs allowed} }
 #' @keywords datasets
 #' @examples
 #' 
@@ -1420,9 +1420,9 @@ NULL
 #' @rdname poison
 #' @docType data
 #' @format A data frame with 48 observations on the following 3 variables.
-#' \itemize{ \item{Poison}{type of poison (1, 2, or 3)}
-#' \item{Treatment}{manner of treatment (1, 2, 3, or 4)}
-#' \item{Time}{time until death (hours)} }
+#' \itemize{ \item{Poison}{ type of poison (1, 2, or 3)}
+#' \item{Treatment}{ manner of treatment (1, 2, 3, or 4)}
+#' \item{Time}{ time until death (hours)} }
 #' @references Box, G. E. P., and Cox, D. R. (1964). An analysis of
 #' transformations (with Discussion). J. R. Statist. Soc. B, 26, 211-252.
 #' 
@@ -1466,13 +1466,13 @@ NULL
 #' @rdname punting
 #' @docType data
 #' @format A data frame with 13 observations on the following 7 variables.
-#' \itemize{ \item{distance}{mean distance for 10 punts (feet) }
-#' \item{hang}{mean hang time (seconds) }
-#' \item{rStrength}{right leg strength (pounds)}
-#' \item{lStrength}{left leg strength (pounds)}
-#' \item{rFlexibility}{right leg flexibility (degrees)}
-#' \item{lFlexibility}{left leg flexibility (degrees)}
-#' \item{oStrength}{overall leg strength (foot-pounds)} }
+#' \itemize{ \item{distance}{ mean distance for 10 punts (feet) }
+#' \item{hang}{ mean hang time (seconds) }
+#' \item{rStrength}{ right leg strength (pounds)}
+#' \item{lStrength}{ left leg strength (pounds)}
+#' \item{rFlexibility}{ right leg flexibility (degrees)}
+#' \item{lFlexibility}{ left leg flexibility (degrees)}
+#' \item{oStrength}{ overall leg strength (foot-pounds)} }
 #' @references "The relationship between selected physical performance
 #' variables and football punting ability" by the Department of Health,
 #' Physical Education and Recreation at the Virginia Polytechnic Institute and
@@ -1501,10 +1501,10 @@ NULL
 #' @rdname ratpoison
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
-#' \itemize{ \item{consumption}{a numeric vector}
-#' \item{flavor}{a factor with levels \code{bread}
+#' \itemize{ \item{consumption}{ a numeric vector}
+#' \item{flavor}{ a factor with levels \code{bread}
 #' \code{butter-vanilla} \code{plain} \code{roast beef}}
-#' \item{location}{a factor with levels \code{A} \code{B} \code{C}
+#' \item{location}{ a factor with levels \code{A} \code{B} \code{C}
 #' \code{D} \code{E}} }
 #' @keywords datasets
 #' @examples
@@ -1547,8 +1547,8 @@ NULL
 #' @rdname rubberband
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
-#' \itemize{ \item{Stretch}{amount rubber band was stretched before
-#' launch} \item{Distance}{distance rubber band traveled } }
+#' \itemize{ \item{Stretch}{ amount rubber band was stretched before
+#' launch} \item{Distance}{ distance rubber band traveled } }
 #' @keywords datasets
 #' @examples
 #' 
@@ -1571,17 +1571,17 @@ NULL
 #' @rdname scent
 #' @docType data
 #' @format A data frame with 21 observations on the following 12 variables.
-#' \itemize{ \item{id}{ID number} \item{sex}{a factor with
-#' levels \code{F} and\code{M}} \item{smoker}{a factor with levels
-#' \code{N}, \code{Y}} \item{opinion}{opinion of the odor
-#' (\code{indiff}, \code{neg}, or \code{pos}}) \item{age}{age of
-#' subject (in years)} \item{first}{which treatment was first,
-#' \code{scented} or \code{unscented}} \item{u1}{time (in seconds) in
-#' first unscented trial} \item{u2}{time (in seconds) in second
-#' unscented trial} \item{u3}{time (in seconds) in third unscented
-#' trial} \item{s1}{time (in seconds) in first scented trial}
-#' \item{s2}{time (in seconds) in second scented trial}
-#' \item{s3}{time (in seconds) in third scented trial} }
+#' \itemize{ \item{id}{ ID number} \item{sex}{ a factor with
+#' levels \code{F} and\code{M}} \item{smoker}{ a factor with levels
+#' \code{N}, \code{Y}} \item{opinion}{ opinion of the odor
+#' (\code{indiff}, \code{neg}, or \code{pos}}) \item{age}{ age of
+#' subject (in years)} \item{first}{ which treatment was first,
+#' \code{scented} or \code{unscented}} \item{u1}{ time (in seconds) in
+#' first unscented trial} \item{u2}{ time (in seconds) in second
+#' unscented trial} \item{u3}{ time (in seconds) in third unscented
+#' trial} \item{s1}{ time (in seconds) in first scented trial}
+#' \item{s2}{ time (in seconds) in second scented trial}
+#' \item{s3}{ time (in seconds) in third scented trial} }
 #' @references Hirsch, A. R., and Johnston, L. H. "Odors and Learning," Smell
 #' \& Taste Treatment and Research Foundation, Chicago.
 #' @source These data are also available at DASL, the data and story library
@@ -1623,8 +1623,8 @@ NULL
 #' @rdname soap
 #' @docType data
 #' @format A data frame with 15 observations on the following 3 variables.
-#' \itemize{ \item{Date}{} \item{Day}{days since start of soap
-#' usage and data collection} \item{Weight}{weight of bar of soap (in
+#' \itemize{ \item{Date}{ } \item{Day}{ days since start of soap
+#' usage and data collection} \item{Weight}{ weight of bar of soap (in
 #' grams) } }
 #' @source Data collected by Rex Boggs and available from OzDASL
 #' (\url{http://www.statsci.org/data/index.html}).
@@ -1650,8 +1650,8 @@ NULL
 #' @rdname spheres
 #' @docType data
 #' @format A data frame with 12 observations on the following 2 variables.
-#' \itemize{ \item{diameter}{diameter of bearing (m)}
-#' \item{mass}{mass of the bearing (kg) } }
+#' \itemize{ \item{diameter}{ diameter of bearing (m)}
+#' \item{mass}{ mass of the bearing (kg) } }
 #' @references data(spheres)
 #' @source These data were collected by Calvin College physics students under
 #' the direction of Steve Plath.
@@ -1691,11 +1691,11 @@ NULL
 #' @rdname step
 #' @docType data
 #' @format A data frame with 30 observations on the following 7 variables.
-#' \itemize{ \item{order}{performance order}
-#' \item{block}{number of experimenter block}
-#' \item{restHR}{resting heart rate (beats per minute)}
-#' \item{HR}{final heart rate} \item{height}{height of step
-#' (\code{hi} or \code{lo})} \item{freq}{whether subject stepped
+#' \itemize{ \item{order}{ performance order}
+#' \item{block}{ number of experimenter block}
+#' \item{restHR}{ resting heart rate (beats per minute)}
+#' \item{HR}{ final heart rate} \item{height}{ height of step
+#' (\code{hi} or \code{lo})} \item{freq}{ whether subject stepped
 #' \code{fast}, \code{medium}, or \code{slow}} }
 #' @source These data are available at DASL, the data and story library
 #' (\url{http://lib.stat.cmu.edu/DASL/}).
@@ -1725,8 +1725,8 @@ NULL
 #' @rdname stereogram
 #' @docType data
 #' @format A data frame with 78 observations on the following 2 variables.
-#' \itemize{ \item{Time}{time until subject was able to fuse a random
-#' dot stereogram} \item{Group}{treatment group: \code{NV}(no visual
+#' \itemize{ \item{Time}{ time until subject was able to fuse a random
+#' dot stereogram} \item{Group}{ treatment group: \code{NV}(no visual
 #' instructions) \code{VV} (visual instructions)} }
 #' @references Frisby, J. P.  and Clatworthy, J. L., "Learning to see complex
 #' random-dot stereograms," \emph{Perception}, 4, (1975), pp. 173-178.
@@ -1756,10 +1756,10 @@ NULL
 #' @rdname students
 #' @docType data
 #' @format A data frame with 1000 observations on the following 6 variables.
-#' \itemize{ \item{ACT}{ACT score} \item{SAT}{SAT score}
-#' \item{Grad}{has the student graduated from college?}
-#' \item{GradGPA}{college GPA at graduation} \item{HSGPA}{high
-#' school GPA} \item{Cohort}{year of graduation or expected graduation}
+#' \itemize{ \item{ACT}{ ACT score} \item{SAT}{ SAT score}
+#' \item{Grad}{ has the student graduated from college?}
+#' \item{GradGPA}{ college GPA at graduation} \item{HSGPA}{ high
+#' school GPA} \item{Cohort}{ year of graduation or expected graduation}
 #' }
 #' @keywords datasets
 #' @examples
@@ -1791,10 +1791,10 @@ NULL
 #' @aliases tastetest taste1
 #' @docType data
 #' @format A data frame with 16 observations on 2 (\code{taste1}) or 4
-#' (\code{tastetest}) variables.  \itemize{ \item{score}{taste score
-#' from a group of 50 testers} \item{scr}{a factor with levels
-#' \code{coarse} \code{fine}} \item{liq}{a factor with levels \code{hi}
-#' \code{lo}} \item{type}{a factor with levels \code{A} \code{B}
+#' (\code{tastetest}) variables.  \itemize{ \item{score}{ taste score
+#' from a group of 50 testers} \item{scr}{ a factor with levels
+#' \code{coarse} \code{fine}} \item{liq}{ a factor with levels \code{hi}
+#' \code{lo}} \item{type}{ a factor with levels \code{A} \code{B}
 #' \code{C} \code{D}} }
 #' @source E. Street and M. G. Carroll, \emph{Preliminary evaluation of a food
 #' product}, Statistics: A Guide to the Unknown (Judith M. Tanur et al., eds.),
@@ -1824,8 +1824,8 @@ NULL
 #' @rdname tirewear
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
-#' \itemize{ \item{weight}{estimated wear (1000's of miles) base on
-#' weight loss} \item{groove}{estimated wear (1000's of miles) based on
+#' \itemize{ \item{weight}{ estimated wear (1000's of miles) base on
+#' weight loss} \item{groove}{ estimated wear (1000's of miles) based on
 #' groove wear} }
 #' @references R. D. Stichler, G. G. Richey, and J. Mandel, "Measurement of
 #' Treadware of Commercial Tires", \emph{Rubber Age}, 73:2 (May 1953).
@@ -1856,11 +1856,11 @@ NULL
 #' @rdname traffic
 #' @docType data
 #' @format A data frame with 9 observations on the following 6 variables.
-#' \itemize{ \item{year}{a year from 1951 to 1959}
-#' \item{cn.deaths}{number of traffic deaths in Connecticut}
-#' \item{ny}{deaths per 100,000 in New York} \item{cn}{deaths
-#' per 100,000 in Connecticut} \item{ma}{deaths per 100,000 in
-#' Massachusetts} \item{ri}{deaths per 100,000 in in Rhode Island} }
+#' \itemize{ \item{year}{ a year from 1951 to 1959}
+#' \item{cn.deaths}{ number of traffic deaths in Connecticut}
+#' \item{ny}{ deaths per 100,000 in New York} \item{cn}{ deaths
+#' per 100,000 in Connecticut} \item{ma}{ deaths per 100,000 in
+#' Massachusetts} \item{ri}{ deaths per 100,000 in in Rhode Island} }
 #' @references Donald T. Campbell and H. Laurence Ross. "The Connecticut
 #' Crackdown on Speeding: Time-Series Data in Quasi-Experimental Analysis",
 #' \emph{Law \& Society Review} Vol. 3, No. 1 (Aug., 1968), pp. 33-54.
@@ -1898,13 +1898,13 @@ NULL
 #' @aliases trebuchet trebuchet1 trebuchet2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
-#' \item{object}{the object serving as projectile\code{bean} \code{big
+#' \item{object}{ the object serving as projectile\code{bean} \code{big
 #' washerb} \code{bigWash} \code{BWB} \code{foose} \code{golf} \code{MWB}
 #' \code{SWB} \code{tennis ball} \code{wood}}
-#' \item{projectileWt}{weight of projectile (in grams)}
-#' \item{counterWt}{weight of counter weight (in kg)}
-#' \item{distance}{distance projectile traveled (in cm)}
-#' \item{form}{a factor with levels \code{a} \code{b} \code{B} \code{c}
+#' \item{projectileWt}{ weight of projectile (in grams)}
+#' \item{counterWt}{ weight of counter weight (in kg)}
+#' \item{distance}{ distance projectile traveled (in cm)}
+#' \item{form}{ a factor with levels \code{a} \code{b} \code{B} \code{c}
 #' describing the configuration of the trebuchet.} }
 #' @source Data collected by Andrew Pruim as part of a Science Olympiad
 #' competition.
@@ -1933,23 +1933,23 @@ NULL
 #' @aliases utilities utilities2
 #' @docType data
 #' @format A data frame the following variables.  \itemize{
-#' \item{month}{month (coded as a number)} \item{day}{day of
-#' month on which bill was calculated} \item{year}{year of bill}
-#' \item{temp}{average temperature (F) for billing period}
-#' \item{kwh}{electricity usage (kwh)} \item{ccf}{gas usage
-#' (ccf)} \item{thermsPerDay}{a numeric vector}
-#' \item{billingDays}{number of billing days in billing period}
-#' \item{totalbill}{total bill (in dollars)} \item{gasbill}{gas
-#' bill (in dollars)} \item{elecbill}{exectric bill (in dollars)}
-#' \item{notes}{notes about the billing period}
-#' \item{ccfpday}{average gas usage per day [\code{utilities2} only]}
-#' \item{kwhpday}{average electric usage per day [\code{utilities2}
-#' only]} \item{gasbillpday}{gas bill divided by billing days
-#' [\code{utilities2} only]} \item{elecbillpday}{electric bill divided
+#' \item{month}{ month (coded as a number)} \item{day}{ day of
+#' month on which bill was calculated} \item{year}{ year of bill}
+#' \item{temp}{ average temperature (F) for billing period}
+#' \item{kwh}{ electricity usage (kwh)} \item{ccf}{ gas usage
+#' (ccf)} \item{thermsPerDay}{ a numeric vector}
+#' \item{billingDays}{ number of billing days in billing period}
+#' \item{totalbill}{ total bill (in dollars)} \item{gasbill}{ gas
+#' bill (in dollars)} \item{elecbill}{ exectric bill (in dollars)}
+#' \item{notes}{ notes about the billing period}
+#' \item{ccfpday}{ average gas usage per day [\code{utilities2} only]}
+#' \item{kwhpday}{ average electric usage per day [\code{utilities2}
+#' only]} \item{gasbillpday}{ gas bill divided by billing days
+#' [\code{utilities2} only]} \item{elecbillpday}{ electric bill divided
 #' by billing days a numeric vector [\code{utilities2} only]}
-#' \item{totalbillpday}{total bill divided by billing days a numeric
-#' vector [\code{utilities2} only]} \item{therms}{\code{thermsPerDay *
-#' billingDays} [\code{utilities2} only]} \item{monthsSinceY2K}{months
+#' \item{totalbillpday}{ total bill divided by billing days a numeric
+#' vector [\code{utilities2} only]} \item{therms}{ \code{thermsPerDay *
+#' billingDays} [\code{utilities2} only]} \item{monthsSinceY2K}{ months
 #' since 2000 [\code{utilities2} only]} }
 #' @source Daniel T. Kaplan, \emph{Statistical modeling: A fresh approach},
 #' 2009.
@@ -1981,9 +1981,9 @@ NULL
 #' @rdname workingWomen
 #' @docType data
 #' @format A data frame with 19 observations on the following 3 variables.
-#' \itemize{ \item{city}{name of a U.S. city (coded as a factor with
-#' 19 levels)} \item{labor72}{percent of women in labor force in 1972}
-#' \item{labor68}{percent of women in labor force in 1968} }
+#' \itemize{ \item{city}{ name of a U.S. city (coded as a factor with
+#' 19 levels)} \item{labor72}{ percent of women in labor force in 1972}
+#' \item{labor68}{ percent of women in labor force in 1968} }
 #' @source These data are from the United States Department of Labor Statistics
 #' and are also available at DASL, the Data and Story Library
 #' (\url{http://lib.stat.cmu.edu/DASL/}).

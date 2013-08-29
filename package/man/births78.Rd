@@ -3,8 +3,8 @@
 \alias{births78}
 \title{Births by Day}
 \format{A data frame with 365 observations on the following 3 variables.
-\itemize{ \item{date}{date (as a factor)}
-\item{births}{number of live births} \item{dayofyear}{number
+\itemize{ \item{date}{ date (as a factor)}
+\item{births}{ number of live births} \item{dayofyear}{ number
 of days since start of year} }}
 \description{
   The number of live births in the United States for each

@@ -4,23 +4,23 @@
 \alias{utilities2}
 \title{Utilities bills}
 \format{A data frame the following variables.  \itemize{
-\item{month}{month (coded as a number)} \item{day}{day of
-month on which bill was calculated} \item{year}{year of bill}
-\item{temp}{average temperature (F) for billing period}
-\item{kwh}{electricity usage (kwh)} \item{ccf}{gas usage
-(ccf)} \item{thermsPerDay}{a numeric vector}
-\item{billingDays}{number of billing days in billing period}
-\item{totalbill}{total bill (in dollars)} \item{gasbill}{gas
-bill (in dollars)} \item{elecbill}{exectric bill (in dollars)}
-\item{notes}{notes about the billing period}
-\item{ccfpday}{average gas usage per day [\code{utilities2} only]}
-\item{kwhpday}{average electric usage per day [\code{utilities2}
-only]} \item{gasbillpday}{gas bill divided by billing days
-[\code{utilities2} only]} \item{elecbillpday}{electric bill divided
+\item{month}{ month (coded as a number)} \item{day}{ day of
+month on which bill was calculated} \item{year}{ year of bill}
+\item{temp}{ average temperature (F) for billing period}
+\item{kwh}{ electricity usage (kwh)} \item{ccf}{ gas usage
+(ccf)} \item{thermsPerDay}{ a numeric vector}
+\item{billingDays}{ number of billing days in billing period}
+\item{totalbill}{ total bill (in dollars)} \item{gasbill}{ gas
+bill (in dollars)} \item{elecbill}{ exectric bill (in dollars)}
+\item{notes}{ notes about the billing period}
+\item{ccfpday}{ average gas usage per day [\code{utilities2} only]}
+\item{kwhpday}{ average electric usage per day [\code{utilities2}
+only]} \item{gasbillpday}{ gas bill divided by billing days
+[\code{utilities2} only]} \item{elecbillpday}{ electric bill divided
 by billing days a numeric vector [\code{utilities2} only]}
-\item{totalbillpday}{total bill divided by billing days a numeric
-vector [\code{utilities2} only]} \item{therms}{\code{thermsPerDay *
-billingDays} [\code{utilities2} only]} \item{monthsSinceY2K}{months
+\item{totalbillpday}{ total bill divided by billing days a numeric
+vector [\code{utilities2} only]} \item{therms}{ \code{thermsPerDay *
+billingDays} [\code{utilities2} only]} \item{monthsSinceY2K}{ months
 since 2000 [\code{utilities2} only]} }}
 \source{
   Daniel T. Kaplan, \emph{Statistical modeling: A fresh

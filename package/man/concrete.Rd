@@ -5,14 +5,14 @@
 \alias{concreteAll}
 \title{Concrete Compressive Strength Data}
 \format{\code{concreteAll} is a data frame with the following 9 variables.
-\itemize{ \item{cement}{amount of cement (kg/m^3)}
-\item{slag}{amount of blast furnace slag (kg/m^3)}
-\item{ash}{amount of fly ash(kg/m^3)} \item{water}{amount of
-water (kg/m^3)} \item{superP}{amount of superplasticizer (kg/m^3)}
-\item{coarseAg}{amount of coarse aggregate (kg/m^3)}
-\item{fineAg}{amount of fine aggregate (kg/m^3)}
-\item{age}{age of concrete in days }
-\item{strength}{compressive strength measured in MPa} }
+\itemize{ \item{cement}{ amount of cement (kg/m^3)}
+\item{slag}{ amount of blast furnace slag (kg/m^3)}
+\item{ash}{ amount of fly ash(kg/m^3)} \item{water}{ amount of
+water (kg/m^3)} \item{superP}{ amount of superplasticizer (kg/m^3)}
+\item{coarseAg}{ amount of coarse aggregate (kg/m^3)}
+\item{fineAg}{ amount of fine aggregate (kg/m^3)}
+\item{age}{ age of concrete in days }
+\item{strength}{ compressive strength measured in MPa} }
 \code{concrete28} is a subset of \code{concreteAll}.}
 \source{
   Data were obtained from the Machine Learning Repository
