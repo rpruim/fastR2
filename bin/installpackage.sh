@@ -1,1 +1,1 @@
-bin/do2all "sudo R CMD install" *_*.tar.gz
+do2all "sudo R CMD install" *_*.tar.gz
