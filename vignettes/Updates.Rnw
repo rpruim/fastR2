@@ -42,12 +42,15 @@ opts_chunk$set(
 
 %\tableofcontents
 
-Since the publication of \emph{Foundations and Applications of Statistics}, I have been working with colleagues from 
-the NSF-funded Project MOSAIC to create and improve the \pkg{mosaic} package.  Many functions originally in the \pkg{fastR}
-package have been moved to the \pkg{mosaic} package; some of these have subsequently been improved.  Additional functionality
-has been added to the \pkg{mosaic} package over time that I would have used in \emph{Foundations and Applications of Statistics},
-had they existed at the time the book was written.  This vignette points out some of these features for students and intructors
-who might prefer these alternative approaches.
+Since the publication of \emph{Foundations and Applications of Statistics}, I
+have been working with colleagues from the NSF-funded Project MOSAIC to create
+and improve the \pkg{mosaic} package.  Many functions originally in the
+\pkg{fastR} package have been moved to the \pkg{mosaic} package; some of these
+have subsequently been improved.  Additional functionality has been added to
+the \pkg{mosaic} package over time that I would have used in \emph{Foundations
+and Applications of Statistics}, had they existed at the time the book was
+written.  This vignette points out some of these features for students and
+intructors who might prefer these alternative approaches.
 
 
 
@@ -60,22 +63,23 @@ in Chapter 1.  The use of a formula interface has several advantages, the chief 
 graphical summaries, and linear models into a common syntactic template:
 
 <<eval=FALSE>>=
-function( formula, data=mydata, ...)
+goal( formula, data=mydata, ...)
 @
 Common formula shapes include the following
 <<eval=FALSE>>=
-function( ~ x,  data=mydata)       # for single variable summaries
-function( y ~ x, data=mydata)      # for two-variable summaries and linear models
-function( y ~ x | z, data=mydata)  # for multi-variable summaries and faceting in plots
+goal( ~ x,  data=mydata)       # for single variable summaries
+goal( y ~ x, data=mydata)      # for two-variable summaries and linear models
+goal( y ~ x | z, data=mydata)  # for multi-variable summaries and faceting in plots
 @
-The function name typically names the goal for the computation (e.g., \function{histogram()}, \function{mean()}, \function{tally()}, etc.).
-The formula is described using variables in data frame \dataframe{mydata} (and removing the need for otherwise required \texttt{\$} operator
-or \function{with()} constructions).
+The function name typically names the goal for the computation 
+(e.g., \function{histogram()}, \function{mean()}, \function{tally()}, etc.).
+The formula is described using variables in data frame \dataframe{mydata} (and
+removing the need for otherwise required \texttt{\$} operator or
+\function{with()} constructions).
 
 \subsubsection{\texttt{tally()}}
 
 The \function{tally()} function provides a formula interface for constructing tables.
-
 
 <<>>=
 require(fastR)
@@ -102,11 +106,13 @@ mean( ~ Sepal.Length, data=iris )
 median( ~ Sepal.Length, data=iris )
 sd( ~ Sepal.Length, data=iris )
 iqr( ~ Sepal.Length, data=iris )
+favstats( ~Sepal.Length, data=iris )
 @
 Furthermore, the use of a formula with left and right sides allows us to 
 summarize within groups without using the \function{summary()} function:
 <<>>=
 mean( Sepal.Length ~ Species, data=iris )
+favstats( Sepal.Length ~ Species, data=iris )
 @
 
 Use
