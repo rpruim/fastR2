@@ -40,6 +40,8 @@ If you find an error not listed here, please send an email to \verb!rpruim@calvi
 	\\
 	29, \P -1 & ``even a simply" should be ``even a simple"
 	\\
+	109, Prob 2.84 & Final punctuation should be `.' not `?'.
+	\\
 	155, caption & ``jn'' should be ``An''
 	\\
 	211, Lem 4.6.8 & ``If'' should be ``Let"
@@ -54,6 +56,8 @@ If you find an error not listed here, please send an email to \verb!rpruim@calvi
 	\\
 	286, Thm 5.4.1 & 
 	$\Prob( \chi^2 \ge X^2 )$ should be $\Prob( \chi^2 \le X^2 )$ 
+	\\
+	288, R code & \texttt{df} is off by one (should be, for example, \texttt{5-1}
 	\\
 	287, Ex 5.4.9 & ``fits'' should be ``fit''
 	\\
@@ -79,6 +83,8 @@ If you find an error not listed here, please send an email to \verb!rpruim@calvi
 	\\
 	388, Table 6.2 & Some hats are missing on $\beta_1$ in the estimator column.
 	\\
+	396, prob 6.36 & \texttt{power.test.test} should be \texttt{power.t.test}
+	\\
 	398, Prob 6.42 & $SSE$ should be $SSM$ in both displayed equations.
 	\\
 	438 & $\vec Y$ should be $\vec y$ in the bottom half of the page.
@@ -99,6 +105,8 @@ If you find an error not listed here, please send an email to \verb!rpruim@calvi
 
 	595, Sol 5.36 & $n$ should be atop the product symbol rather than behind it.  Furthermore, 
 		the wrong prior has been used.
+		\\
+		601, Prob D.7 & should be $0.3 \cdot \Norm(8,2) \fbox{:} 0.7 \cdot \Norm(16,3)$ 
 		\\
 	610 & confidence interval should also reference page 202
 	\\
