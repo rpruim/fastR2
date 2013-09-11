@@ -74,8 +74,7 @@ goal( y ~ x | z, data=mydata)  # for multi-variable summaries and faceting in pl
 The function name typically names the goal for the computation 
 (e.g., \function{histogram()}, \function{mean()}, \function{tally()}, etc.).
 The formula is described using variables in data frame \dataframe{mydata} (and
-removing the need for otherwise required \texttt{\$} operator or
-\function{with()} constructions).
+removing the need for the \texttt{\$} operator or \function{with()} constructions).
 
 \subsubsection{\texttt{tally()}}
 
@@ -121,6 +120,7 @@ Use
 @
 \noindent
 to get a list of additional functions that take advantage of the formula interface.
+
 \subsection{Treating data like distributions}
 
 In analogy to functions like \function{pnorm()} and \function{qnorm()}, the \pkg{mosaic} package provides 
