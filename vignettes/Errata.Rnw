@@ -40,6 +40,8 @@ If you find an error not listed here, please send an email to \verb!rpruim@calvi
 	\\
 	29, \P -1 & ``even a simply" should be ``even a simple"
 	\\
+	50, Lem 2.3.2 & Part (2) of the ``Furthermore" has an unnecessary ``$\in [0,1]$ for all $x \in R$''
+	\\
 	109, Prob 2.84 & Final punctuation should be `.' not `?'.
 	\\
 	155, caption & ``jn'' should be ``An''
