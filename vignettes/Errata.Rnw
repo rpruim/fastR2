@@ -42,6 +42,10 @@ If you find an error not listed here, please send an email to \verb!rpruim@calvi
 	\\
 	50, Lem 2.3.2 & Part (2) of the ``Furthermore" has an unnecessary ``$\in [0,1]$ for all $x \in R$''
 	\\
+	66, Def. 2.5.2 & ``Then $t(X)$ is'' should be ``Then $Y = t(X)$ is''
+	\\
+	67, 2nd table & ``value of $X$" should be ``value of $X^2$'' 
+	\\
 	109, Prob 2.84 & Final punctuation should be `.' not `?'.
 	\\
 	155, caption & ``jn'' should be ``An''
