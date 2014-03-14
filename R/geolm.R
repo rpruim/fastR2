@@ -67,16 +67,20 @@ function (formula, data = parent.env(), type = "xz", version = 1,
     aspect <- c(diff(range(d$y))/diff(range(d$x)), diff(range(d$z))/diff(range(d$x)))
     if (plot) {
         if (version == 1) {
-            print(xyplot(y ~ x, data = d, groups = gp, type = "l", 
-                lwd = 4, lty = 1, aspect = "iso", col = c("orange", 
-                  "blue", "black", "forestgreen", "purple", "red"), 
-                scales = list(draw = F), xlab = "", ylab = ""))
+          return(xyplot(y ~ x, data = d, groups = gp, type = "l", 
+                        main=deparse(formula),
+                        lwd = 4, lty = 1, aspect = "iso", 
+                        col = c("orange", "blue", "black", "forestgreen", "purple", "red"), 
+                        scales = list(draw = F), xlab = "", ylab = "")
+                 )
         }
         else {
-            print(cloud(z ~ x * y, data = d, groups = gp, aspect = aspect, 
-                col = c("orange", "blue", "black", "forestgreen", 
-                  "purple", "red"), xlab = "mean", ylab = "effect", 
-                zlab = "resid", scales = list(draw = F), type = "l"))
+          return(cloud(z ~ x * y, data = d, groups = gp, aspect = aspect, 
+                       main=deparse(formula),
+                       col = c("orange", "blue", "black", "forestgreen",  "purple", "red"), 
+                       xlab = "mean", ylab = "effect", 
+                       zlab = "resid", scales = list(draw = F), type = "l")
+          )
         }
     }
     return(model)
