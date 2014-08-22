@@ -18,7 +18,7 @@ volume.
 \examples{
 data(noise)
 noise2 <- noise[noise$volume != 'none',]
-model <- lm(score~volume*frequency,noise2)
+model <- lm(score~volume*frequency, data=noise2)
 anova(model)
 xyplot(score~volume,noise2, groups=frequency, type='a',
 		auto.key=list(columns=2, points=FALSE, lines=TRUE))

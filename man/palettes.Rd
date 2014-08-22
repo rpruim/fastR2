@@ -26,7 +26,7 @@ anova(pal.lm1)
 # Now using day as a blocking variable
 pal.lm2 <- lm(palettes~employee+day,palettes)
 anova(pal.lm2)
-xyplot(palettes~day,palettes,
+xyplot(palettes~day, data=palettes,
 		groups=employee,
 		main="Productivity by day and employee",
 		type='b',auto.key=list(columns=4,points=FALSE,lines=TRUE))

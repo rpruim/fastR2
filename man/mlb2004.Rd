@@ -24,7 +24,7 @@ League Baseball season.
 }
 \examples{
 data(mlb2004)
-xyplot(W ~ Rdiff, mlb2004)
+xyplot(W ~ Rdiff, data=mlb2004)
 }
 \keyword{datasets}
 

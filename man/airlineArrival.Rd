@@ -18,7 +18,7 @@ Flights categorized by destination city, airline, and whether or not the
 flight was on time.
 }
 \examples{
-row.perc(xtabs(~Airline+Result, airlineArrival))
+row.perc(xtabs(~Airline+Result, data=airlineArrival))
 for (city in levels(airlineArrival$Airport)) {
 	cat(paste('\\nArriving in ', city,':\\n',sep=''))
 	print(row.perc(xtabs(~Airline+Result, airlineArrival,

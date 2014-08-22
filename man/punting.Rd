@@ -24,7 +24,7 @@ catches it), and a number of measures of leg strength and flexibility.
 }
 \examples{
 data(punting)
-xyplot(hang ~ distance, punting)
+xyplot(hang ~ distance, data=punting)
 }
 \references{
 "The relationship between selected physical performance

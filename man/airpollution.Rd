@@ -16,7 +16,7 @@ Air pollution measurements at three locations.
 }
 \examples{
 data(airpollution)
-summary(lm(pollution ~ location, airpollution))
+summary(lm(pollution ~ location, data=airpollution))
 }
 \keyword{datasets}
 

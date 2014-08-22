@@ -32,8 +32,8 @@ Data from utility bills at a residence.
 }
 \examples{
 data(utilities); data(utilities2)
-xyplot(gasbill ~ temp, utilities)
-xyplot(gasbillpday ~ temp, utilities2)
+xyplot(gasbill ~ temp, data=utilities)
+xyplot(gasbillpday ~ temp, data=utilities2)
 }
 \keyword{datasets}
 

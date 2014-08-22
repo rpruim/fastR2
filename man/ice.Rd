@@ -51,7 +51,7 @@ of recovery} }
 }
 \examples{
 data(ice)
-xyplot(Weight ~ Skinfold, groups=Sex, ice, auto.key=TRUE)
+xyplot(Weight ~ Skinfold, groups=Sex, data=ice, auto.key=TRUE)
 }
 \keyword{datasets}
 

@@ -26,7 +26,7 @@ these fumbles were recovered by the team that fumbled.
 data(fumbles)
 m <- max(fumbles$week1)
 table(factor(fumbles$week1,levels=0:m))
-favstats(fumbles$week1)
+favstats( ~ week1, data=fumbles)
 # compare with Poisson distribution
 signif( cbind(
 		  fumbles=0:m,
@@ -37,7 +37,7 @@ signif( cbind(
 	) ,3)
 showFumbles <- function(x,lambda=mean(x),...) {
 	mx <- max(x)
-    result <- histogram(~x,type="density", xlim=c(-.5,(mx+2.5)),
+    result <- histogram(~x, type="density", xlim=c(-.5,(mx+2.5)),
 		xlab='number of fumbles',
         panel=function(x,y,...){
             panel.histogram(x,alpha=0.8,breaks=seq(-0.5,(mx+2.5),by=1,...))

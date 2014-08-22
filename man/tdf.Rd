@@ -22,7 +22,7 @@ This function computes degrees of freedom for a 2-sample t-test from the standar
 and sample sizes of the two samples.
 }
 \examples{
-data(KidsFeet)
+data(KidsFeet, package="mosaicData")
 fs <- favstats( length ~ sex, data=KidsFeet ); fs
 t.test( length ~ sex, data=KidsFeet )
 tdf( fs[1,'sd'], fs[2,'sd'], fs[1,'n'], fs[2,'n'])

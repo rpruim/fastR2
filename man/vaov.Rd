@@ -30,8 +30,8 @@ ANOVA models partition variance.  It may not work properly for more
 complicated models.
 }
 \examples{
-aov(pollution ~ location, airpollution)
-vaov(pollution ~ location, airpollution)
+aov(pollution ~ location, data=airpollution)
+vaov(pollution ~ location, data=airpollution)
 }
 \author{
 Randall Pruim

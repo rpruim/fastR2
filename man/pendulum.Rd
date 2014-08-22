@@ -19,7 +19,7 @@ length of the string was varied from 10cm to 16 m.
 }
 \examples{
 data(pendulum)
-xyplot(period ~ length, pendulum)
+xyplot(period ~ length, data=pendulum)
 }
 \keyword{datasets}
 

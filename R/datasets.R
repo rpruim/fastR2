@@ -15,9 +15,11 @@
 #' numeric vector} }
 #' @keywords datasets
 #' @examples
-#' 
-#' data(Jordan8687)
-#' xqqmath(~Points,data=Jordan8687)
+#'
+#' if (require(mosaicData)) {
+#'   data(Jordan8687)
+#'   xqqmath(~Points, data=Jordan8687)
+#' }
 #' 
 NULL
 
@@ -38,8 +40,10 @@ NULL
 #' vector} }
 #' @keywords datasets
 #' @examples
-#' 
-#' xyplot(GPA ~ ACT, actgpa)
+#'
+#' if (require(mosaicData)) {
+#'   xyplot(GPA ~ ACT, data=actgpa)
+#' }
 #' 
 NULL
 
@@ -69,7 +73,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' row.perc(xtabs(~Airline+Result, airlineArrival))
+#' row.perc(xtabs(~Airline+Result, data=airlineArrival))
 #' for (city in levels(airlineArrival$Airport)) {
 #' 	cat(paste('\nArriving in ', city,':\n',sep=''))
 #' 	print(row.perc(xtabs(~Airline+Result, airlineArrival, 
@@ -100,7 +104,7 @@ NULL
 #' @examples
 #' 
 #' data(airpollution)
-#' summary(lm(pollution ~ location, airpollution))
+#' summary(lm(pollution ~ location, data=airpollution))
 #' 
 NULL
 
@@ -124,7 +128,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' xyplot(time ~ height, balldrop)
+#' xyplot(time ~ height, data=balldrop)
 #' 
 NULL
 
@@ -564,7 +568,7 @@ NULL
 #' data(fumbles)
 #' m <- max(fumbles$week1)
 #' table(factor(fumbles$week1,levels=0:m))
-#' favstats(fumbles$week1)
+#' favstats( ~ week1, data=fumbles)
 #' # compare with Poisson distribution
 #' signif( cbind(
 #' 		  fumbles=0:m,
@@ -575,7 +579,7 @@ NULL
 #' 	) ,3)
 #' showFumbles <- function(x,lambda=mean(x),...) {
 #' 	mx <- max(x)
-#'     result <- histogram(~x,type="density", xlim=c(-.5,(mx+2.5)),
+#'     result <- histogram(~x, type="density", xlim=c(-.5,(mx+2.5)),
 #' 		xlab='number of fumbles',
 #'         panel=function(x,y,...){
 #'             panel.histogram(x,alpha=0.8,breaks=seq(-0.5,(mx+2.5),by=1,...))
@@ -642,10 +646,10 @@ NULL
 #' 
 #' data(pheno); data(fusion1); data(fusion2)
 #' fusion1m <- merge(fusion1, pheno, by="id", all.x=FALSE, all.y=FALSE) 
-#' xtabs(~t2d + genotype, fusion1m) 
-#' xtabs(~t2d + Gdose, fusion1m) 
-#' chisq.test( xtabs( ~t2d + genotype, fusion1m ) )
-#' f1.glm <- glm( factor(t2d) ~ Gdose, fusion1m, family=binomial) 
+#' xtabs(~t2d + genotype, data=fusion1m) 
+#' xtabs(~t2d + Gdose, data=fusion1m) 
+#' chisq.test( xtabs( ~t2d + genotype, data=fusion1m ) )
+#' f1.glm <- glm( factor(t2d) ~ Gdose, data=fusion1m, family=binomial) 
 #' summary(f1.glm)
 #' 
 NULL
@@ -788,7 +792,7 @@ NULL
 #' @examples
 #' 
 #' data(ice)
-#' xyplot(Weight ~ Skinfold, groups=Sex, ice, auto.key=TRUE)
+#' xyplot(Weight ~ Skinfold, groups=Sex, data=ice, auto.key=TRUE)
 #' 
 NULL
 
@@ -868,8 +872,8 @@ NULL
 #' @examples
 #' 
 #' data(kids)
-#' xtabs(~Goals + Urban.Rural, kids)
-#' chisq.test(xtabs(~Goals + Urban.Rural, kids))
+#' xtabs(~Goals + Urban.Rural, data=kids)
+#' chisq.test(xtabs(~Goals + Urban.Rural, data=kids))
 #' 
 NULL
 
@@ -918,8 +922,8 @@ NULL
 #' @examples
 #' 
 #' data(littleSurvey)
-#' xtabs(~surprise+surpriseVer,littleSurvey)
-#' xtabs(~disease+diseaseVer,littleSurvey)
+#' xtabs(~surprise+surpriseVer, data=littleSurvey)
+#' xtabs(~disease+diseaseVer, data=littleSurvey)
 #' 
 NULL
 
@@ -947,8 +951,8 @@ NULL
 #' @examples
 #' 
 #' data(mathnoise)
-#' xyplot(score~noise,mathnoise, group=group, type='a', 
-#' 		auto.key=list(columns=2,lines=TRUE,points=FALSE))
+#' xyplot(score~noise, data=mathnoise, group=group, type='a', 
+#' 		auto.key=list(columns=2, lines=TRUE, points=FALSE))
 #' 
 NULL
 
@@ -987,7 +991,7 @@ NULL
 #' @examples
 #' 
 #' data(miaa05)
-#' histogram(~FTPct,miaa05)
+#' histogram(~FTPct, data=miaa05)
 #' 
 NULL
 
@@ -1023,7 +1027,7 @@ NULL
 #' @examples
 #' 
 #' data(mlb2004)
-#' xyplot(W ~ Rdiff, mlb2004)
+#' xyplot(W ~ Rdiff, data=mlb2004)
 #' 
 NULL
 
@@ -1126,7 +1130,7 @@ NULL
 #' 
 #' data(noise)
 #' noise2 <- noise[noise$volume != 'none',] 
-#' model <- lm(score~volume*frequency,noise2) 
+#' model <- lm(score~volume*frequency, data=noise2) 
 #' anova(model)
 #' xyplot(score~volume,noise2, groups=frequency, type='a',
 #' 		auto.key=list(columns=2, points=FALSE, lines=TRUE))
@@ -1165,7 +1169,7 @@ NULL
 #' # Now using day as a blocking variable
 #' pal.lm2 <- lm(palettes~employee+day,palettes) 
 #' anova(pal.lm2)
-#' xyplot(palettes~day,palettes,
+#' xyplot(palettes~day, data=palettes,
 #' 		groups=employee,
 #' 		main="Productivity by day and employee",
 #' 		type='b',auto.key=list(columns=4,points=FALSE,lines=TRUE))
@@ -1260,7 +1264,7 @@ NULL
 #' @examples
 #' 
 #' data(pendulum)
-#' xyplot(period ~ length, pendulum)
+#' xyplot(period ~ length, data=pendulum)
 #' 
 NULL
 
@@ -1400,7 +1404,7 @@ NULL
 #' @examples
 #' 
 #' data(pitching2005)
-#' xyplot(IPouts/3 ~ W, pitching2005, ylab="innings pitched", xlab="wins")
+#' xyplot(IPouts/3 ~ W, data=pitching2005, ylab="innings pitched", xlab="wins")
 #' 
 NULL
 
@@ -1439,11 +1443,11 @@ NULL
 #' @examples
 #' 
 #' data(poison)
-#' poison.lm <- lm(Time~factor(Poison) * factor(Treatment),poison) 
+#' poison.lm <- lm(Time~factor(Poison) * factor(Treatment), data=poison) 
 #' xplot(poison.lm,w=c(4,2))
 #' anova(poison.lm)
 #' # improved fit using a transformation
-#' poison.lm2 <- lm(1/Time~factor(Poison) * factor(Treatment),poison) 
+#' poison.lm2 <- lm(1/Time~factor(Poison) * factor(Treatment), data=poison) 
 #' xplot(poison.lm2,w=c(4,2))
 #' anova(poison.lm)
 #' 
@@ -1483,7 +1487,7 @@ NULL
 #' @examples
 #' 
 #' data(punting)
-#' xyplot(hang ~ distance, punting)
+#' xyplot(hang ~ distance, data=punting)
 #' 
 NULL
 
@@ -1553,7 +1557,7 @@ NULL
 #' @examples
 #' 
 #' data(rubberband)
-#' xyplot(Distance ~ Stretch, rubberband, type=c("p","r"))
+#' xyplot(Distance ~ Stretch, data=rubberband, type=c("p","r"))
 #' 
 NULL
 
@@ -1632,7 +1636,7 @@ NULL
 #' @examples
 #' 
 #' data(soap)
-#' xyplot(Weight~Day,soap)
+#' xyplot(Weight~Day, data=soap)
 #' 
 NULL
 
@@ -1739,7 +1743,7 @@ NULL
 #' 
 #' data(stereogram)
 #' require(Hmisc)
-#' summary(Time~Group, stereogram,fun=favstats)
+#' favstats(Time~Group, data=stereogram)
 #' 
 NULL
 
@@ -1765,8 +1769,8 @@ NULL
 #' @examples
 #' 
 #' data(students)
-#' xyplot(ACT ~ SAT, students)
-#' xyplot(GradGPA ~ HSGPA, students)
+#' xyplot(ACT ~ SAT, data=students)
+#' xyplot(GradGPA ~ HSGPA, data=students)
 #' 
 NULL
 
@@ -1805,9 +1809,9 @@ NULL
 #' data(tastetest)
 #' data(taste1)
 #' require(Hmisc)
-#' xyplot(score~scr,tastetest)
-#' xyplot(score~scr,groups=liq,tastetest,type='a')
-#' summary(score~scr,tastetest)
+#' xyplot(score~scr, data=tastetest)
+#' xyplot(score~scr, groups=liq, tastetest, type='a')
+#' favstats(score~scr, data=tastetest)
 #' 
 NULL
 
@@ -1835,7 +1839,7 @@ NULL
 #' @examples
 #' 
 #' data(tirewear)
-#' xyplot(weight ~ groove, tirewear)
+#' xyplot(weight ~ groove, data=tirewear)
 #' 
 NULL
 
@@ -1874,12 +1878,12 @@ NULL
 #' @examples
 #' 
 #' data(traffic)
-#' xyplot(cn.deaths ~ year, traffic,type=c('l','g'))
+#' xyplot(cn.deaths ~ year, data=traffic, type=c('l','g'))
 #' trafficLong <- reshape(traffic,direction='long', idvar="year", 
 #' 				varying=list(3:6), v.names='deathRate',
-#' 				times=names(traffic)[3:6],timevar='state')
-#' xyplot(deathRate~year,groups=state,data=trafficLong,type='b',
-#' 		auto.key=list(lines=TRUE,points=FALSE,columns=2))
+#' 				times=names(traffic)[3:6], timevar='state')
+#' xyplot(deathRate~year, groups=state, data=trafficLong, type='b',
+#' 		auto.key=list(lines=TRUE, points=FALSE, columns=2))
 #' 
 NULL
 
@@ -1912,9 +1916,9 @@ NULL
 #' @examples
 #' 
 #' data(trebuchet); data(trebuchet1); data(trebuchet2)
-#' xyplot(distance~projectileWt, trebuchet1)
-#' xyplot(distance~projectileWt, trebuchet2)
-#' xyplot(distance~projectileWt, groups=projectileWt, trebuchet)
+#' xyplot(distance~projectileWt, data=trebuchet1)
+#' xyplot(distance~projectileWt, data=trebuchet2)
+#' xyplot(distance~projectileWt, groups=projectileWt, data=trebuchet)
 #' 
 NULL
 
@@ -1957,8 +1961,8 @@ NULL
 #' @examples
 #' 
 #' data(utilities); data(utilities2)
-#' xyplot(gasbill ~ temp, utilities)
-#' xyplot(gasbillpday ~ temp, utilities2)
+#' xyplot(gasbill ~ temp, data=utilities)
+#' xyplot(gasbillpday ~ temp, data=utilities2)
 #' 
 NULL
 

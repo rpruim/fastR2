@@ -10,7 +10,9 @@ vector} }}
 ACT scores and college GPA for a small sample of college students.
 }
 \examples{
-xyplot(GPA ~ ACT, actgpa)
+if (require(mosaicData)) {
+  xyplot(GPA ~ ACT, data=actgpa)
+}
 }
 \keyword{datasets}
 

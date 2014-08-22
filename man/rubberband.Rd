@@ -12,7 +12,7 @@ was stretched prior to launch.
 }
 \examples{
 data(rubberband)
-xyplot(Distance ~ Stretch, rubberband, type=c("p","r"))
+xyplot(Distance ~ Stretch, data=rubberband, type=c("p","r"))
 }
 \keyword{datasets}
 

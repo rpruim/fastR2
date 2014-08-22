@@ -18,8 +18,8 @@ mathematics test in either a quiet or loud testing environment.
 }
 \examples{
 data(mathnoise)
-xyplot(score~noise,mathnoise, group=group, type='a',
-		auto.key=list(columns=2,lines=TRUE,points=FALSE))
+xyplot(score~noise, data=mathnoise, group=group, type='a',
+		auto.key=list(columns=2, lines=TRUE, points=FALSE))
 }
 \keyword{datasets}
 

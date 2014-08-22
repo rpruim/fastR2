@@ -16,7 +16,7 @@ Treadwear is estimated by two methods: weight loss and groove wear.
 }
 \examples{
 data(tirewear)
-xyplot(weight ~ groove, tirewear)
+xyplot(weight ~ groove, data=tirewear)
 }
 \references{
 R. D. Stichler, G. G. Richey, and J. Mandel, "Measurement of

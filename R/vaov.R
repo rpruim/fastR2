@@ -19,8 +19,8 @@
 #' @export
 #' @examples
 #' 
-#' aov(pollution ~ location, airpollution)
-#' vaov(pollution ~ location, airpollution)
+#' aov(pollution ~ location, data=airpollution)
+#' vaov(pollution ~ location, data=airpollution)
 #' 
 vaov <-
 function (x, ...) 

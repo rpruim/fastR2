@@ -24,9 +24,9 @@ small trebuchet under different conditions.
 }
 \examples{
 data(trebuchet); data(trebuchet1); data(trebuchet2)
-xyplot(distance~projectileWt, trebuchet1)
-xyplot(distance~projectileWt, trebuchet2)
-xyplot(distance~projectileWt, groups=projectileWt, trebuchet)
+xyplot(distance~projectileWt, data=trebuchet1)
+xyplot(distance~projectileWt, data=trebuchet2)
+xyplot(distance~projectileWt, groups=projectileWt, data=trebuchet)
 }
 \keyword{datasets}
 

@@ -34,7 +34,7 @@ piece went down the plughole.
 }
 \examples{
 data(soap)
-xyplot(Weight~Day,soap)
+xyplot(Weight~Day, data=soap)
 }
 \keyword{datasets}
 

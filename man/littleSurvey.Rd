@@ -37,8 +37,8 @@ multiple versions and distributed randomly to the students.
 }
 \examples{
 data(littleSurvey)
-xtabs(~surprise+surpriseVer,littleSurvey)
-xtabs(~disease+diseaseVer,littleSurvey)
+xtabs(~surprise+surpriseVer, data=littleSurvey)
+xtabs(~disease+diseaseVer, data=littleSurvey)
 }
 \keyword{datasets}
 

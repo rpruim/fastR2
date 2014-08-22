@@ -20,11 +20,11 @@ animals is completely randomized.
 }
 \examples{
 data(poison)
-poison.lm <- lm(Time~factor(Poison) * factor(Treatment),poison)
+poison.lm <- lm(Time~factor(Poison) * factor(Treatment), data=poison)
 xplot(poison.lm,w=c(4,2))
 anova(poison.lm)
 # improved fit using a transformation
-poison.lm2 <- lm(1/Time~factor(Poison) * factor(Treatment),poison)
+poison.lm2 <- lm(1/Time~factor(Poison) * factor(Treatment), data=poison)
 xplot(poison.lm2,w=c(4,2))
 anova(poison.lm)
 }

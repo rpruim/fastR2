@@ -11,8 +11,10 @@ The number of points scored by Michael Jordan in each game of the 1986-87
 regular season.
 }
 \examples{
-data(Jordan8687)
-xqqmath(~Points,data=Jordan8687)
+if (require(mosaicData)) {
+  data(Jordan8687)
+  xqqmath(~Points, data=Jordan8687)
+}
 }
 \keyword{datasets}
 

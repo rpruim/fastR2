@@ -22,12 +22,12 @@ to 1956 can be attributed to the stricter enforcement.
 }
 \examples{
 data(traffic)
-xyplot(cn.deaths ~ year, traffic,type=c('l','g'))
+xyplot(cn.deaths ~ year, data=traffic, type=c('l','g'))
 trafficLong <- reshape(traffic,direction='long', idvar="year",
 				varying=list(3:6), v.names='deathRate',
-				times=names(traffic)[3:6],timevar='state')
-xyplot(deathRate~year,groups=state,data=trafficLong,type='b',
-		auto.key=list(lines=TRUE,points=FALSE,columns=2))
+				times=names(traffic)[3:6], timevar='state')
+xyplot(deathRate~year, groups=state, data=trafficLong, type='b',
+		auto.key=list(lines=TRUE, points=FALSE, columns=2))
 }
 \references{
 Donald T. Campbell and H. Laurence Ross. "The Connecticut

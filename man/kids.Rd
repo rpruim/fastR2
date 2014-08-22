@@ -35,8 +35,8 @@ information.
 }
 \examples{
 data(kids)
-xtabs(~Goals + Urban.Rural, kids)
-chisq.test(xtabs(~Goals + Urban.Rural, kids))
+xtabs(~Goals + Urban.Rural, data=kids)
+chisq.test(xtabs(~Goals + Urban.Rural, data=kids))
 }
 \references{
 Chase, M. A., and Dummer, G. M. (1992), "The Role of Sports as a

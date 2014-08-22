@@ -31,9 +31,9 @@ for the group.
 data(tastetest)
 data(taste1)
 require(Hmisc)
-xyplot(score~scr,tastetest)
-xyplot(score~scr,groups=liq,tastetest,type='a')
-summary(score~scr,tastetest)
+xyplot(score~scr, data=tastetest)
+xyplot(score~scr, groups=liq, tastetest, type='a')
+favstats(score~scr, data=tastetest)
 }
 \keyword{datasets}
 

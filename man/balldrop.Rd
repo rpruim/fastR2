@@ -14,7 +14,7 @@ Undergraduate students in a physics lab recorded the height from which a
 ball was dropped and the time it took to reach the floor.
 }
 \examples{
-xyplot(time ~ height, balldrop)
+xyplot(time ~ height, data=balldrop)
 }
 \keyword{datasets}
 

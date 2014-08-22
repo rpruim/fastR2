@@ -34,8 +34,8 @@ of the plot to display.}
 \code{geolm} create a graphical representation of the fit of a linear model.
 }
 \examples{
-geolm(pollution ~ location, airpollution)
-geolm(distance ~ projectileWt, trebuchet2)
+geolm(pollution ~ location, data=airpollution)
+geolm(distance ~ projectileWt, data=trebuchet2)
 }
 \author{
 Randall Pruim

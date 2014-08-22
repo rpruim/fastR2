@@ -21,7 +21,7 @@ group (group VV) received both verbal information and visual information
 \examples{
 data(stereogram)
 require(Hmisc)
-summary(Time~Group, stereogram,fun=favstats)
+favstats(Time~Group, data=stereogram)
 }
 \references{
 Frisby, J. P.  and Clatworthy, J. L., "Learning to see complex
