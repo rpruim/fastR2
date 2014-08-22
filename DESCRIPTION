@@ -13,9 +13,9 @@ Depends:
     R (>= 3.0.0),
     mosaic
 Imports:
+    lattice,
     mosaicData
 Suggests:
-    lattice,
     grid,
     MASS,
     faraway,
