@@ -29,6 +29,6 @@ Suggests:
     cubature,
     Devore6,
     knitr
+VignetteBuilder: knitr
 LazyLoad: yes
 LazyData: yes
-VignetteBuilder: knitr
