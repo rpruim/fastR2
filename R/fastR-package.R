@@ -21,6 +21,7 @@
 
 #' @import mosaic
 #' @import mosaicData
+#' @import lattice
 NA
 
 
