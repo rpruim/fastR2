@@ -1,0 +1,11 @@
+^\.Rproj\.user$
+^.*\.Rproj$
+^.*\.swp$
+^.*\.swo$
+^RBuildIgnore$
+^.*Rcheck.*$
+^bin$
+^build$
+^builds$
+^fastR_.*gz$
+^vignettes/figure$
