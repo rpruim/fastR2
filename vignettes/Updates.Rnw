@@ -288,8 +288,7 @@ histogram( ~shape2, data=results, type='density', v=5 )
 @
 
 The advantages of using \function{do()} are even more pronounced when working with \function{lm()}.  
-See
-\url{https://github.com/rpruim/mosaic/blob/master/inst/PDFs/Resampling-vignette.pdf?raw=true}
+See the vignettes in the \pkg{mosaic} package 
 for more examples using \function{do()}.
 
 
