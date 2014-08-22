@@ -2,7 +2,6 @@
 pmfplot <-
 function (pmf = dnorm, xlab, ylab, col, ...) 
 {
-    require(lattice)
     if (missing(col)) {
         col = "black"
     }
