@@ -14,9 +14,9 @@ Depends:
     mosaic
 Imports:
     lattice,
+    grid,
     mosaicData
 Suggests:
-    grid,
     MASS,
     faraway,
     Hmisc,
