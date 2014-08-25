@@ -1,8 +1,8 @@
 
+%\VignetteEngine{knitr::knitr} 
 %\VignetteIndexEntry{Updates to R Programming in FASt}
 %\VignettePackage{fastR}
 %\VignetteKeywords{mosaic, fastR, vignettes, resources}
-%\VignetteEngine{knitr::knitr} 
 
 \documentclass[11pt]{article}
 \usepackage{hyperref} 
@@ -61,7 +61,8 @@ intructors who might prefer these alternative approaches.
 \subsection{Access to Data}
 
 CRAN has requested that we separate the data that were previously in the
-\pkg{mosaic} package into a separate package (\pkg{mosaicData}) and that this \emph{not} be a dependency of \pkg{mosaic} of \pkg{fastR}.  So some of the 
+\pkg{mosaic} package into a separate package (\pkg{mosaicData}) and that this \emph{not} 
+be a dependency of \pkg{mosaic} or of \pkg{fastR}.  So some of the 
 data sets used in the book will require loading the new \pkg{mosaicData} package.
 
 <<>>=
