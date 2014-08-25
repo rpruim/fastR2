@@ -5,8 +5,6 @@
 ^RBuildIgnore$
 ^.*Rcheck.*$
 ^bin$
-^build$
-^builds$
 ^fastR_.*gz$
 ^vignettes/framed\.sty$
 ^vignettes/figure$
