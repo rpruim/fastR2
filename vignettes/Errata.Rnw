@@ -1,8 +1,8 @@
 
+%\VignetteEngine{knitr::knitr} 
 %\VignetteIndexEntry{Errata}
 %\VignettePackage{fastR}
 %\VignetteKeywords{fastR, vignettes}
-%\VignetteEngine{knitr::knitr} 
 
 \documentclass[11pt]{article}
 \usepackage{hyperref} 
