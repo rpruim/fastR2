@@ -10,8 +10,7 @@
 #' @author Randall Pruim
 #' 
 #' Maintainer: Randall Pruim <rpruim@@calvin.edu>
-#' @references R. Pruim, \cite{Foundations and Applicaitons of Statistics: An
-#' Introduction Using R}, AMS, 2011.
+#' @references R. Pruim, \cite{Foundations and Applicaitons of Statistics: An Introduction Using R}, AMS, 2011.
 #' @keywords package 
 #' @examples
 #' 
@@ -23,6 +22,6 @@
 #' @import mosaicData
 #' @import lattice
 #' @import grid
-NA
+NULL
 
 
