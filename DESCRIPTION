@@ -2,8 +2,8 @@ Package: fastR
 Type: Package
 Title: Data sets and utilities for Foundations and Applications of Statistics
     by R Pruim
-Version: 0.8-1
-Date: 2014-08-27
+Version: 0.8-2
+Date: 2015-05-08
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
 Description: Data sets and utilities for Foundations and Applications of
@@ -28,7 +28,7 @@ Suggests:
     corrgram,
     BradleyTerry2,
     cubature,
-    Devore6,
+    Devore7,
     knitr
 VignetteBuilder: knitr
 LazyLoad: yes
