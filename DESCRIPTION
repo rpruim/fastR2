@@ -1,13 +1,13 @@
 Package: fastR
 Type: Package
-Title: Data sets and utilities for Foundations and Applications of Statistics
+Title: Data Sets and Utilities for Foundations and Applications of Statistics
     by R Pruim
-Version: 0.8-2
-Date: 2015-05-08
+Version: 0.8.2.9000
+Date: 2015-05-16
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
-Description: Data sets and utilities for Foundations and Applications of
-    Statistics:an Introduction using R by R Pruim
+Description: This package contains data sets and utilities for Foundations and 
+  Applications of Statistics: an Introduction using R by R Pruim.
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
