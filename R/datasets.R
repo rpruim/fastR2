@@ -321,9 +321,9 @@ NULL
 #' 
 #' corn2 <- stack(corn)
 #' names(corn2) <- c('yield','treatment')
-#' lm(yield ~ treatment, corn2)
-#' t.test(yield ~ treatment, corn2)
-#' t.test(corn$reg,corn$kiln)
+#' lm(yield ~ treatment, data = corn2)
+#' t.test(yield ~ treatment, data=corn2)
+#' t.test(corn$reg, corn$kiln)
 #' 
 NULL
 
@@ -468,9 +468,9 @@ NULL
 #' t.test(endurance$Vitamin, endurance$Placebo, paired=TRUE)
 #' t.test(log(endurance$Vitamin), log(endurance$Placebo), paired=TRUE)
 #' t.test(1/endurance$Vitamin, 1/endurance$Placebo, paired=TRUE)
-#' xqqmath( ~ Vitamin - Placebo, endurance)
-#' xqqmath( ~ log(Vitamin) - log(Placebo), endurance)
-#' xqqmath( ~ 1/Vitamin - 1/Placebo, endurance)
+#' xqqmath( ~ Vitamin - Placebo, data = endurance)
+#' xqqmath( ~ log(Vitamin) - log(Placebo), data = endurance)
+#' xqqmath( ~ 1/Vitamin - 1/Placebo, data = endurance)
 #' 
 NULL
 

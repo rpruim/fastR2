@@ -23,9 +23,9 @@ adjacent plots, accounting for 11 pairs of "split" plots.
 \examples{
 corn2 <- stack(corn)
 names(corn2) <- c('yield','treatment')
-lm(yield ~ treatment, corn2)
-t.test(yield ~ treatment, corn2)
-t.test(corn$reg,corn$kiln)
+lm(yield ~ treatment, data = corn2)
+t.test(yield ~ treatment, data=corn2)
+t.test(corn$reg, corn$kiln)
 }
 \references{
 W.S. Gosset, "The Probable Error of a Mean," Biometrika, 6
