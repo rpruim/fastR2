@@ -8,3 +8,4 @@
 ^fastR_.*gz$
 ^vignettes/framed\.sty$
 ^vignettes/figure$
+^\.travis\.yml$
