@@ -12,7 +12,7 @@ The package can be installed from CRAN via
 install.packages("fastR")
 #> 
 #> The downloaded binary packages are in
-#>  /var/folders/qm/fvhzvrvx1qs1cr8c0pkk5f9m0000gn/T//RtmpeyyW1C/downloaded_packages
+#>  /var/folders/qm/fvhzvrvx1qs1cr8c0pkk5f9m0000gn/T//Rtmp8iffHv/downloaded_packages
 ```
 
 or from github
@@ -27,55 +27,7 @@ In addtion to data sets, `fastR` contains a `snippet()` function that loads and 
 
 ``` r
 require(fastR)
-#> Loading required package: fastR
-#> Loading required package: mosaic
-#> Loading required package: car
-#> Loading required package: dplyr
-#> 
-#> Attaching package: 'dplyr'
-#> 
-#> The following object is masked from 'package:stats':
-#> 
-#>     filter
-#> 
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-#> 
-#> Loading required package: lattice
-#> Loading required package: ggplot2
-#> Loading required package: mosaicData
-#> 
-#> Attaching package: 'mosaic'
-#> 
-#> The following objects are masked from 'package:dplyr':
-#> 
-#>     count, do, tally
-#> 
-#> The following object is masked from 'package:car':
-#> 
-#>     logit
-#> 
-#> The following objects are masked from 'package:stats':
-#> 
-#>     binom.test, cor, cov, D, fivenum, IQR, median, prop.test,
-#>     quantile, sd, t.test, var
-#> 
-#> The following objects are masked from 'package:base':
-#> 
-#>     max, mean, min, prod, range, sample, sum
-#> 
-#> 
-#> Attaching package: 'fastR'
-#> 
-#> The following object is masked from 'package:graphics':
-#> 
-#>     panel.smooth
 require(multcomp)
-#> Loading required package: multcomp
-#> Loading required package: mvtnorm
-#> Loading required package: survival
-#> Loading required package: TH.data
 snippet("bugs")
 #> 
 #> 
@@ -113,11 +65,11 @@ snippet("bugs")
 #> 
 #> Linear Hypotheses:
 #>            Estimate Std. Error t value Pr(>|t|)    
-#> G - B == 0   1.7503     0.3946   4.436  0.00123 ** 
-#> W - B == 0   0.1469     0.3946   0.372  0.98189    
+#> G - B == 0   1.7503     0.3946   4.436  0.00130 ** 
+#> W - B == 0   0.1469     0.3946   0.372  0.98190    
 #> Y - B == 0   3.0602     0.3946   7.755  < 0.001 ***
-#> W - G == 0  -1.6034     0.3946  -4.063  0.00310 ** 
-#> Y - G == 0   1.3099     0.3946   3.319  0.01681 *  
+#> W - G == 0  -1.6034     0.3946  -4.063  0.00296 ** 
+#> Y - G == 0   1.3099     0.3946   3.319  0.01674 *  
 #> Y - W == 0   2.9133     0.3946   7.383  < 0.001 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
