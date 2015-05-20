@@ -8,6 +8,8 @@
 \usepackage{hyperref} 
 \usepackage[margin=.8in]{geometry}
 \usepackage{longtable}
+\usepackage{xstring}
+\usepacakge{xcolor}
 %\usepackage[parfill]{parskip}
 \hypersetup{pdftitle={Updates to R Programming in Foundations and Applications of Statistics}, colorlinks=true, linkcolor=black, citecolor=black}
 
