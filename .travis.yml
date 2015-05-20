@@ -12,3 +12,13 @@ notifications:
   email:
     on_success: change
     on_failure: change
+
+r_binary_packages:
+  - XML
+  - Rcpp
+  - knitr
+  
+r_github_packages:
+  - rstudio/rmarkdown
+  - hadley/testthat
+  - ProjectMOSAIC/mosaic
