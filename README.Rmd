@@ -1,0 +1,46 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+fastR
+=======
+
+This package contains data sets and some utility functions to support
+[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) b
+Randall Pruim.
+
+### Installation
+
+The package can be installed from CRAN via
+```{r eval=TRUE}
+install.packages("fastR")
+```
+or from github
+```{r eval=FALSE}
+devtools::install_github("rpruim/fastR")
+```
+
+### Snippets
+
+In addtion to data sets, `fastR` contains a `snippet()` function that 
+loads and executes code found in the text.  Here is an example:
+
+```{r}
+require(fastR)
+require(multcomp)
+snippet("bugs")
+```
+
+

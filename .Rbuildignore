@@ -9,3 +9,5 @@
 ^vignettes/framed\.sty$
 ^vignettes/figure$
 ^\.travis\.yml$
+^README\.Rmd$
+^README-.*\.png$
