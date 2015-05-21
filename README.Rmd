@@ -1,5 +1,7 @@
 ---
 output:
+  html_document:
+    keep_md: yes
   md_document:
     variant: markdown_github
 ---
@@ -14,6 +16,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](http://cran.r-project.org/web/packages/fastR)
+
 fastR
 =======
 
@@ -24,7 +29,7 @@ Randall Pruim.
 ### Installation
 
 The package can be installed from CRAN via
-```{r eval=TRUE}
+```{r eval=FALSE}
 install.packages("fastR")
 ```
 or from github

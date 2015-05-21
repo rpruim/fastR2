@@ -1,38 +1,45 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-fastR
-=====
 
-This package contains data sets and some utility functions to support [*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) b Randall Pruim.
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](http://cran.r-project.org/web/packages/fastR)
+
+fastR
+=======
+
+This package contains data sets and some utility functions to support
+[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) b
+Randall Pruim.
 
 ### Installation
 
 The package can be installed from CRAN via
 
-``` r
+```r
 install.packages("fastR")
-#> 
-#> The downloaded binary packages are in
-#>  /var/folders/qm/fvhzvrvx1qs1cr8c0pkk5f9m0000gn/T//Rtmp8iffHv/downloaded_packages
 ```
-
 or from github
 
-``` r
+```r
 devtools::install_github("rpruim/fastR")
 ```
 
 ### Snippets
 
-In addtion to data sets, `fastR` contains a `snippet()` function that loads and executes code found in the text. Here is an example:
+In addtion to data sets, `fastR` contains a `snippet()` function that 
+loads and executes code found in the text.  Here is an example:
 
-``` r
+
+```r
 require(fastR)
 require(multcomp)
 snippet("bugs")
 #> 
 #> 
-#>  snippet(bugs)
-#>  ------- ~~~~
+#> 	snippet(bugs)
+#> 	------- ~~~~
 #> 
 #> > model <- aov(sqrt(NumTrap)~Color,bugs)
 #> 
@@ -56,7 +63,7 @@ snippet("bugs")
 #> 
 #> > summary(glht(model,mcp(Color="Tukey")))
 #> 
-#>   Simultaneous Tests for General Linear Hypotheses
+#> 	 Simultaneous Tests for General Linear Hypotheses
 #> 
 #> Multiple Comparisons of Means: Tukey Contrasts
 #> 
@@ -65,13 +72,15 @@ snippet("bugs")
 #> 
 #> Linear Hypotheses:
 #>            Estimate Std. Error t value Pr(>|t|)    
-#> G - B == 0   1.7503     0.3946   4.436  0.00130 ** 
-#> W - B == 0   0.1469     0.3946   0.372  0.98190    
+#> G - B == 0   1.7503     0.3946   4.436  0.00156 ** 
+#> W - B == 0   0.1469     0.3946   0.372  0.98189    
 #> Y - B == 0   3.0602     0.3946   7.755  < 0.001 ***
-#> W - G == 0  -1.6034     0.3946  -4.063  0.00296 ** 
-#> Y - G == 0   1.3099     0.3946   3.319  0.01674 *  
+#> W - G == 0  -1.6034     0.3946  -4.063  0.00315 ** 
+#> Y - G == 0   1.3099     0.3946   3.319  0.01650 *  
 #> Y - W == 0   2.9133     0.3946   7.383  < 0.001 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> (Adjusted p values reported -- single-step method)
 ```
+
+
