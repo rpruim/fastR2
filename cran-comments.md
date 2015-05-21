@@ -8,12 +8,12 @@
 
 There were no ERRORs or WARNINGs. 
 
-There was 1 NOTE:
+Sometimes there has been one NOTE:
 
 Found the following (possibly) invalid URLs:
   URL: http://lib.stat.cmu.edu/DASL/
   
-  I checked the URL manually and had no problems loading the page.
+  When I check the URL manually, I have no problems loading the page.
 
 ## Downstream dependencies
 
