@@ -8,6 +8,10 @@
 \usepackage{hyperref} 
 \usepackage[margin=.8in]{geometry}
 \usepackage{longtable}
+\usepackage{fancyvrb} % for probstat and travis-ci
+\usepackage{amsmath} % for probstat and travis-ci
+\usepackage{ifthen} % for probstat and travis-ci
+\usepackage{bm} % for probstat and travis-ci
 \usepackage{probstat}
 %\usepackage[parfill]{parskip}
 \hypersetup{pdftitle={Errata for Foundations and Applications of Statistics}, colorlinks=true, linkcolor=black, citecolor=black}
