@@ -10,7 +10,7 @@ fastR
 =======
 
 This package contains data sets and some utility functions to support
-[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) b
+[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) by
 Randall Pruim.
 
 ### Installation
@@ -72,11 +72,11 @@ snippet("bugs")
 #> 
 #> Linear Hypotheses:
 #>            Estimate Std. Error t value Pr(>|t|)    
-#> G - B == 0   1.7503     0.3946   4.436  0.00156 ** 
-#> W - B == 0   0.1469     0.3946   0.372  0.98189    
+#> G - B == 0   1.7503     0.3946   4.436  0.00132 ** 
+#> W - B == 0   0.1469     0.3946   0.372  0.98190    
 #> Y - B == 0   3.0602     0.3946   7.755  < 0.001 ***
-#> W - G == 0  -1.6034     0.3946  -4.063  0.00315 ** 
-#> Y - G == 0   1.3099     0.3946   3.319  0.01650 *  
+#> W - G == 0  -1.6034     0.3946  -4.063  0.00309 ** 
+#> Y - G == 0   1.3099     0.3946   3.319  0.01645 *  
 #> Y - W == 0   2.9133     0.3946   7.383  < 0.001 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

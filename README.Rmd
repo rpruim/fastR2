@@ -23,7 +23,7 @@ fastR
 =======
 
 This package contains data sets and some utility functions to support
-[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) b
+[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) by
 Randall Pruim.
 
 ### Installation
