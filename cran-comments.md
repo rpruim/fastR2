@@ -8,7 +8,7 @@
 
 There were no ERRORs or WARNINGs. 
 
-Sometimes there has been one NOTE:
+There has been one intermittant NOTE:
 
 Found the following (possibly) invalid URLs:
   URL: http://lib.stat.cmu.edu/DASL/
@@ -17,4 +17,4 @@ Found the following (possibly) invalid URLs:
 
 ## Downstream dependencies
 
-None.
+Suggested by mosaic.  This update is driven by the recent mosaic update.
