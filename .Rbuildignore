@@ -13,3 +13,4 @@
 ^README-.*\.png$
 ^cran-comments\.md$
 ^README\.html$
+^data-raw$
