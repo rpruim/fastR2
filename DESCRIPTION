@@ -1,13 +1,13 @@
-Package: fastR
+Package: fastR2
 Type: Package
-Title: Foundations and Applications of Statistics Using R
-Version: 0.10
-Date: 2015-05-21
+Title: Foundations and Applications of Statistics Using R (2nd ed)
+Version: 0.1
+Date: 2015-08-11
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
-Description:  Data sets and utilities to accompany
+Description:  Data sets and utilities to accompany the 2nd edition of
   "Foundations and Applications of Statistics: an Introduction 
-  using R" (R Pruim, published by AMS, 2011), a text covering 
+  using R" (R Pruim, published by AMS, 2016), a text covering 
   topics from probability and mathematical statistics at an advanced
   undergraduate level.  R is integrated throughout, and access to all 
   the R code in the book is provided via the snippet function.
