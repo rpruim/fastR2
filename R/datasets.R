@@ -11,8 +11,9 @@
 #' @rdname Jordan8687
 #' @docType data
 #' @format A data frame with 82 observations on the following 2 variables.
-#' \itemize{ \item{Game}{a numeric vector} \item{Points}{a
-#' numeric vector} }
+#' \itemize{ 
+#'   \item{game}{a numeric vector} 
+#'   \item{points}{a numeric vector} }
 #' @keywords datasets
 #' @examples
 #'
@@ -32,17 +33,16 @@ NULL
 #' ACT scores and college GPA for a small sample of college students.
 #' 
 #' 
-#' @name actgpa
-#' @rdname actgpa
+#' @name ACTgpa
+#' @rdname ACTgpa
 #' @docType data
 #' @format A data frame with 26 observations on the following 2 variables.
-#' \itemize{ \item{ACT}{ a numeric vector} \item{GPA}{ a numeric
-#' vector} }
+#' \itemize{ \item{ACT}{ACT score} \item{GPA}{GPA} }
 #' @keywords datasets
 #' @examples
 #'
 #' if (require(mosaicData)) {
-#'   xyplot(GPA ~ ACT, data=actgpa)
+#'   xyplot(GPA ~ ACT, data=ACTgpa)
 #' }
 #' 
 NULL
@@ -57,15 +57,15 @@ NULL
 #' flight was on time.
 #' 
 #' 
-#' @name airlineArrival
-#' @rdname airlineArrival
+#' @name AirlineArrival
+#' @rdname AirlineArrival
 #' @docType data
 #' @format A data frame with 11000 observations on the following 3 variables.
-#' \itemize{ \item{Airport}{ a factor with levels \code{LosAngeles}
-#' \code{Phoenix} \code{SanDiego} \code{SanFrancisco} \code{Seattle}}
-#' \item{Result}{ a factor with levels \code{Delayed} \code{OnTime}}
-#' \item{Airline}{ a factor with levels \code{Alaska}
-#' \code{AmericaWest}} }
+#' \itemize{ 
+#'   \item{airport}{ a factor with levels \code{LosAngeles},
+#'     \code{Phoenix}, \code{SanDiego}, \code{SanFrancisco}, \code{Seattle}}
+#'   \item{result}{ a factor with levels \code{Delayed}, \code{OnTime}}
+#'   \item{airline}{ a factor with levels \code{Alaska}, \code{AmericaWest}} }
 #' @references These and similar data appear in many text books under the topic
 #' of Simpson's paradox.
 #' @source Barnett, Arnold. 1994. ``How numbers can trick you.''
@@ -73,12 +73,21 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' row.perc(xtabs(~Airline+Result, data=airlineArrival))
-#' for (city in levels(airlineArrival$Airport)) {
-#' 	cat(paste('\nArriving in ', city,':\n',sep=''))
-#' 	print(row.perc(xtabs(~Airline+Result, airlineArrival, 
-#' 		subset=Airport==city)))
-#' }
+#' tally(airline ~ result, data=AirlineArrival, format="perc", margins=TRUE)
+#' tally(result ~ airline + airport, data = AirlineArrival, format="perc", margins=TRUE)
+#' AirlineArrival2 <- 
+#'   AirlineArrival %>% 
+#'   group_by(airport, airline, result) %>% 
+#'   summarise(count = n()) %>%
+#'   group_by(airport, airline) %>%
+#'   mutate(total = sum(count), percent = count/total * 100) %>% 
+#'   filter(result == "Delayed") 
+#'   xyplot( percent ~ airport, groups=airline, data = AirlineArrival2,
+#'     type="l", auto.key=list(points=FALSE, lines=TRUE), ylab="percent delayed")
+#'   ggplot(data=AirlineArrival2) + 
+#'     geom_line(aes(x=airport, y=percent, colour = airline, group=airline)) +
+#'     geom_point(aes(x=airport, y=percent, colour = airline, size=total)) +
+#'     ylab("percent delayed")
 #' 
 NULL
 
@@ -91,20 +100,21 @@ NULL
 #' Air pollution measurements at three locations.
 #' 
 #' 
-#' @name airpollution
-#' @rdname airpollution
+#' @name AirPollution
+#' @rdname AirPollution
 #' @docType data
 #' @format A data frame with 6 observations on the following 2 variables.
-#' \itemize{ \item{pollution}{ a numeric vector}
-#' \item{location}{ a factor with levels \code{Hill Suburb} \code{Plains
-#' Suburb} \code{Urban City}} }
+#' \itemize{ 
+#'   \item{pollution}{ a numeric vector}
+#'   \item{location}{a factor with levels \code{Hill Suburb}, 
+#'         \code{Plains Suburb}, \code{Urban City}} }
 #' @source David J. Saville and Graham R. Wood, \emph{Statistical methods: A
 #' geometric primer}, Springer, 1996.
 #' @keywords datasets
 #' @examples
 #' 
-#' data(airpollution)
-#' summary(lm(pollution ~ location, data=airpollution))
+#' data(AirPollution)
+#' summary(lm(pollution ~ location, data=AirPollution))
 #' 
 NULL
 
@@ -118,17 +128,16 @@ NULL
 #' ball was dropped and the time it took to reach the floor.
 #' 
 #' 
-#' @name balldrop
-#' @rdname balldrop
+#' @name BallDrop
+#' @rdname BallDrop
 #' @docType data
 #' @format A data frame with 30 observations on the following 2 variables.
-#' \itemize{ \item{height}{ height in meters} \item{time}{ time
-#' in seconds} }
+#' \itemize{ \item{height}{ height in meters} \item{time}{ time in seconds} }
 #' @source Steve Plath, Calvin College Physics Department
 #' @keywords datasets
 #' @examples
 #' 
-#' xyplot(time ~ height, data=balldrop)
+#' xyplot(time ~ height, data=BallDrop)
 #' 
 NULL
 
@@ -141,8 +150,8 @@ NULL
 #' Major League batting data for the seasons from 2000-2005.
 #' 
 #' 
-#' @name batting
-#' @rdname batting
+#' @name Batting
+#' @rdname Batting
 #' @docType data
 #' @format A data frame with 8062 observations on the following 22 variables.
 #' \itemize{ \item{player}{ unique identifier for each player}
@@ -1045,35 +1054,35 @@ NULL
 
 
 
-
+####### edits still needed above here  ############
 
 #' NFL 2007 season
 #' 
 #' Results of National Football League games (2007 season, including playoffs)
 #' 
 #' 
-#' @name nfl2007
-#' @rdname nfl2007
+#' @name NFL2007
+#' @rdname NFL2007
 #' @docType data
 #' @format A data frame with 267 observations on the following 7 variables.
-#' \itemize{ \item{Date}{ date on which game was played}
-#' \item{Visitor}{ visiting team} \item{VisitorScore}{ score for
+#' \itemize{ \item{date}{ date on which game was played}
+#' \item{visitor}{ visiting team} \item{VisitorScore}{ score for
 #' visiting team} \item{Home}{ home team} \item{HomeScore}{ score
 #' for home team} \item{Line}{ `betting line'}
-#' \item{TotalLine}{ 'over/under' line (for combined score of both
+#' \item{totalLine}{ 'over/under' line (for combined score of both
 #' teams)} }
 #' @keywords datasets
 #' @examples
 #' 
-#' data(nfl2007); nfl <- nfl2007
-#' nfl$dscore <- nfl$HomeScore - nfl$VisitorScore 
-#' w <- which(nfl$dscore > 0) 
-#' nfl$winner <- nfl$Visitor; nfl$winner[w] <- nfl$Home[w] 
-#' nfl$loser <- nfl$Home; nfl$loser[w] <- nfl$Visitor[w] 
+#' data(NFL2007); NFL <- NFL2007
+#' NFL$dscore <- NFL$homeScore - NFL$visitorScore 
+#' w <- which(NFL$dscore > 0) 
+#' NFL$winner <- NFL$visitor; NFL$winner[w] <- NFL$home[w] 
+#' NFL$loser <- NFL$home; NFL$loser[w] <- NFL$visitor[w] 
 #' # did the home team win? 
-#' nfl$homeTeamWon <- nfl$dscore > 0 
-#' table(nfl$homeTeamWon)
-#' table(nfl$dscore > nfl$line)
+#' NFL$homeTeamWon <- NFL$dscore > 0 
+#' table(NFL$homeTeamWon)
+#' table(NFL$dscore > NFL$line)
 #' 
 NULL
 
@@ -1081,16 +1090,16 @@ NULL
 
 
 
-#' Noise -- unfinished documentation
+#' Noise 
 #' 
 #' In order to test the effect of room noise, subjects were given a test under
-#' 5 diff sets of conditions: 1) no noise, 2) intermittent low volume, 3)
+#' 5 different sets of conditions: 1) no noise, 2) intermittent low volume, 3)
 #' intermittent high volume, 4) continuous low volume, and 5) continuous high
 #' volume.
 #' 
 #' 
-#' @name noise
-#' @rdname noise
+#' @name Noise
+#' @rdname Noise
 #' @docType data
 #' @format A data frame with 50 observations on the following 5 variables.
 #' \itemize{ \item{id}{ subject identifier} \item{score}{ score
@@ -1101,12 +1110,12 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(noise)
-#' noise2 <- noise[noise$volume != 'none',] 
-#' model <- lm(score~volume*frequency, data=noise2) 
+#' data(Noise)
+#' Noise2 <- Noise %>% filter(volume != 'none')
+#' model <- lm(score ~ volume * frequency, data = Noise2) 
 #' anova(model)
-#' xyplot(score~volume,noise2, groups=frequency, type='a',
-#' 		auto.key=list(columns=2, points=FALSE, lines=TRUE))
+#' xyplot(score ~ volume, data = Noise2, groups = frequency, 
+#'    type = 'a',	auto.key = list(columns = 2, points = FALSE, lines = TRUE))
 #' 
 NULL
 
@@ -1114,20 +1123,20 @@ NULL
 
 
 
-#' Palette repair data
+#' Pallet repair data
 #' 
-#' The palettes data set contains data from a firm that recycles palettes.
-#' Palettes from warehouses are bought, repaired, and resold. (Repairing a
+#' The paletts data set contains data from a firm that recycles paletts.
+#' Paletts from warehouses are bought, repaired, and resold. (Repairing a
 #' palette typically involves replacing one or two boards.) The company has
 #' four employees who do the repairs. The employer sampled five days for each
-#' employee and recorded the number of palettes repaired.
+#' employee and recorded the number of pallets repaired.
 #' 
 #' 
-#' @name palettes
-#' @rdname palettes
+#' @name Pallets
+#' @rdname Pallets
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
-#' \itemize{ \item{palettes}{ number of palettes repaired}
+#' \itemize{ \item{pallets}{ number of pallets repaired}
 #' \item{employee}{ a factor with levels \code{A} \code{B} \code{C}
 #' \code{D}} \item{day}{ a factor with levels \code{day1} \code{day2}
 #' \code{day3} \code{day4} \code{day5}} }
@@ -1135,14 +1144,14 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(palettes)
-#' # Do the employees differ in the rate at which they repair palettes?
-#' pal.lm1 <- lm(palettes~employee,palettes) 
+#' data(Pallets)
+#' # Do the employees differ in the rate at which they repair pallets?
+#' pal.lm1 <- lm(pallets ~ employee, data = Pallets) 
 #' anova(pal.lm1)
 #' # Now using day as a blocking variable
-#' pal.lm2 <- lm(palettes~employee+day,palettes) 
+#' pal.lm2 <- lm(pallets ~ employee + day, data = Pallets) 
 #' anova(pal.lm2)
-#' xyplot(palettes~day, data=palettes,
+#' xyplot(pallets ~ day, data = Pallets,
 #' 		groups=employee,
 #' 		main="Productivity by day and employee",
 #' 		type='b',auto.key=list(columns=4,points=FALSE,lines=TRUE))
@@ -1192,8 +1201,8 @@ NULL
 #' to eight, the random numbers were generated and accordingly the order of the
 #' experiment was found.
 #' 
-#' @name paperplanes
-#' @rdname paperplanes
+#' @name PaperPlanes
+#' @rdname PaperPlanes
 #' @docType data
 #' @format A data frame with 16 observations on the following 5 variables.
 #' \itemize{ \item{distance}{ distance plane traveled (cm)}
@@ -1208,7 +1217,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(paperplanes)
+#' data(PaperPlanes)
 #' 
 NULL
 
@@ -1223,8 +1232,8 @@ NULL
 #' length of the string was varied from 10cm to 16 m.
 #' 
 #' 
-#' @name pendulum
-#' @rdname pendulum
+#' @name Pendulum
+#' @rdname Pendulum
 #' @docType data
 #' @format A data frame with 27 observations on the following 3 variables.
 #' \itemize{ \item{length}{ length of the pendulum (in meters)}
@@ -1236,8 +1245,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pendulum)
-#' xyplot(period ~ length, data=pendulum)
+#' data(Pendulum)
+#' xyplot(period ~ length, data=Pendulum)
 #' 
 NULL
 
@@ -1254,12 +1263,12 @@ NULL
 #' with a friend present, or with their dog present.  The average heart rate
 #' during the task was used as a measure of stress.
 #' 
-#' @name petstress
-#' @rdname petstress
+#' @name PetStress
+#' @rdname PetStress
 #' @docType data
 #' @format A data frame with 45 observations on the following 2 variables.
-#' \itemize{ \item{Group}{ a factor with levels \code{C}ontrol,
-#' \code{F}riend, or \code{P}et} \item{Rate}{ average heart rate while
+#' \itemize{ \item{group}{ a factor with levels \code{C}ontrol,
+#' \code{F}riend, or \code{P}et} \item{rate}{ average heart rate while
 #' performing a stressful task} }
 #' @references These data also appear in
 #' 
@@ -1272,7 +1281,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(petstress)
+#' data(PetStress)
+#' xyplot(rate ~ group, data = PetStress, jitter.x=TRUE, type = c('p', 'a'))
 #' 
 NULL
 
@@ -1316,19 +1326,16 @@ NULL
 #' both pigs have the same configuration, so, for example, two Snouters are
 #' worth 40 rather than 20.
 #' 
-#' The vector \code{pigConfig} is provided to assist in converting from the
-#' numeric codes above to pig configurations.
-#' 
-#' @name pigs
-#' @rdname pigs
-#' @aliases pigs pigConfig
+#' @name Pigs
+#' @rdname Pigs
+#' @aliases Pigs 
 #' @docType data
 #' @format A data frame with 6000 observations on the following 6 variables.
 #' \itemize{ \item{roll}{ roll number (1-6000)}
-#' \item{black}{ numerical code for position of black pig}
-#' \item{blackF}{ position of black pig coded as a factor}
-#' \item{pink}{ numerical code for position of pink pig}
-#' \item{pinkF}{ position of pink pig coded as a factor}
+#' \item{blackScore}{ numerical code for position of black pig}
+#' \item{black}{ position of black pig coded as a factor}
+#' \item{pinkScore}{ numerical code for position of pink pig}
+#' \item{pink}{ position of pink pig coded as a factor}
 #' \item{score}{ score of the roll} \item{height}{ height from
 #' which pigs were rolled (5 or 8 inches)} \item{start}{ starting
 #' position of the pigs (0 = both pigs backwards, 1 = one bacwards one
@@ -1337,8 +1344,15 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pigs)
-#' table(pigConfig[pigs$black])
+#' data(Pigs)
+#' tally( ~blackF, data = Pigs )
+#' if (require(tidyr)) {
+#'   Pigs %>% 
+#'   select(roll, black, pink) %>%
+#'   gather(pig, state, black, pink) %>%
+#'   tally( state ~ pig, data = ., format="prop", margins=TRUE)
+#' }
+#'   
 #' 
 NULL
 
@@ -1351,8 +1365,8 @@ NULL
 #' Major League Baseball pitching statistics for the 2005 season.
 #' 
 #' 
-#' @name pitching2005
-#' @rdname pitching2005
+#' @name Pitching2005
+#' @rdname Pitching2005
 #' @docType data
 #' @format A data frame with 653 observations on the following 27 variables.
 #' \itemize{ \item{playerID}{ unique identifier for each player}
@@ -1376,8 +1390,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pitching2005)
-#' xyplot(IPouts/3 ~ W, data=pitching2005, ylab="innings pitched", xlab="wins")
+#' data(Pitching2005)
+#' xyplot(IPouts/3 ~ W, data=Pitching2005, ylab="innings pitched", xlab="wins")
 #' 
 NULL
 
@@ -1393,13 +1407,13 @@ NULL
 #' animals is completely randomized.
 #' 
 #' 
-#' @name poison
-#' @rdname poison
+#' @name Poison
+#' @rdname Poison
 #' @docType data
 #' @format A data frame with 48 observations on the following 3 variables.
-#' \itemize{ \item{Poison}{ type of poison (1, 2, or 3)}
-#' \item{Treatment}{ manner of treatment (1, 2, 3, or 4)}
-#' \item{Time}{ time until death (hours)} }
+#' \itemize{ \item{poison}{ type of poison (1, 2, or 3)}
+#' \item{treatment}{ manner of treatment (1, 2, 3, or 4)}
+#' \item{time}{ time until death (hours)} }
 #' @references Box, G. E. P., and Cox, D. R. (1964). An analysis of
 #' transformations (with Discussion). J. R. Statist. Soc. B, 26, 211-252.
 #' 
@@ -1416,11 +1430,11 @@ NULL
 #' @examples
 #' 
 #' data(poison)
-#' poison.lm <- lm(Time~factor(Poison) * factor(Treatment), data=poison) 
+#' poison.lm <- lm(time~factor(poison) * factor(treatment), data=Poison) 
 #' xplot(poison.lm,w=c(4,2))
 #' anova(poison.lm)
 #' # improved fit using a transformation
-#' poison.lm2 <- lm(1/Time~factor(Poison) * factor(Treatment), data=poison) 
+#' poison.lm2 <- lm(1/time~factor(poison) * factor(treatment), data=Poison) 
 #' xplot(poison.lm2,w=c(4,2))
 #' anova(poison.lm)
 #' 
@@ -1439,8 +1453,8 @@ NULL
 #' catches it), and a number of measures of leg strength and flexibility.
 #' 
 #' 
-#' @name punting
-#' @rdname punting
+#' @name Punting
+#' @rdname Punting
 #' @docType data
 #' @format A data frame with 13 observations on the following 7 variables.
 #' \itemize{ \item{distance}{ mean distance for 10 punts (feet) }
@@ -1459,8 +1473,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(punting)
-#' xyplot(hang ~ distance, data=punting)
+#' data(Punting)
+#' xyplot(hang ~ distance, data=Punting)
 #' 
 NULL
 
@@ -1474,8 +1488,8 @@ NULL
 #' influence the consumption by rats.
 #' 
 #' 
-#' @name ratpoison
-#' @rdname ratpoison
+#' @name RatPoison
+#' @rdname RatPoison
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
 #' \itemize{ \item{consumption}{ a numeric vector}
@@ -1486,8 +1500,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(ratpoison)
-#' 
+#' data(RatPoison)
+#' xyplot(consumption ~ flavor, groups=location, data = RatPoison, 
+#'   type=c("p","l"), auto.key=TRUE)
 NULL
 
 
@@ -1520,8 +1535,8 @@ NULL
 #' was stretched prior to launch.
 #' 
 #' 
-#' @name rubberband
-#' @rdname rubberband
+#' @name RubberBand
+#' @rdname RubberBand
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \itemize{ \item{Stretch}{ amount rubber band was stretched before
@@ -1529,8 +1544,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(rubberband)
-#' xyplot(Distance ~ Stretch, data=rubberband, type=c("p","r"))
+#' data(Rubberband)
+#' xyplot(distance ~ stretch, data=Rubberband, type=c("p","r"))
 #' 
 NULL
 
@@ -1544,8 +1559,8 @@ NULL
 #' smelling a floral scent and when they were not.
 #' 
 #' 
-#' @name scent
-#' @rdname scent
+#' @name Scent
+#' @rdname Scent
 #' @docType data
 #' @format A data frame with 21 observations on the following 12 variables.
 #' \itemize{ \item{id}{ ID number} \item{sex}{ a factor with
@@ -1566,8 +1581,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(scent)
-#' summary(scent)
+#' data(Scent)
+#' summary(Scent)
 #' 
 NULL
 
@@ -1596,20 +1611,20 @@ NULL
 #' The data ends at day 22. On day 23 the soap broke into two pieces and one
 #' piece went down the plughole.
 #' 
-#' @name soap
-#' @rdname soap
+#' @name Soap
+#' @rdname Soap
 #' @docType data
 #' @format A data frame with 15 observations on the following 3 variables.
-#' \itemize{ \item{Date}{ } \item{Day}{ days since start of soap
-#' usage and data collection} \item{Weight}{ weight of bar of soap (in
+#' \itemize{ \item{date}{ } \item{day}{ days since start of soap
+#' usage and data collection} \item{weight}{ weight of bar of soap (in
 #' grams) } }
 #' @source Data collected by Rex Boggs and available from OzDASL
 #' (\url{http://www.statsci.org/data/index.html}).
 #' @keywords datasets
 #' @examples
 #' 
-#' data(soap)
-#' xyplot(Weight~Day, data=soap)
+#' data(Soap)
+#' xyplot(weight~day, data=Soap)
 #' 
 NULL
 
@@ -1623,8 +1638,8 @@ NULL
 #' steel ball bearings.
 #' 
 #' 
-#' @name spheres
-#' @rdname spheres
+#' @name Spheres
+#' @rdname Spheres
 #' @docType data
 #' @format A data frame with 12 observations on the following 2 variables.
 #' \itemize{ \item{diameter}{ diameter of bearing (m)}
@@ -1633,6 +1648,9 @@ NULL
 #' @source These data were collected by Calvin College physics students under
 #' the direction of Steve Plath.
 #' @keywords datasets
+#' @examples
+#' xyplot( mass ~ diameter, data = Spheres )
+#' xyplot( mass ~ diameter, data = Spheres, scales=list(log=TRUE) )
 NULL
 
 
@@ -1664,8 +1682,8 @@ NULL
 #' variability in the experiment. Each pair of experimenters was treated as a
 #' block.
 #' 
-#' @name step
-#' @rdname step
+#' @name Step
+#' @rdname Step
 #' @docType data
 #' @format A data frame with 30 observations on the following 7 variables.
 #' \itemize{ \item{order}{ performance order}
@@ -1679,9 +1697,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(step)
-#' xyplot(HR-restHR ~ freq, data=step, groups=height, type='a')
-#' xyplot(HR-restHR ~ height, data=step, groups=freq, type='a')
+#' data(Step)
+#' xyplot(HR-restHR ~ freq, data=Step, groups=height, type=c('p','a'))
+#' xyplot(HR-restHR ~ height, data=Step, groups=freq, type=c('p','a'))
 #' 
 NULL
 
@@ -1698,12 +1716,12 @@ NULL
 #' (e.g., a drawing of the object).
 #' 
 #' 
-#' @name stereogram
-#' @rdname stereogram
+#' @name Stereogram
+#' @rdname Stereogram
 #' @docType data
 #' @format A data frame with 78 observations on the following 2 variables.
-#' \itemize{ \item{Time}{ time until subject was able to fuse a random
-#' dot stereogram} \item{Group}{ treatment group: \code{NV}(no visual
+#' \itemize{ \item{time}{time until subject was able to fuse a random
+#' dot stereogram} \item{group}{treatment group: \code{NV}(no visual
 #' instructions) \code{VV} (visual instructions)} }
 #' @references Frisby, J. P.  and Clatworthy, J. L., "Learning to see complex
 #' random-dot stereograms," \emph{Perception}, 4, (1975), pp. 173-178.
@@ -1714,9 +1732,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(stereogram)
-#' require(Hmisc)
-#' favstats(Time~Group, data=stereogram)
+#' data(Stereogram)
+#' favstats(time~group, data=Stereogram)
+#' xyplot(time~group, data=Stereogram, jitter.x=TRUE)
 #' 
 NULL
 
@@ -1729,21 +1747,21 @@ NULL
 #' Standardized test scores and GPAs for 1000 students.
 #' 
 #' 
-#' @name students
-#' @rdname students
+#' @name Students
+#' @rdname Students
 #' @docType data
 #' @format A data frame with 1000 observations on the following 6 variables.
 #' \itemize{ \item{ACT}{ ACT score} \item{SAT}{ SAT score}
 #' \item{Grad}{ has the student graduated from college?}
-#' \item{GradGPA}{ college GPA at graduation} \item{HSGPA}{ high
+#' \item{gradGPA}{ college GPA at graduation} \item{hsGPA}{ high
 #' school GPA} \item{Cohort}{ year of graduation or expected graduation}
 #' }
 #' @keywords datasets
 #' @examples
 #' 
-#' data(students)
-#' xyplot(ACT ~ SAT, data=students)
-#' xyplot(GradGPA ~ HSGPA, data=students)
+#' data(Students)
+#' xyplot(ACT ~ SAT, data=Students)
+#' xyplot(gradGPA ~ hsGPA, data=Students)
 #' 
 NULL
 
@@ -1753,7 +1771,7 @@ NULL
 
 #' Taste test data
 #' 
-#' Tthe results from a study comparing different preparation methods for taste
+#' The results from a study comparing different preparation methods for taste
 #' test samples.
 #' 
 #' The samples were prepared for tasting using either a coarse screen or a fine
@@ -1763,9 +1781,9 @@ NULL
 #' (excellent).  The sum of these individual scores is the overall taste score
 #' for the group.
 #' 
-#' @name tastetest
-#' @rdname tastetest
-#' @aliases tastetest taste1
+#' @name TasteTest
+#' @rdname TasteTest
+#' @aliases TasteTest Taste1
 #' @docType data
 #' @format A data frame with 16 observations on 2 (\code{taste1}) or 4
 #' (\code{tastetest}) variables.  \itemize{ \item{score}{ taste score
@@ -1779,12 +1797,11 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(tastetest)
-#' data(taste1)
-#' require(Hmisc)
-#' xyplot(score~scr, data=tastetest)
-#' xyplot(score~scr, groups=liq, tastetest, type='a')
-#' favstats(score~scr, data=tastetest)
+#' data(TasteTest)
+#' data(Taste1)
+#' xyplot(score~scr, data = TasteTest, jitter.x=TRUE)
+#' xyplot(score~scr, groups=liq, data = TasteTest, type=c('p','a'), jitter.x=TRUE)
+#' favstats(score~scr, data = TasteTest)
 #' 
 NULL
 
@@ -1792,13 +1809,12 @@ NULL
 
 
 
-#' Estimating tirewear
+#' Estimating tire wear
 #' 
-#' Treadwear is estimated by two methods: weight loss and groove wear.
+#' Tread wear is estimated by two methods: weight loss and groove wear.
 #' 
-#' 
-#' @name tirewear
-#' @rdname tirewear
+#' @name TireWear
+#' @rdname TireWear
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \itemize{ \item{weight}{ estimated wear (1000's of miles) base on
@@ -1811,8 +1827,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(tirewear)
-#' xyplot(weight ~ groove, data=tirewear)
+#' data(TireWear)
+#' xyplot(weight ~ groove, data=TireWear)
 #' 
 NULL
 
@@ -1829,8 +1845,8 @@ NULL
 #' to 1956 can be attributed to the stricter enforcement.
 #' 
 #' 
-#' @name traffic
-#' @rdname traffic
+#' @name Traffic
+#' @rdname Traffic
 #' @docType data
 #' @format A data frame with 9 observations on the following 6 variables.
 #' \itemize{ \item{year}{ a year from 1951 to 1959}
@@ -1850,8 +1866,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(traffic)
-#' xyplot(cn.deaths ~ year, data=traffic, type=c('l','g'))
+#' data(Traffic)
+#' xyplot(cn.deaths ~ year, data=Traffic, type=c('l','g'))
 #' trafficLong <- reshape(traffic,direction='long', idvar="year", 
 #' 				varying=list(3:6), v.names='deathRate',
 #' 				times=names(traffic)[3:6], timevar='state')
@@ -1870,9 +1886,9 @@ NULL
 #' small trebuchet under different conditions.
 #' 
 #' 
-#' @name trebuchet
-#' @rdname trebuchet
-#' @aliases trebuchet trebuchet1 trebuchet2
+#' @name Trebuchet
+#' @rdname Trebuchet
+#' @aliases Trebuchet Trebuchet1 Trebuchet2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
 #' \item{object}{ the object serving as projectile\code{bean} \code{big
@@ -1883,61 +1899,21 @@ NULL
 #' \item{distance}{ distance projectile traveled (in cm)}
 #' \item{form}{ a factor with levels \code{a} \code{b} \code{B} \code{c}
 #' describing the configuration of the trebuchet.} }
+#' @details
+#' \code{Trebuchet1} and \code{Trebuchet2} are subsets of \code{Trebuchet} restricted
+#' to a single value of \code{counterWt}
 #' @source Data collected by Andrew Pruim as part of a Science Olympiad
 #' competition.
 #' @keywords datasets
 #' @examples
 #' 
-#' data(trebuchet); data(trebuchet1); data(trebuchet2)
-#' xyplot(distance~projectileWt, data=trebuchet1)
-#' xyplot(distance~projectileWt, data=trebuchet2)
-#' xyplot(distance~projectileWt, groups=projectileWt, data=trebuchet)
+#' data(Trebuchet); data(Trebuchet1); data(Trebuchet2)
+#' xyplot(distance~projectileWt, data=Trebuchet1)
+#' xyplot(distance~projectileWt, data=Trebuchet2)
+#' xyplot(distance~projectileWt, groups=projectileWt, data=Trebuchet)
 #' 
 NULL
 
-
-
-
-
-
-#' Utilities bills
-#' 
-#' Data from utility bills at a residence.
-#' 
-#' 
-#' @name utilities
-#' @rdname utilities
-#' @aliases utilities utilities2
-#' @docType data
-#' @format A data frame the following variables.  \itemize{
-#' \item{month}{ month (coded as a number)} \item{day}{ day of
-#' month on which bill was calculated} \item{year}{ year of bill}
-#' \item{temp}{ average temperature (F) for billing period}
-#' \item{kwh}{ electricity usage (kwh)} \item{ccf}{ gas usage
-#' (ccf)} \item{thermsPerDay}{ a numeric vector}
-#' \item{billingDays}{ number of billing days in billing period}
-#' \item{totalbill}{ total bill (in dollars)} \item{gasbill}{ gas
-#' bill (in dollars)} \item{elecbill}{ exectric bill (in dollars)}
-#' \item{notes}{ notes about the billing period}
-#' \item{ccfpday}{ average gas usage per day [\code{utilities2} only]}
-#' \item{kwhpday}{ average electric usage per day [\code{utilities2}
-#' only]} \item{gasbillpday}{ gas bill divided by billing days
-#' [\code{utilities2} only]} \item{elecbillpday}{ electric bill divided
-#' by billing days a numeric vector [\code{utilities2} only]}
-#' \item{totalbillpday}{ total bill divided by billing days a numeric
-#' vector [\code{utilities2} only]} \item{therms}{ \code{thermsPerDay *
-#' billingDays} [\code{utilities2} only]} \item{monthsSinceY2K}{ months
-#' since 2000 [\code{utilities2} only]} }
-#' @source Daniel T. Kaplan, \emph{Statistical modeling: A fresh approach},
-#' 2009.
-#' @keywords datasets
-#' @examples
-#' 
-#' data(utilities); data(utilities2)
-#' xyplot(gasbill ~ temp, data=utilities)
-#' xyplot(gasbillpday ~ temp, data=utilities2)
-#' 
-NULL
 
 
 
@@ -1954,8 +1930,8 @@ NULL
 #' of women in 1972 # 3. labor68: Labor Force Participation rate of women in
 #' 1968 # # The Data: #
 #' 
-#' @name workingWomen
-#' @rdname workingWomen
+#' @name WorkingWomen
+#' @rdname WorkingWomen
 #' @docType data
 #' @format A data frame with 19 observations on the following 3 variables.
 #' \itemize{ \item{city}{ name of a U.S. city (coded as a factor with
@@ -1967,8 +1943,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(workingWomen)
-#' xyplot(labor72 ~ labor68, workingWomen)
+#' data(WorkingWomen)
+#' xyplot(labor72 ~ labor68, WorkingWomen)
 #' 
 NULL
 
