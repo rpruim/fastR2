@@ -56,7 +56,12 @@ Cuckoo <- cuckoo
 devtools::use_data(Cuckoo, overwrite = TRUE)
 
 DeathPenalty <- deathPen %>% select(-Penalty)
-names(DeathPenalty) <- tolower(names(DeathPenalty))
+names(DeathPenalty) <- c("id", "victim", "defendant", "death")
+DeathPenalty <- DeathPenalty %>%
+  mutate(penalty = derivedFactor(
+    death = death == "Yes",
+    other = death == "No"
+  ))
 devtools::use_data(DeathPenalty, overwrite = TRUE)
 
 Drag <- drag

@@ -377,24 +377,25 @@ NULL
 #' A famous example of Simpson's paradox.
 #' 
 #' 
-#' @name deathPenalty
-#' @rdname deathPenalty
-#' @aliases deathPenalty deathPen
+#' @name DeathPenalty
+#' @rdname DeathPenalty
+#' @aliases DeathPenalty 
 #' @docType data
-#' @format A data frame with 326 observations.  The factors are coded more
-#' succinctly in \code{deathPen}, but otherwise the data are the same.
-#' \itemize{ \item{DeathPenalty}{ a factor with levels \code{Yes}
-#' \code{No}} \item{Penalty}{ a factor with levels \code{Death}
-#' \code{Not}} \item{Victim}{ a factor with levels \code{Black}
-#' \code{White} (or \code{Bl} \code{Wh})} \item{Defendant}{ a factor
-#' with levels \code{Black} \code{White} (or \code{Bl} \code{Wh})} }
+#' @format A data frame with 326 observations.  
+# The factors are coded more
+# succinctly in \code{deathPen}, but otherwise the data are the same.
+#' \itemize{ \item{death}{ a factor with levels \code{Yes}
+#' \code{No}} \item{penalty}{ a factor with levels \code{death}
+#' \code{other}} \item{victim}{ a factor with levels 
+#' \code{Bl} \code{Wh})} \item{Defendant}{ a factor
+#' with levels \code{Bl} \code{Wh} } }
 #' @source Radelet, M. (1981). Racial characteristics and imposition of the
 #' death penalty. \emph{American Sociological Review}, 46:918--927.
 #' @keywords datasets
 #' @examples
 #' 
-#' xtabs(~Defendant+Penalty,deathPenalty)
-#' xtabs(~Defendant+Victim+Penalty,deathPenalty)
+#' tally(penalty ~ defendant, data = DeathPenalty)
+#' tally(penalty ~ defendant + vctim, data = DeathPenalty)
 #' 
 NULL
 
