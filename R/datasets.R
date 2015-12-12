@@ -315,7 +315,7 @@ NULL
 #' @references W.S. Gosset, "The Probable Error of a Mean," Biometrika, 6
 #' (1908), pp 1-25.
 #' @source These data are also available at DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -348,7 +348,7 @@ NULL
 #' \code{meadow pipet} \code{pied wagtail} \code{robin} \code{tree pipet}
 #' \code{wren}} }
 #' @references These data are also available from DASL, the data and story
-#' library (\url{http://lib.stat.cmu.edu/DASL/}).
+#' library (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @source L.H.C. Tippett, \emph{The Methods of Statistics}, 4th Edition, John
 #' Wiley and Sons, Inc., 1952, p. 176.
 #' @keywords datasets
@@ -700,7 +700,7 @@ NULL
 #' @references Lafferty, M. B. (1993), "OSU scientists get a kick out of sports
 #' controversy", \emph{The Columbus Dispatch} (November, 21, 1993), B7.
 #' @source These data are available from DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -840,7 +840,7 @@ NULL
 #' Social Determinant for Children," Research Quarterly for Exercise and Sport,
 #' 63, 418-424.
 #' @source These data are available at DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1562,7 +1562,7 @@ NULL
 #' @references Hirsch, A. R., and Johnston, L. H. "Odors and Learning," Smell
 #' \& Taste Treatment and Research Foundation, Chicago.
 #' @source These data are also available at DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1675,7 +1675,7 @@ NULL
 #' (\code{hi} or \code{lo})} \item{freq}{ whether subject stepped
 #' \code{fast}, \code{medium}, or \code{slow}} }
 #' @source These data are available at DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1710,7 +1710,7 @@ NULL
 #' 
 #' Cleveland, W. S. \emph{Visualizing Data}. 1993.
 #' @source These data are available at DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}.
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}.
 #' @keywords datasets
 #' @examples
 #' 
@@ -1807,7 +1807,7 @@ NULL
 #' @references R. D. Stichler, G. G. Richey, and J. Mandel, "Measurement of
 #' Treadware of Commercial Tires", \emph{Rubber Age}, 73:2 (May 1953).
 #' @source These data are available at DASL, the Data and Story Library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1963,7 +1963,7 @@ NULL
 #' \item{labor68}{ percent of women in labor force in 1968} }
 #' @source These data are from the United States Department of Labor Statistics
 #' and are also available at DASL, the Data and Story Library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' @keywords datasets
 #' @examples
 #' 
