@@ -5,12 +5,12 @@ Version: 0.10.1
 Date: 2015-12-11
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
-Description:  Data sets and utilities to accompany
-  "Foundations and Applications of Statistics: an Introduction 
-  using R" (R Pruim, published by AMS, 2011), a text covering 
-  topics from probability and mathematical statistics at an advanced
-  undergraduate level.  R is integrated throughout, and access to all 
-  the R code in the book is provided via the snippet function.
+Description: Data sets and utilities to accompany
+    "Foundations and Applications of Statistics: an Introduction
+    using R" (R Pruim, published by AMS, 2011), a text covering
+    topics from probability and mathematical statistics at an advanced
+    undergraduate level.  R is integrated throughout, and access to all
+    the R code in the book is provided via the snippet function.
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
@@ -36,3 +36,4 @@ Suggests:
 VignetteBuilder: knitr
 LazyLoad: yes
 LazyData: yes
+RoxygenNote: 5.0.1
