@@ -10,7 +10,7 @@
 \item{Time}{ time until death (hours)} }}
 \source{
 These data are also available from OzDASL, the Australian Data and
-Story Library (\url{http://www.statsci.org}).  (Note: The time measurements
+Story Library (\url{http://www.statsci.org/data/}).  (Note: The time measurements
 of the data at OzDASL are in units of tens of hours.)
 }
 \description{

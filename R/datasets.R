@@ -1410,7 +1410,7 @@ NULL
 #' modelling dispersion in generalized linear models. Environmetrics 10,
 #' 696-709. \url{http://www.statsci.org/smyth/pubs/ties98tr.html}.
 #' @source These data are also available from OzDASL, the Australian Data and
-#' Story Library (\url{http://www.statsci.org}).  (Note: The time measurements
+#' Story Library (\url{http://www.statsci.org/data/}).  (Note: The time measurements
 #' of the data at OzDASL are in units of tens of hours.)
 #' @keywords datasets
 #' @examples
@@ -1455,7 +1455,7 @@ NULL
 #' Physical Education and Recreation at the Virginia Polytechnic Institute and
 #' State University, 1983.
 #' @source These data are also available at OzDASL
-#' (\url{http://www.statsci.org}).
+#' (\url{http://www.statsci.org/data/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1604,7 +1604,7 @@ NULL
 #' usage and data collection} \item{Weight}{ weight of bar of soap (in
 #' grams) } }
 #' @source Data collected by Rex Boggs and available from OzDASL
-#' (\url{http://www.statsci.org/data/index.html}).
+#' (\url{http://www.statsci.org/data/}).
 #' @keywords datasets
 #' @examples
 #' 
