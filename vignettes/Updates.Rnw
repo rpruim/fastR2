@@ -80,13 +80,13 @@ in Chapter 1.  The use of a formula interface has several advantages, the chief 
 graphical summaries, and linear models into a common syntactic template:
 
 <<eval=FALSE>>=
-goal( formula, data=mydata, ...)
+goal( formula, data = mydata, ...)
 @
 Common formula shapes include the following
 <<eval=FALSE>>=
-goal( ~ x,  data=mydata)       # for single variable summaries
-goal( y ~ x, data=mydata)      # for two-variable summaries and linear models
-goal( y ~ x | z, data=mydata)  # for multi-variable summaries and faceting in plots
+goal( ~ x,  data = mydata)       # for single variable summaries
+goal( y ~ x, data = mydata)      # for two-variable summaries and linear models
+goal( y ~ x | z, data = mydata)  # for multi-variable summaries and faceting in plots
 @
 The function name typically names the goal for the computation 
 (e.g., \function{histogram()}, \function{mean()}, \function{tally()}, etc.).
@@ -99,36 +99,36 @@ The \function{tally()} function provides a formula interface for constructing ta
 
 <<>>=
 require(fastR)
-trellis.par.set(theme=col.mosaic())   # change default colors, etc.
+trellis.par.set(theme = col.mosaic())   # change default colors, etc.
 table( iris $ Species )
-tally( ~ Species, data=iris )
+tally( ~ Species, data = iris )
 @
 By default, \function{tally()} adds marginal totals, but these can be turned off, if desired:
 <<>>=
-tally( ~ Species, data=iris, margins=FALSE )
+tally( ~ Species, data = iris, margins = FALSE )
 @
 Tallies can be presented as counts, proportions, or percents:
 <<>>=
-tally( ~ Species, data=iris, format="count")
-tally( ~ Species, data=iris, format="percent")
-tally( ~ Species, data=iris, format="proportion")
+tally( ~ Species, data = iris, format = "count")
+tally( ~ Species, data = iris, format = "percent")
+tally( ~ Species, data = iris, format = "proportion")
 @
 The default format is chosen based on the shape of the formula.
 
 \subsubsection{\texttt{Numerical Summaries}}
 The \pkg{mosaic} package provides a formula interface for a number of numerical summary functions.
 <<>>=
-mean( ~ Sepal.Length, data=iris )
-median( ~ Sepal.Length, data=iris )
-sd( ~ Sepal.Length, data=iris )
-iqr( ~ Sepal.Length, data=iris )
-favstats( ~Sepal.Length, data=iris )
+mean( ~ Sepal.Length, data = iris)
+median( ~ Sepal.Length, data = iris)
+sd( ~ Sepal.Length, data = iris)
+iqr( ~ Sepal.Length, data = iris)
+favstats( ~ Sepal.Length, data = iris)
 @
 Furthermore, the use of a formula with left and right sides allows us to 
 summarize within groups without using the \function{summary()} function:
 <<>>=
-mean( Sepal.Length ~ Species, data=iris )
-favstats( Sepal.Length ~ Species, data=iris )
+mean( Sepal.Length ~ Species, data = iris )
+favstats( Sepal.Length ~ Species, data = iris )
 @
 
 Use
@@ -143,10 +143,10 @@ to get a list of additional functions that take advantage of the formula interfa
 In analogy to functions like \function{pnorm()} and \function{qnorm()}, the \pkg{mosaic} package provides 
 \function{pdata()} and \function{qdata()}.
 <<>>=
-qdata( .5, Sepal.Length, data=iris )
-median( ~ Sepal.Length, data=iris )
-pdata( 5, Sepal.Length, data=iris )
-tally( ~ (Sepal.Length <= 5), data=iris, format="proportion")
+qdata( ~ Sepal.Length, p = 0.5, data = iris )
+median( ~ Sepal.Length, data = iris )
+pdata( ~ Sepal.Length, 5,  data = iris )
+tally( ~ (Sepal.Length <= 5), data = iris, format = "proportion")
 @
 
 \subsection{More plots}
@@ -157,8 +157,8 @@ The \pkg{mosaic} function \function{barchart()} requires the user to first tally
 The \function{bargraph()} function makes it easy to create bar graphs in the same way other lattice plots are 
 created.
 <<>>=
-bargraph( ~substance, data=HELPrct)
-bargraph( ~substance, data=HELPrct, groups=sex )
+bargraph( ~ substance, data = HELPrct)
+bargraph( ~ substance, data = HELPrct, groups = sex )
 @
 
 \subsubsection{Augmented \texttt{histogram()}}
@@ -172,12 +172,12 @@ For example, one can choose the bins used for a histogram by setting values for 
 and \texttt{width}.  Setting \texttt{width} to 1 is often useful for histograms of integer data with relatively 
 few possible values.
 <<>>=
-histogram( ~ week1, data=fumbles, width=1 )
+histogram( ~ week1, data = fumbles, width = 1 )
 @
 Here are some additional features:
 <<>>=
-histogram( ~ Sepal.Length, data=iris, groups = Sepal.Length > 5, h=c(.1,.2) )
-histogram( ~ Sepal.Length | Species, data=iris, fit="normal", v=6 )
+histogram( ~ Sepal.Length, data = iris, groups = Sepal.Length > 5, h = c(.1,.2) )
+histogram( ~ Sepal.Length | Species, data = iris, fit = "normal", v = 6 )
 @
 
 
@@ -207,8 +207,8 @@ For example, the Lady Tasting Tea example can be handled using the following com
 rflip(10)
 do(3) * rflip(10)
 Flips <- do(1000) * rflip(10)
-tally( ~heads, data=Flips )
-histogram( ~ heads, data=Flips, width=1 )
+tally( ~ heads, data = Flips)
+histogram( ~ heads, data = Flips, width = 1)
 @
 
 \subsection{Plotting Distributions}
@@ -216,29 +216,29 @@ histogram( ~ heads, data=Flips, width=1 )
 We can use \function{plotDist()} to plot discrete and continuous distributions in a number of ways.
 
 <<>>=
-plotDist("binom", params=list(size=10,prob=.5))
-plotDist("binom", params=list(size=10,prob=.5), kind='cdf')
+plotDist("binom", params = list(size = 10,prob = .5))
+plotDist("binom", params = list(size = 10,prob = .5), kind = 'cdf')
 @
 <<>>=
-plotDist("binom", params=list(size=10,prob=.5), kind='hist')
-plotDist("binom", params=list(size=10,prob=.5), kind='qq')
+plotDist("binom", params = list(size = 10,prob = .5), kind = 'hist')
+plotDist("binom", params = list(size = 10,prob = .5), kind = 'qq')
 @
 <<>>=
-plotDist("chisq", params=list(df=4)) 
-plotDist("chisq", params=list(df=4), kind='cdf')
+plotDist("chisq", params = list(df = 4)) 
+plotDist("chisq", params = list(df = 4), kind = 'cdf')
 @
 
 \subsection{Formulas for \texttt{binom.test()}}
 
 <<>>=
-binom.test( ~ sex, data=HELPrct )
+binom.test( ~ sex, data = HELPrct )
 @
 
 Also, if you only want to extract the p-value or a confidence interval from a hypothesis test object, the \function{pval()} and 
 \function{confint()} functions will do this for you.
 <<>>=
-pval( binom.test( ~ sex, data=HELPrct ) )
-confint( binom.test( ~ sex, data=HELPrct ) )
+pval( binom.test( ~ sex, data = HELPrct ) )
+confint( binom.test( ~ sex, data = HELPrct ) )
 @
 
 \section{Chapter 3: Continuous Distributions}
@@ -250,9 +250,9 @@ provides a simplified method of defining functions via \function{makeFun()}.
 <<>>=
 f <- makeFun( x^2 ~ x )
 f(3)
-g <- makeFun( A*x^2 + B*x + C ~ x, A=1, B=2, C=3 )
+g <- makeFun( A*x^2 + B*x + C ~ x, A = 1, B = 2, C = 3 )
 g(2)
-g(2, A=3, B=2, C=1)
+g(2, A = 3, B = 2, C = 1)
 @
 
 \subsection{Calculus with \texttt{D()} and \texttt{antiD()}}
@@ -267,16 +267,16 @@ fprime(2)
 fprime
 gprime <- D(g(x) ~ x)
 gprime(3)
-gprime(3, A=3, B=2, C=1)
+gprime(3, A = 3, B = 2, C = 1)
 h <- makeFun( sin(x^2) ~ x )
 hprime <- D( h(x) ~ x )
-plotFun(hprime(x) ~ x, col="red", x.lim=c(0,pi))
-plotFun( h(x) ~ x, x.lim=c(0,pi), add=TRUE )
+plotFun(hprime(x) ~ x, col = "red", x.lim = c(0,pi))
+plotFun( h(x) ~ x, x.lim = c(0,pi), add = TRUE )
 @
 
 Antiderivatives work similarly.
 <<>>=
-plotFun(f(x) ~ x, type="h")
+plotFun(f(x) ~ x, type = "h")
 F <- antiD( f(x) ~ x )
 F(1) - F(0)
 @
@@ -287,7 +287,7 @@ F(1) - F(0)
 
 As was the case for \function{binom.test()}, we can now use formulas for the 1-sample t-test:
 <<>>=
-t.test( ~ age, data=HELPrct )
+t.test( ~ age, data = HELPrct )
 @
 
 \subsection{Simulations with \texttt{do()}}
@@ -298,10 +298,10 @@ Here's some code that could replace the code in Example 4.3.3.
 
 <<>>=
 snippet("mom-beta01")   # to define beta.mom
-results <- do(1000) * beta.mom( rbeta(50,2,5) )
+results <- do(1000) * beta.mom(rbeta(50,2,5))
 head(results, 2)
-histogram( ~shape1, data=results, type='density', v=2 )
-histogram( ~shape2, data=results, type='density', v=5 )
+histogram( ~shape1, data = results, type = 'density', v = 2 )
+histogram( ~shape2, data = results, type = 'density', v = 5 )
 @
 
 The advantages of using \function{do()} are even more pronounced when working with \function{lm()}.  
@@ -330,18 +330,18 @@ transformations of the response variable}.  In the case of \function{glm()} mode
 is \texttt{"response"} rather than \texttt{"link"} since this is more natural for beginners.
 
 <<>>=
-ball.model <- lm( time ~ sqrt(height), data=balldrop)
+ball.model <- lm( time ~ sqrt(height), data = balldrop)
 time <- makeFun(ball.model)
 time( height = 0.8 )
-time( height = 0.8, interval="confidence" )
+time( height = 0.8, interval = "confidence" )
 @
 
 \subsection{And adding fitted functions to plots with \texttt{plotFun()}}
 
 We can add the model fit function to our scatter plot using \function{plotFun()}.
 <<>>=
-xyplot( time ~ height, data=balldrop )
-plotFun( time(height) ~ height, add=TRUE )
+xyplot( time ~ height, data = balldrop )
+plotFun( time(height) ~ height, add = TRUE )
 @
 
 \section{Chapter 7: More Linear Models}
@@ -350,10 +350,10 @@ plotFun( time(height) ~ height, add=TRUE )
 
 <<>>=
 # TukeyHSD() can take a model created by lm()
-model <- lm( pollution ~ location, data=airpollution)
+model <- lm( pollution ~ location, data = airpollution)
 TukeyHSD(model)
 # we can even let TukeyHSD build the model for us
-TukeyHSD( pollution ~ location, data=airpollution)
+TukeyHSD( pollution ~ location, data = airpollution)
 @
 
 
