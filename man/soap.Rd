@@ -10,7 +10,7 @@ usage and data collection} \item{Weight}{ weight of bar of soap (in
 grams) } }}
 \source{
 Data collected by Rex Boggs and available from OzDASL
-(\url{http://www.statsci.org/data/index.html}).
+(\url{http://www.statsci.org/data/}).
 }
 \description{
 A bar of soap was weighed after showering to see how much soap was used each

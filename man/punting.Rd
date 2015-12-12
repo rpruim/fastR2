@@ -14,7 +14,7 @@
 \item{oStrength}{ overall leg strength (foot-pounds)} }}
 \source{
 These data are also available at OzDASL
-(\url{http://www.statsci.org}).
+(\url{http://www.statsci.org/data/}).
 }
 \description{
 Investigators studied physical characteristics and ability in 13 football
