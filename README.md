@@ -6,6 +6,8 @@
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](http://cran.r-project.org/package=fastR)
 
+[![Travis-CI Build Status](https://travis-ci.org/rpruim/fastR.svg?branch=master)](https://travis-ci.org/rpruim/fastR/)
+
 fastR
 =======
 
@@ -72,11 +74,11 @@ snippet("bugs")
 #> 
 #> Linear Hypotheses:
 #>            Estimate Std. Error t value Pr(>|t|)    
-#> G - B == 0   1.7503     0.3946   4.436  0.00129 ** 
-#> W - B == 0   0.1469     0.3946   0.372  0.98188    
+#> G - B == 0   1.7503     0.3946   4.436  0.00122 ** 
+#> W - B == 0   0.1469     0.3946   0.372  0.98190    
 #> Y - B == 0   3.0602     0.3946   7.755  < 0.001 ***
-#> W - G == 0  -1.6034     0.3946  -4.063  0.00323 ** 
-#> Y - G == 0   1.3099     0.3946   3.319  0.01686 *  
+#> W - G == 0  -1.6034     0.3946  -4.063  0.00312 ** 
+#> Y - G == 0   1.3099     0.3946   3.319  0.01641 *  
 #> Y - W == 0   2.9133     0.3946   7.383  < 0.001 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

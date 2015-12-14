@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](http://cran.r-project.org/package=fastR)
 
+[![Travis-CI Build Status](https://travis-ci.org/rpruim/fastR.svg?branch=master)](https://travis-ci.org/rpruim/fastR/)
+
 fastR
 =======
 
