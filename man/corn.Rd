@@ -9,7 +9,7 @@
 \item{kiln}{ yield of kiln-dried corn (lbs/acre)} }}
 \source{
 These data are also available at DASL, the data and story library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 William Gosset analyzed data from an experiment comparing the yield of

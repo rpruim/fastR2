@@ -10,7 +10,7 @@ weight loss} \item{groove}{ estimated wear (1000's of miles) based on
 groove wear} }}
 \source{
 These data are available at DASL, the Data and Story Library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 Treadwear is estimated by two methods: weight loss and groove wear.

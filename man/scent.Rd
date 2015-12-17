@@ -18,7 +18,7 @@ trial} \item{s1}{ time (in seconds) in first scented trial}
 \item{s3}{ time (in seconds) in third scented trial} }}
 \source{
 These data are also available at DASL, the data and story library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 Subjects were asked to to complete a pencil and paper maze when they were

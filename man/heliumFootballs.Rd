@@ -10,7 +10,7 @@ traveled by air-filled football (yards)} \item{Helium}{ distance
 traveled by helium-filled football (yards)} }}
 \source{
 These data are available from DASL, the data and story library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 Two identical footballs, one air-filled and one helium-filled, were used

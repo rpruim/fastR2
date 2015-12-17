@@ -13,7 +13,7 @@
 \code{fast}, \code{medium}, or \code{slow}} }}
 \source{
 These data are available at DASL, the data and story library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 An experiment was conducted by students at The Ohio State University in the

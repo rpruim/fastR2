@@ -22,7 +22,7 @@ handsome or pretty' (1=most important for popularity; 4=least important)}
 popularity; 4=least important)} }}
 \source{
 These data are available at DASL, the data and story library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 Subjects were students in grades 4-6 from three school districts in

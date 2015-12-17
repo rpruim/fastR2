@@ -11,7 +11,7 @@
 \source{
 These data are from the United States Department of Labor Statistics
 and are also available at DASL, the Data and Story Library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 The labor force participation rate of women in each of 19 U.S. cities in

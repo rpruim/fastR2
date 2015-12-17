@@ -10,7 +10,7 @@ dot stereogram} \item{Group}{ treatment group: \code{NV}(no visual
 instructions) \code{VV} (visual instructions)} }}
 \source{
 These data are available at DASL, the data and story library
-(\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}.
+(\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \description{
 Results of an experiment on the effect of prior information on the time to
