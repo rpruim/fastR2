@@ -12,6 +12,13 @@
 
 There were no ERRORs or WARNINGs. 
 
+The following identificed as possibly mis-spelled words in DESCRIPTION:
+  AMS (10:37)
+  Pruim (10:17)
+
+are CORRECT.
+
+
 ## Downstream dependencies
 
 Suggested by mosaic.  This update is driven by the recent mosaic update.
