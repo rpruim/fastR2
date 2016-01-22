@@ -588,9 +588,9 @@ NULL
 #' NIDDM (type 2) Diabetes (FUSION) study.
 #' 
 #' 
-#' @name pheno
-#' @rdname fusion 
-#' @aliases pheno fusion1 fusion2
+#' @name Pheno
+#' @rdname FUSION 
+#' @aliases Pheno FUSION1 FUSION2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
 #' \item{id}{ subject ID number for matching between data sets}
@@ -627,12 +627,12 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pheno); data(fusion1); data(fusion2)
-#' fusion1m <- merge(fusion1, pheno, by="id", all.x=FALSE, all.y=FALSE) 
-#' xtabs(~t2d + genotype, data=fusion1m) 
-#' xtabs(~t2d + Gdose, data=fusion1m) 
-#' chisq.test( xtabs( ~t2d + genotype, data=fusion1m ) )
-#' f1.glm <- glm( factor(t2d) ~ Gdose, data=fusion1m, family=binomial) 
+#' data(Pheno); data(FUSION1); data(FUSION2)
+#' FUSION1m <- merge(FUSION1, Pheno, by="id", all.x=FALSE, all.y=FALSE) 
+#' xtabs(~t2d + genotype, data=FUSION1m) 
+#' xtabs(~t2d + Gdose, data=FUSION1m) 
+#' chisq.test( xtabs( ~t2d + genotype, data=FUSION1m ) )
+#' f1.glm <- glm( factor(t2d) ~ Gdose, data=FUSION1m, family=binomial) 
 #' summary(f1.glm)
 #' 
 NULL
