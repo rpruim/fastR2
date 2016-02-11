@@ -6,6 +6,7 @@ includeApp <- rep(TRUE, 5)
 require(MASS)  # make sure this comes before dplyr loads
 require(fastR2)
 require(mosaic)
+theme_set(theme_minimal())
 require(knitr)
 require(xtable)
 options(xtable.floating = FALSE)

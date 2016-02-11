@@ -1,3 +1,3 @@
 ## require(vcd)
-## mosaic( ~Student+Parents, familySmoking, shade = TRUE )
+## mosaic( ~ student + parents, data = FamilySmoking, shade = TRUE)
 

@@ -1,3 +1,3 @@
 # look at top teams 
-coef(ncaa.model)[rev(order(coef(ncaa.model)))[1:6]]
+coef(NCAA.model)[rev(order(coef(NCAA.model)))[1:6]]
 

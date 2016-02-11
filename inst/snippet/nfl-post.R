@@ -1,15 +1,18 @@
-bta <- BTabilities(nfl.model)
+bta <- BTabilities(NFL.model)
 nflRatings<- data.frame(
     team = rownames(bta),
     rating = bta[, "ability"],
     se = bta[, "s.e."],
-    wins = as.vector(table(nfl$winner)),
-    losses = as.vector(table(nfl$loser))
+    wins = as.vector(table(NFL$winner)),
+    losses = as.vector(table(NFL$loser))
     )
 rownames(nflRatings) = NULL
 
-nfl$winnerRating <- nflRatings$rating[as.numeric(nfl$winner)]
-nfl$loserRating <- nflRatings$rating[as.numeric(nfl$loser)]
-nfl$upset <- nfl$loserRating > nfl$winnerRating
+NFL <- NFL %>% 
+  mutate(
+    winnerRating = nflRatings$rating[as.numeric(winner)],
+    loserRating  = nflRatings$rating[as.numeric(loser)], 
+    upset = loserRating > winnerRating)
+
 nflRatings[rev(order(nflRatings$rating)), ]
 

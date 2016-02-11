@@ -1,6 +1,9 @@
 require(BradleyTerry2)
 # home team gets advantage unless on neutral court
-ncaa$home <- data.frame(team = ncaa$home, at.home = 1 - ncaa$neutralSite)
-ncaa$away <- data.frame(team = ncaa$away, at.home = 0)
-ncaa.model2 <- update(ncaa.model, id = 'team', formula = ~ team + at.home)
+NCAA$homeTeam <- data.frame(team = NCAA$home, at.home = 1 - NCAA$neutralSite)
+NCAA$awayTeam <- data.frame(team = NCAA$away, at.home = 0)
+NCAA.model2 <- BTm(cbind(homeTeamWon, 1-homeTeamWon),
+                   homeTeam, awayTeam, id = 'team', formula = ~ team + at.home,
+                   data = NCAA)
+# NCAA.model2 <- update(NCAA.model, id = 'team', formula = ~ team + at.home)
 

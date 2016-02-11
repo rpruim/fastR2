@@ -1,5 +1,5 @@
-require(faraway)           # for ilogit(), the inverse logit
-nfl$pwinner <- ilogit(nfl$winnerRating - nfl$loserRating)
+NFL <- NFL %>% 
+  mutate(pwinner = ilogit(winnerRating - loserRating))
 # how big an upset was the Super Bowl?
-nfl[nrow(nfl), ]
+NFL[nrow(NFL), ]
 
