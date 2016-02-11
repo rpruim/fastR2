@@ -2,7 +2,7 @@ Package: fastR2
 Type: Package
 Title: Foundations and Applications of Statistics Using R (2nd ed)
 Version: 0.1.9001
-Date: 2016-01-19
+Date: 2016-02-10
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
 Description: Data sets and utilities to accompany the 2nd edition of
@@ -18,7 +18,8 @@ Depends:
 Imports:
     lattice,
     grid,
-    mosaicData
+    mosaicData,
+    maxLik
 Suggests:
     MASS,
     faraway,
