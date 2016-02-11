@@ -4,7 +4,7 @@ m <- mean( ~ duration, data = geyser)
 s <- sd( ~ duration, data = geyser)
 
 ml <- 
-  maxLik(loglik, x = geyser$duration,
+  maxLik(loglik.faithful, x = geyser$duration,
     start = c(alpha = 0.5, mu1 = m-1, mu2 = m+1, sigma1 = s, sigma2 = s)) 
 returnMessage(ml)
 mle <- coef(ml); mle

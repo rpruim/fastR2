@@ -1,4 +1,4 @@
-# loglik defined above
+# loglik defined above  
 snippet("loglik-faithful", echo = FALSE)
 m <- mean( ~ duration, data = geyser)
 s <-   sd( ~ duration, data = geyser)
