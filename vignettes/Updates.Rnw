@@ -143,9 +143,9 @@ to get a list of additional functions that take advantage of the formula interfa
 In analogy to functions like \function{pnorm()} and \function{qnorm()}, the \pkg{mosaic} package provides 
 \function{pdata()} and \function{qdata()}.
 <<>>=
-qdata( .5, Sepal.Length, data=iris )
+qdata( ~ Sepal.Length, 0.5, data=iris )
 median( ~ Sepal.Length, data=iris )
-pdata( 5, Sepal.Length, data=iris )
+pdata( ~ Sepal.Length, 5, data=iris )
 tally( ~ (Sepal.Length <= 5), data=iris, format="proportion")
 @
 
@@ -330,7 +330,7 @@ transformations of the response variable}.  In the case of \function{glm()} mode
 is \texttt{"response"} rather than \texttt{"link"} since this is more natural for beginners.
 
 <<>>=
-ball.model <- lm( time ~ sqrt(height), data=balldrop)
+ball.model <- lm( time ~ sqrt(height), data=BallDrop)
 time <- makeFun(ball.model)
 time( height = 0.8 )
 time( height = 0.8, interval="confidence" )
@@ -340,7 +340,7 @@ time( height = 0.8, interval="confidence" )
 
 We can add the model fit function to our scatter plot using \function{plotFun()}.
 <<>>=
-xyplot( time ~ height, data=balldrop )
+xyplot( time ~ height, data=BallDrop )
 plotFun( time(height) ~ height, add=TRUE )
 @
 
@@ -350,10 +350,10 @@ plotFun( time(height) ~ height, add=TRUE )
 
 <<>>=
 # TukeyHSD() can take a model created by lm()
-model <- lm( pollution ~ location, data=airpollution)
+model <- lm( pollution ~ location, data=AirPollution)
 TukeyHSD(model)
 # we can even let TukeyHSD build the model for us
-TukeyHSD( pollution ~ location, data=airpollution)
+TukeyHSD( pollution ~ location, data=AirPollution)
 @
 
 
