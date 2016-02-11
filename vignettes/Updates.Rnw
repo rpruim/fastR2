@@ -172,7 +172,7 @@ For example, one can choose the bins used for a histogram by setting values for 
 and \texttt{width}.  Setting \texttt{width} to 1 is often useful for histograms of integer data with relatively 
 few possible values.
 <<>>=
-histogram( ~ week1, data=fumbles, width=1 )
+histogram( ~ week1, data=Fumbles, width=1 )
 @
 Here are some additional features:
 <<>>=
