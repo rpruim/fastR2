@@ -5,3 +5,4 @@ rev(x)                                  # reverse x
 diff(x)                                 # pairwise differences
 cumsum(x)                               # cumulative sum
 cumprod(x)                              # cumulative product
+

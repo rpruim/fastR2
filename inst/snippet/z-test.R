@@ -35,3 +35,4 @@ z.test <- function (x,
         data.name = DNAME),        
         class = "htest")
 }
+

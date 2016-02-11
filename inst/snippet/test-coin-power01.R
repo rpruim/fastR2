@@ -1,1 +1,2 @@
-binom.test(61,100)
+binom.test(61, 100)
+

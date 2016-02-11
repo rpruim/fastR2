@@ -1,1 +1,2 @@
-binom.test(9,10,alternative="greater");
+binom.test(9,10,alternative="greater")
+

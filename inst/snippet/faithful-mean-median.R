@@ -1,2 +1,3 @@
-mean(faithful$eruptions) 
-median(faithful$eruptions)
+  mean( ~eruptions, data = faithful)
+median( ~eruptions, data = faithful)
+

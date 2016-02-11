@@ -1,1 +1,2 @@
 chisq.test(smokeTab)
+

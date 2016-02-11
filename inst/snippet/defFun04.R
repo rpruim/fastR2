@@ -5,3 +5,4 @@ favstats <- function(x) {
 }
 favstats((1:20)^2)
 summary(Sepal.Length~Species,data=iris,fun=favstats)
+

@@ -1,1 +1,2 @@
-iris$Species         # get one variable and print as vector
+iris$Species         # get one variable and display as vector
+

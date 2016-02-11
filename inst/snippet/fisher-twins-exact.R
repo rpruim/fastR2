@@ -1,1 +1,2 @@
-fisher.test(xtabs(~twin+conviction,ft));
+fisher.test(xtabs(~twin+conviction, ft));
+

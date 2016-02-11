@@ -11,3 +11,4 @@ ef2 <- project(y,v2,type='v')
 ef0 + ef1 + ef2
 # should match what lm() produces
 predict(concrete.lmmod)
+

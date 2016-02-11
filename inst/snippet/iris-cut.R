@@ -1,1 +1,2 @@
-table(cut(iris$Sepal.Length,breaks=2:10))
+tally( ~cut(Sepal.Length, breaks = 2:10), data = iris)
+

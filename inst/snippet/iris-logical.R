@@ -1,1 +1,2 @@
-table(iris$Sepal.Length > 6.0)  
+tally( ~(Sepal.Length > 6.0), data = iris)  
+

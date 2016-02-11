@@ -1,1 +1,2 @@
-quantile((1:10)^2,type=5)
+quantile((1:10)^2, type = 5)
+

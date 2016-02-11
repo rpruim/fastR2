@@ -1,0 +1,16 @@
+x <- c(3, 4, 5, 8)
+mean(x)
+var(x)
+u1 <- .5 * c(1,1,1,1)
+u2 <-  1/sqrt(2) * c(1,-1,0,0)
+u3 <-  1/sqrt(6) * c(1,1,-2,0)
+u4 <-  1/sqrt(12) * c(1,1,1,-3)
+ulist <- list(u1,u2,u3,u4)
+vlength <- function(x) sqrt(dot(x,x))
+sapply(ulist, vlength)
+c(dot(u1, u2), dot(u1,u3), dot(u1,u4), dot(u2,u3), dot(u2,u4), dot(u3,u4))
+pList <- lapply( ulist, function(u)  project(x,u) ); pList
+sapply( pList, vlength)
+sum( sapply(pList, function(x) dot(x,x) )[2:4] )
+3 * var(x)
+

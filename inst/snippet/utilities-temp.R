@@ -1,1 +1,5 @@
-plot <- xyplot( ccf ~ temp, utilities )
+Temp <-
+  Utilities %>% 
+  select(month, year, temp) 
+head(Temp)
+

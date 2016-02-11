@@ -7,3 +7,4 @@ names(ddd)
 row.names(ddd)
 row.names(ddd) <- c("Abe","Betty","Claire","Don","Ethel")
 ddd                 # row.names affects how a data.frame prints
+

@@ -4,3 +4,4 @@ model3 <- lm(log(velocity) ~ log(force.drag), drag)
 summary(model1)
 summary(model2)
 summary(model3)
+

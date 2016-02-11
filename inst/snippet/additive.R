@@ -14,3 +14,4 @@ plot5 <- xyplot(I(fit+4*e)~x2,groups=x1,type=c('p','r'),pch=16,
 plot6 <- xyplot(I(fit+4*e)~x1,groups=x2,type=c('p','r'),pch=16,
       main=expression(paste("Simulated data grouped by ",x[2], 
                 "(larger ", sigma,")")))
+

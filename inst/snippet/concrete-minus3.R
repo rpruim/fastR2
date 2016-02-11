@@ -8,3 +8,4 @@ coef(lm(strength ~ water, concretemod))
 project(y,w1,type='l') / vlength(w1)
 project(y,w2,type='l') / vlength(w2)
 coef(concrete.lmmod)
+

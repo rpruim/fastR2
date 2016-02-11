@@ -1,1 +1,2 @@
 anova(treb.model)
+

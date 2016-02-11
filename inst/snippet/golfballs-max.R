@@ -1,2 +1,3 @@
-plot <- statTally(golfballs, rgolfballs, max, 
-                  xlab="test statistic (max)")
+statTally(golfballs, rgolfballs, max, 
+          xlab = "test statistic (max)")
+

@@ -5,3 +5,4 @@ y <- b0 + b1*x + e                 # build response according to model
 ###hop:3-9
 model <- lm(y~x); summary(model)
 confint(model)
+

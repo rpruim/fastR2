@@ -6,3 +6,4 @@
 pnbinom(1,2,0.6)                # lose <= 1 time  before 2 wins
 pnbinom(2,3,0.6)                # lose <= 2 times before 3 wins
 pnbinom(3,4,0.6)                # lose <= 3 times before 4 wins
+

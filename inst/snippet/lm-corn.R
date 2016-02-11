@@ -11,3 +11,4 @@ summary(yield~treatment,data=corn2,fun=favstats)
 corn.model <- lm(yield~treatment,data=corn2)
 ###hop:3-9
 summary(corn.model)
+

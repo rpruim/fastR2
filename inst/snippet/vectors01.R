@@ -4,3 +4,4 @@ x * 10
 x < 3
 x^2
 log(x); log(x, base=10)            # natural and base 10 logs
+

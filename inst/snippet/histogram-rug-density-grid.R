@@ -1,5 +1,5 @@
 x <- rnorm(100)
-p <- histogram(~x, type='density',
+histogram(~x, type='density',
             panel=function(x,y,...) {
                 panel.rug(x,...)
                 panel.histogram(x,...)
@@ -28,3 +28,4 @@ p <- histogram(~x, type='density',
                     )
             }
      )
+

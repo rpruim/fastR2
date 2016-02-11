@@ -4,3 +4,4 @@ altfavstats <- function(x) {
     cat(paste("    sd:", format(sd(x),4),"\n"))
 }
 altfavstats((1:20)^2)
+

@@ -4,5 +4,5 @@ M <- cbind(                                    # model matrix
         "C3" = rep(c(1,-1,-1,1),each=4)/4      # C3
         )
 taste.lm2 <- lm(score~M,data=tastetest)
-###hop:3-9
 summary(taste.lm2)
+

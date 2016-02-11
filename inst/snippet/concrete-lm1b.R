@@ -5,3 +5,4 @@ ef2 <- project(y,v2,type='v')
 ef0 + ef1 + ef2
 predict(concrete.lm1)
 fitted(concrete.lm1)
+

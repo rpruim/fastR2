@@ -1,3 +1,5 @@
-for (species in levels(iris$Species)) { 
-    print(t.test(iris$Sepal.Length[iris$Species==species])$conf.int) 
-}
+iris %>% group_by(Species) %>%
+  do(data.frame(as.list( 
+	 confint(t.test( ~ Sepal.Length, data= .))
+  )))
+

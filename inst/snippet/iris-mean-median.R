@@ -1,1 +1,3 @@
-mean(iris$Sepal.Length); median(iris$Sepal.Length)
+mean( ~ Sepal.Length, data = iris) 
+median( ~ Sepal.Length, data = iris )
+

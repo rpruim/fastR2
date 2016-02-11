@@ -5,3 +5,4 @@ firstDigit <- function(x) {
 table(firstDigit(rivers))              # lengths in miles
 table(firstDigit(1.61 * rivers))       # lengths in km
 table(firstDigit(5280 * rivers))       # lengths in feet
+

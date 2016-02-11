@@ -1,6 +1,18 @@
 # seed the algorithm  
-m <- mean(faithful$eruptions)
-s <- sd(faithful$eruptions)
+m <- mean( ~ duration, data = geyser)
+s <- sd( ~ duration, data = geyser)
 
-mle <- nlmax(loglik,p=c(0.5,m,m,s,s),x=faithful$eruptions)$estimate
-mle
+# Newton-Raphson (NR) compares well to the results above
+maxLik(loglik,  x = geyser$duration,
+       start = c(alpha = 0.5, mu1 = m, mu2 = m, sigma1 = s, sigma2 = s)) 
+# Neler-Mead doesn't converge (fast enough)
+maxLik(loglik, x = geyser$duration, method = "NM",
+       start = c(alpha = 0.5, mu1 = m, mu2 = m, sigma1 = s, sigma2 = s)) 
+# Nelder-Mead converges if we give it more time
+maxLik(loglik, x = geyser$duration, method = "NM", 
+       start = c(alpha = 0.5, mu1 = m, mu2 = m, sigma1 = s, sigma2 = s), 
+       control = list(iterlim = 3000))
+# BFGS "converges", but only fits one group
+maxLik(loglik, x = geyser$duration, method = "BFGS",
+       start = c(alpha = 0.5, mu1 = m, mu2 = m, sigma1 = s, sigma2 = s))
+

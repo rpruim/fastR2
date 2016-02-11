@@ -4,3 +4,4 @@ traffic <-
     read.table("http://www.calvin.edu/~rpruim/fastR/trafficTufte.txt", 
     header=TRUE)
 traffic
+

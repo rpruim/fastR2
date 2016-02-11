@@ -1,0 +1,2 @@
+mad(iris$Sepal.Length)
+

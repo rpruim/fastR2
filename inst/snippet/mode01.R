@@ -7,3 +7,4 @@ mode(z); length(z)
 abc
 mode(abc); length(abc)
 abc[3]
+

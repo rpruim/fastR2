@@ -5,3 +5,4 @@ tstats <- replicate(1000,
     }
 )
 mean( abs(tstats) > abs(summary(concrete.lm1)$coef[3,3]) ) 
+

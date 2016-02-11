@@ -8,3 +8,4 @@ K3 <- function(x) {     # parabola / Epanechnikov
      return( (1 - x^2) * as.numeric(abs(x) < 1) )
 }
 K4 <- dnorm         # Gaussian
+

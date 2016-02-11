@@ -10,3 +10,4 @@ aic1 <- 2 * 2 + 9 * log(sum(resid(concrete.lm1)^2)); aic1
 aic0 - aic1
 AIC(concrete.lm0) - AIC(concrete.lm1)
 extractAIC(concrete.lm0)[2] - extractAIC(concrete.lm1)[2]
+

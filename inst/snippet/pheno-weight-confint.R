@@ -1,1 +1,2 @@
 confint(pheno.lm)
+

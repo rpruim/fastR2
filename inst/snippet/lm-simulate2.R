@@ -9,3 +9,4 @@ sim <- function(b0=3,b1=5,sigma=2,
 }
 t <- table(replicate(10000,sim())); t / 10000
 prop.test(t[2],sum(t),p=0.95)
+

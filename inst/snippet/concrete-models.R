@@ -4,3 +4,4 @@ concrete.lm2 <- lm(strength ~ water, concrete)
 concrete.lm3 <- lm(strength ~ 1, concrete)
 concrete.lm4 <- lm(strength ~ I(limestone + water), concrete)
 concrete.lm5 <- lm(strength ~ -1 + limestone + water, concrete)
+

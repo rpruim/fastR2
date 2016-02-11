@@ -9,3 +9,4 @@ groupMean <- s[coagulation$diet,2]; groupMean
 SST <- sum((coagulation$coag - grandMean)^2); SST  # total variation
 SSE <- sum((coagulation$coag - groupMean)^2); SSE  # w/in group variation
 SSM <- sum((groupMean - grandMean)^2 ); SSM        # b/w group variation
+

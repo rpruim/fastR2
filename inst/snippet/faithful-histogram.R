@@ -1,1 +1,2 @@
-plot <- histogram(~eruptions,faithful,n=20)
+## histogram(~eruptions, faithful, n = 20)
+

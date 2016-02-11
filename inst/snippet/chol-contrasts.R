@@ -6,3 +6,4 @@ summary(glht(chol.model, mcp(trt =
         "new - old" = c(2,2,2,-3,-3)/6,
         "drugD - drugE" = c(0,0,0,1,-1))
     )))
+

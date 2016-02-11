@@ -7,5 +7,5 @@ contr <- rbind(
 contr1 <- rbind(
 	"hill - plains" = c(0,1,0),
 	"suburb - urban" = c(0,0.5,-1))
-###hop:3-6
 summary(glht(airp.lm1,contr1))
+

@@ -15,7 +15,8 @@ moment <- function( k=1,           # which moment?
     return ( sum( (x-m)^k ) / length(x) )
 }
 x <- (1:10)^2; n <- length(x)
-moment(1:2,x,centered=F)
-moment(1:2,x,centered=T)
+moment(1:2, x, centered=F)
+moment(1:2, x, centered=T)
 
 c(mean(x), (n-1) / n * var(x))
+

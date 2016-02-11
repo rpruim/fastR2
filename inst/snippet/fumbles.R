@@ -1,3 +1,4 @@
-m <- max(fumbles$week1)
-table(factor(fumbles$week1,levels=0:m))
-favstats(fumbles$week1)
+m <- max(~week1, data = Fumbles)
+tally(~factor(week1,levels=0:m), data = Fumbles)
+favstats(~week1, data = Fumbles)
+

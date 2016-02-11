@@ -4,3 +4,4 @@ dot(v0,w1)
 dot(v0,w2)
 dot(v1,w2)
 dot(w1,v2)
+

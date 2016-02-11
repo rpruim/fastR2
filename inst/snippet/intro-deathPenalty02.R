@@ -1,2 +1,2 @@
-xtabs(~Penalty+Defendant+Victim,
-	data=deathPenalty)
+tally(death ~ defendant + victim, data = DeathPenalty)
+

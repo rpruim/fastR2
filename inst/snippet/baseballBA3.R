@@ -1,6 +1,8 @@
-# suppress warnings from log(0) 
-oldopt <- options(warn=-1)          
-summary(nlmax(loglik,p=c(1,1),x=ba))
-# get just the mle
-nlmax(loglik,p=c(1,1),x=ba)$estimate
-options(oldopt)                         # reset options
+require(maxLik)
+ml <- maxLik(loglik, start = c(shape1 = 1, shape2 = 1), x = ba)
+ml
+# get just the estimated parameter values
+coef(ml)
+# get just the "return message" -- always good to check
+returnMessage(ml)
+

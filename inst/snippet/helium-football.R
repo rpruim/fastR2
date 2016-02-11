@@ -1,5 +1,6 @@
 football <- heliumFootballs      # give it a shorter name
-head(football,3)
+head(football, 3)
  
-football$diff <- football$Helium - football$Air        
-t.test(football$diff)
+football <- transform(football, diff = Helium - Air)
+t.test( ~ diff, data=football)
+

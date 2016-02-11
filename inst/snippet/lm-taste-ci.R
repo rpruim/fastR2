@@ -1,1 +1,2 @@
 confint(taste.model)
+

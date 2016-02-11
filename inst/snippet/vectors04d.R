@@ -5,3 +5,4 @@ a+b
 (a+b)[ a+b > 50]
 length((a+b)[a+b > 50])
 table(a+b > 50)
+

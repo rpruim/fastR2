@@ -1,2 +1,3 @@
-require(vcd)
-smoke.plot <- mosaic(~Student+Parents,familySmoking,shade=T)
+## require(vcd)
+## mosaic( ~Student+Parents, familySmoking, shade = TRUE )
+

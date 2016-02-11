@@ -8,3 +8,4 @@ alpha <- c("a","1","b","0.5")
 mode(alpha)
 as.numeric(alpha)      # can't do the coersion, so NAs are introduced
 as.integer(alpha)      # notice coersion of 0.5 to 0
+

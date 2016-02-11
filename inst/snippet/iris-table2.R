@@ -1,1 +1,2 @@
-table(iris$Sepal.Length)  # make a table of values
+tally(~Sepal.Length, data = iris)  # make a table of values
+
