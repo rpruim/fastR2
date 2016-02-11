@@ -6,6 +6,11 @@
 \usage{
 \method{plot}{maxLik2}(x, y, ...)
 }
+\arguments{
+\item{x}{an object of class \code{"maxLik2"}}
+
+\item{y}{ignored}
+}
 \description{
 See \code{\link{maxLik2}} and \code{\link{maxLik}} for how to create
 the objects this method prints.

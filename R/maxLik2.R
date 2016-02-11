@@ -32,8 +32,8 @@ maxLik2 <- function(loglik, ...) {
 #' See \code{\link{maxLik2}} and \code{\link{maxLik}} for how to create
 #' the objects this method prints.
 #' 
-#' @param x
-#' @param y
+#' @param x an object of class \code{"maxLik2"}
+#' @param y ignored
 #' @export
 
 plot.maxLik2 <- function(x, y, ...) {
