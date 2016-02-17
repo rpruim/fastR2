@@ -4,7 +4,7 @@
 \alias{maxLik2}
 \title{Augmented version of maxLik}
 \usage{
-maxLik2(loglik, ...)
+maxLik2(loglik, ..., env = parent.frame())
 }
 \arguments{
 \item{loglik}{a log-likelihood function as for \code{\link{maxLik}}}

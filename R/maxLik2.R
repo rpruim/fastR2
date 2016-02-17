@@ -10,18 +10,20 @@
 #' 
 #' @export
 
-maxLik2 <- function(loglik, ...) {
+maxLik2 <- function(loglik, ..., env = parent.frame()) {
   orig.call <- match.call()
   fn <- loglik
   dots <- list(...)
-  env <- new.env()
+  # clone of env
+  env2 <- as.environment(as.list(env, all.names=TRUE))
+  parent.env(env2) <- parent.env(env)
   
   result <- maxLik::maxLik(loglik, ...) 
   for (n in intersect(names(dots), names(formals(fn)))) {
     formals(fn)[[n]] <- NULL
-    assign(n, dots[[n]], env)
+    assign(n, dots[[n]], env2)
   }
-  environment(fn) <- env
+  environment(fn) <- env2
   result$loglik <- fn
   class(result) <- c("maxLik2", class(result))
   result
@@ -72,4 +74,14 @@ plot.maxLik2 <- function(x, y, ...) {
     },
     default = stop("Plotting only defined for likelihoods on 1 or 2 parameters")
   )
+}
+
+#' @export
+information <- function(object, ...) {
+  UseMethod("information")
+}
+
+#' @export
+information.maxLik <- function(object, ...) {
+  - maxLik::hessian(object)
 }
