@@ -20,8 +20,8 @@ flight was on time.
 }
 \examples{
 
-tally(airline ~ result, data=AirlineArrival, format="perc", margins=TRUE)
-tally(result ~ airline + airport, data = AirlineArrival, format="perc", margins=TRUE)
+tally(airline ~ result, data = AirlineArrival, format = "perc", margins = TRUE)
+tally(result ~ airline + airport, data = AirlineArrival, format = "perc", margins = TRUE)
 AirlineArrival2 <- 
   AirlineArrival \%>\% 
   group_by(airport, airline, result) \%>\% 
@@ -29,11 +29,11 @@ AirlineArrival2 <-
   group_by(airport, airline) \%>\%
   mutate(total = sum(count), percent = count/total * 100) \%>\% 
   filter(result == "Delayed") 
-  xyplot( percent ~ airport, groups=airline, data = AirlineArrival2,
-    type="l", auto.key=list(points=FALSE, lines=TRUE), ylab="percent delayed")
-  ggplot(data=AirlineArrival2) + 
-    geom_line(aes(x=airport, y=percent, colour = airline, group=airline)) +
-    geom_point(aes(x=airport, y=percent, colour = airline, size=total)) +
+  xyplot( percent ~ airport, groups = airline, data = AirlineArrival2,
+    type = "l", auto.key = list(points = FALSE, lines = TRUE), ylab = "percent delayed")
+  ggplot(data = AirlineArrival2) + 
+    geom_line(aes(x = airport, y = percent, colour = airline, group = airline)) +
+    geom_point(aes(x = airport, y = percent, colour = airline, size = total)) +
     ylab("percent delayed")
 
 }

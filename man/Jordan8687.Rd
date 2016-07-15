@@ -14,10 +14,8 @@ regular season.
 }
 \examples{
 
-if (require(mosaicData)) {
-  data(Jordan8687)
-  xqqmath(~Points, data=Jordan8687)
-}
+data(Jordan8687)
+qqmath(~ Points, data = Jordan8687)
 
 }
 \keyword{datasets}

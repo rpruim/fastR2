@@ -43,8 +43,8 @@ block.
 \examples{
 
 data(Step)
-xyplot(HR-restHR ~ freq, data=Step, groups=height, type=c('p','a'))
-xyplot(HR-restHR ~ height, data=Step, groups=freq, type=c('p','a'))
+xyplot(HR-restHR ~ freq, data = Step, groups = height, type = c('p','a'))
+xyplot(HR-restHR ~ height, data = Step, groups = freq, type = c('p','a'))
 
 }
 \keyword{datasets}

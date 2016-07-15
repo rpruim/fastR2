@@ -22,8 +22,8 @@ group (group VV) received both verbal information and visual information
 \examples{
 
 data(Stereogram)
-favstats(time~group, data=Stereogram)
-xyplot(time~group, data=Stereogram, jitter.x=TRUE)
+favstats(time~group, data = Stereogram)
+xyplot(time~group, data = Stereogram, jitter.x = TRUE)
 
 }
 \references{

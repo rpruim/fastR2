@@ -59,7 +59,7 @@ if (require(tidyr)) {
   Pigs \%>\% 
   select(roll, black, pink) \%>\%
   gather(pig, state, black, pink) \%>\%
-  tally( state ~ pig, data = ., format="prop", margins=TRUE)
+  tally( state ~ pig, data = ., format = "prop", margins = TRUE)
 }
   
 

@@ -19,7 +19,7 @@ Air pollution measurements at three locations.
 \examples{
 
 data(AirPollution)
-summary(lm(pollution ~ location, data=AirPollution))
+summary(lm(pollution ~ location, data = AirPollution))
 
 }
 \keyword{datasets}

@@ -26,7 +26,7 @@ during the task was used as a measure of stress.
 \examples{
 
 data(PetStress)
-xyplot(rate ~ group, data = PetStress, jitter.x=TRUE, type = c('p', 'a'))
+xyplot(rate ~ group, data = PetStress, jitter.x = TRUE, type = c('p', 'a'))
 
 }
 \references{

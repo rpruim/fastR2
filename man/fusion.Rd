@@ -18,8 +18,8 @@ cholesterol} \item{waist}{ waist circumference (cm)}
 \item{whr}{ waist hip ratio } \item{sbp}{ systolic blood
 pressure} \item{dbp}{ diastolic blood pressure}
 \item{marker}{ RS name of SNP} \item{markerID}{ numeric ID for
-SNP} \item{allele1}{ first allele coded as 1=A, 2=C, 3=G, 4=T}
-\item{allele2}{ second allele coded as 1=A, 2=C, 3=G, 4=T}
+SNP} \item{allele1}{ first allele coded as 1 = A, 2 = C, 3 = G, 4 = T}
+\item{allele2}{ second allele coded as 1 = A, 2 = C, 3 = G, 4 = T}
 \item{genotype}{ both alleles coded as a factor}
 \item{Adose}{ number of A alleles} \item{Cdose}{ number of C
 alleles} \item{Gdose}{ number of G alleles}
@@ -47,11 +47,11 @@ NIDDM (type 2) Diabetes (FUSION) study.
 \examples{
 
 data(Pheno); data(FUSION1); data(FUSION2)
-FUSION1m <- merge(FUSION1, Pheno, by="id", all.x=FALSE, all.y=FALSE) 
-xtabs(~t2d + genotype, data=FUSION1m) 
-xtabs(~t2d + Gdose, data=FUSION1m) 
-chisq.test( xtabs( ~t2d + genotype, data=FUSION1m ) )
-f1.glm <- glm( factor(t2d) ~ Gdose, data=FUSION1m, family=binomial) 
+FUSION1m <- merge(FUSION1, Pheno, by = "id", all.x = FALSE, all.y = FALSE) 
+xtabs(~t2d + genotype, data = FUSION1m) 
+xtabs(~t2d + Gdose, data = FUSION1m) 
+chisq.test( xtabs( ~t2d + genotype, data = FUSION1m ) )
+f1.glm <- glm( factor(t2d) ~ Gdose, data = FUSION1m, family = binomial) 
 summary(f1.glm)
 
 }

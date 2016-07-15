@@ -16,11 +16,9 @@ Measurements of the diameter (in meters) and mass (in kilograms) of a set of
 steel ball bearings.
 }
 \examples{
+data(Spheres)
 xyplot( mass ~ diameter, data = Spheres )
-xyplot( mass ~ diameter, data = Spheres, scales=list(log=TRUE) )
-}
-\references{
-data(spheres)
+xyplot( mass ~ diameter, data = Spheres, scales = list(log = TRUE) )
 }
 \keyword{datasets}
 

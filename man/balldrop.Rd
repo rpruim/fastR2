@@ -15,7 +15,7 @@ ball was dropped and the time it took to reach the floor.
 }
 \examples{
 
-xyplot(time ~ height, data=BallDrop)
+xyplot(time ~ height, data = BallDrop)
 
 }
 \keyword{datasets}

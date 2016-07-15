@@ -19,7 +19,7 @@ from the data.
 
 data(golfballs)
 golfballs/sum(golfballs)
-chisq.test(golfballs, p=rep(.25,4))
+chisq.test(golfballs, p = rep(.25,4))
 
 }
 \keyword{datasets}

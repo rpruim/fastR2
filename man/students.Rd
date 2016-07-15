@@ -16,8 +16,8 @@ Standardized test scores and GPAs for 1000 students.
 \examples{
 
 data(Students)
-xyplot(ACT ~ SAT, data=Students)
-xyplot(gradGPA ~ hsGPA, data=Students)
+xyplot(ACT ~ SAT, data = Students)
+xyplot(gradGPA ~ hsGPA, data = Students)
 
 }
 \keyword{datasets}

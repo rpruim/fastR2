@@ -23,8 +23,8 @@ Major League batting data for the seasons from 2000-2005.
 }
 \examples{
 
-data(batting)
-histogram(~HR,batting)
+data(Batting)
+histogram( ~ HR, data = Batting)
 
 }
 \keyword{datasets}

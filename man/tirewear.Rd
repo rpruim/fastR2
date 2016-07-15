@@ -18,7 +18,7 @@ Tread wear is estimated by two methods: weight loss and groove wear.
 \examples{
 
 data(TireWear)
-xyplot(weight ~ groove, data=TireWear)
+xyplot(weight ~ groove, data = TireWear)
 
 }
 \references{

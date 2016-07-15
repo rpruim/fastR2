@@ -11,9 +11,7 @@ ACT scores and college GPA for a small sample of college students.
 }
 \examples{
 
-if (require(mosaicData)) {
-  xyplot(GPA ~ ACT, data=ACTgpa)
-}
+xyplot(GPA ~ ACT, data = ACTgpa)
 
 }
 \keyword{datasets}

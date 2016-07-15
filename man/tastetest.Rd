@@ -32,8 +32,8 @@ for the group.
 
 data(TasteTest)
 data(Taste1)
-xyplot(score~scr, data = TasteTest, jitter.x=TRUE)
-xyplot(score~scr, groups=liq, data = TasteTest, type=c('p','a'), jitter.x=TRUE)
+xyplot(score~scr, data = TasteTest, jitter.x = TRUE)
+xyplot(score~scr, groups = liq, data = TasteTest, type = c('p','a'), jitter.x = TRUE)
 favstats(score~scr, data = TasteTest)
 
 }

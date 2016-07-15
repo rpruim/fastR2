@@ -29,9 +29,9 @@ anova(pal.lm1)
 pal.lm2 <- lm(pallets ~ employee + day, data = Pallets) 
 anova(pal.lm2)
 xyplot(pallets ~ day, data = Pallets,
-		groups=employee,
-		main="Productivity by day and employee",
-		type='b',auto.key=list(columns=4,points=FALSE,lines=TRUE))
+		groups = employee,
+		main = "Productivity by day and employee",
+		type = 'b',auto.key = list(columns = 4,points = FALSE,lines = TRUE))
 
 }
 \keyword{datasets}

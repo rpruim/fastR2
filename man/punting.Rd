@@ -26,7 +26,7 @@ catches it), and a number of measures of leg strength and flexibility.
 \examples{
 
 data(Punting)
-xyplot(hang ~ distance, data=Punting)
+xyplot(hang ~ distance, data = Punting)
 
 }
 \references{
