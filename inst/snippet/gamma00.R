@@ -1,6 +1,6 @@
 require(grid)
 inputs <- seq(0.05, 5, by = 0.05)
-xyplot(gamma(inputs)~inputs, type = "l",
+xyplot(gamma(inputs) ~ inputs, type = "l",
         ylim = c(0, factorial(4)),
         xlab = "x",
         ylab = expression(Gamma(x)),

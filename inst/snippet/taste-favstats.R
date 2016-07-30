@@ -1,2 +1,2 @@
-summary(score~scr, data=taste1, fun=favstats)
+favstats(score ~ scr, data = Taste1)
 

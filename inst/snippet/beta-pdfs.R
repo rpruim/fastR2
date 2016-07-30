@@ -1,10 +1,10 @@
 h <- 4
 dtemp <- function(x, mean = 0, sd = 1, shape1 = 1, shape2 = 1) {
-        dbeta(x, shape1, shape2)
-        }
+  dbeta(x, shape1, shape2)
+}
 
 mylty <- c(1, 6, 6, 2, 2)
-mycol <- trellis.par.get('superpose.line')$col[c(1, 2, 3, 2, 3)]
+mycol <- trellis.par.get("superpose.line")$col[c(1, 2, 3, 2, 3)]
 xyplot(c(0, h) ~ c(0, 1), 
 	main = "Beta pdfs",
 	xlim = c(0, 1),

@@ -1,4 +1,3 @@
-soap.model2 <- lm(I(Weight^(1/3))~Day,soap)
-###hop:3-9
-summary(soap.model2)
+Soap.model2 <- lm(I(weight^(1/3)) ~ day, data = Soap)
+msummary(Soap.model2)
 

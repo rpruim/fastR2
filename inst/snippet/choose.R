@@ -1,2 +1,2 @@
-choose(5,2)
+choose(5, 2)
 

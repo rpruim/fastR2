@@ -1,2 +1,2 @@
-summary(lm(weight~-1 + groove,tirewear))
+summary(lm(weight ~ -1 + groove, data = TireWear))
 

@@ -1,3 +1,2 @@
-summary(B1930 ~ Location + Treatment, data=ice, 
-              fun=mean, method='cross')
+mean(b1930 ~ location + treatment, data = Ice, .format = "table")
 

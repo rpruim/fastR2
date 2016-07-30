@@ -1,2 +1,2 @@
-mplot(star.model1)
+plot(star.model1)
 

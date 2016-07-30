@@ -1,2 +1,2 @@
-vif(seatpos.lm1)
+faraway::vif(seatpos.lm1)
 

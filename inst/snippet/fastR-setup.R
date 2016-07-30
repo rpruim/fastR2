@@ -1,7 +1,7 @@
-includeChapter <- c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE)
 includeChapter <- rep(TRUE, 7)
-includeApp <- c(FALSE, FALSE, FALSE, FALSE, FALSE)
+includeChapter <- c(TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
 includeApp <- rep(TRUE, 5)
+includeApp <- c(FALSE, FALSE, FALSE, FALSE, FALSE)
 
 require(MASS)  # make sure this comes before dplyr loads
 require(fastR2)
@@ -13,6 +13,7 @@ options(xtable.floating = FALSE)
 opts_knit$set(width=75)
 opts_knit$set(self.contained=FALSE)
 opts_chunk$set(
+  digits = 3,
   dev=c("pdf","postscript"),
   dev.args=list(colormodel="cmyk"),
   comment="##",
@@ -21,7 +22,7 @@ opts_chunk$set(
   cache=TRUE,
   cache.path='cache/c-',
   cache.lazy=FALSE,
-  tidy=TRUE,
+  tidy=FALSE,
   fig.width=8*.75,
   fig.height=5*.75,
   fig.show="hold",
@@ -40,6 +41,15 @@ opts_template$set(figbig = list(fig.height = 9, fig.width = 12, out.width=".95\\
 knit_hooks$set(seed = function(before, options, envir) {
     if (before) set.seed(options$seed) 
 })
+
+knit_hooks$set(digits = function(before, options, envir) {
+    if (before) {
+      options(digits = options$digits)
+    } else {
+      options(digits = 3)
+    }
+})
+
 
 knit_hooks$set(document = function(x) {
   sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)

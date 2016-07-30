@@ -1,8 +1,8 @@
 # fit some models
-gpa.lm <- lm(gpa~satm+satv+act,gpa)
-gpa.lma <- lm(gpa~ -1 + satm+satv+act,gpa)
-gpa.lmb <- lm(gpa~satv+act,gpa)
-gpa.lmc <- lm(gpa~satm+act,gpa)
-gpa.lmd <- lm(gpa~satm+satv,gpa)
-gpa.lme <- lm(gpa~1,gpa)
+gpa.lm <- lm(gpa ~ satm + satv + act, data = GPA)
+gpa.lma <- lm(gpa ~ -1 + satm + satv + act, data = GPA)
+gpa.lmb <- lm(gpa ~ satv + act, data = GPA)
+gpa.lmc <- lm(gpa ~ satm + act, data = GPA)
+gpa.lmd <- lm(gpa ~ satm + satv, data = GPA)
+gpa.lme <- lm(gpa ~ 1, data = GPA)
 

@@ -1,3 +1,2 @@
-xyplot( births ~ date, Births, groups = dayofweek, 
-        auto.key = list(space = 'right') )
+xyplot(runningTotal ~ date, Births78, type = "l") 
 

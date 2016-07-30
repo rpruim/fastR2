@@ -1,4 +1,4 @@
-f1.glm0 <- glm( factor(t2d) ~ 1, fusion1m, family=binomial)
+f1.glm0 <- glm(factor(t2d) ~ 1, Fusion1m, family=binomial) 
 deviance(f1.glm0)
 deviance(f1.glm1)
 df1 <- df.residual(f1.glm0) - df.residual(f1.glm1); df1

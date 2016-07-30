@@ -1,3 +1,3 @@
 require(multcomp) 
-confint(glht(base.lmadd, mcp(Treatment="Tukey")),level=0.9)
+confint(glht(base.lmadd, mcp(treatment = "Tukey")), level = 0.9)
 

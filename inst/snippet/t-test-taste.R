@@ -1,2 +1,2 @@
-t.test(score~scr,data=taste1)
+t.test(score ~ scr, data = Taste1)
 

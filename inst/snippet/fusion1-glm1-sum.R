@@ -1,2 +1,2 @@
-summary(f1.glm1)
+summary(f1.glm1) 
 

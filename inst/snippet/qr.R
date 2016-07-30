@@ -1,5 +1,6 @@
-glimpse(SmallData)
-model <- lm(y ~ x, data = SmallData)
-Q <- qr.Q(qr(model))    # this is Q1
-R <- qr.R(qr(model))    # this is R1
+QRdata <- data.frame(x = c(1, 1, 5, 5), y = c(1, 2, 4, 6))
+glimpse(QRdata)
+qr.model <- lm(y ~ x, data = QRdata)
+Q <- qr.model %>% qr() %>% qr.Q(); Q
+R <- qr.model %>% qr() %>% qr.R(); R
 

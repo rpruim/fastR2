@@ -1,2 +1,2 @@
-head(mlb2004,4)
+head(MLB2004, 4)
 

@@ -1,5 +1,5 @@
-w1 <- v1 - project(v1,v2)
-w2 <- v2 - project(v2,v1)
+w1 <- v1 - project(v1, v2)
+w2 <- v2 - project(v2, v1)
 dot(v0,w1)
 dot(v0,w2)
 dot(v1,w2)

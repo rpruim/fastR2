@@ -1,11 +1,11 @@
 times <- faithful$eruptions
-densityplot(~times, kernel = "rectangular",
+densityplot( ~ times, kernel = "rectangular",
     main = "Rectangular kernel")
-densityplot(~times, kernel = "triangular",
+densityplot( ~ times, kernel = "triangular",
     main = "Triangular kernel")
-densityplot(~times,
+densityplot( ~ times,
     main = "Normal kernel")
-densityplot(~times, adjust = 0.25,
+densityplot( ~ times, adjust = 0.25,
     main = "Normal kernel; adjust=0.25")
 #density(times)       # display some information about the kde
 

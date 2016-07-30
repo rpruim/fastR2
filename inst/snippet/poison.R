@@ -1,3 +1,3 @@
-poison.lm <- lm(Time~factor(Poison) * factor(Treatment),poison)
+poison.lm <- lm(time~factor(poison) * factor(treatment), data = Poison)
 anova(poison.lm)
 

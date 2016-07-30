@@ -1,3 +1,3 @@
-summary(students)
-model <- lm(ACT~SAT,students); summary(model)
+summary(Students)
+model <- lm(ACT ~ SAT, data = Students); summary(model)
 

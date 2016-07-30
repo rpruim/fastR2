@@ -1,2 +1,2 @@
-summary(score~scr+liq, data=tastetest, method="cross")
+mean(score ~ scr + liq, data = TasteTest, .format = "table")
 

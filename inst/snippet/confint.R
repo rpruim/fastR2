@@ -1,2 +1,0 @@
-stats:::confint.lm
-

@@ -1,3 +1,3 @@
-pet.lm <- lm(Rate ~ Group, petstress)
-summary(Rate~Group,petstress,fun=favstats)
+pet.lm <- lm(rate ~ group, data = PetStress)
+favstats(rate ~ group, data = PetStress)
 

@@ -1,5 +1,8 @@
 # create model matrix
-intercept <- rep(1,4)
+x <- SmallData$x; y <- SmallData$y
+x
+y
+intercpet <- rep(1, 4)
 X <- cbind(intercept, x); X
 # estimate coeficients
 B <- solve(t(X) %*% X) %*% t(X)

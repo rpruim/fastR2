@@ -1,3 +1,5 @@
-punting.lm <- lm(distance~rStrength+rFlexibility,punting) 
-summary(punting.lm)
+punting.lm <- 
+  lm(distance ~ rStrength + rFlexibility, data = Punting) 
+msummary(punting.lm)
+anova(punting.lm)
 

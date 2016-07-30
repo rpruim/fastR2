@@ -1,2 +1,2 @@
-resid.plots <- xplot(punting.lm)
+## mplot(punting.lm, w = 1:2)
 

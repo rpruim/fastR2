@@ -1,4 +1,4 @@
-require(alr3); data(rat)
-rat.lm <- lm(y~BodyWt*LiverWt,rat)
+data(rat, package = "alr3")
+rat.lm <- lm(y ~ BodyWt * LiverWt, data = rat)
 summary(rat.lm)
 

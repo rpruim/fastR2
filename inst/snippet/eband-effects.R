@@ -1,5 +1,5 @@
 require(DAAG); data(elasticband)
-eband.model <- lm(distance~stretch,data=elasticband)
+eband.model <- lm(distance ~ stretch, data = elasticband)
 ef <- eband.model$effects; n <- length(ef)
 ef
 # total length

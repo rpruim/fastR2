@@ -1,3 +1,3 @@
-model2 <- lm(score~noise*group,mathnoise)
+model2 <- lm(score ~ noise * group, data = MathNoise)
 anova(model2)
 

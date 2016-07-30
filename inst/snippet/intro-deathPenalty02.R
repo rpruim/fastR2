@@ -1,2 +1,2 @@
-tally(death ~ defendant + victim, data = DeathPenalty)
+tally(death ~ defendant | victim, data = DeathPenalty)
 

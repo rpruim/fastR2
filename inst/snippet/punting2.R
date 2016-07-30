@@ -1,6 +1,6 @@
-summary(lm(rFlexibility~rStrength, punting))
-xyplot(rStrength~rFlexibility, punting)
+summary(lm(rFlexibility ~ rStrength, data = Punting))
+xyplot(rStrength ~ rFlexibility, data = Punting)
 # if all we want is the correlation coefficient, we can get it directly
-r <- cor(punting$rStrength, punting$rFlexibility); r
+r <- cor(rStrength ~ rFlexibility, data = Punting); r
 r^2
 

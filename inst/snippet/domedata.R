@@ -1,3 +1,3 @@
-require(alr3); data(domedata) 
+data(domedata, package = "alr3") 
 summary(domedata)
 

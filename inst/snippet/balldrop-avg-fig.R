@@ -1,10 +1,11 @@
-require(plyr)
-balldropavg <- ddply( balldrop, .(height), summarise,
-					 time =mean(time) )
-balldropavg
-ball.modelA <- lm(time ~ sqrt(height),balldropavg)
+BallDropAvg <-  
+  BallDrop %>% 
+  group_by(height) %>%
+  summarise(time = mean(time))
+BallDropAvg
+ball.modelA <- lm(time ~ sqrt(height), data = BallDropAvg)
 summary(ball.modelA)
-xyplot(time~height,balldropavg,
-                panel=panel.lm,model=ball.modelA)
-xplot(ball.modelA,w=1)
+xyplot(time ~ height, BallDropAvg,
+                panel = panel.lm, model = ball.modelA)
+plot(ball.modelA, w = 1)
 

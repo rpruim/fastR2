@@ -8,7 +8,7 @@ bin.data <- cut(data, cutpts)
 p <- diff(pexp(cutpts, theta.hat))
 e <- n * p
 o <- table(bin.data)
-print(cbind(o,e))
+print(cbind(o, e))
 lrt  <- 2 * sum(o * log(o/e)); lrt
 pearson <- sum( (o-e)^2/e ); pearson
 1-pchisq(lrt, df = 2)               # df = (4 - 1) - 1 [anti-conservative]

@@ -1,3 +1,3 @@
-summary(lm(weight~groove,tirewear))
-xyplot(weight~groove,tirewear, type=c('p','r'))
+summary(lm(weight ~ groove, data = TireWear))
+xyplot(weight ~ groove, data = TireWear, type = c('p', 'r'))
 

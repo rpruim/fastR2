@@ -1,3 +1,3 @@
-coag.altmodel <- lm(coag~diet-1,coagulation)
+coag.altmodel <- lm(coag ~ -1 + diet, data = coagulation)
 summary(coag.altmodel)
 

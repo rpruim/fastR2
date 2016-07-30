@@ -1,4 +1,4 @@
-treb.model <- lm(distance~projectileWt,data=trebuchet2)
+treb.model <- lm(distance ~ projectileWt, data = Trebuchet2)
 coef(treb.model)
-xyplot(distance~projectileWt,data=trebuchet2, type=c('p','r'))
+xyplot(distance ~ projectileWt, data = Trebuchet2, type = c('p', 'r'))
 

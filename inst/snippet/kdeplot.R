@@ -2,11 +2,11 @@ kdeplot <- function(data, kernel, xlim, ylim,
     args = list(),
     lty = 1,
     lwd = 3,
-    col = trellis.par.get('plot.line')$col,
+    col = trellis.par.get("plot.line")$col,
     buffer = 0,
     n = 50,
-    xlab = 'x',
-    ylab = 'density',
+    xlab = "x",
+    ylab = "density",
     ...) {
 
     ndata <- length(data)
@@ -22,16 +22,15 @@ kdeplot <- function(data, kernel, xlim, ylim,
 
     if (missing(ylim)) {
         xvals <- seq(xlim[1], xlim[2], length = n)
-        #yvals <- fun(xvals, unlist(args))
+        # yvals <- fun(xvals, unlist(args))
         yvals = do.call(kernel,
                       c(list(x = seq(xlim[1], xlim[2], length = 100)), args))
         ylim <- range(yvals)
         buf <- buffer * diff(ylim)
         ylim <- ylim + c(-1, 1) * buf
-        
     }
 
-    xyplot(ylim~xlim, xlab = xlab, ylab = ylab,
+    xyplot(ylim ~ xlim, xlab = xlab, ylab = ylab,
             panel = function(x, y, ...){ 
             panel.mathdensity(kde(data, kernel, ...),
                 args = args,
@@ -49,7 +48,7 @@ kdeplot <- function(data, kernel, xlim, ylim,
                 args = args,
                 lwd = 1.5,
                 lty = 1,
-                col = trellis.par.get('superpose.line')$col[2],
+                col = trellis.par.get("superpose.line")$col[2],
                 n = n,
                 ...) 
             }

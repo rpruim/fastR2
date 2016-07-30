@@ -1,2 +1,2 @@
-fisher.test(xtabs(~twin+conviction, ft));
+fisher.test(tally(twin ~ conviction, data = FT)) 
 

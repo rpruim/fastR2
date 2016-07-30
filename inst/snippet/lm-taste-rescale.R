@@ -1,2 +1,2 @@
-confint(taste.model,"scrfine") / 50
+confint(taste.model, "scrfine") / 50 
 

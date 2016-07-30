@@ -1,10 +1,8 @@
-t.test(~ (Vitamin - Placebo), data=endurance)
-t.test(~ (log(Vitamin) - log(Placebo)) , data=endurance)
-t.test(~ (log(Vitamin / Placebo)) , data=endurance)  # same as above
-t.test(~(Vitamin/Placebo), data=endurance)
-t.test(~ (1/Vitamin - 1/Placebo), data=endurance)
-x <- sum(~ (Vitamin > Placebo), data=endurance)
-n <- nrow(endurance)
-binom.test(x, n)
-prop.test(x, n)
+t.test( ~ (vitamin - placebo), data = Endurance)
+t.test( ~ (log(vitamin) - log(placebo)) , data = Endurance)
+t.test( ~ (log(vitamin / placebo)) , data = Endurance)  # same as above
+t.test( ~ (vitamin / placebo), data = Endurance)
+t.test(~ (1 / vitamin - 1 / placebo), data = Endurance)
+binom.test(~ (vitamin > placebo), data = Endurance)
+prop.test(~ (vitamin > placebo), data = Endurance)
 

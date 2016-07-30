@@ -1,3 +1,0 @@
-## snippet('snippet', exec=FALSE)
-
-

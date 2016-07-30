@@ -1,12 +1,20 @@
-sim <- function(b0=3,b1=5,sigma=2,
-                x=rep(1:5,each=4)    # 4 observations at each of 5 values
+sim <- 
+  function(
+    b0 = 3, b1 = 5, sigma = 2, 
+    x = rep(1:5, each = 4)         # 4 observations at each of 5 values
     ){
-    e <-rnorm(length(x),sd=sigma)
-    y <- b0 + b1*x + e
-    model <- lm(y~x)  
-    ci <- confint(model,2)
-    return(b1 > ci[1] && b1 < ci[2])
-}
-t <- table(replicate(10000,sim())); t / 10000
-prop.test(t[2],sum(t),p=0.95)
+    e <-rnorm(length(x), sd = sigma)
+    y <- b0 + b1 * x + e
+    model <- lm(y ~ x)  
+    ci <- confint(model, 2)
+    dimnames(ci)[[2]] <- c("lo", "hi")   # provide nicer names
+    ci
+  }
+Sims <- do(5000) * sim()
+Sims <-
+  Sims %>% 
+  mutate(status = ifelse(lo > 5, "hi", ifelse(hi < 5, "lo", "good"))) 
+tally( ~ status, data = Sims)
+
+binom.test( ~ status, data = Sims, p = 0.95)
 

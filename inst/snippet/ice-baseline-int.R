@@ -1,3 +1,3 @@
-base.lmint <- lm(B1930 ~ Location * Treatment, ice)
+base.lmint <- lm(b1930 ~ location * treatment, data = Ice)
 anova(base.lmint)
 

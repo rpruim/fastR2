@@ -1,2 +1,0 @@
-devtools::session_info()
-

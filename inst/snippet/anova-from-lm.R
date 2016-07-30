@@ -1,2 +1,2 @@
-summary(lm(y~x,someData))
+summary(lm(y ~ x, someData))
 

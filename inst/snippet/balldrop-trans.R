@@ -1,5 +1,5 @@
-ball.modelT <- lm(time ~ sqrt(height),balldrop)
+ball.modelT <- lm(time ~ sqrt(height), data = BallDrop) 
 summary(ball.modelT)
-xyplot(time~height,balldrop, panel=panel.lm,model=ball.modelT)
-xplot(ball.modelT,w=1)
+xyplot(time ~ height, data = BallDrop, panel = panel.lm, model = ball.modelT)
+plot(ball.modelT, w = 1)
 

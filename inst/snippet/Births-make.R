@@ -1,7 +1,5 @@
 data(Births78)
-Births <- 
-  mutate( 
-    Births78, 
-    dayofweek = lubridate::wday(date, label = TRUE, abbr = TRUE))
-head(Births, 3)
+Births78 <- 
+  mutate(Births78, runningTotal = cumsum(births))
+head(Births78, 3)
 

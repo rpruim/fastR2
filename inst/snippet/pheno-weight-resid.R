@@ -1,2 +1,2 @@
-xplot(pheno.lm,w=1:2)
+xplot(pheno.lm, w=1:2)
 

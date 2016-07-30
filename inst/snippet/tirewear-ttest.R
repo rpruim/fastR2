@@ -1,3 +1,4 @@
-t.test(tirewear$weight,tirewear$groove,paired=T)
-t.test(tirewear$weight - tirewear$groove)
+t.test(TireWear$weight, TireWear$groove, paired = T)
+t.test(TireWear$weight - TireWear$groove)
+t.test( ~ (weight - groove), data = TireWear)
 

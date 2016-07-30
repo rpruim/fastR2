@@ -1,5 +1,5 @@
-model <- aov(sqrt(NumTrap)~Color,bugs)
+model <- aov(sqrt(trapped) ~ color, data = Bugs)
 TukeyHSD(model)
-model <- lm(sqrt(NumTrap)~Color,bugs)
+model <- lm(sqrt(trapped) ~ color, data = Bugs)
 summary(glht(model,mcp(Color="Tukey")))
 

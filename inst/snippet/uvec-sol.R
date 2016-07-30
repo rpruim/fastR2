@@ -9,7 +9,7 @@ u5 <- c(1,1,1,1,-4) / sqrt(20)
 ulist <- list(u1,u2,u3,u4,u5)
 vlength <- function(x) sqrt(dot(x,x))
 sapply(ulist, vlength)
-xList <- lapply( ulist, function(u)  project(x,u) ); xList
-vList <- lapply( ulist, function(u)  project(v,u) ); vList
+xList <- lapply(ulist, function(u) project(x,u)); xList
+vList <- lapply(ulist, function(u) project(v,u)); vList
 all.equal(xList[-1], vList[-1])
 

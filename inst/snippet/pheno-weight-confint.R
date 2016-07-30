@@ -1,2 +1,2 @@
-confint(pheno.lm)
+confint(pheno.lm) 
 

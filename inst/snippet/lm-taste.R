@@ -1,4 +1,3 @@
-taste.model <- lm(score~scr, data=taste1)
-###hop:3-9
-summary(taste.model)
+taste.model <- lm(score ~ scr, data = Taste1) 
+msummary(taste.model) 
 

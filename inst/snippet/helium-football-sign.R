@@ -1,4 +1,2 @@
-n <- nrow(football)
-x <- sum(football$Helium > football$Air)
-binom.test(x, n)
+binom.test( ~ (helium > air), data = HeliumFootballs)
 

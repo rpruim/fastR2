@@ -2,6 +2,6 @@
 sampleMeans <- replicate(5000, mean(rnorm(16, 100, 12)))
 mean(sampleMeans)
 sd(sampleMeans)
-histogram(~sampleMeans, n=20, v=100,
-    density=TRUE, args=list(mean=100, sd=3))
+histogram( ~ sampleMeans, n = 20, v = 100,
+           density = TRUE, args = list(mean = 100, sd = 3))
 

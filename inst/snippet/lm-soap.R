@@ -1,3 +1,3 @@
-soap.model1 <- lm(Weight~Day,soap)
-summary(soap.model1)
+Soap.model1 <- lm(weight ~ day, data = Soap)
+summary(Soap.model1)
 

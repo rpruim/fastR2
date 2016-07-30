@@ -1,10 +1,10 @@
 require(MASS)                        # for fractions()
-kernel <- function(x) { (x-2) * (x+2) * (x >=-2 & x <= 2) }
+kernel <- function(x) { (x - 2) * (x + 2) * (x >= -2 & x <= 2) }
 k <- 1 / integrate(kernel, -2, 2)$value; k
 f <- function(x) { k * kernel(x) }
 fractions(k)
 integrate(f, -2, 2)                    # check that we have pdf
-integrate(f, 0, 2)                     # P( 0 <= X <= 2 )
+integrate(f,  0, 2)                    # P( 0 <= X <= 2 )
 fractions(integrate(f, 0, 2)$value)
 integrate(f, 1, 2)                     # P( 1 <= X <= 2 )
 fractions(integrate(f, 1, 2)$value)

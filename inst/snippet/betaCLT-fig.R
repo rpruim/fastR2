@@ -1,9 +1,7 @@
-sampleMeans05 <- replicate(1000, mean(rbeta(5, 0.5, 0.5)))
-sampleMeans10 <- replicate(1000, mean(rbeta(10, 0.5, 0.5)))
-sampleMeans20 <- replicate(1000, mean(rbeta(20, 0.5, 0.5)))
-sampleMeans40 <- replicate(1000, mean(rbeta(40, 0.5, 0.5)))
-betaSim <- data.frame(
-    mean=c(sampleMeans05, sampleMeans10, sampleMeans20, sampleMeans40),
-    size=rep(c(5, 10, 20, 40), each=1000))
-qqmath(~mean|factor(size), betaSim, scales=list(relation='free'))
+BetaSims <-
+  expand.grid(rep = 1:1000, size = c(5, 10, 20, 40)) %>%
+  group_by(rep, size) %>% mutate(mean = mean(rbeta(size, 0.5, 0.5)))
+qqmath(    ~ mean | factor(size), data = BetaSims, 
+           scales = list(relation = "free"))
+histogram( ~ mean | factor(size), data = BetaSims, n = 25, density = TRUE)
 

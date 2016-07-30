@@ -3,6 +3,6 @@ data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
 nweiblik <- function(theta, x) { -sum(dweibull(x, theta[1], theta[2], log = TRUE)) }
 pweib <- function(x, theta){ pweibull(x, theta[1], theta[2]) }
-GOF(data, nweiblik, pweib, start = c(1,1), cutpts = c(0,3,5,9,13,Inf))
-GOF(data, nweiblik, pweib, start = c(1,1), cutpts = c(0,3,5,9,13,Inf), pearson = TRUE)
+GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf))
+GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), pearson = TRUE)
 

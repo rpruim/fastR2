@@ -1,1 +1,2 @@
+mplot(TukeyHSD(coag.model)) 
 

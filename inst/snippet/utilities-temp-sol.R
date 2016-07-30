@@ -1,2 +1,2 @@
-xyplot( ccf ~ temp, data = Utilities )
+xyplot(ccf ~ temp, data = Utilities)
 

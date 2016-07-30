@@ -4,7 +4,8 @@ sums <- function(n){
     for (x in 0:n) {
         for ( y in (0:(n-x)) ) {
             z <- n - x - y
-            results <- c(results,paste(x+1,"+",y+1,"+",z+1,"=",x+y+z+3))
+            results <- c(results, 
+                         paste(x + 1, "+", y+1, "+", z + 1, "=", x + y + z + 3))
         }
     }
     return(results)

@@ -1,6 +1,6 @@
-surface <- ice[ice$Location=='surface',c("Treatment","T1930")]
-intra <- ice[ice$Location=='intramuscular',"T1930"]
-newdata <- cbind(surface,intra)
-names(newdata) <- c('Treatment','SurfTemp','IntraTemp')
-anova(lm(SurfTemp - IntraTemp ~ Treatment, newdata))
+surface <- Ice[Ice$location=='surface', c("treatment", "t1930")]
+intra <- Ice[Ice$location == 'intramuscular', "t1930"]
+newdata <- cbind(surface, intra)
+names(newdata) <- c('treatment', 'surfTemp', 'intraTemp')
+anova(lm(surfTemp - intraTemp ~ treatment, data = newdata))
 

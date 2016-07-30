@@ -6,6 +6,6 @@ mise <- function(size = 20, reps = 100, dist = "norm", args = list(), ...) {
     d <- density(data, ...)
     data.frame(ise = ise(d, distr))
   }
-  return( c(mise = mean(~ise, data = results) ) )
+  return(c(mise = mean( ~ ise, data = results)))
 }
 

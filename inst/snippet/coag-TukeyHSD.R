@@ -1,3 +1,3 @@
-coag.aov <- aov(coag~diet,coagulation); coag.aov
-TukeyHSD(coag.aov)
+coag.model <- lm(coag ~ diet, data = coagulation); coag.model
+TukeyHSD(coag.model)
 

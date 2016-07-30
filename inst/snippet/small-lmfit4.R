@@ -1,7 +1,7 @@
 #
 # we can compare the results with those from lm()
 #
-model <- lm(y~x1+x2); fitted(model)        
+model <- lm(y ~ x1 + x2); fitted(model)        
 #
 # this won't work to get the coefficients:
 #

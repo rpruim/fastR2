@@ -1,10 +1,9 @@
 B <- runif(10000, 10150, 10250)
-Dimes.boot <- do(10000) * mean( ~mass, data=resample(Dimes) )
+Dimes.boot <- do(10000) * mean( ~ mass, data = resample(Dimes))
 head(Dimes.boot, 3)
 Dimes.boot <- 
-  Dimes.boot %>% 
-  mutate(D = mean, N = B/D)
-histogram(~N, data = Dimes.boot)
-qqmath(~N, data = Dimes.boot)
-sd(~N, data = Dimes.boot)
+  Dimes.boot %>% mutate(D = mean, N = B / D)
+histogram( ~ N, data = Dimes.boot)
+qqmath( ~ N, data = Dimes.boot)
+sd( ~ N, data = Dimes.boot)
 

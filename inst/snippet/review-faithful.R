@@ -1,2 +1,2 @@
-t.test(~ eruptions, data=faithful)
+t.test( ~ eruptions, data = faithful)
 

@@ -1,2 +1,2 @@
-confint(orings.model,parm='temp')
+confint(orings.model, parm = 'temp')
 

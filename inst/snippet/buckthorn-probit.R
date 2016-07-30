@@ -1,4 +1,4 @@
-buck.model2 <- glm(dead~conc,data=buckthorn, 
-				   family=binomial(link=probit))
+buck.model2 <- 
+  glm(dead ~ conc, data = Buckthorn, family = binomial(link = probit))
 summary(buck.model2)
 

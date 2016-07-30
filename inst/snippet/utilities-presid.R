@@ -1,3 +1,3 @@
 # partial residual plot
-xyplot(resid(ut.lm1) ~ kwhpday, ut, type=c('p','r'))
+xyplot(resid(ut.lm1) ~ kwhpday, data = Ut, type=c('p','r'))
 

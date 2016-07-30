@@ -1,0 +1,2 @@
+summary(pal.lm2) 
+

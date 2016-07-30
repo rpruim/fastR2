@@ -1,6 +1,6 @@
 require(multcomp)
-coag.glht <- glht(coag.model,mcp(diet="Tukey"))
+coag.glht <- glht(coag.model, mcp(diet = "Tukey"))
 summary(coag.glht)  
-plot(TukeyHSD(coag.aov))  
+mplot(TukeyHSD(coag.model)) 
 plot(confint(coag.glht))
 

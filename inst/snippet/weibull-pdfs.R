@@ -1,7 +1,7 @@
 h <- 1.6
 dtemp <- function(x, mean = 0, sd = 1, scale = 1, shape = 1) {
-        dweibull(x, scale = scale, shape = shape)
-        }
+  dweibull(x, scale = scale, shape = shape)
+}
 
 xyplot(c(0, h) ~ c(0, 3), 
 	main = "Weibull pdfs (shape=1)",
@@ -15,7 +15,7 @@ xyplot(c(0, h) ~ c(0, 3),
 			cex = 0.7
 		),
 		lines = list(
-			col = trellis.par.get('superpose.line')$col[1:3],
+			col = trellis.par.get("superpose.line")$col[1:3],
 			lty = 1, 
 			lwd = 2
 			),
@@ -26,11 +26,11 @@ xyplot(c(0, h) ~ c(0, 3),
 		),
 	panel = function(x, y, ...) {
 		panel.mathdensity(dmath = dtemp, args = list(scale = 1, shape = 1),  n = 100,
-			col = trellis.par.get('superpose.line')$col[1], lwd = 2, lty = 1) 
+			col = trellis.par.get("superpose.line")$col[1], lwd = 2, lty = 1) 
 		panel.mathdensity(dmath = dtemp, args = list(scale = 2, shape = 1), n = 100,
-			col = trellis.par.get('superpose.line')$col[2], lwd = 2, lty = 1) 
+			col = trellis.par.get("superpose.line")$col[2], lwd = 2, lty = 1) 
 		panel.mathdensity(dmath = dtemp, args = list(scale = 3, shape = 1), n = 100,
-			col = trellis.par.get('superpose.line')$col[3], lwd = 2, lty = 1) 
+			col = trellis.par.get("superpose.line")$col[3], lwd = 2, lty = 1) 
 	}
 	)
 
@@ -46,7 +46,7 @@ xyplot(c(0, h) ~ c(0, 3),
 			cex = 0.7
 		),
 		lines = list(
-			col = trellis.par.get('superpose.line')$col[1:3],
+			col = trellis.par.get("superpose.line")$col[1:3],
 			lty = 1, 
 			lwd = 2
 			),
@@ -57,11 +57,11 @@ xyplot(c(0, h) ~ c(0, 3),
 		),
 	panel = function(x, y, ...) {
 		panel.mathdensity(dmath = dtemp,  args = list(scale = 1, shape = 1),  n = 100,
-			col = trellis.par.get('superpose.line')$col[1], lwd = 2) 
+			col = trellis.par.get("superpose.line")$col[1], lwd = 2) 
 		panel.mathdensity(dmath = dtemp, args = list(scale = 1, shape = 2), n = 100,
-			col = trellis.par.get('superpose.line')$col[2], lwd = 2) 
+			col = trellis.par.get("superpose.line")$col[2], lwd = 2) 
 		panel.mathdensity(dmath = dtemp, args = list(scale = 1, shape = 0.5), n = 100,
-			col = trellis.par.get('superpose.line')$col[3], lwd = 2) 
+			col = trellis.par.get("superpose.line")$col[3], lwd = 2) 
 	}
 	)
 

@@ -1,3 +1,3 @@
-backsolve(R, t(Q) %*% y)
-
+backsolve(R, t(Q) %*% QRdata$y)
+coef(qr.model)
 

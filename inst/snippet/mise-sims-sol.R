@@ -1,5 +1,5 @@
-settings <- expand.grid( kernel = c('gaussian', 'triangular',
-                                  'rectangular', 'epanechinikov'),
+settings <- expand.grid( kernel = c("gaussian", "triangular",
+                                  "rectangular", "epanechinikov"),
                          size = c(10, 30, 100),
                          adjust = c(1/3, 1, 3)
 )

@@ -1,6 +1,7 @@
-# build two variables that make the model easier to describe
-airp$x1 <- with( airp, ((loc==1) + 0.5*(loc==3)) )
-airp$x2 <- with( airp, ((loc==2) + 0.5*(loc==3)) )
-model3 <- lm(pollution~ -1 + x1 + x2, airp)
-anova(model3,model)
+# build two variables that make the model easier to describe 
+AirP <- AirP %>% mutate(
+  x1 = (loc==1) + 0.5 * (loc==3),
+  x2 = (loc==2) + 0.5 * (loc==3))
+model3 <- lm(pollution ~ -1 + x1 + x2, data = AirP)
+anova(model3, model)
 

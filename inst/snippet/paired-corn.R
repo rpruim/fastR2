@@ -1,3 +1,3 @@
-t.test(~ (reg-kiln), data=corn)    # paired
-t.test(corn$reg, corn$kiln)        # 2-sample
+t.test(~ (reg-kiln), data = Corn)    # paired
+t.test(Corn$reg, Corn$kiln)        # 2-sample
 

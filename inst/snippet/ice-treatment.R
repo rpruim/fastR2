@@ -1,3 +1,3 @@
-ice.trt <- lm(T1930 - B1930 ~ Treatment * Location, ice)
+ice.trt <- lm(t1930 - b1930 ~ treatment * location, data = Ice)
 anova(ice.trt)
 

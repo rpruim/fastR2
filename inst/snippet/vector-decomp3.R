@@ -13,5 +13,5 @@ b2 <- vdecomp2(x,x1,v3)$coefficients[2]
 # this should equal x
 a2 * (a1 * v1 + b1* v2) + b2 * v3 
 # the three coefficients
-c( a2 * a1, a2 * b1, b2)
+c(a2 * a1, a2 * b1, b2)
 
