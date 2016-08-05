@@ -4,7 +4,7 @@
 \alias{plot.maxLik2}
 \title{plot method for augment maxLik objects}
 \usage{
-\method{plot}{maxLik2}(x, y, ...)
+\method{plot}{maxLik2}(x, y, ci = "Wald", hline = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{"maxLik2"}}

@@ -38,8 +38,10 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
 #' @param y ignored
 #' @export
 
-plot.maxLik2 <- function(x, y, ...) {
+plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
   ml <- x
+  ci <- match.arg(tolower(ci), c("wald", "likelihood"), 
+                  several.ok = TRUE)
   
   switch(
     length(coef(ml)), 
@@ -47,15 +49,42 @@ plot.maxLik2 <- function(x, y, ...) {
       se <- stdEr(ml)
       S <- Vectorize(function(.x) {   numDeriv::grad(   Vectorize(ml$loglik), .x) })
       I <- Vectorize(function(.x) { - numDeriv::hessian(Vectorize(ml$loglik), .x) })
-      Q <- function(.x) { ml$loglik(coef(ml)) - 1/2 * I(coef(ml)) *(.x - coef(ml))^2}
+      Q <- function(.x) { ml$loglik(coef(ml)) - 1/2 * I(coef(ml)) * (.x - coef(ml))^2}
       G <- data.frame(theta = c(coef(ml) - 3 * se, coef(ml) + 3 * se))
-      ggplot(G, aes(x = theta)) + 
+      p <- 
+        ggplot(G, aes(x = theta)) + 
         stat_function(fun = ml$loglik, size = 1.2) +
         stat_function(fun = Q, colour = "skyblue", size = 0.8, alpha = 0.7) +
-        geom_vline(xintercept = coef(ml) - 2 * se, colour = "skyblue", linetype = "dashed") +
         geom_vline(xintercept = coef(ml), colour = "skyblue", linetype = "dotted", size = 1) +
-        geom_vline(xintercept = coef(ml) + 2 * se, colour = "skyblue", linetype = "dashed") +
-        labs(x = names(coef(ml)), y = "log-likelihood")
+          labs(x = names(coef(ml)), y = "log-likelihood")
+        
+        if ("wald" %in% ci) {
+          p <- p + 
+            geom_vline(xintercept = coef(ml) - 2 * se, colour = "skyblue", linetype = "dashed") +
+            geom_vline(xintercept = coef(ml) + 2 * se, colour = "skyblue", linetype = "dashed") 
+        }
+        if ("likelihood" %in% ci) {
+          D <- 
+            data_frame(
+              x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
+              y = suppressWarnings(ml$loglik(x))
+            ) %>% 
+            filter(!is.na(y), !is.nan(y), is.finite(y)) %>%
+            filter(y > max(y, na.rm = TRUE) - 2)
+          
+          lo <- range(D$x)[1]
+          hi <- range(D$x)[2]
+          
+          p <- p + 
+            geom_vline(xintercept = lo, colour = "gray50", size = 0.5) +
+            geom_vline(xintercept = hi, colour = "gray50", size = 0.5)
+        }
+      if (hline) {
+        p <- p +
+          geom_hline(yintercept = max(D$y, na.rm = TRUE) - 2, colour = "skyblue",
+                     linetype = "dashed")
+      }
+      p
     },
     "2" = {
       se <- stdEr(ml)
