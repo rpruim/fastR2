@@ -3,8 +3,8 @@ nflRatings<- data.frame(
     team = rownames(bta),
     rating = bta[, "ability"],
     se = bta[, "s.e."],
-    wins = as.vector(table(NFL$winner)),
-    losses = as.vector(table(NFL$loser))
+    wins = as.vector(tally( ~ winner, data = NFL)),
+    losses = as.vector(tally( ~ loserr, data = NFL))
     )
 rownames(nflRatings) = NULL
 

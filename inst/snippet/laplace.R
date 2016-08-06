@@ -8,8 +8,8 @@ plaplace1 <- function(q, theta = 0, lambda = 1) {
 }
 
 plaplace2 <- function(q, theta = 0, lambda = 1) {
-    if (q < theta) return( 0.5 * (1-pexp(theta-q, lambda)) )
-    return( 0.5 + 0.5 * pexp(q-theta, lambda) )
+    if (q < theta) return(0.5 * (1-pexp(theta-q, lambda)))
+    return(0.5 + 0.5 * pexp(q-theta, lambda))
     }
 # should get same results either way:
 plaplace1(3, lambda = 2, theta = 1)

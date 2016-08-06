@@ -1,6 +1,6 @@
 GOF <- function(x, 
     lik = function(theta, x) { 
-        return(sum ( dnorm(x, mean = theta[1], sd = theta[2], log = TRUE) ) )
+        return(sum(dnorm(x, mean = theta[1], sd = theta[2], log = TRUE)))
     } ,
     pdist = function(x, theta) { 
         return(pnorm(x, mean = theta[1], sd = theta[2]) ) 
@@ -12,14 +12,14 @@ GOF <- function(x,
     ml <- maxLik(lik, start = start, x = x, ...)
     mle <- coef(ml)
     names(mle) <- paramNames
-    prob <- diff( pdist(cutpts, mle))
+    prob <- diff(pdist(cutpts, mle))
     n <- length(x)
-    o <- table(cut(x, cutpts))
+    o <- tally(cut(x, cutpts))
     e <- prob * n
 
 
-    pearsonStat <- sum( (o-e)^2 / e)
-    lrtStat <- 2 * sum( o * log (o/e) )
+    pearsonStat <- sum((o - e)^2 / e)
+    lrtStat <- 2 * sum(o * log(o / e))
     df = length(cutpts) - 2 - 2
 
     if (pearson) {
@@ -42,7 +42,7 @@ GOF <- function(x,
         p.value = pval, method = method,
         data.name = deparse(substitute(x)), 
         observed = o, expected = e, 
-        residuals = (o - e)/sqrt(e),
+        residuals = (o - e) / sqrt(e),
         table = cbind(o, e, prob),
         message = returnMessage(ml)
         ), 

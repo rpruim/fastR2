@@ -1,2 +1,2 @@
-tally(~t2d + genotype, Fusion1m)
+tally(~t2d + genotype, data = Fusion1m)
 

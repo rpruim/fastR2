@@ -1,2 +1,2 @@
-snippet("golfballs-max", echo = FALSE)  
+snippet("golfballs-max", echo = FALSE)   
 

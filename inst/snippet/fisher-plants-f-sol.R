@@ -6,7 +6,13 @@ fisher.pval <-
       1 - pchisq(w, df = 1)
     }
   )
-lo <- uniroot(function(t0) fisher.pval(t0, fisher.counts) - 0.05, c(0, theta.hat))
-hi <- uniroot(function(t0) fisher.pval(t0, fisher.counts) - 0.05, c(1, theta.hat))
-c(lo$root, hi$root)
+lo <- 
+  uniroot(
+    function(t0) fisher.pval(t0, fisher.counts) - 0.05, c(0, theta.hat)) %>% 
+  value()
+hi <- 
+  uniroot(
+    function(t0) fisher.pval(t0, fisher.counts) - 0.05, c(1, theta.hat)) %>% 
+  value()
+c(lo, hi)
 

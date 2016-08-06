@@ -3,8 +3,8 @@ theta2probs <- function(theta) {
 }
 loglik <- function(theta, x) {
   probs <- theta2probs(theta)
-  if (any( probs < 0) ) return (-Inf)
-	dmultinom( x, sum(x), theta2probs(theta), log = TRUE )
+  if (any(probs < 0)) return (NA)
+	dmultinom(x, sum(x), theta2probs(theta), log = TRUE)
 }
 
 geno<-c(83, 447, 470)

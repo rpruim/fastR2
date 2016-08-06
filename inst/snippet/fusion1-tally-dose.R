@@ -1,2 +1,2 @@
-tally(~t2d + Gdose, Fusion1m)
+tally(~t2d + Gdose, data = Fusion1m)
 
