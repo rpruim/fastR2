@@ -63,22 +63,25 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
             geom_vline(xintercept = coef(ml) - 2 * se, colour = "skyblue", linetype = "dashed") +
             geom_vline(xintercept = coef(ml) + 2 * se, colour = "skyblue", linetype = "dashed") 
         }
-        if ("likelihood" %in% ci) {
-          D <- 
-            data_frame(
-              x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
-              y = suppressWarnings(ml$loglik(x))
-            ) %>% 
-            filter(!is.na(y), !is.nan(y), is.finite(y)) %>%
-            filter(y > max(y, na.rm = TRUE) - 2)
-          
-          lo <- range(D$x)[1]
-          hi <- range(D$x)[2]
-          
-          p <- p + 
-            geom_vline(xintercept = lo, colour = "gray50", size = 0.5) +
-            geom_vline(xintercept = hi, colour = "gray50", size = 0.5)
-        }
+      if ("likelihood" %in% ci || hline) {
+        # create data frame of x, y pairs on the log-likelihood function
+        D <- 
+          data_frame(
+            x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
+            y = suppressWarnings(ml$loglik(x))
+          ) %>% 
+          filter(!is.na(y), !is.nan(y), is.finite(y)) %>%
+          filter(y > max(y, na.rm = TRUE) - 2)
+      }
+      
+      if ("likelihood" %in% ci) {
+        lo <- range(D$x)[1]
+        hi <- range(D$x)[2]
+        
+        p <- p + 
+          geom_vline(xintercept = lo, colour = "gray50", size = 0.5) +
+          geom_vline(xintercept = hi, colour = "gray50", size = 0.5)
+      }
       if (hline) {
         p <- p +
           geom_hline(yintercept = max(D$y, na.rm = TRUE) - 2, colour = "skyblue",
