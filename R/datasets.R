@@ -241,9 +241,26 @@ NULL
 #' slag, fly ash, water, superplasticizer, coarse aggregate, and fine
 #' aggregate) and age.
 #' 
-#' 
 #' @name Concrete
 #' @rdname Concrete
+#' @aliases Concrete
+#' @docType data
+#' 
+#' @format \code{Concrete} is a data frame with the following 
+#' variables.
+#' \itemize{ 
+#' \item{limestone}{ percentage of limestone}
+#' \item{water}{ water-cement ratio}
+#' \item{strength}{ compressive strength (MPa) after 28 days}
+#' }
+#' 
+#' @references Appeared in Devore's "Probability and Statsistics for Engineers and 
+#' the Sciences (6th ed).  The variables have been renamed.
+#' 
+#' 
+#' 
+#' @name ConcreteAll
+#' @rdname ConcreteAll
 #' @aliases ConcreteAll Concrete28
 #' @docType data
 #' @format \code{concreteAll} is a data frame with the following 9 variables.
@@ -1019,34 +1036,38 @@ NULL
 #' Results of NCAA basketball games
 #' 
 #' 
-#' @name NCAA2010
-#' @rdname NCAA2010
-#' @aliases NCAA2010 NCAA2009 NCAA2008
+#' @name NCAAbb
+#' @rdname NCAAbb
 #' @docType data
-#' @format Seven variables describing NCAA Division I basketball games.
-#' \itemize{ \item{date}{ date on which game was played}
-#' \item{away}{ visiting team} \item{ascore}{ visiting team's
-#' score} \item{home}{ home team} \item{hscore}{ home team's
-#' score} \item{notes}{ code indicting games played at neutral sites (n
-#' or N) or in tournaments (T)} \item{location}{ where game was played}
+#' @format Nine variables describing NCAA Division I basketball games.
+#' \itemize{ 
+#' \item{date}{ date on which game was played}
+#' \item{away}{ visiting team} 
+#' \item{ascore}{ visiting team's score} 
+#' \item{home}{ home team} 
+#' \item{hscore}{ home team's score} 
+#' \item{notes}{ code indicting games played at neutral sites (n or N) or 
+#' in tournaments (T)} 
+#' \item{location}{ where game was played}
+#' \item{season}{ a character indicating which season the game belonged to}
+#' \item{postseason}{ a logical indicating whether the game is a postseason game}
 #' }
-#' @source \url{kenpom.com}
+#' @source \url{http://kenpom.com}
 #' @keywords datasets
 #' @examples
 #' 
-#' data(NCAA2010)
-#' # add some additional variables to the data frame
-#' NCAA2010$dscore <- NCAA2010$hscore- NCAA2010$ascore
-#' NCAA2010$homeTeamWon <- NCAA2010$dscore > 0
-#' NCAA2010$numHomeTeamWon <- -1 + 2 * as.numeric(NCAA2010$homeTeamWon)
-#' w <- which(NCAA2010$homeTeamWon)
-#' NCAA2010$winner <- as.character(NCAA2010$away)
-#' NCAA2010$winner[w] <- as.character(NCAA2010$home)[w]
-#' NCAA2010$loser <- as.character(NCAA2010$home)
-#' NCAA2010$loser[w] <- as.character(NCAA2010$away)[w]
-#' NCAA2010$homeTeamWon <- NCAA2010$winner == NCAA2010$home
-#' NCAA2010$numHomeTeamWon <- -1 + 2 * as.numeric(NCAA2010$homeTeamWon)
-#' 
+#' data(NCAAbb)
+#' # select one year and add some additional variables to the data frame
+#' NCAA2010 <-
+#'   NCAAbb %>% 
+#'   filter(season == "2009-10") %>%
+#'   mutate(
+#'     dscore = hscore - ascore,
+#'     homeTeamWon = dscore > 0,
+#'     numHomeTeamWon <- -1 + 2 * as.numeric(homeTeamWon),
+#'     winner = ifelse(homeTeamWon, home, away),
+#'     loser  = ifelse(homeTeamWon, away, home)
+#'   )
 NULL
 
 
