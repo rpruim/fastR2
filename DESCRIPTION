@@ -14,6 +14,7 @@ Description: Data sets and utilities to accompany the 2nd edition of
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
+    mosaic
 Imports:
     lattice,
     grid,
@@ -32,7 +33,6 @@ Suggests:
     cubature,
     Devore7,
     knitr,
-    mosaic,
     mosaicData
 VignetteBuilder: knitr
 LazyLoad: yes
