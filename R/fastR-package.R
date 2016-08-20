@@ -14,12 +14,10 @@
 #' @keywords package 
 #' @examples
 #' 
-#' require(fastR)
+#' require(fastR2)
 #' trellis.par.set(theme=col.fastR())
 #' 
 
-#' @import mosaic
-#' @import mosaicData
 #' @import lattice
 #' @import grid
 NULL
