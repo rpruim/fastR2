@@ -1,2 +1,0 @@
-confint(model2)
-

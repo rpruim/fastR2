@@ -1,2 +1,0 @@
-msummary(pet.lm)
-
