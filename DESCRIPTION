@@ -20,6 +20,7 @@ Imports:
     grid,
     maxLik
 Suggests:
+    ggplot2,
     MASS,
     faraway,
     Hmisc,
@@ -31,7 +32,6 @@ Suggests:
     corrgram,
     BradleyTerry2,
     cubature,
-    Devore7,
     knitr,
     mosaicData
 VignetteBuilder: knitr
