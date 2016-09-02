@@ -24,8 +24,8 @@ tryCatch(utils::globalVariables(c('gp')),
 #' @export
 #' @examples
 #' 
-#' geolm(pollution ~ location, data=airpollution)
-#' geolm(distance ~ projectileWt, data=trebuchet2)
+#' geolm(pollution ~ location, data = AirPollution)
+#' geolm(distance ~ projectileWt, data = Trebuchet2)
 #' 
 geolm <-
 function (formula, data = parent.env(), type = "xz", version = 1, 
