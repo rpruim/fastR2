@@ -7,7 +7,8 @@
 #' 
 #' @param loglik a log-likelihood function as for \code{\link{maxLik}}
 #' @param ... additional arguments passed to \code{\link{maxLik}}
-#' 
+#' @param env an environment in which to evaluate \code{loglik}.
+#' @importFrom numDeriv grad hessian
 #' @export
 
 maxLik2 <- function(loglik, ..., env = parent.frame()) {

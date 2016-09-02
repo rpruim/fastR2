@@ -10,6 +10,8 @@ maxLik2(loglik, ..., env = parent.frame())
 \item{loglik}{a log-likelihood function as for \code{\link{maxLik}}}
 
 \item{...}{additional arguments passed to \code{\link{maxLik}}}
+
+\item{env}{an environment in which to evaluate \code{loglik}.}
 }
 \description{
 This version of \code{\link{maxLik}} stores additional information in the 
