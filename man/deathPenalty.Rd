@@ -20,7 +20,7 @@ A famous example of Simpson's paradox.
 \examples{
 
 tally(penalty ~ defendant, data = DeathPenalty)
-tally(penalty ~ defendant + vctim, data = DeathPenalty)
+tally(penalty ~ defendant + victim, data = DeathPenalty)
 
 }
 \keyword{datasets}
