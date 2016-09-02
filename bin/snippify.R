@@ -14,7 +14,10 @@ snippify <- function(file, path, ...) {
     chunkName <- sub("(## ----)(?<chunk>[^,]*)(.*)", "\\2", lines[start[i]], 
                      perl = TRUE)
     chunkName <- sub("-*$", "", chunkName)
-    if (is.character(chunkName) && nchar(chunkName > 0) && !grepl("=", chunkName)) {
+    if (is.character(chunkName) && 
+        nchar(chunkName > 0) && 
+        ! grepl("-sol", chunkName) && 
+        ! grepl("=", chunkName)) {
       chunkPath<- file.path(path, paste0(chunkName,".R"))
       message(paste("  ** Writing", chunkPath))
       results <- c(results, chunkPath)
