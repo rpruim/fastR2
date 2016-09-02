@@ -1,0 +1,2 @@
+msummary(pallets.lm2)
+

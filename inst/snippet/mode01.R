@@ -1,10 +1,10 @@
-w <- 2.5; x <- c(1,2); y <- "foo"; z <- TRUE; abc <- letters[1:3]
-mode(w); length(w)
-mode(x); length(x)
-mode(y); length(y)
+w <- 2.5; mode(w); length(w)
+x <- c(1, 2); mode(x); length(x)
+y <- "foo"; mode(y); length(y)
 y[1]; y[2]             # not an error to ask for y[2]
-mode(z); length(z)
-abc
-mode(abc); length(abc)
+z <- TRUE; mode(z); length(z)
+abc <- letters[1:3]
+abc; mode(abc); length(abc)
 abc[3]
+abc[6] <- "Z"; abc     # NAs fill in to make vector long enough
 

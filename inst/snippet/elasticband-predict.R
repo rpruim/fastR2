@@ -1,6 +1,5 @@
-predict(eband.model, newdata = data.frame(stretch = 30))
-predict(eband.model, newdata = data.frame(stretch = 30),
-        interval = 'confidence')
-predict(eband.model, newdata = data.frame(stretch = 30),
-        interval = 'prediction')
+eband.dist <- makeFun(eband.model)
+eband.dist(stretch = 30)
+eband.dist(stretch = 30, interval = "confidence")
+eband.dist(stretch = 30, interval = "prediction")
 

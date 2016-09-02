@@ -1,4 +1,6 @@
-GOF <- function(x, 
+GOF <- 
+  function(
+    x, 
     lik = function(theta, x) { 
         return(sum(dnorm(x, mean = theta[1], sd = theta[2], log = TRUE)))
     } ,
@@ -6,7 +8,7 @@ GOF <- function(x,
         return(pnorm(x, mean = theta[1], sd = theta[2]) ) 
     } , 
     start = c(0, 1), cutpts = quantile(x), 
-    paramNames = paste('parameter', 1:length(p)),
+    paramNames = paste("parameter", 1:length(start)),
     pearson = FALSE, ...) 
 {
     ml <- maxLik(lik, start = start, x = x, ...)
@@ -32,7 +34,7 @@ GOF <- function(x,
         stat = lrtStat
     }
 
-    names(df) = 'df'
+    names(df) = "df"
     names(stat) = "X-squared"
     message(returnMessage(ml))
 

@@ -1,2 +1,2 @@
-tally(~t2d + genotype + marker, data = FUSION1m)
+tally( ~ t2d + genotype + marker, data = FUSION1m)
 

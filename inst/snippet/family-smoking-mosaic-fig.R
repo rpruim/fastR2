@@ -1,3 +1,3 @@
-require(vcd)  
-mosaic( ~ student + parents, data = FamilySmoking, shade = TRUE)
+vcd::mosaic( ~ student + parents, data = FamilySmoking, 
+             shade = TRUE)
 

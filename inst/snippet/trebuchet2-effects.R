@@ -1,4 +1,4 @@
-treb.model <- lm(distance ~ projectileWt, data = Trebuchet2)
+treb.model <- lm(distance ~ projectileWt, data = Trebuchet2) 
 ef <- treb.model$effects; n <- length(ef)
 ef
 # total length

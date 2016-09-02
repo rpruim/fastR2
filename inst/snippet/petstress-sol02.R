@@ -1,0 +1,2 @@
+anova(pet.lm)
+

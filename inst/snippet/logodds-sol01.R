@@ -1,4 +1,4 @@
-loglik.binom3 <- function(theta, x, n) { 
+loglik.binom3 <- function(theta, x, n) {
   x * log(exp(theta) / (1 + exp(theta))) + (n - x) * log(1 / (1 + exp(theta)))
 }
 ml.binom3 <- maxLik2(loglik.binom3, x = 35, n = 55, start = c(logodds = 0))

@@ -1,0 +1,2 @@
+plot(star.model1)
+

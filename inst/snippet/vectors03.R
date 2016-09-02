@@ -1,3 +1,4 @@
-x <- 1:5; y <- seq(10,70,by=10)
-x + y
+x <- 1:10; z <- rnorm(100)
+mean(z); sd(z); var(z); median(z)  # basic statistical functions
+range(z)                           # range returns a vector of length 2
 

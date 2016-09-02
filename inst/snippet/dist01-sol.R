@@ -1,4 +1,3 @@
-require(MASS)                        # for fractions()
 kernel <- function(x) { (x - 2) * (x + 2) * (x >= -2 & x <= 2) }
 k <- 1 / integrate(kernel, -2, 2)$value; k
 f <- function(x) { k * kernel(x) }

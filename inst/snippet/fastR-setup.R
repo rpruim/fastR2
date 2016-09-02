@@ -1,7 +1,9 @@
 includeChapter <- rep(TRUE, 7)
 includeChapter <- c(TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
+includeChapter <- rep(c(FALSE, TRUE), c(5, 2))
+includeChapter <- rep(TRUE, 7)
 includeApp <- rep(TRUE, 5)
-includeApp <- c(FALSE, FALSE, FALSE, FALSE, FALSE)
+includeApp <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
 
 require(MASS)  # make sure this comes before dplyr loads
 require(fastR2)
@@ -51,9 +53,13 @@ knit_hooks$set(digits = function(before, options, envir) {
 })
 
 
-knit_hooks$set(document = function(x) {
-  sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)
-}
+knit_hooks$set(
+  document = function(x) {
+    sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)
+    gsub(
+      "\\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}",
+      "\\definecolor{shadecolor}{gray}{0.9}", x, fixed = TRUE)
+  }
 )
 
 knit_hooks$set(chunk = function (x, options) {

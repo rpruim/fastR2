@@ -1,2 +1,2 @@
-apropos('hist')
+apropos("hist")
 

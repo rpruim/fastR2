@@ -1,0 +1,2 @@
+msummary(pet.lm)
+

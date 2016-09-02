@@ -1,0 +1,2 @@
+car::avPlots(punting.lm)
+

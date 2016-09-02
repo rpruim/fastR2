@@ -1,2 +1,3 @@
-summary(glht(coag.model, mcp(diet = "Dunnet")))
+glht(coag.lm, mcp(diet = "Dunnet")) %>% 
+  summary()
 

@@ -1,4 +1,4 @@
-plot(ml.binom, hline = TRUE)    
+plot(ml.binom, hline = TRUE) +
   ylim(-42, -35.5) + 
   labs(title = "parameter: proportion")
 plot(ml.binom2, hline = TRUE) +

@@ -1,0 +1,2 @@
+confint(model2)
+

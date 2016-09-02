@@ -1,5 +1,5 @@
 # seed the algorithm  
-require(MASS)  # contains the geyser data set
+data(geyser, package = "MASS")
 m <- mean( ~ duration, data = geyser)
 s <- sd( ~ duration, data = geyser)
 

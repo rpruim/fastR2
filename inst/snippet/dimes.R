@@ -1,4 +1,3 @@
-require(Stob)
 s <- sd(~ mass, data = Dimes)
 n <- nrow(Dimes)
 B <- 10200; B

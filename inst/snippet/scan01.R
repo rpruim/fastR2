@@ -1,0 +1,2 @@
+## myData1 <- scan()
+

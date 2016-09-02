@@ -1,4 +1,4 @@
-require(tidyr)
+require(tidyr) 
 Temp2 <- 
   Temp %>%
   spread(key = month, value = temp)

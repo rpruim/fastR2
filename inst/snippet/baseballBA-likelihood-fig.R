@@ -7,9 +7,9 @@ dat$loglik <- apply(cbind(dat$alpha, dat$beta), 1, FUN = "loglik", x = ba)
 
 wireframe(
   exp(loglik) ~ alpha * beta, dat, 
-  col = 'gray25',
+  col = "gray25",
   par.settings = list(
-    box.3d = list(col = 'transparent'),
+    box.3d = list(col = "transparent"),
     axis.line = list(col = NA, lty = 1, lwd = 1)
   ),
   shade = FALSE, 

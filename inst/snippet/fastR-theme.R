@@ -1,2 +1,2 @@
-trellis.par.set(theme=col.fastR(bw=TRUE))
+trellis.par.set(theme = col.fastR())
 

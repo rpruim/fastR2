@@ -1,8 +1,8 @@
-favstats <- function(x) {
+fstats <- function(x) {
     print(mean(x))
     print(median(x))
     print(sd(x))
 }
 
-favstats((1:20)^2)
+fstats((1:20)^2)
 

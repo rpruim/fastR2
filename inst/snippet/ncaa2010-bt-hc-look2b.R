@@ -1,2 +1,2 @@
-ratings[14: 30, ]
+ratings[14:30, ]
 

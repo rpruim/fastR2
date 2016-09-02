@@ -4,5 +4,5 @@ SomeData
 write.table(SomeData, "SomeData.txt")
 write.csv(SomeData, "SomeData.csv")
 # this system call should work on a Mac or Linux machine
-system("head -20 SomeData.txt SomeData.csv")
+system("head SomeData.txt SomeData.csv")
 

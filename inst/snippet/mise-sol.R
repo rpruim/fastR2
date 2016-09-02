@@ -1,4 +1,3 @@
-require(ggplot2)
 mise <- function(size = 20, reps = 100, dist = "norm", args = list(), ...) {
   results <- do(reps) * {
     data <- do.call(paste0("r", dist), c(list(n = size), args))

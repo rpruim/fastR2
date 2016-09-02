@@ -1,4 +1,5 @@
-pal <- Pallets$pallets; dim(pal) <- c(5,4); pal
-palperc <- 100 * row.perc(pal); palperc
-Pallets$palperc <- as.vector(palperc)
+Pallets2 <-
+  Pallets %>% 
+  group_by(day) %>% mutate(total = sum(pallets)) %>%
+  group_by(day, employee) %>% mutate(perc = 100 * pallets / total)
 

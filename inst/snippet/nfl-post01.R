@@ -4,15 +4,9 @@ nflRatings<- data.frame(
     rating = bta[, "ability"],
     se = bta[, "s.e."],
     wins = as.vector(tally( ~ winner, data = NFL)),
-    losses = as.vector(tally( ~ loserr, data = NFL))
+    losses = as.vector(tally( ~ loser, data = NFL))
     )
-rownames(nflRatings) = NULL
-
-NFL <- NFL %>% 
-  mutate(
-    winnerRating = nflRatings$rating[as.numeric(winner)],
-    loserRating  = nflRatings$rating[as.numeric(loser)], 
-    upset = loserRating > winnerRating)
+rownames(nflRatings) <- NULL
 
 nflRatings[rev(order(nflRatings$rating)), ]
 
