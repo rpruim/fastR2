@@ -1,8 +1,10 @@
 ## ----fastR-setup,include=FALSE-------------------------------------------
 includeChapter <- rep(TRUE, 7)
 includeChapter <- c(TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
+includeChapter <- rep(c(FALSE, TRUE), c(5, 2))
+includeChapter <- rep(TRUE, 7)
 includeApp <- rep(TRUE, 5)
-includeApp <- c(FALSE, FALSE, FALSE, FALSE, FALSE)
+includeApp <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
 
 require(MASS)  # make sure this comes before dplyr loads
 require(fastR2)
@@ -52,9 +54,13 @@ knit_hooks$set(digits = function(before, options, envir) {
 })
 
 
-knit_hooks$set(document = function(x) {
-  sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)
-}
+knit_hooks$set(
+  document = function(x) {
+    sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)
+    gsub(
+      "\\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}",
+      "\\definecolor{shadecolor}{gray}{0.9}", x, fixed = TRUE)
+  }
 )
 
 knit_hooks$set(chunk = function (x, options) {
@@ -195,9 +201,7 @@ tail(iris, n = 3)            # last three rows
 iris[50:51, 3:5]  # 2 rows and 3 columns
 
 ## ----iris-sample---------------------------------------------------------
-# mosaic is required so sample() can be applied to a data frame
-require(mosaic)      
-sample(iris, 6)
+sample(iris, 6)      # this requires mosaic::sample()
 
 ## ----eval=FALSE----------------------------------------------------------
 ## snippet("iris-glimpse")
@@ -289,10 +293,14 @@ histogram(~ Sepal.Length | Species, data = iris)
 ## ----iris-histo-subset, eval=FALSE---------------------------------------
 ## histogram( ~ Sepal.Length | Species, data = iris,
 ##     subset = Species == "virginica")
+## histogram( ~ Sepal.Length | Species,
+##            data = filter(iris, Species == "virginica"))
 
 ## ----iris-histo-subset-fig, echo=FALSE-----------------------------------
 histogram( ~ Sepal.Length | Species, data = iris,
     subset = Species == "virginica")
+histogram( ~ Sepal.Length | Species, 
+           data = filter(iris, Species == "virginica"))
 histogram( ~ Sepal.Length | ntiles(Sepal.Width, 4, format = "interval"), data = iris)
 
 ## ----hist-freqp-fig, echo = FALSE----------------------------------------
@@ -529,13 +537,11 @@ tally(death ~ victim, data = DeathPenalty)
 tally(death ~ defendant | victim, data = DeathPenalty)
 
 ## ----deathPenaltyMosaic-fig, echo=FALSE, message=FALSE-------------------
-require(vcd)
-mosaic(~ victim + defendant + death, data = DeathPenalty)
+vcd::mosaic(~ victim + defendant + death, data = DeathPenalty)
 
 ## ----intro-deathPenalty03, fig.show="hide"-------------------------------
-require(vcd)
-mosaic( ~ victim + defendant + death, data = DeathPenalty)
-structable(~ victim + defendant + death, data = DeathPenalty)
+vcd::mosaic( ~ victim + defendant + death, data = DeathPenalty)
+vcd::structable(~ victim + defendant + death, data = DeathPenalty)
 
 ## ----faithful-sol--------------------------------------------------------
 xyplot(waiting ~ eruptions, data = faithful)
@@ -1410,7 +1416,6 @@ plotFun(f(x) ~ x, xlim = c(-1, 4))
 integrate(function(x) x^2/9, 0, 3)
 
 ## ----dist01-sol----------------------------------------------------------
-require(MASS)                        # for fractions()
 kernel <- function(x) { (x - 2) * (x + 2) * (x >= -2 & x <= 2) }
 k <- 1 / integrate(kernel, -2, 2)$value; k
 f <- function(x) { k * kernel(x) }
@@ -1424,7 +1429,6 @@ integrate(f, -1, 1)                    # P( -1 <= X <= 1 )
 fractions(integrate(f, -1, 1)$value)
 
 ## ----dist02-sol----------------------------------------------------------
-require(MASS)                         # for fractions()
 kernel <- function(x) { x * (x-3) * as.numeric(x >= 0 & x <= 3) }
 k <- 1 / integrate(kernel, 0, 3)$value; k
 fractions(k)
@@ -2115,7 +2119,6 @@ d <- density(x)
 ise( d, dnorm )
 
 ## ----mise-sol, cache=TRUE------------------------------------------------
-require(ggplot2)
 mise <- function(size = 20, reps = 100, dist = "norm", args = list(), ...) {
   results <- do(reps) * {
     data <- do.call(paste0("r", dist), c(list(n = size), args))
@@ -2300,14 +2303,13 @@ xqqmath( ~ x | dist, data = qqdata,
 qqmath( ~ points, data = Jordan8687)
 
 ## ----joint02-------------------------------------------------------------
-require(cubature) 
 f <- function(x) { 6 * x[1] * x[2]^2 }
-adaptIntegrate(f, c(0, 0), c(1, 1))
+cubature::adaptIntegrate(f, c(0, 0), c(1, 1))
 g <- function(x) { 
     if (x[1] > x[2]) {return(0)}   # set value to 0 if X > Y
     return(f(x))                   # else return joint pdf
     }
-adaptIntegrate(g, c(0, 0), c(1, 1), tol = 0.01)  # get less accuracy
+cubature::adaptIntegrate(g, c(0, 0), c(1, 1), tol = 0.01)  # get less accuracy
 
 ## ------------------------------------------------------------------------
 pnorm(-10, 0, 25 / sqrt(3)) 
@@ -3385,7 +3387,7 @@ tally( ~ (lower <= mu & mu <= upper), data = Intervals)
 
 ## ------------------------------------------------------------------------
 WaldSims <- 
-  CIsim(2000, n=c(5, 10, 20, 40), 
+  CIsim(2000, n = c(5, 10, 20, 40), 
         method = binom.test, method.args = list(ci.method = "Wald"),
         rdist = rbinom, args = list(size = 1, prob = 0.2),
         estimand = 0.2)
@@ -3877,7 +3879,6 @@ cdata( ~ mean, data = Dimes.boot)
 t.test( ~ mass, data = Dimes) %>% confint()
 
 ## ----dimes, include = FALSE, tidy = FALSE--------------------------------
-require(Stob)
 s <- sd(~ mass, data = Dimes)
 n <- nrow(Dimes)
 B <- 10200; B
@@ -3893,7 +3894,6 @@ mean(Y)
 var(Y)
 
 ## ----warning = FALSE-----------------------------------------------------
-require(MASS)
 integrate(makeFun( y * 2*y ~ y), 0, 1)
 mu <- integrate(function(y) y * 2*y, 0, 1) %>% value()
 fractions(mu)
@@ -3901,7 +3901,7 @@ integrate(function(y) (y-mu)^2 * 2*y, 0, 1)
 integrate(function(y) (y-mu)^2 * 2*y, 0, 1) %>% value() %>% fractions()
 
 ## ----mean-dime-cl--------------------------------------------------------
-pt(1, df=29) - pt(-1, df=29)
+pt(1, df = 29) - pt(-1, df = 29)
 
 ## ----dimes-sim,cache=TRUE, digits = 4------------------------------------
 B <- runif(10000, 10150, 10250)
@@ -4104,7 +4104,7 @@ round(moment.cont(function(x) {dnorm(x, 10, 3)}, k = 1:4, centered = TRUE), 5)
 ## ----Likelihood, child="Likelihood.Rnw", eval=includeChapter[5]----------
 
 ## ----include = FALSE-----------------------------------------------------
-knitr::opts_chunk$set(cache.path = "cache/Lik-")
+knitr::opts_chunk$set(cache.path = "cache/Lik-") 
 require(maxLik)
 
 ## ----dice-likelihood-sol-------------------------------------------------
@@ -4126,7 +4126,7 @@ llik <- function (p, t = 14) {
 xpts <- seq(0, 1, by = 0.005)
 xyplot(
   llik(xpts) ~ xpts,
-  type = 'l', lwd = 2, 
+  type = "l", lwd = 2, 
   xlab = expression(pi),
   ylab = "log-likelihood"
 )
@@ -4269,9 +4269,9 @@ dat$loglik <- apply(cbind(dat$alpha, dat$beta), 1, FUN = "loglik", x = ba)
 
 wireframe(
   exp(loglik) ~ alpha * beta, dat, 
-  col = 'gray25',
+  col = "gray25",
   par.settings = list(
-    box.3d = list(col = 'transparent'),
+    box.3d = list(col = "transparent"),
     axis.line = list(col = NA, lty = 1, lwd = 1)
   ),
   shade = FALSE, 
@@ -4345,7 +4345,7 @@ loglik.faithful <- function(theta, x) {
 
 ## ----faithful-mle03, fig.show="hide", tidy=FALSE-------------------------
 # seed the algorithm  
-require(MASS)  # contains the geyser data set
+data(geyser, package = "MASS")
 m <- mean( ~ duration, data = geyser)
 s <- sd( ~ duration, data = geyser)
 
@@ -4367,7 +4367,7 @@ histogram( ~ duration, data = geyser,
 
 ## ----faithful-mle03-fig, echo = FALSE, results = "hide"------------------
 # seed the algorithm  
-require(MASS)  # contains the geyser data set
+data(geyser, package = "MASS")
 m <- mean( ~ duration, data = geyser)
 s <- sd( ~ duration, data = geyser)
 
@@ -4444,10 +4444,10 @@ y1 <- sapply(theta, function(theta) { lik.unif(theta, x)} )
 y2 <- sapply(theta, function(theta) { loglik.unif(theta, x)} )
 xyplot(y1 ~ theta,
     xlab = expression(theta),
-    ylab = 'likelihood', cex = 0.5)
+    ylab = "likelihood", cex = 0.5)
 xyplot(y2 ~ theta,
     xlab = expression(theta),
-    ylab = 'log-likelihood', cex = 0.5)
+    ylab = "log-likelihood", cex = 0.5)
 
 ## ----hwe-mle-------------------------------------------------------------
 theta2probs <- function(theta) { 
@@ -4604,7 +4604,7 @@ plot(ml.binom2, hline = TRUE) +
   labs(x = "log odds")
 
 ## ----logodds-sol01-------------------------------------------------------
-loglik.binom3 <- function(theta, x, n) { 
+loglik.binom3 <- function(theta, x, n) {
   x * log(exp(theta) / (1 + exp(theta))) + (n - x) * log(1 / (1 + exp(theta)))
 }
 ml.binom3 <- maxLik2(loglik.binom3, x = 35, n = 55, start = c(logodds = 0))
@@ -4617,7 +4617,7 @@ hi <- uniroot(function(logodds) p(logodds) - 0.5, c(100, logodds.hat)) %>% value
 c(lo, hi)
 
 ## ----logodds-sol02, tidy = FALSE, warning=FALSE--------------------------
-plot(ml.binom, hline = TRUE)    
+plot(ml.binom, hline = TRUE) +
   ylim(-42, -35.5) + 
   labs(title = "parameter: proportion")
 plot(ml.binom2, hline = TRUE) +
@@ -4784,24 +4784,25 @@ lo <- uniroot(function(a){f(a) - 0.05}, c(0.1, mle[1])) %>% value(); lo
 hi <- uniroot(function(a){f(a) - 0.05}, c(0.9, mle[1])) %>% value(); hi
 
 ## ----golfballs-max, eval=FALSE, tidy = FALSE-----------------------------
-## 
 ## golfballs <- c(137, 138, 107, 104)
 ## statTally(golfballs, rgolfballs, max,
 ##           xlab = "test statistic (max)")
 
-## ----golfballs-max-fig, echo = FALSE-------------------------------------
-snippet("golfballs-max", echo = FALSE)   
+## ----golfballs-max-fig, echo = FALSE, message = FALSE, results = "hide"----
+golfballs <- c(137, 138, 107, 104)
+statTally(golfballs, rgolfballs, max, 
+          xlab = "test statistic (max)")
 
-## ----golfballs-lrt-------------------------------------------------------
+## ----golfballs-lrt, digits = 4-------------------------------------------
 # LRT calculation
-o <- golfballs; o
+o <- golfballs; o  
 e <- rep(486 / 4, 4); e
 G <- 2 * sum (o * log(o / e)); G       # lrt Goodness of fit statistic
 1 - pchisq(G, df = 3)
 
 ## ----golfballs-pearson-sim-----------------------------------------------
 E <- rep(486 / 4, 4)
-chisqstat <- function(x) { sum((x-E)^2 / E) }
+chisqstat <- function(x) { sum((x - E)^2 / E) }
 statTally(golfballs, rgolfballs, chisqstat, xlab = expression(X^2))
 
 ## ----golfballs-pearson---------------------------------------------------
@@ -4827,11 +4828,11 @@ G <- -2 * (lnum - ldenom); G
 o <- c(2, 10, 16, 11, 5, 3, 3)
 o.collapsed <- c(2 + 10, 16, 11, 5, 3 + 3)
 n <- sum(o)
-m <- sum(o * 0:6 ) / n     # mean count = MLE for lambda (full data)
+m <- sum(o * 0:6) / n     # mean count = MLE for lambda (full data)
 p <- dpois(0:6, m)  
-p.collapsed <- c(p[1] + p[2], p[3:5], 1-sum(p[1:5]))   # collapsed probs
+p.collapsed <- c(p[1] + p[2], p[3:5], 1 - sum(p[1:5]))   # collapsed probs
 e.collapsed <- p.collapsed * n
-print(cbind(o.collapsed, p.collapsed, e.collapsed))
+cbind(o.collapsed, p.collapsed, e.collapsed)
 lrt  <- 2 * sum(o.collapsed * log(o.collapsed / e.collapsed)); lrt
 pearson <- sum((o.collapsed - e.collapsed)^2 / e.collapsed); pearson
 1-pchisq(lrt, df = 3)
@@ -4842,16 +4843,16 @@ pearson <- sum((o.collapsed - e.collapsed)^2 / e.collapsed); pearson
 1-pchisq(pearson, df = 5-1-1)
 
 ## ----fit-exp-------------------------------------------------------------
-data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
+Edata <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-n <- length(data)
-theta.hat <- 1 / mean(data); theta.hat
-cutpts <- c(0, 2, 4, 7, 12, Inf)
-bin.data <- cut(data, cutpts)
+n <- length(Edata)
+theta.hat <- 1 / mean(Edata); theta.hat
+cutpts <- c(0, 2.5, 6, 12, Inf)
+bin.Edata <- cut(Edata, cutpts)
 p <- diff(pexp(cutpts, theta.hat))
 e <- n * p
-o <- tally(bin.data)
+o <- tally(bin.Edata)
 print(cbind(o, e))
 lrt  <- 2 * sum(o * log(o / e)); lrt
 pearson <- sum((o - e)^2 / e); pearson
@@ -4861,7 +4862,9 @@ pearson <- sum((o - e)^2 / e); pearson
 1-pchisq(pearson, df = 3)
 
 ## ----GOF-sol01, tidy=FALSE-----------------------------------------------
-GOF <- function(x, 
+GOF <- 
+  function(
+    x, 
     lik = function(theta, x) { 
         return(sum(dnorm(x, mean = theta[1], sd = theta[2], log = TRUE)))
     } ,
@@ -4869,7 +4872,7 @@ GOF <- function(x,
         return(pnorm(x, mean = theta[1], sd = theta[2]) ) 
     } , 
     start = c(0, 1), cutpts = quantile(x), 
-    paramNames = paste('parameter', 1:length(p)),
+    paramNames = paste("parameter", 1:length(start)),
     pearson = FALSE, ...) 
 {
     ml <- maxLik(lik, start = start, x = x, ...)
@@ -4895,7 +4898,7 @@ GOF <- function(x,
         stat = lrtStat
     }
 
-    names(df) = 'df'
+    names(df) = "df"
     names(stat) = "X-squared"
     message(returnMessage(ml))
 
@@ -4916,29 +4919,36 @@ GOF <- function(x,
 data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, start = c(5, 5))$table
+GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, 
+    start = c(5, 5))$table
 GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, start = c(5, 5))
-GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, start = c(5, 5), pearson = TRUE)
+GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, start = c(5, 5), 
+    pearson = TRUE)
 
 ## ----gof-gamma-----------------------------------------------------------
 oldopt <- options(warn = -1)
 data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-ngamlik <- function(theta, x) { -sum(dgamma(x, theta[1], theta[2], log = TRUE)) }
-pgamm <- function(x, theta){ pgamma(x, theta[1], theta[2]) }
+ngamlik <- 
+  function(theta, x) { -sum(dgamma(x, theta[1], theta[2], log = TRUE)) }
+pgamm <- 
+  function(x, theta){ pgamma(x, theta[1], theta[2]) }
 GOF(data, ngamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf))
-GOF(data, ngamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), pearson = TRUE)
+GOF(data, ngamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), 
+    pearson = TRUE)
 options(oldopt)
 
 ## ----gof-weibull, warning=FALSE------------------------------------------
 data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-nweiblik <- function(theta, x) { -sum(dweibull(x, theta[1], theta[2], log = TRUE)) }
+nweiblik <- 
+  function(theta, x) { -sum(dweibull(x, theta[1], theta[2], log = TRUE)) }
 pweib <- function(x, theta){ pweibull(x, theta[1], theta[2]) }
 GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf))
-GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), pearson = TRUE)
+GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), 
+    pearson = TRUE)
 
 ## ----hwe-gof-sol, warning=FALSE------------------------------------------
 theta2probs <- function(theta) { 
@@ -5054,14 +5064,14 @@ G <- 2 * sum(o * log(o / e)); G
 pval <- 1-pchisq(G, 3); pval
 
 ## ----family-smoking01----------------------------------------------------
-tally( ~ student + parents, data = FamilySmoking) -> smokeTab
+smokeTab <- tally(student ~ parents, data = FamilySmoking) 
 smokeTab
 
 ## ----family-smoking-manual-----------------------------------------------
-row.sum <- apply(smokeTab, 1, sum)
-col.sum <- apply(smokeTab, 2, sum)
-grandTotal <- sum(smokeTab)
-e <- outer(row.sum, col.sum) / grandTotal; e
+rowTotal <- rowSums(smokeTab); rowTotal
+colTotal <- colSums(smokeTab); colTotal
+grandTotal <- sum(smokeTab); grandTotal
+e <- outer(rowTotal, colTotal) / grandTotal; e
 o <- smokeTab
 stat <- sum ((e - o)^2 / e); stat
 pval <- 1 - pchisq(stat, df = 2); pval
@@ -5076,17 +5086,17 @@ attributes((chisq.test(smokeTab)))
 xchisq.test(smokeTab)
 
 ## ----family-smoking-mosaic, eval=FALSE, message = FALSE------------------
-## require(vcd)
-## mosaic( ~ student + parents, data = FamilySmoking, shade = TRUE)
+## vcd::mosaic( ~ student + parents, data = FamilySmoking,
+##              shade = TRUE)
 
 ## ----family-smoking-mosaic-fig, echo=FALSE-------------------------------
-require(vcd)  
-mosaic( ~ student + parents, data = FamilySmoking, shade = TRUE)
+vcd::mosaic( ~ student + parents, data = FamilySmoking, 
+             shade = TRUE)
 
 ## ----smoking-ads01, tidy = FALSE-----------------------------------------
 smTab <- rbind(NonExperimenter = c(171, 15, 148), 
                   Experimenter = c(89, 10, 132))
-colnames(smTab) = c('Never', 'Hardly Ever', 'Sometimes or a lot')
+colnames(smTab) = c("Never", "Hardly Ever", "Sometimes or a lot")
 smTab
 chisq.test(smTab)
 
@@ -5096,9 +5106,12 @@ xchisq.test(smTab)
 ## ----smoking-bbs01, tidy = FALSE-----------------------------------------
 smTab2 <- rbind(NonExperimenter = c(34, 4, 296), 
                    Experimenter = c(15, 3, 213))
-colnames(smTab2) <- c('Never', 'Hardly ever', 'Sometimes or a lot')
+colnames(smTab2) <- c("Never", "Hardly ever", "Sometimes or a lot")
 smTab2
 chisq.test(smTab2)
+
+## ----smoking-sims--------------------------------------------------------
+chisq.test(smTab2, simulate.p.value = TRUE, B = 5000)
 
 ## ----smoking-bbs02-------------------------------------------------------
 smTab2[, -2]
@@ -5121,29 +5134,29 @@ xchisq.test(phs)
 ## ----chisq-twins, tidy=FALSE---------------------------------------------
 convictions <- rbind(dizygotic   = c(2, 15), 
                      monozygotic = c(10, 3))
-colnames(convictions) <- c('convicted', 'not convicted')
+colnames(convictions) <- c("convicted", "not convicted")
 convictions
 chisq.test(convictions, correct = FALSE)
-pval(chisq.test(convictions))
-pval(fisher.test(convictions))
+chisq.test(convictions) %>% pval()
+fisher.test(convictions) %>% pval()
 
 ## ----amd-----------------------------------------------------------------
-amd <- rbind(cases = c(27, 17, 6), controls = c(13, 46, 37))
-dom <- rbind(cases = c(27 + 17, 6), controls = c(13 + 46, 37))
-rec <- rbind(cases = c(27, 17 + 6), controls = c(13, 46 + 37))
+amd <- rbind(cases = c(27,  17,  6), controls = c(13,  46,  37))
+dom <- rbind(cases = c(27 + 17,  6), controls = c(13 + 46,  37))
+rec <- rbind(cases = c(27,  17 + 6), controls = c(13,  46 + 37))
 chisq.test(amd)
 chisq.test(dom)
 chisq.test(rec)
 
 ## ----fusion1-merge-------------------------------------------------------
 # merge fusion1 and pheno keeping only id's that are in both
-Fusion1m <- merge(FUSION1, Pheno, by = 'id', all = FALSE)
+Fusion1m <- merge(FUSION1, Pheno, by = "id", all = FALSE)
 
 ## ----fusion1-tally-geno--------------------------------------------------
-tally(~t2d + genotype, data = Fusion1m)
+tally( ~ t2d + genotype, data = Fusion1m)
 
 ## ----fusion1-tally-dose--------------------------------------------------
-tally(~t2d + Gdose, data = Fusion1m)
+tally( ~ t2d + Gdose, data = Fusion1m)
 
 ## ----fusion1m-3models-sol------------------------------------------------
 tally(t2d ~ genotype, data = Fusion1m) 
@@ -5152,9 +5165,7 @@ chisq.test(tally( ~ t2d + (Tdose >= 1), data = Fusion1m))
 chisq.test(tally( ~ t2d + (Tdose <= 1), data = Fusion1m))
 
 ## ----nfl-prep, tidy = FALSE----------------------------------------------
-NFL <- NFL2007                         # shorten name of data set
-head(NFL, 3)
-NFL <- NFL %>% mutate(
+NFL <- NFL2007 %>% mutate(
   dscore = homeScore - visitorScore,
   winner = ifelse(dscore > 0, home, visitor),
   loser  = ifelse(dscore > 0, visitor, home),
@@ -5162,11 +5173,11 @@ NFL <- NFL %>% mutate(
   )
 head(NFL, 3)
 
-## ----nfl-bt, tidy = FALSE------------------------------------------------
+## ----nfl-bt, tidy = FALSE, message = FALSE-------------------------------
 # fit Bradley-Terry model
 require(BradleyTerry2)
-BTm(cbind(homeTeamWon, !homeTeamWon), home, visitor, 
-          data = NFL, id = 'team') -> NFL.model
+NFL.model <- 
+  BTm(cbind(homeTeamWon, !homeTeamWon), home, visitor, data = NFL, id = "team") 
 
 ## ----nfl-post01, tidy=FALSE----------------------------------------------
 bta <- BTabilities(NFL.model)
@@ -5175,45 +5186,40 @@ nflRatings<- data.frame(
     rating = bta[, "ability"],
     se = bta[, "s.e."],
     wins = as.vector(tally( ~ winner, data = NFL)),
-    losses = as.vector(tally( ~ loserr, data = NFL))
+    losses = as.vector(tally( ~ loser, data = NFL))
     )
-rownames(nflRatings) = NULL
-
-NFL <- NFL %>% 
-  mutate(
-    winnerRating = nflRatings$rating[as.numeric(winner)],
-    loserRating  = nflRatings$rating[as.numeric(loser)], 
-    upset = loserRating > winnerRating)
+rownames(nflRatings) <- NULL
 
 nflRatings[rev(order(nflRatings$rating)), ]
 
 ## ----nfl-post02----------------------------------------------------------
 NFL <- NFL %>% 
-  mutate(pwinner = ilogit(winnerRating - loserRating))
+  mutate(
+    winnerRating = nflRatings$rating[as.numeric(winner)],
+    loserRating  = nflRatings$rating[as.numeric(loser)], 
+    upset = loserRating > winnerRating,
+    pwinner = ilogit(winnerRating - loserRating))
 # how big an upset was the Super Bowl?
-NFL[nrow(NFL), ]
+NFL %>% tail(1)
 
 ## ----ncaa2010-bt-prep, tidy = FALSE--------------------------------------
-NCAA <- NCAA2010 %>% 
+NCAA <- NCAAbb %>% 
+  filter(season == "2009-10", !postseason) %>%
   mutate(
-    neutralSite = grepl('n', notes, ignore.case = TRUE), # at a neutral site?
-    homeTeamWon = hscore > ascore)                       # did home team win?
+    neutralSite = grepl("n", notes, ignore.case = TRUE), # at neutral site?
+    homeTeamWon = hscore > ascore)                     # did home team win?
 # remove teams that didn't play >= 5 at home and >=5 away
 # (typically div II teams that played a few div I teams)
 h <- tally( ~ home, data = NCAA); a <- tally( ~ away, data = NCAA)
 deleteTeams <- c(names(h[h <= 5]), names(a[a <= 5]))
 NCAA <- NCAA %>% 
-  filter(!(NCAA$home %in% deleteTeams | NCAA$away %in% deleteTeams))
-# remove unused levels from home and away factors
-teams <- union(NCAA$home, NCAA$away)
-NCAA$home <- factor(NCAA$home, levels = teams)
-NCAA$away <- factor(NCAA$away, levels = teams)
+  filter(!(home %in% deleteTeams | away %in% deleteTeams))
 
 ## ----ncaa2010-bt-fit, cache=TRUE, tidy = FALSE---------------------------
 # fit a Bradley-Terry model
 require(BradleyTerry2)
 NCAA.model <- 
-  BTm(cbind(homeTeamWon, 1-homeTeamWon), 
+  BTm(cbind(homeTeamWon, 1 - homeTeamWon), 
        home, away, data = NCAA, refcat = "Kansas")
 
 ## ----ncaa2010-bt-look----------------------------------------------------
@@ -5225,10 +5231,9 @@ require(BradleyTerry2)
 # home team gets advantage unless on neutral court
 NCAA$homeTeam <- data.frame(team = NCAA$home, at.home = 1 - NCAA$neutralSite)
 NCAA$awayTeam <- data.frame(team = NCAA$away, at.home = 0)
-NCAA.model2 <- BTm(cbind(homeTeamWon, 1-homeTeamWon),
-                   homeTeam, awayTeam, id = 'team', formula = ~ team + at.home,
-                   data = NCAA)
-# NCAA.model2 <- update(NCAA.model, id = 'team', formula = ~ team + at.home)
+NCAA.model2 <- 
+  BTm(cbind(homeTeamWon, 1-homeTeamWon),
+      homeTeam, awayTeam, id = "team", formula = ~ team + at.home, data = NCAA)
 
 ## ----ncaa2010-bt-hc-look-------------------------------------------------
 # the "order effect" is the coefficient on "at.home"
@@ -5246,7 +5251,7 @@ ratings <-
 ratings[1:13, ]
 
 ## ----ncaa2010-bt-hc-look2b-----------------------------------------------
-ratings[14: 30, ]
+ratings[14:30, ]
 
 ## ----ncaa2010-compare, tidy = FALSE--------------------------------------
 compareTeams <-  
@@ -5254,11 +5259,11 @@ compareTeams <-
            abilities = BTabilities(model)) { 
     a <- abilities[team1, 1]
     b <- abilities[team2, 1]
-    return(ilogit(a-b))
+    return(ilogit(a - b))
 } 
-compareTeams('Kansas', 'Kentucky', ab = ratings)
-compareTeams('Michigan St.', 'Butler', ab = ratings)
-compareTeams('Butler', 'Duke', ab = ratings)
+compareTeams("Kansas", "Kentucky", ab = ratings)
+compareTeams("Michigan St.", "Butler", ab = ratings)
+compareTeams("Butler", "Duke", ab = ratings)
 
 ## ----binom-credible01----------------------------------------------------
 qbeta(c(0.025, 0.975), 20 + 1, 30 + 1)
@@ -5329,68 +5334,69 @@ xqqmath( ~ p.val, data = Sims50, distribution = qunif, type = "l", main = "lambd
 
 ## ----LinearModels, child="LinearModels.Rnw", eval=includeChapter[6]------
 
-## ----include=FALSE-------------------------------------------------------
-require(DAAG)
+## ----LM-packages, include = FALSE, cache = FALSE-------------------------
 require(fastR2)
 
-## ----include = FALSE-----------------------------------------------------
+## ----include = FALSE, cache = FALSE--------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/LM-")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## response ~ predictor1 + predictor2 + predictor3
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## response ~ 1 + predictor1 + predictor2 + predictor3
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## response ~ -1 + predictor1 + predictor2 + predictor3
 
 ## ----eval = FALSE--------------------------------------------------------
 ## y ~ 1           # note: explicit intercept is the only term on right
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## length ~ weight        # using implicit intercept
 ## length ~ 1 + weight    # using explicit intercept
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## height ~ sex           # using implicit intercept
 ## height ~ 1 + sex       # using explicit intercept
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## cholesterol ~ age + I(age^2)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------
 ## gpa ~ SATM + SATV
 ## gpa ~ I(SATM + SATV)
 
-## ----small-data----------------------------------------------------------
+## ----small-data01--------------------------------------------------------
 SmallData <- data.frame(x = c(1, 2, 3, 4), y = c(2, 5, 6, 8))
 xyplot(y ~ x, data = SmallData)
 
-## ----lm-demo1------------------------------------------------------------
+## ----small-data02--------------------------------------------------------
 model <- lm(y ~ x , data = SmallData) 
 xyplot(y ~ x, data = SmallData, type = c("p", "r"))
 
-## ----lm-demo2------------------------------------------------------------
+## ----small-data03--------------------------------------------------------
 coef(model)           # the coefficients
 fitted(model)         # y-hat values
 resid(model)          # residuals
 SmallData$y - fitted(model)     # residuals again
-summary(model)        # a summary of the model
+msummary(model)        # a summary of the model
 
-## ----lm-demo3------------------------------------------------------------
+## ----small-data04--------------------------------------------------------
 names(model)
-names(summary(model))
+names(msummary(model))
+model$rank             # number of linearly independent cols in model matrix
+summary(model)$sigma
 
-## ----lm-demo-sse---------------------------------------------------------
-x <- SmallData$x; y <- SmallData$y
+## ----small-data05--------------------------------------------------------
+x <- SmallData$x; y <- SmallData$y     
 Sxx <- sum((x - mean(x))^2); Sxx
 Sxy <- sum((x - mean(x)) * (y - mean(y))); Sxy
-r <- 1 / 3 * sum( (x - mean(x)) / sd(x) * (y - mean(y)) / sd(y) ); r
+r <- 1 / 3 * sum((x - mean(x)) / sd(x) * (y - mean(y)) / sd(y)); r
 slope <- r * sd(y) / sd(x); slope
 intercept <- mean(y) - slope * mean(x); intercept
 
-## ----lm-demo-vector------------------------------------------------------
+## ----small-data06--------------------------------------------------------
 # set up the v an u vectors
 v0 <- rep(1, 4); v0
 u0 <- v0 / vlength(v0); u0
@@ -5404,22 +5410,22 @@ project(y, v0) + project(y, v1)    # fitted values
 fitted(model)
 #
 # two ways to compute beta_1-hat
-b1 <- project(y, v1, type = 'l') / vlength(v1); b1
 b1 <- dot(y, v1) / (vlength(v1))^2; b1
+b1 <- dot(y, u1) / (vlength(v1));   b1
 #
 # two ways to compute alpha_0-hat
-a0 <- project(y, v0, type = 'l') / vlength(v0); a0
 a0 <- dot(y, v0) / (vlength(v0))^2; a0
+a0 <- dot(y, u0) / (vlength(v0));   a0
 #
 # beta_0-hat
 b0 <- a0 - b1 * mean(x); b0
 
-## ----lm-demo-matrix1-----------------------------------------------------
+## ----small-data07--------------------------------------------------------
 # create model matrix
 x <- SmallData$x; y <- SmallData$y
 x
 y
-intercpet <- rep(1, 4)
+intercept <- rep(1, 4)
 X <- cbind(intercept, x); X
 # estimate coeficients
 B <- solve(t(X) %*% X) %*% t(X)
@@ -5428,30 +5434,32 @@ B %*% y
 H <- X %*% B
 H %*% y
 
-## ----lm-demo-matrix2-----------------------------------------------------
+## ----small-data08--------------------------------------------------------
 X <- model.matrix(model); X             
 
-## ----lm-trebuchet2, fig.show="hide"--------------------------------------
-treb.model <- lm(distance ~ projectileWt, data = Trebuchet2)
+## ----trebuchet2, fig.show="hide"-----------------------------------------
+treb.model <- lm(distance ~ projectileWt, data = Trebuchet2) 
 coef(treb.model)
-xyplot(distance ~ projectileWt, data = Trebuchet2, type = c('p', 'r'))
+xyplot(distance ~ projectileWt, data = Trebuchet2, type = c("p", "r"))
 
-## ----lm-trebuchet2-fig, echo=FALSE---------------------------------------
-treb.model <- lm(distance ~ projectileWt, data = Trebuchet2)
+## ----trebuchet2-fig, echo=FALSE, results = "hide"------------------------
+treb.model <- lm(distance ~ projectileWt, data = Trebuchet2) 
 coef(treb.model)
-xyplot(distance ~ projectileWt, data = Trebuchet2, type = c('p', 'r'))
+xyplot(distance ~ projectileWt, data = Trebuchet2, type = c("p", "r"))
 
-## ----lm-elasticband, fig.show='hide'-------------------------------------
-require(DAAG) 
-eband.model <- lm(distance ~ stretch, data = elasticband); coef(eband.model)
-xyplot(distance ~ stretch, data = elasticband, type = c('p', 'r'))
+## ----lm-elasticband, fig.show = "hide"-----------------------------------
+data(elasticband, package = "DAAG") 
+eband.model <- lm(distance ~ stretch, data = elasticband) 
+coef(eband.model)
+xyplot(distance ~ stretch, data = elasticband, type = c("p", "r"))
 
-## ----lm-elasticband-fig, echo=FALSE--------------------------------------
-require(DAAG) 
-eband.model <- lm(distance ~ stretch, data = elasticband); coef(eband.model)
-xyplot(distance ~ stretch, data = elasticband, type = c('p', 'r'))
+## ----lm-elasticband-fig, results = "hide", echo = FALSE------------------
+data(elasticband, package = "DAAG") 
+eband.model <- lm(distance ~ stretch, data = elasticband) 
+coef(eband.model)
+xyplot(distance ~ stretch, data = elasticband, type = c("p", "r"))
 
-## ----Galton-regression1, tidy = FALSE------------------------------------
+## ----Galton-regression01, tidy = FALSE-----------------------------------
 GaltonBoys <- 
   Galton %>%
   filter(sex == "M") %>%
@@ -5461,24 +5469,24 @@ GaltonBoys <-
 Galton.lm <- lm(height ~ father, data = GaltonBoys) 
 coef(Galton.lm)
 xyplot(height ~ father, data = GaltonBoys, type = c("p", "r"))
-projectedHeight <- makeFun(Galton.lm) 
 
-## ----Galton-regression2--------------------------------------------------
+## ----Galton-regression02-------------------------------------------------
 favstats( ~ height, data = GaltonBoys)
 favstats( ~ father, data = GaltonBoys)
 
-## ----Galton-regression3--------------------------------------------------
+## ----Galton-regression03-------------------------------------------------
+projectedHeight <- makeFun(Galton.lm) 
 projectedHeight(father = 75)
 projectedHeight(father = 65)
 
-## ----Galton-regression4, tidy=FALSE--------------------------------------
+## ----Galton-regression04, tidy = FALSE-----------------------------------
 GaltonBoys <-
   GaltonBoys %>%
   mutate(midparent = (father + mother) / 2)
 favstats( ~ height, data = GaltonBoys)
 favstats( ~ midparent, data = GaltonBoys)
 
-## ----Galton-regression5, tidy = FALSE------------------------------------
+## ----Galton-regression05, tidy = FALSE, fig.keep = "none"----------------
 GaltonBoys <- 
   GaltonBoys %>%
   mutate(zheight = zscore(height),
@@ -5486,24 +5494,40 @@ GaltonBoys <-
   )
 Galtonz.lm <- lm(zheight ~ zmidparent, data = GaltonBoys) 
 coef(Galtonz.lm)
-xyplot(zheight ~ zmidparent, data = GaltonBoys, type = c("p", "r"))
+xyplot(zheight ~ zmidparent, data = GaltonBoys, type = c("p", "r"),
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.abline(0, 1, lty = 2, col = "gray70")
+       }
+)
 
-## ------------------------------------------------------------------------
-model1 <- lm( distance ~ stretch, data = elasticband)
-model2 <- lm( distance ~ stretch, data = RubberBand)
-summary(model1)
-summary(model2)
+## ----Galton-regression05-fig, echo = FALSE, results = "hide"-------------
+GaltonBoys <- 
+  GaltonBoys %>%
+  mutate(zheight = zscore(height),
+         zmidparent = zscore(midparent)
+  )
+Galtonz.lm <- lm(zheight ~ zmidparent, data = GaltonBoys) 
+coef(Galtonz.lm)
+xyplot(zheight ~ zmidparent, data = GaltonBoys, type = c("p", "r"),
+       panel = function(x, y, ...) {
+         panel.xyplot(x, y, ...)
+         panel.abline(0, 1, lty = 2, col = "gray70")
+       }
+)
 
-## ----eval=FALSE----------------------------------------------------------
-## lm(y ~ 0 + x)
-## lm(y ~ -1 + x)
+## ----bands-sol-----------------------------------------------------------
+model1 <- lm(distance ~ stretch, data = elasticband)
+model2 <- lm(distance ~ stretch, data = RubberBand)
+msummary(model1)
+msummary(model2)
 
-## ----lm-trebuchet2-summary, tidy = FALSE---------------------------------
+## ----trebuchet2-summary, tidy = FALSE------------------------------------
 treb.model <- 
   lm(distance ~ projectileWt, data = Trebuchet2)
-msummary(treb.model)
+msummary(treb.model)   # terser output than summary() produces
 
-## ----lm-trebuchet2-ci----------------------------------------------------
+## ----trebuchet2-ci-------------------------------------------------------
 -0.0946 + c(-1, 1) * 0.01713 * qt(0.975, df = 14)  # CI by hand
 confint(treb.model, "projectileWt")             # CI using confint()
 
@@ -5516,45 +5540,45 @@ msummary(eband.model)
 confint(eband.model, "stretch")                   # CI using confint()
 
 ## ----anova-trebuchet2----------------------------------------------------
-treb.model <- 
+treb.model <-  
   lm(distance ~ projectileWt, data = Trebuchet2)
 anova(treb.model)
 
-## ----lm-trebuchet2-summary-again, tidy = FALSE---------------------------
-treb.model <- 
-  lm(distance ~ projectileWt, data = Trebuchet2)
-msummary(treb.model)
+## ----trebuchet2-rsquared, tidy = FALSE-----------------------------------
+rsquared(treb.model)
+
+## ----eval = FALSE--------------------------------------------------------
+## lm(y ~  0 + x)
+## lm(y ~ -1 + x)
 
 ## ----anova-elasticband---------------------------------------------------
 anova(eband.model)
 
-## ----trebuchet2-predict, tidy=FALSE--------------------------------------
-predict(treb.model, newdata = data.frame(projectileWt = 44))  
-predict(treb.model, newdata = data.frame(projectileWt = 44),
-    interval = 'confidence')
-predict(treb.model, newdata = data.frame(projectileWt = 44),
-    interval = 'prediction')
+## ----trebuchet2-predict, tidy = FALSE------------------------------------
+treb.dist <- makeFun(treb.model)
+treb.dist(projectileWt = 44)
+treb.dist(projectileWt = 44, interval = "confidence")
+treb.dist(projectileWt = 44, interval = "prediction")
 
-## ----trebuchet2-plot2, fig.show='hide', tidy=FALSE-----------------------
-xyplot(distance ~ projectileWt,
-    data = Trebuchet2, ylim = c(250, 1050),
+## ----trebuchet2-plot2, fig.show = "hide", tidy = FALSE-------------------
+xyplot(distance ~ projectileWt, 
+    data = Trebuchet2, ylim = c(2.50, 10.50),
     panel = panel.lmbands, conf.lty = 1, pred.lty = 1
     )
 
-## ----trebuchet2-plot2-fig, echo=FALSE, tidy=FALSE------------------------
-xyplot(distance ~ projectileWt,
-    data = Trebuchet2, ylim = c(250, 1050),
+## ----trebuchet2-plot2-fig, results = "hide", echo = FALSE, tidy = FALSE----
+xyplot(distance ~ projectileWt, 
+    data = Trebuchet2, ylim = c(2.50, 10.50),
     panel = panel.lmbands, conf.lty = 1, pred.lty = 1
     )
 
-## ----elasticband-predict, tidy=FALSE-------------------------------------
-predict(eband.model, newdata = data.frame(stretch = 30))
-predict(eband.model, newdata = data.frame(stretch = 30),
-        interval = 'confidence')
-predict(eband.model, newdata = data.frame(stretch = 30),
-        interval = 'prediction')
+## ----elasticband-predict, tidy = FALSE-----------------------------------
+eband.dist <- makeFun(eband.model)
+eband.dist(stretch = 30)
+eband.dist(stretch = 30, interval = "confidence")
+eband.dist(stretch = 30, interval = "prediction")
 
-## ----eband-bandplot, echo = FALSE----------------------------------------
+## ----eband-fig, results = "hide", echo = FALSE---------------------------
 xyplot(distance ~ stretch,
     data = elasticband, ylim = c(80, 210),
     panel = panel.lmbands,
@@ -5562,7 +5586,7 @@ xyplot(distance ~ stretch,
     pred.lty = 1
 )
 
-## ----resid-v-fit-fig, echo=FALSE-----------------------------------------
+## ----resid-v-fit-fig, results = "hide", echo = FALSE---------------------
 x <- seq(0, 10, by = 0.25)
 resid <- rnorm(length(x))
 y1 <- x + resid
@@ -5596,8 +5620,7 @@ xyplot(stresidual ~ fit|group,
                     ylim = c(-1.1, 1.1) * max(abs(rdata$stresidual)),
                     as.table = T)
 
-## ----lm-star, tidy = FALSE-----------------------------------------------
-require(faraway); require(grid)
+## ----lm-star01, tidy = FALSE, fig.keep = "none", message = FALSE---------
 Stars <- faraway::star
 star.plot1 <- xyplot(light ~ temp, data = Stars)
 HotStars <- Stars %>% filter(temp > 3.7)   # select all but 4 coolest stars
@@ -5606,18 +5629,17 @@ star.model2 <- lm(light ~ temp, data = HotStars)
 xyplot(light ~ temp, data = Stars,
     panel = function(x, y, ...){
         panel.abline(reg = star.model1, lwd = 2, lty = 1,
-            col = trellis.par.get('superpose.line')$col[2])
+            col = trellis.par.get("superpose.line")$col[2])
         panel.abline(reg = star.model2, lwd = 2, lty = 1,
-            col = trellis.par.get('superpose.line')$col[1])
+            col =  trellis.par.get("superpose.line")$col[1])
         panel.xyplot(x, y, ...)
         ids <- which(Stars$temp < 4.0)
-        grid.text(x = x[ids] + 0.04, y = y[ids],
+        grid::grid.text(x = x[ids] + 0.04, y = y[ids],
             as.character(ids),
-            default.units = "native", gp = gpar(cex = 0.7))
+            default.units = "native", gp = grid::gpar(cex = 0.7))
     })
 
-## ----lm-star-fig, echo = FALSE-------------------------------------------
-require(faraway); require(grid)
+## ----lm-star-fig, results = "hide", echo = FALSE, message = FALSE--------
 Stars <- faraway::star
 star.plot1 <- xyplot(light ~ temp, data = Stars)
 HotStars <- Stars %>% filter(temp > 3.7)   # select all but 4 coolest stars
@@ -5626,55 +5648,55 @@ star.model2 <- lm(light ~ temp, data = HotStars)
 xyplot(light ~ temp, data = Stars,
     panel = function(x, y, ...){
         panel.abline(reg = star.model1, lwd = 2, lty = 1,
-            col = trellis.par.get('superpose.line')$col[2])
+            col = trellis.par.get("superpose.line")$col[2])
         panel.abline(reg = star.model2, lwd = 2, lty = 1,
-            col = trellis.par.get('superpose.line')$col[1])
+            col =  trellis.par.get("superpose.line")$col[1])
         panel.xyplot(x, y, ...)
         ids <- which(Stars$temp < 4.0)
-        grid.text(x = x[ids] + 0.04, y = y[ids],
+        grid::grid.text(x = x[ids] + 0.04, y = y[ids],
             as.character(ids),
-            default.units = "native", gp = gpar(cex = 0.7))
+            default.units = "native", gp = grid::gpar(cex = 0.7))
     })
 
-## ----lm-diag-star-fig1, echo=FALSE---------------------------------------
+## ----lm-star-fig01, results = "hide", echo = FALSE-----------------------
 plot(star.model1)
 
-## ----lm-diag-star-fig2, echo=FALSE---------------------------------------
+## ----lm-star-fig02, results = "hide", echo = FALSE-----------------------
 plot(star.model2)
 
-## ----eval=FALSE----------------------------------------------------------
-## plot(model, w = 1:6)
-## mplot(model, w = 1:6)
+## ----plot-starmodels, fig.keep = "none"----------------------------------
+plot(star.model1, w = 1:6) 
+plot(star.model2, w = 1:6) 
 
-## ----lm-star-dfbeta, fig.show = 'hide', tidy = FALSE---------------------
-xyplot(dfbeta(star.model2)[, 'temp'] ~ index, 
+## ----lm-star-dfbeta, fig.show = "hide", tidy = FALSE---------------------
+xyplot(dfbeta(star.model2)[, "temp"] ~ index, 
     data = HotStars,
     ylab = "DFBETA",
     panel = function(x, y, ...) {
         ids <- which(abs(y) > 0.5)
         panel.xyplot(x, y, ...)
-        grid.text(
+        grid::grid.text(
             x = x[ids] + 1.5, y = y[ids],
             as.character(ids), default.units = "native")
     })
 coef(lm(light ~ temp, HotStars))
 coef(lm(light ~ temp, HotStars[-7, ]))
 
-## ----lm-star-dfbeta-fig, echo=FALSE--------------------------------------
-xyplot(dfbeta(star.model2)[, 'temp'] ~ index, 
+## ----lm-star-dfbeta-fig, echo = FALSE, results = "hide"------------------
+xyplot(dfbeta(star.model2)[, "temp"] ~ index, 
     data = HotStars,
     ylab = "DFBETA",
     panel = function(x, y, ...) {
         ids <- which(abs(y) > 0.5)
         panel.xyplot(x, y, ...)
-        grid.text(
+        grid::grid.text(
             x = x[ids] + 1.5, y = y[ids],
             as.character(ids), default.units = "native")
     })
 coef(lm(light ~ temp, HotStars))
 coef(lm(light ~ temp, HotStars[-7, ]))
 
-## ----tukey-bulge01, echo=FALSE-------------------------------------------
+## ----tukey-bulge01, results = "hide", echo = FALSE-----------------------
 n <- 20  
 x <- runif(n, 2, 10)
 y <- exp(0.3 * x)
@@ -5702,149 +5724,148 @@ original <- (a==1 & b==1)
 ddd <- data.frame(X = X, Y = Y, a = a, b = b, original = original)
 xyplot(y ~ x)
 
-## ----tukey-buldge-many-fig, echo=FALSE, opts.label="figbig"--------------
+## ----tukey-buldge-many-fig, results = "hide", echo = FALSE, opts.label = "figbig"----
 latticeExtra::useOuterStrips(
-xyplot( Y ~ X | paste('a=', a, sep = "") + paste("b=", b, sep = ""),
+xyplot(Y ~ X | paste("a=", a, sep = "") + paste("b=", b, sep = ""),
             ddd, groups = original,
-            scales = list(relation = 'free', draw = FALSE))
+            scales = list(relation = "free", draw = FALSE))
 )
 
-## ----balldrop, fig.show="hide"-------------------------------------------
+## ----balldrop, fig.show = "hide"-----------------------------------------
 ball.model <- lm(time ~ height, BallDrop)
 msummary(ball.model)
-xyplot(time ~ height, data = BallDrop, type = c('p', 'r'))
+xyplot(time ~ height, data = BallDrop, type = c("p", "r"))
 plot(ball.model, w = 1)
 
-## ----balldrop-fig, echo=FALSE--------------------------------------------
+## ----balldrop-fig, results = "hide", echo = FALSE------------------------
 ball.model <- lm(time ~ height, BallDrop)
 msummary(ball.model)
-xyplot(time ~ height, data = BallDrop, type = c('p', 'r'))
+xyplot(time ~ height, data = BallDrop, type = c("p", "r"))
 plot(ball.model, w = 1)
 
-## ----balldrop-trans, fig.show='hide', cache=FALSE------------------------
+## ----balldrop-trans, fig.show = "hide", cache = FALSE--------------------
 ball.modelT <- lm(time ~ sqrt(height), data = BallDrop) 
-summary(ball.modelT)
+msummary(ball.modelT)
 xyplot(time ~ height, data = BallDrop, panel = panel.lm, model = ball.modelT)
 plot(ball.modelT, w = 1)
 
-## ----balldrop-trans-fig, echo=FALSE, cache=FALSE-------------------------
+## ----balldrop-trans-fig, results = "hide", echo = FALSE, cache = FALSE----
 ball.modelT <- lm(time ~ sqrt(height), data = BallDrop) 
-summary(ball.modelT)
+msummary(ball.modelT)
 xyplot(time ~ height, data = BallDrop, panel = panel.lm, model = ball.modelT)
 plot(ball.modelT, w = 1)
 
-## ----cache = FALSE-------------------------------------------------------
-lm( time^2 ~ height, data = BallDrop)
-lm( log(time) ~ log(height), BallDrop)
+## ----balldrop-sol--------------------------------------------------------
+lm(time^2 ~ height, data = BallDrop)
+lm(log(time) ~ log(height), BallDrop)
 
-## ----balldrop-avg, fig.show='hide', tidy=FALSE, cache=FALSE--------------
+## ----balldrop-avg, fig.show = "hide", tidy = FALSE, cache = FALSE--------
 BallDropAvg <-  
   BallDrop %>% 
   group_by(height) %>%
   summarise(time = mean(time))
 BallDropAvg
 ball.modelA <- lm(time ~ sqrt(height), data = BallDropAvg)
-summary(ball.modelA)
+msummary(ball.modelA)
 xyplot(time ~ height, BallDropAvg,
                 panel = panel.lm, model = ball.modelA)
 plot(ball.modelA, w = 1)
 
-## ----balldrop-avg-fig, echo=FALSE----------------------------------------
+## ----balldrop-avg-fig, results = "hide", echo = FALSE--------------------
 BallDropAvg <-  
   BallDrop %>% 
   group_by(height) %>%
   summarise(time = mean(time))
 BallDropAvg
 ball.modelA <- lm(time ~ sqrt(height), data = BallDropAvg)
-summary(ball.modelA)
+msummary(ball.modelA)
 xyplot(time ~ height, BallDropAvg,
                 panel = panel.lm, model = ball.modelA)
 plot(ball.modelA, w = 1)
 
-## ----lm-soap-------------------------------------------------------------
+## ----lm-soap01-----------------------------------------------------------
 Soap.model1 <- lm(weight ~ day, data = Soap)
-summary(Soap.model1)
+msummary(Soap.model1)
 
-## ----lm-soap-trans-------------------------------------------------------
+## ----lm-soap02-----------------------------------------------------------
 Soap.model2 <- lm(I(weight^(1/3)) ~ day, data = Soap)
 msummary(Soap.model2)
 
-## ----lm-soap-fig, echo=FALSE---------------------------------------------
+## ----lm-soap-fig, results = "hide", echo = FALSE-------------------------
 daysToFit <- seq(1, 22, by = 0.5)
 linfits <- predict(Soap.model1, newdata = data.frame(day = daysToFit))
 transfits <- predict(Soap.model2, newdata = data.frame(day = daysToFit))^3
 xyplot(weight ~ day, data = Soap, 
     panel = function(x, y, ...) {
         panel.xyplot(daysToFit, linfits, lwd = 2, type = "l", 
-            col = trellis.par.get('superpose.line')$col[1])
+            col = trellis.par.get("superpose.line")$col[1])
         panel.xyplot(daysToFit, transfits, lwd = 2, type = "l",
-            col = trellis.par.get('superpose.line')$col[2])
+            col = trellis.par.get("superpose.line")$col[2])
         panel.xyplot(x, y, cex = 1.0, ...)
     }
 )
 
-## ----lm-soap-ci----------------------------------------------------------
+## ----lm-soap03-----------------------------------------------------------
 confint(Soap.model1) 
 
-## ------------------------------------------------------------------------
+## ----prob-soap-----------------------------------------------------------
 Soap2 <- Soap %>% filter(day < 20)
-Soap.model2 <- lm( weight ~ day, data = Soap2)
-summary(Soap.model2)
+Soap.model2 <- lm(weight ~ day, data = Soap2)
+msummary(Soap.model2)
 plot(Soap.model2, w = 1:2)
 
-## ----warning=FALSE-------------------------------------------------------
-model <- lm( period ~ sqrt(length), data = Pendulum )
-summary(model)
+## ----pendulum-sol01, warning = FALSE-------------------------------------
+model <- lm(period ~ sqrt(length), data = Pendulum)
+msummary(model)
 confint(model)
 f <- makeFun(model) 
 plot(model, w = 1)
 plot(model, w = 2)
 
-## ----fig.keep='last', warning=FALSE--------------------------------------
-xyplot( period ~ length, data = Pendulum)
-plotFun( f(l) ~ l, add = TRUE)
+## ----pendulum-sol02, fig.keep = "last", warning = FALSE------------------
+xyplot(period ~ length, data = Pendulum)
+plotFun(f(l) ~ l, add = TRUE)
 
-## ----warning=FALSE-------------------------------------------------------
-model2 <- lm( log(period) ~ log(length), data = Pendulum )
-summary(model2)
+## ----pendulum-sol03, warning = FALSE-------------------------------------
+model2 <- lm(log(period) ~ log(length), data = Pendulum)
+msummary(model2)
 g <- makeFun(model2) 
 plot(model2, w = 1)
 plot(model2, w = 2)
 
-## ----fig.keep='last', warning=FALSE--------------------------------------
-xyplot( period ~ length, data = Pendulum)
-plotFun( f(l) ~ l, add = TRUE)
-plotFun( exp(g(l)) ~ l, add = TRUE, col = "red")
+## ----pendulum-sol04, fig.keep = "last", warning = FALSE------------------
+xyplot(period ~ length, data = Pendulum)
+plotFun(f(l) ~ l, add = TRUE)
+plotFun(exp(g(l)) ~ l, add = TRUE, col = "red")
 
-## ------------------------------------------------------------------------
+## ----pendulum-sol05------------------------------------------------------
 confint(model2)
 
-## ------------------------------------------------------------------------
-require(faraway)
-xyplot(yield ~ log( 1 + nitrogen), data = cornnit, type = c("p", "r"))
-cornnit.mod <- lm(yield ~ log( 1 + nitrogen), data = cornnit)
+## ----cornnit-sol01-------------------------------------------------------
+data(cornnit, package = "faraway")
+xyplot(yield ~ log(1 + nitrogen), data = cornnit, type = c("p", "r"))
+cornnit.mod <- lm(yield ~ log(1 + nitrogen), data = cornnit)
 msummary(cornnit.mod)
 plot(cornnit.mod, w = 1:3)
 
-## ------------------------------------------------------------------------
-require(faraway)
-xyplot(yield ~ log( 1 + nitrogen), data = cornnit[-21, ], type = c("p", "r"))
-cornnit.mod2 <- lm(yield ~ log( 1 + nitrogen), data = cornnit[-21, ])
+## ----cornnit-sol02-------------------------------------------------------
+xyplot(yield ~ log(1 + nitrogen), data = cornnit[-21, ], type = c("p", "r"))
+cornnit.mod2 <- lm(yield ~ log(1 + nitrogen), data = cornnit[-21, ])
 msummary(cornnit.mod2)
 plot(cornnit.mod2, w = 1:3)
 
-## ------------------------------------------------------------------------
-require(faraway)
+## ----cornnit-sol03-------------------------------------------------------
 xyplot(yield^2 ~ sqrt(nitrogen), data = cornnit, type = c("p", "r"))
 cornnit.mod3 <- lm(yield^2 ~ sqrt(nitrogen), data = cornnit)
 msummary(cornnit.mod3)
 plot(cornnit.mod3, w = 1:3)
 
-## ----eval=FALSE----------------------------------------------------------
-## lm(y1 ~ x1, data = anscombe) -> model1;  summary(model1)
+## ----eval = FALSE--------------------------------------------------------
+## model1 <- lm(y1 ~ x1, data = anscombe)
+## msummary(model1)
 
 ## ----eband-effects-------------------------------------------------------
-require(DAAG); data(elasticband)
+data(elasticband, package = "DAAG") 
 eband.model <- lm(distance ~ stretch, data = elasticband)
 ef <- eband.model$effects; n <- length(ef)
 ef
@@ -5863,7 +5884,7 @@ ef[2] / sqrt(sum((elasticband$stretch - mean(elasticband$stretch))^2))
 coef(eband.model)
 
 ## ----trebuchet2-effects--------------------------------------------------
-treb.model <- lm(distance ~ projectileWt, data = Trebuchet2)
+treb.model <- lm(distance ~ projectileWt, data = Trebuchet2) 
 ef <- treb.model$effects; n <- length(ef)
 ef
 # total length
@@ -5881,70 +5902,72 @@ v1 <- Trebuchet2$projectileWt - mean(Trebuchet2$projectileWt)
 ef[2] / sqrt(sum(v1^2))
 coef(treb.model)
 
-## ----anova-from-lm-pre, include=FALSE, seed=123--------------------------
+## ----anova-from-lm00, include = FALSE, seed = 123------------------------
 x = rep(1:5, each = 4)
 y = 3 + 1 * x + rnorm(20, 0, 3)
 someData = data.frame(x = x, y = y)
 
-## ----anova-from-lm-------------------------------------------------------
-summary(lm(y ~ x, someData))
-
-## ----anova-from-lm-sol---------------------------------------------------
-summary(lm(y ~ x, someData))
-
 ## ------------------------------------------------------------------------
+msummary(lm(y ~ x, someData))
+
+## ----anova-from-lm-sol01-------------------------------------------------
+
+
+## ----anova-from-lm-sol02-------------------------------------------------
 anova(lm(y ~ x, someData))
 
-## ----act-gpa-------------------------------------------------------------
+## ----act-gpa-sol---------------------------------------------------------
 grades <- ACTgpa
 t.test(grades$ACT)
 t.test(grades$GPA)
 grades.model <- lm(GPA ~ ACT, data = grades)
-summary(grades.model)
+msummary(grades.model)
 grades.plot1 <- xyplot(GPA ~ ACT, data = grades, panel = panel.lmbands)
-predict(grades.model, new = data.frame(ACT = 25), interval = "confidence")
-predict(grades.model, new = data.frame(ACT = 30), interval = "prediction")
+act2gpa <- makeFun(grades.model)
+act2gpa(ACT = 25, interval = "confidence")
+act2gpa(ACT = 25, interval = "prediction")
 
-## ----drag----------------------------------------------------------------
-model1 <- lm(velocity^2 ~ force.drag, drag)
-model2 <- lm(velocity ~ sqrt(force.drag), drag)
-model3 <- lm(log(velocity) ~ log(force.drag), drag)
-summary(model1)
-summary(model2)
-summary(model3)
+## ----drag-sol------------------------------------------------------------
+model1 <- lm(velocity^2 ~ force.drag, data = Drag)
+model2 <- lm(velocity ~ sqrt(force.drag), data = Drag)
+model3 <- lm(log(velocity) ~ log(force.drag), data = Drag)
+msummary(model1)
+msummary(model2)
+msummary(model3)
 
-## ----drag-fig, echo=FALSE------------------------------------------------
-xyplot(velocity^2 ~ force.drag, drag, groups = height)
+## ----drag-fig, results = "hide", echo = FALSE----------------------------
+xyplot(velocity^2 ~ force.drag, data= Drag, groups = height)
 plot(model1, w = 1)
-xyplot(velocity ~ force.drag, drag, scales = list(log = T), groups = height)
+xyplot(velocity ~ force.drag, data = Drag, 
+       scales = list(log = T), groups = height)
 plot(model3, w = 1)
 
-## ------------------------------------------------------------------------
-xyplot( log(mass) ~ log(diameter), data = Spheres)
-spheres.lm <- lm( log(mass) ~ log(diameter), data = Spheres)
+## ----spheres-sol01-------------------------------------------------------
+xyplot(log(mass) ~ log(diameter), data = Spheres)
+spheres.lm <- lm(log(mass) ~ log(diameter), data = Spheres)
 confint(spheres.lm)
 plot(spheres.lm, w = 1:2)
 
-## ----fig.keep='last'-----------------------------------------------------
+## ----spheres-sol02, fig.keep = "last"------------------------------------
 mass <- makeFun(spheres.lm) 
-xyplot( mass ~ diameter, data = Spheres)
-plotFun( mass(x) ~ x, add = TRUE, lwd = 2, under = TRUE)
+xyplot(mass ~ diameter, data = Spheres)
+plotFun(mass(x) ~ x, add = TRUE, lwd = 2, under = TRUE)
 
-## ------------------------------------------------------------------------
+## ----spheres-sol03-------------------------------------------------------
 confint(spheres.lm, level = .96)
 
-## ----taste-favstats------------------------------------------------------
-favstats(score ~ scr, data = Taste1)
+## ----lm-taste01----------------------------------------------------------
+favstats(score ~ scr, data = TasteTest)
 
-## ----lm-taste------------------------------------------------------------
-taste.model <- lm(score ~ scr, data = Taste1) 
-msummary(taste.model) 
+## ----lm-taste02----------------------------------------------------------
+taste.model <- lm(score ~ scr, data = TasteTest) 
+msummary(taste.model)
 
-## ----lm-taste-ci---------------------------------------------------------
-confint(taste.model) 
+## ----lm-taste03----------------------------------------------------------
+confint(taste.model)
 
-## ----lm-taste-rescale----------------------------------------------------
-confint(taste.model, "scrfine") / 50 
+## ----lm-taste04----------------------------------------------------------
+confint(taste.model, "scrfine") / 50  
 
 ## ----lm-corn, tidy = FALSE-----------------------------------------------
 # the Corn data frame has an inconvenient "shape" 
@@ -5954,33 +5977,28 @@ head(Corn, 3)
 Corn2 <- stack(Corn)                         
 Corn2[c(1, 2, 12, 13), ]
 # the default variable names aren't great, so we rename them
-names(Corn2) <- c('yield', 'treatment')       
+names(Corn2) <- c("yield", "treatment")       
 Corn2[c(1, 2, 12, 13), ]
 favstats(yield ~ treatment, data = Corn2)
 Corn.model <- lm(yield ~ treatment, data = Corn2)
 msummary(Corn.model)
 
-## ----paired-corn---------------------------------------------------------
+## ----paired-corn-sol-----------------------------------------------------
 t.test(~ (reg-kiln), data = Corn)    # paired
 t.test(Corn$reg, Corn$kiln)        # 2-sample
 
-## ----tirewear------------------------------------------------------------
-summary(lm(weight ~ groove, data = TireWear))
-xyplot(weight ~ groove, data = TireWear, type = c('p', 'r'))
+## ----tirewear-sol01------------------------------------------------------
+msummary(lm(weight ~ groove, data = TireWear))
+xyplot(weight ~ groove, data = TireWear, type = c("p", "r"))
 
-## ----tirewear2-----------------------------------------------------------
-summary(lm(weight ~ -1 + groove, data = TireWear))
+## ----tirewear-sol02------------------------------------------------------
+msummary(lm(weight ~ -1 + groove, data = TireWear))
 
-## ----tirewear-ttest------------------------------------------------------
-t.test(TireWear$weight, TireWear$groove, paired = T)
-t.test(TireWear$weight - TireWear$groove)
+## ----tirewear-sol03------------------------------------------------------
+t.test(TireWear$weight, TireWear$groove, paired = TRUE)
 t.test( ~ (weight - groove), data = TireWear)
 
-## ----tirewear-sign-------------------------------------------------------
-x <- sum( ~ (weight > groove), data = TireWear)
-n <- nrow(TireWear)
-binom.test(x, n)
-prop.test(x, n)
+## ----tirewear-sol04------------------------------------------------------
 binom.test(~ (weight > groove), data = TireWear)
 prop.test(~ (weight > groove), data = TireWear)
 
@@ -5993,45 +6011,49 @@ oats <- data.frame(
 t.test( ~ (A - B), data = oats)
 
 ## ----t-corn--------------------------------------------------------------
-t.test(Corn$kiln, Corn$reg)              # 2-vector interface
-t.test(yield ~ treatment, data = Corn2)      # formula interface
+t.test(Corn$kiln, Corn$reg)                 # 2-vector interface
+t.test(yield ~ treatment, data = Corn2)     # formula interface
 
-## ----t-test-taste--------------------------------------------------------
-t.test(score ~ scr, data = Taste1)
+## ----taste-t-------------------------------------------------------------
+t.test(score ~ scr, data = TasteTest)
 
-## ----power-t-test01a-----------------------------------------------------
+## ----power-t-test01------------------------------------------------------
 power.t.test(delta = 5, sd = 10, power = 0.8)
 
-## ----power-t-test01b-----------------------------------------------------
+## ----power-t-test02------------------------------------------------------
 power.t.test(delta = 0.5, power = 0.8)
 
-## ----power-t-test01c-----------------------------------------------------
+## ----power-t-test03------------------------------------------------------
 power.t.test(delta = 0.5, n = 50)
+
+## ----power-t-test04------------------------------------------------------
 power.t.test(delta = 0.25, n = 50)
 
-## ----power-t-test01d, fig.show='hide'------------------------------------
+## ----power-t-test05, fig.show = "hide"-----------------------------------
 pow <- function(effect) {
     power.t.test(delta = effect, n = 50)$power
 }
 effect = seq(0, 2, by = 0.05)
-xyplot(pow(effect) ~ effect, type= 'l',
+xyplot(pow(effect) ~ effect, type= "l",
     ylab = "power", xlab = "effect size",
     main = "Power of a 2-sample test (n = 50)")
 
-## ----power-t-test01d-fig, echo=FALSE-------------------------------------
+## ----power-t-test05-fig, results = "hide", echo = FALSE------------------
 pow <- function(effect) {
     power.t.test(delta = effect, n = 50)$power
 }
 effect = seq(0, 2, by = 0.05)
-xyplot(pow(effect) ~ effect, type= 'l',
+xyplot(pow(effect) ~ effect, type= "l",
     ylab = "power", xlab = "effect size",
     main = "Power of a 2-sample test (n = 50)")
 
-## ----power-t-test02------------------------------------------------------
-power.t.test(delta = 0.5, power = 0.8, type = 'one.sample')
-power.t.test(delta = 0.5, power = 0.8, type = 'paired')
+## ----power-t-test06------------------------------------------------------
+power.t.test(delta = 0.5, power = 0.8, type = "one.sample")
 
-## ----glm-orings, tidy = FALSE--------------------------------------------
+## ----power-t-test07------------------------------------------------------
+power.t.test(delta = 0.5, power = 0.8, type = "paired")
+
+## ----orings01, tidy = FALSE----------------------------------------------
 # select the version of this data set in the faraway package
 data(orings, package = "faraway")        
 orings <-
@@ -6040,7 +6062,7 @@ orings.model <-
     glm(failure ~ temp, data = orings, family = binomial(link = logit))
 msummary(orings.model)
 
-## ----glm-orings-fig, echo = FALSE----------------------------------------
+## ----orings-fig, results = "hide", echo = FALSE--------------------------
 temps <- seq(30, 100, by = 2)
 xyplot(damage / 6 ~ temp, data = orings, 
     xlim = c(30, 100),
@@ -6049,7 +6071,7 @@ xyplot(damage / 6 ~ temp, data = orings,
     alpha = 0.7,
     panel = function(x, y, ...){
         panel.xyplot(temps, 
-            predict(orings.model, type = 'response', 
+            predict(orings.model, type = "response", 
                 newdata = data.frame(temp = temps)),
             type = "l", lwd = 2)
         panel.xyplot(x, y, ...)
@@ -6062,36 +6084,43 @@ xyplot(failure ~ temp, data = orings,
     alpha = 0.7,
     panel = function(x, y, ...){
         panel.xyplot(temps, 
-            predict(orings.model, type = 'response', 
+            predict(orings.model, type = "response", 
                 newdata = data.frame(temp = temps)),
             type = "l", lwd = 2)
         panel.xyplot(x, y, ...)
     }
     )
 
-## ----glm-orings-predict, tidy = FALSE, digits = 5------------------------
-predict(orings.model, newdata = data.frame(temp = 31)) -> r; r
-ilogit(r)                        # inverse logit transformation
-predict(orings.model, newdata = data.frame(temp = 31), type = 'response')
+## ----orings-predict, tidy = FALSE, digits = 5----------------------------
+# by default, predict() works on the linear model scale
+r <- predict(orings.model, newdata = data.frame(temp = 31)); r
+ilogit(r)
+# but we can ask for it to work on the "response" scale
+predict(orings.model, newdata = data.frame(temp = 31), type = "response")
 
-## ----glm-orings-makeFun, digits=5----------------------------------------
-orings.f <- makeFun(orings.model) 
-orings.f(temp = 31) 
+## ----orings-makeFun, digits = 5------------------------------------------
+# by default, makeFun() uses type = "response" and 
+# returns values on data scale
+temp2damage <- makeFun(orings.model) 
+temp2damage(temp = 31) 
 makeFun(orings.model)(31)   # We can do it all in one line if we prefer
+# the other option is type = "link"
+temp2damage <- makeFun(orings.model, type = "link")
+temp2damage(temp = 31)
 
-## ----glm-orings-predict2, digits = 5-------------------------------------
+## ----orings-predict2, digits = 5-----------------------------------------
 p <- makeFun(orings.model)(31)
 1 - (1-p)^(1/6) -> q; q       # P(damage to particular O-ring)
 1 - dbinom(0, 6, q)           # P(damage to >0 O-rings)
 cbind(0:6, dbinom(0:6, 6, q)) # table of all probabilities
 
-## ----glm-orings-2, digits = 5--------------------------------------------
-orings.model2 <-                  # link=logit is default, so unnecessary
+## ----orings-2, digits = 5------------------------------------------------
+orings.model2 <-                  # link = logit is default, so unnecessary
     glm(cbind(damage, 6 - damage) ~ temp, data = orings, 
         family = binomial(link = logit))
-summary(orings.model2)
-p1 <- predict(orings.model, newdata = data.frame(temp = 31), type = 'response'); p1
-p2 <- predict(orings.model2, newdata = data.frame(temp = 31), type = 'response'); p2
+msummary(orings.model2)
+p1 <- predict(orings.model, newdata = data.frame(temp = 31), type = "response"); p1
+p2 <- predict(orings.model2, newdata = data.frame(temp = 31), type = "response"); p2
 dbinom(0, 6, prob = p2)               # 0 damaged O-rings
 xyplot(damage / 6 ~ temp, data = orings, 
     xlim = c(30, 100),
@@ -6100,11 +6129,11 @@ xyplot(damage / 6 ~ temp, data = orings,
     alpha = 0.7,
     panel = function(x, y, ...){
         panel.xyplot(temps, 
-            predict(orings.model, type = 'response', 
+            predict(orings.model, type = "response", 
                 newdata = data.frame(temp = temps)),
             type = "l", lwd = 2, col = "gray50", lty = 2)
         panel.xyplot(temps, 
-            predict(orings.model2, type = 'response', 
+            predict(orings.model2, type = "response", 
                 newdata = data.frame(temp = temps)),
             type = "l", lwd = 2)
         panel.xyplot(x, y, ...)
@@ -6114,15 +6143,15 @@ xyplot(damage / 6 ~ temp, data = orings,
 ## ----runswins-look-------------------------------------------------------
 head(MLB2004, 4)
 
-## ----runswins-glm, tidy=FALSE--------------------------------------------
+## ----runswins01, tidy = FALSE--------------------------------------------
 BB <- MLB2004 %>% 
-  mutate( runmargin = (R - OR) / G)
+  mutate(runmargin = (R - OR) / G)
 
 # data frame has summarized data for each team, so different syntax here:
-glm.bb <- glm(cbind(W, L) ~ runmargin, data = BB, family = 'binomial') 
-summary(glm.bb)
+glm.bb <- glm(cbind(W, L) ~ runmargin, data = BB, family = "binomial") 
+msummary(glm.bb)
 
-## ----runswins-glm2, fig.show='hide', tidy=FALSE--------------------------
+## ----runswins02, fig.keep = "none", tidy = FALSE-------------------------
 BB <- 
   BB %>% 
   mutate( 
@@ -6138,15 +6167,16 @@ xyplot(winP ~ predWinP, data = BB,
         panel.abline(0, 1)
     })
 
+## ----runswins03, fig.keep = "none"---------------------------------------
 rm <- seq(-5, 5, by = 0.1)
 wp <- makeFun(glm.bb)(runmargin = rm)
 xyplot(winP ~ runmargin, data = BB, xlim = c(-2.5, 2.5), ylim = c(0, 1),
     panel = function(x, y, ...){
         panel.xyplot(x, y, ...)
-        panel.xyplot(rm, wp, type = 'l', col = 'gray50')
+        panel.xyplot(rm, wp, type = "l", col = "gray50")
     })
 
-## ----runswins-glm2-fig, echo=FALSE---------------------------------------
+## ----runswins02-fig, results = "hide", echo = FALSE----------------------
 BB <- 
   BB %>% 
   mutate( 
@@ -6161,25 +6191,24 @@ xyplot(winP ~ predWinP, data = BB,
         panel.xyplot(x, y, ...)
         panel.abline(0, 1)
     })
-
 rm <- seq(-5, 5, by = 0.1)
 wp <- makeFun(glm.bb)(runmargin = rm)
 xyplot(winP ~ runmargin, data = BB, xlim = c(-2.5, 2.5), ylim = c(0, 1),
     panel = function(x, y, ...){
         panel.xyplot(x, y, ...)
-        panel.xyplot(rm, wp, type = 'l', col = 'gray50')
+        panel.xyplot(rm, wp, type = "l", col = "gray50")
     })
 
-## ----glm-orings-ci-------------------------------------------------------
+## ----orings-ci01---------------------------------------------------------
 s <- summary(orings.model)
 sqrt(diag(s$cov.unscaled)) -> st.err; st.err
 coef(orings.model)[2] + c(-1, 1) * st.err[2] * qnorm(0.975)
 exp(coef(orings.model)[2] + c(-1, 1) * st.err[2] * qnorm(0.975))
 
-## ----glm-orings-ci2------------------------------------------------------
-confint(orings.model, parm = 'temp')
+## ----orings-ci02---------------------------------------------------------
+confint(orings.model, parm = "temp")
 
-## ----runswins-lm, tidy = FALSE-------------------------------------------
+## ----runswins-sol01, tidy = FALSE----------------------------------------
 BB <- 
   MLB2004 %>% 
   mutate(
@@ -6199,24 +6228,25 @@ plot(glm.bb, w = 2)
 # observations 8 and 27 have largest residuals
 BB[c(8, 27, 1:2, 29:30), c("team", "winP", "glmPredWinP", "lmPredWinP")]
 
-## ----buckthorn, fig.keep='last'------------------------------------------
-buck.model <- glm(dead ~ conc, data = Buckthorn, family = binomial)
-summary(buck.model)
+## ----buckthorn-sol01, fig.keep = "last"----------------------------------
+buck.model <- 
+  glm(dead ~ conc, data = Buckthorn, family = binomial)
+msummary(buck.model)
 dead <- makeFun(buck.model) 
 
-## ------------------------------------------------------------------------
+## ----buckthorn-sol02-----------------------------------------------------
 odds <- exp(coef(buck.model)[1]); odds     # odds when conc = 0
 # prob when conc = 0
 odds / (1 + odds)
 ilogit(coef(buck.model)[1])  
 dead(0)
 
-## ------------------------------------------------------------------------
+## ----buckthorn-sol03-----------------------------------------------------
 odds <- function(p) { p / (1 - p) }
 odds(dead(0.01)) / odds(dead(0))
 odds(dead(0.30)) / odds(dead(0.29))
 
-## ----fig.keep='last', tidy = FALSE---------------------------------------
+## ----buckthorn-sol04, fig.keep = "last", tidy = FALSE--------------------
 # calculate the percentage dead at each concentration used.
 tbl <- 
   Buckthorn %>%
@@ -6238,7 +6268,7 @@ xyplot(propDead ~ conc, data = tbl,
 )
 plotFun(dead(c) ~ c, add = TRUE)
 
-## ----include=FALSE, eval=FALSE-------------------------------------------
+## ----include = FALSE, eval = FALSE---------------------------------------
 ## tbl2 <- Buckthorn %>%
 ##   group_by(conc) %>%
 ##   summarise(
@@ -6249,7 +6279,7 @@ plotFun(dead(c) ~ c, add = TRUE)
 ## fits <- predict(buck.model, new = data.frame(conc = concentrations),
 ##             type = "response")
 
-## ------------------------------------------------------------------------
+## ----buckthorn-sol05-----------------------------------------------------
 observed <- tbl[, 3:4]; observed 
 expected <- tbl[, 6:7]; expected
 lrt <- 2 * sum(observed *  log (observed / expected)); lrt
@@ -6258,11 +6288,18 @@ pearson <- sum((observed - expected)^2 / expected); pearson
 1 - pchisq(pearson, df = 2)
 1 - pchisq(lrt, df = 2)
 
-## ----fig.keep='last', tidy = FALSE---------------------------------------
+## ----logit-probit-sol, fig.keep = "last"---------------------------------
+plotFun(ilogit(3 + 2 * x) ~ x, x.lim = c(-6, 3), lwd = 3, col = "gray70")
+plotFun(pnorm(1.5 * b1 + b1 * x) ~ x, b1 = sqrt(2 * pi)/2, 
+        add = TRUE, col = "red")
+
+## ----runmargin-sol, fig.keep = "last", tidy = FALSE----------------------
 bb.logit <-
-  glm(cbind(W, L) ~ runmargin, data = BB, family = binomial(link = logit)) 
+  glm(cbind(W, L) ~ runmargin, data = BB, 
+      family = binomial(link = logit)) 
 bb.probit <-
-  glm(cbind(W, L) ~ runmargin, data = BB, family = binomial(link = probit))
+  glm(cbind(W, L) ~ runmargin, data = BB, 
+      family = binomial(link = probit))
 confint(bb.logit)
 confint(bb.probit)
 f.logit <- makeFun(bb.logit) 
@@ -6271,7 +6308,7 @@ plotFun(f.logit(r) ~ r, r.lim = c(-2, 2))
 plotFun(f.probit(r) ~ r, add = TRUE, 
         lty = 2, lwd = 5, alpha = .4, col = "black")
 
-## ----fig.keep='last', tidy = FALSE---------------------------------------
+## ----orings-sol, fig.keep = "last", tidy = FALSE-------------------------
 orings.logit <- 
   glm(failure ~ temp, data = orings, family = binomial(link = logit))
 orings.probit <- 
@@ -6284,12 +6321,12 @@ plotFun(g.logit(t) ~ t, t.lim = c(25, 90))
 plotFun(g.probit(t) ~ t, add = TRUE, 
         lty = 2, lwd = 5, alpha = .4, col = "black")
 
-## ----buckthorn-probit, tidy = FALSE--------------------------------------
+## ----buckthorn-probit-sol01, tidy = FALSE--------------------------------
 buck.model2 <- 
   glm(dead ~ conc, data = Buckthorn, family = binomial(link = probit))
-summary(buck.model2)
+msummary(buck.model2)
 
-## ----fig.keep='last', tidy=FALSE-----------------------------------------
+## ----buckthorn-probit-sol02, fig.keep = "last", tidy = FALSE-------------
 dead2 <- makeFun(buck.model2) 
 tbl2 <- 
   Buckthorn %>% 
@@ -6312,26 +6349,26 @@ xyplot(propDead ~ conc, data = tbl2,
 plotFun(dead2(c) ~ c, add = TRUE)
 plotFun(dead(c) ~ c, add = TRUE, col = "gray60", lwd = 3, lty = 2)
 
-## ----tidy = FALSE--------------------------------------------------------
+## ----bucktorn-probit-sol03, tidy = FALSE---------------------------------
 observed <- tbl2[ , 3:4]
 expected <- tbl2[ , 6:7]
-lrt <- 2 * sum( observed *  log (observed / expected) ); lrt
-pearson <- sum( ( observed - expected )^2 / expected ); pearson
+lrt <- 2 * sum(observed *  log (observed / expected)); lrt
+pearson <- sum((observed - expected)^2 / expected); pearson
 
 ## ------------------------------------------------------------------------
 # pvals
 1 - pchisq(pearson, df = 2)
 1 - pchisq(lrt, df = 2)
 
-## ----lm-simulate1--------------------------------------------------------
+## ----lm-sim01------------------------------------------------------------
 b0 <- 3; b1 <- 5; sigma <- 2       # set model parameters
 x <- rep(1:5, each = 4)            # 4 observations at each of 5 values
 e <- rnorm(length(x), sd = sigma)  # error term in the model
-y <- b0 + b1 * x + e                 # build response according to model
+y <- b0 + b1 * x + e               # build response according to model
 model <- lm(y ~ x); msummary(model)
 confint(model)
 
-## ----lm-simulate2, cache=TRUE, tidy=FALSE--------------------------------
+## ----lm-sim02, cache = TRUE, tidy = FALSE--------------------------------
 sim <- 
   function(
     b0 = 3, b1 = 5, sigma = 2, 
@@ -6352,10 +6389,10 @@ tally( ~ status, data = Sims)
 
 binom.test( ~ status, data = Sims, p = 0.95)
 
-## ------------------------------------------------------------------------
+## ----lm-sim03------------------------------------------------------------
 chisq.test(tally( ~ status, data = Sims), p = c(0.95, 0.025, 0.025))
 
-## ----lm-simulate3, cache=TRUE, tidy = FALSE------------------------------
+## ----lm-sim04, cache = TRUE, tidy = FALSE--------------------------------
 sim2 <- 
   function(
     b0 = 3, b1 = 5, lambda = 1,
@@ -6378,7 +6415,7 @@ tally( ~ status, data = Sims2) / 5000
 binom.test( ~ status, data = Sims2, p = 0.95)
 chisq.test(tally( ~ status, data = Sims2), p = c(0.95, 0.025, 0.025))
 
-## ----lm-simulate4, cache=TRUE, tidy = FALSE------------------------------
+## ----lm-sim05, cache = TRUE, tidy = FALSE--------------------------------
 sim3 <- 
   function(
     b0 = 3, b1 = 5, lambda = 1, 
@@ -6402,7 +6439,6 @@ chisq.test(tally( ~ status, data = Sims3), p = c(0.95, 0.025, 0.025))
 
 ## ----qr, tidy = FALSE----------------------------------------------------
 QRdata <- data.frame(x = c(1, 1, 5, 5), y = c(1, 2, 4, 6))
-glimpse(QRdata)
 qr.model <- lm(y ~ x, data = QRdata)
 Q <- qr.model %>% qr() %>% qr.Q(); Q
 R <- qr.model %>% qr() %>% qr.R(); R
@@ -6411,121 +6447,87 @@ R <- qr.model %>% qr() %>% qr.R(); R
 backsolve(R, t(Q) %*% QRdata$y)
 coef(qr.model)
 
-## ----tidy = FALSE--------------------------------------------------------
-glm( stretch ~ distance, data = elasticband, family = gaussian()) %>% 
-  summary()
-lm( stretch ~ distance, data = elasticband) %>% summary()
-lm( stretch ~ distance, data = elasticband) %>% anova()
+## ----glm-guassian-sol, tidy = FALSE--------------------------------------
+glm(stretch ~ distance, data = elasticband, 
+    family = gaussian()) %>% 
+  msummary()
+lm(stretch ~ distance, data = elasticband) %>% msummary()
+lm(stretch ~ distance, data = elasticband) %>% anova()
 
 
 ## ----RegressionVariations, child="RegressionVariations.Rnw", eval=includeChapter[7]----
 
-## ----punting-lm, tidy = FALSE--------------------------------------------
+## ----include = FALSE-----------------------------------------------------
+knitr::opts_chunk$set(cache.path = "cache/Reg-")
+require(multcomp)
+require(effects)
+
+## ----punting01, tidy = FALSE---------------------------------------------
 punting.lm <- 
   lm(distance ~ rStrength + rFlexibility, data = Punting) 
-msummary(punting.lm)
+summary(punting.lm)
 anova(punting.lm)
 
-## ----include = FALSE-----------------------------------------------------
-punting.anova <- anova(punting.lm)
-
-## ----punting2, fig.show='hide', tidy = FALSE-----------------------------
-summary(lm(rFlexibility ~ rStrength, data = Punting))
+## ----punting02, fig.show = "hide", tidy = FALSE--------------------------
+lm(rFlexibility ~ rStrength, data = Punting) %>% msummary()
 xyplot(rStrength ~ rFlexibility, data = Punting)
 # if all we want is the correlation coefficient, we can get it directly
-r <- cor(rStrength ~ rFlexibility, data = Punting); r
+r <- cor(rStrength ~ rFlexibility, data = Punting); r 
 r^2
 
-## ----punting2-fig, echo=FALSE--------------------------------------------
-
-## ----punting2------------------------------------------------------------
-summary(lm(rFlexibility ~ rStrength, data = Punting))
+## ----punting02-fig, echo = FALSE, results = "hide", cache = FALSE--------
+lm(rFlexibility ~ rStrength, data = Punting) %>% msummary()
 xyplot(rStrength ~ rFlexibility, data = Punting)
 # if all we want is the correlation coefficient, we can get it directly
-r <- cor(rStrength ~ rFlexibility, data = Punting); r
+r <- cor(rStrength ~ rFlexibility, data = Punting); r 
 r^2
 
-## ----punting-resid, eval=FALSE-------------------------------------------
-## mplot(punting.lm, w = 1:2)
+## ----punting03, eval = FALSE---------------------------------------------
+## plot(punting.lm, w = 1:2)
 
-## ----punting-resid-fig, echo=FALSE---------------------------------------
-mplot(punting.lm, w = 1:2)
+## ----punting03-fig, echo = FALSE, results = "hide"-----------------------
+plot(punting.lm, w = 1:2)
 
-## ------------------------------------------------------------------------
-# regressions of y and x1 on x2
-punting.lmy2 <- lm( distance ~ rFlexibility, data = Punting)
-punting.lm12 <- lm( rStrength ~ rFlexibility, data = Punting)
-# regressions of y and x2 on x1
-punting.lmy1 <- lm( distance ~ rStrength, data = Punting)
-punting.lm21 <- lm( rFlexibility ~ rStrength, data = Punting)
-# these coefficients match coefficients from y ~ x1 + x2
-coef(lm(resid(punting.lmy2) ~ resid(punting.lm12)))
-coef(lm(resid(punting.lmy1) ~ resid(punting.lm21)))
-coef(punting.lm)
+## ----punting07, tidy = FALSE---------------------------------------------
+puntingFit <- makeFun(punting.lm)
+puntingFit(rStrength = 175, rFlexibility = 100, interval = "confidence")
+puntingFit(rStrength = 175, rFlexibility = 100, interval = "prediction")
 
-## ----partial-residual-plots----------------------------------------------
-# partial residual plots (a.k.a. added-variable plots)
-xyplot(resid(punting.lmy2) ~ resid(punting.lm12), type = c("p", "r"))
-xyplot(resid(punting.lmy1) ~ resid(punting.lm21), type = c("p", "r"))
+## ----concrete01----------------------------------------------------------
+concrete.lm1 <- lm(strength ~ limestone + water, data = Concrete)
+msummary(concrete.lm1)
 
-## ----avPlots, opts.label="fig1"------------------------------------------
-car::avPlots(punting.lm)
-
-## ----punting-predict, tidy = FALSE---------------------------------------
-makeFun(punting.lm)(rStrength = 175, rFlexibility = 100, 
-                    interval = "confidence")
-makeFun(punting.lm)(rStrength = 175, rFlexibility = 100, 
-                    interval = "prediction")
-
-## ----concrete-load, tidy = FALSE-----------------------------------------
-concrete <- 
-  with(Devore7::xmp13.13, 
-       data.frame(
-        limestone = x1, 
-        water = x2, 
-        strength = X28)
-  )
-concrete$strength[8:9] <- c(48, 42.3)
-
-## ----concrete-lm1--------------------------------------------------------
-concrete.lm1 <- lm(strength ~ limestone + water, data = concrete)
-concrete.lm1
-
-## ----concrete-lm2--------------------------------------------------------
-concrete.lm2 <- lm(strength ~ limestone * water, data = concrete)
-summary(concrete.lm2)
-
-## ----vector-utils--------------------------------------------------------
-y <- concrete$strength
+## ----concrete03----------------------------------------------------------
+y <- Concrete$strength
 n <- length(y); v0 <- rep(1, n)
-v1 <- with(concrete, limestone - mean(limestone))
-v2 <- with(concrete, water - mean(water))
+v1 <- with(Concrete, limestone - mean(limestone))
+v2 <- with(Concrete, water - mean(water))
 dot(y, v0) / vlength(v0)^2
 mean(y)
 dot(y, v1) / vlength(v1)^2
 dot(y, v2) / vlength(v2)^2
 
-## ----concrete-lm1b-------------------------------------------------------
-y <- concrete$strength
-ef0 <- project(y, v0, type = 'v')
-ef1 <- project(y, v1, type = 'v')
-ef2 <- project(y, v2, type = 'v')
+## ----concrete04----------------------------------------------------------
+y <- Concrete$strength
+ef0 <- project(y, v0)
+ef1 <- project(y, v1)
+ef2 <- project(y, v2)
 ef0 + ef1 + ef2
 fitted(concrete.lm1)
 
-## ----concrete-lm1c-------------------------------------------------------
-dot(v1,v2)
+## ----concrete05----------------------------------------------------------
+dot(v1, v2)
 
-## ----concrete-minus------------------------------------------------------
+## ----concrete-minus01----------------------------------------------------
 # modify data by dropping first observation
-concretemod <- concrete[-1,]
-concrete.lmmod <- lm(strength ~ limestone + water, data = concretemod)
+Concretemod <- Concrete[-1, ]
+concrete.lmmod <- lm(strength ~ limestone + water, data = Concretemod)
 coef(concrete.lmmod)
-y <- concretemod$strength
-n <- length(y); v0 <- rep(1,n)
-v1 <- with(concretemod, limestone - mean(limestone))
-v2 <- with(concretemod, water - mean(water))
-project(y,v0,type='v')
+y <- Concretemod$strength
+n <- length(y); v0 <- rep(1, n)
+v1 <- with(Concretemod, limestone - mean(limestone))
+v2 <- with(Concretemod, water - mean(water))
+project(y, v0)
 mean(y)
 dot(y, v1) / vlength(v1)^2
 dot(y, v2) / vlength(v2)^2
@@ -6535,21 +6537,21 @@ ef2 <- project(y, v2)
 ef0 + ef1 + ef2
 fitted(concrete.lmmod)
 
-## ----concrete-minus-dot--------------------------------------------------
+## ----concrete-minus02----------------------------------------------------
 dot(v0, v1)
 dot(v0, v2)
 dot(v1, v2)
 
-## ----concrete-minus-adj--------------------------------------------------
+## ----concrete-minus03----------------------------------------------------
 w1 <- v1 - project(v1, v2)
 w2 <- v2 - project(v2, v1)
-dot(v0,w1)
-dot(v0,w2)
-dot(v1,w2)
-dot(w1,v2)
+dot(v0, w1)
+dot(v0, w2)
+dot(v1, w2)
+dot(w1, v2)
 
-## ----concrete-minus2-----------------------------------------------------
-y <- concretemod$strength
+## ----concrete-minus04----------------------------------------------------
+y <- Concretemod$strength
 # make fits using v1 and w2
 ef0 <- project(y, v0)
 ef1 <- project(y, v1)
@@ -6563,40 +6565,41 @@ ef0 + ef1 + ef2
 # should match what lm() produces
 fitted(concrete.lmmod)
 
-## ----concrete-minus3-----------------------------------------------------
-# using v1 gives coefficient in model with only limestone as a predictor
+## ----concrete-minus05----------------------------------------------------
+# using v1 gives coefficient in model with 
+# only limestone as a predictor
 dot(y, v1) / vlength(v1)^2
-coef(lm(strength ~ limestone, data = concretemod))
+lm(strength ~ limestone, data = Concretemod) %>% coef()
 # using v2 gives coefficient in model with only water as a predictor
 dot(y, v2) / vlength(v2)^2
-coef(lm(strength ~ water, data = concretemod))
+lm(strength ~ water, data = Concretemod) %>% coef()
 # using w1 and w2 gives coefficients in the model 
 dot(y, w1) / vlength(w1)^2
 dot(y, w2) / vlength(w2)^2
 coef(concrete.lmmod)
 
-## ------------------------------------------------------------------------
-QQ <- 
+## ----concrete-Q01--------------------------------------------------------
+Q <- 
   cbind( 
     w1 / vlength(w1)^2, 
     w2 / vlength(w2)^2)
-t(QQ) %*% y
+t(Q) %*% y
 
-## ------------------------------------------------------------------------
-x1 <- concretemod$limestone; x2 <- concretemod$water
-QQ <- 
+## ----concrete-Q02--------------------------------------------------------
+x1 <- Concretemod$limestone; x2 <- Concretemod$water
+Q <- 
   cbind( 
-    1/nrow(concretemod),
+    1 / nrow(Concretemod),
     w1 / vlength(w1)^2, 
     w2 / vlength(w2)^2)
-alpha <- t(QQ) %*% y; alpha
+alpha <- t(Q) %*% y; alpha
 beta0 <- alpha[1] - alpha[2] * mean(x1) - alpha[3] * mean(x2)
 beta0
 
-## ----concrete-qr, tidy = FALSE-------------------------------------------
+## ----concrete-QR01, tidy = FALSE-----------------------------------------
 X <- cbind(1, x1, x2); X
 Q <- cbind(
-  1/sqrt(nrow(concretemod)), 
+  1/sqrt(nrow(Concretemod)), 
   v1 / vlength(v1), 
   w2 / vlength(w2)) 
 Q %>% round(4)
@@ -6604,51 +6607,51 @@ t(Q) %*% Q %>% round(4)           # should be the identity matrix
 R <- t(Q) %*% X; R %>% round(4)   # should be upper triangular
 Q %*% R %>% round(4)              # should be X
 
-## ----concrete-qr-solve---------------------------------------------------
+## ----concrete-QR02-------------------------------------------------------
 solve(R) %*% t(Q) %*% y
 backsolve(R, t(Q) %*% y)
 
-## ------------------------------------------------------------------------
+## ----concrete-QR03-------------------------------------------------------
 diag(R)
 c(vlength(v0), vlength(v1), vlength(v2))
 
-## ------------------------------------------------------------------------
+## ----concrte-QR04--------------------------------------------------------
 t(Q) %*% y  / c(vlength(v0), vlength(v1), vlength(w2))
 
-## ------------------------------------------------------------------------
+## ----concrete-QR05-------------------------------------------------------
 concrete.lmmod %>% qr() %>% qr.Q()
 concrete.lmmod %>% qr() %>% qr.R()
 
-## ----small-lmfit---------------------------------------------------------
-y <- c(0,2,0,2,-1,6)
-x1 <- c(1,1,2,2,3,3); x2 <- c(0,1,1,2,1,3)
-v0 <- rep(1,length(y))
-v1 <- x1 - mean(x1); v2=x2 - mean(x2)
-w1 <- v1 - project(v1,v2)
-w2 <- v2 - project(v2,v1)
+## ----small-lmfit-sol01---------------------------------------------------
+y <- c(0, 2, 0, 2, -1, 6)
+x1 <- c(1, 1, 2, 2, 3, 3); x2 <- c(0, 1, 1, 2, 1, 3)
+v0 <- rep(1, length(y))
+v1 <- x1 - mean(x1); v2 = x2 - mean(x2)
+w1 <- v1 - project(v1, v2)
+w2 <- v2 - project(v2, v1)
 
-## ----small-lmfit2--------------------------------------------------------
+## ----small-lmfit-sol02---------------------------------------------------
 #
 # obtaining model fits by projection
 #
-p0 <- project(y,v0,type='vec'); p0
-p1 <- project(y,v1,type='vec'); p1
-p2 <- project(y,v2,type='vec'); p2
-q1 <- project(y,w1,type='vec'); q1
-q2 <- project(y,w2,type='vec'); q2
+p0 <- project(y, v0); p0
+p1 <- project(y, v1); p1
+p2 <- project(y, v2); p2
+q1 <- project(y, w1); q1
+q2 <- project(y, w2); q2
 #
-# this won't be a correct fit because dot(v1,v2) != 0
+# this won't be a correct fit because dot(v1, v2) != 0
 #
 p0 + p1 + p2  
 
-## ----small-lmfit3--------------------------------------------------------
+## ----small-lmfit-sol03---------------------------------------------------
 #
 # here is the correct fit 
 #
 p0 + q1 + p2
 p0 + p1 + q2
 
-## ----small-lmfit4--------------------------------------------------------
+## ----small-lmfit-sol04---------------------------------------------------
 #
 # we can compare the results with those from lm()
 #
@@ -6659,7 +6662,7 @@ model <- lm(y ~ x1 + x2); fitted(model)
 b1.wrong <- (p1/v1); b1.wrong   
 b2.wrong <- (p2/v2); b2.wrong   
 
-## ----small-lmfit5--------------------------------------------------------
+## ----small-lmfit-sol05---------------------------------------------------
 #
 # now let's get the coefficients correctly:
 #
@@ -6669,7 +6672,7 @@ a0 <- (p0/v0); a0
 b0 <- a0 - b1*mean(x1) - b2*mean(x2); b0
 coef(model)
 
-## ------------------------------------------------------------------------
+## ----small-QR-sol--------------------------------------------------------
 X <- cbind(1, x1, x2)
 Q <- cbind(
   v0 / vlength(v0),
@@ -6692,32 +6695,61 @@ solve(R) %*% t(Q) %*% y
 # check that this matches coefficients from lm()
 range( solve(R) %*% t(Q) %*% y - coef(model) )
 
-## ----concrete-mods-------------------------------------------------------
-concrete.lm0 <- lm(strength ~ limestone + water, data = concrete)
-concrete.lm1 <- lm(strength ~ limestone, data = concrete)
-concrete.lm2 <- lm(strength ~ water, data = concrete)
-concrete.lm3 <- lm(strength ~ 1, data = concrete)
-concrete.lm4 <- lm(strength ~ I(limestone + water), data = concrete)
-concrete.lm5 <- lm(strength ~ -1 + limestone + water, data = concrete)
+## ----concrete-mods01-----------------------------------------------------
+# define several models
+concrete.lm0 <- lm(strength ~ limestone + water, data = Concrete)
+concrete.lm1 <- lm(strength ~ -1 + limestone + water, data = Concrete)
+concrete.lm2 <- lm(strength ~ water, data = Concrete)
+concrete.lm3 <- lm(strength ~ limestone, data = Concrete)
+concrete.lm4 <- lm(strength ~ 1, data = Concrete)
+concrete.lm5 <- lm(strength ~ I(limestone + water), data = Concrete)
 
-## ----concrete-mct--------------------------------------------------------
-anova(concrete.lm1, concrete.lm0)
-anova(concrete.lm2, concrete.lm0)
-anova(concrete.lm3, concrete.lm0)
-anova(concrete.lm4, concrete.lm0)
-anova(concrete.lm5, concrete.lm0)
+## ----concrete-mods02-----------------------------------------------------
+msummary(concrete.lm0)
 
-## ----concrete-summary2---------------------------------------------------
-summary(concrete.lm0)
+## ----concrete-mods03-----------------------------------------------------
+anova(concrete.lm1, concrete.lm0) # with/without intercept
+anova(concrete.lm2, concrete.lm0) # with/without limestone
+anova(concrete.lm3, concrete.lm0) # with/without water
+anova(concrete.lm4, concrete.lm0) # with/without limestone and water
 
-## ----concrete-confint1---------------------------------------------------
+## ----concrete-mods04-----------------------------------------------------
 confint(concrete.lm0)
 
-## ----anova-rand, warning = FALSE-----------------------------------------
-m1 <- lm(strength ~ water, data = concrete) 
-anova(m1)
-r7 <- lm(strength ~ water + rand(7), data=concrete)
-anova(r7)
+## ----concrete-rand01, warning = FALSE------------------------------------
+concrete.lm1 <- lm(strength ~ limestone, data = Concrete) 
+anova(concrete.lm1)
+concrete.r7 <- lm(strength ~ limestone + rand(7), data = Concrete)
+anova(concrete.r7)
+
+## ----include = FALSE-----------------------------------------------------
+RSS1 <- sum(resid(concrete.lm1)^2)
+RSS0 <- sum(resid(concrete.lm0)^2)
+
+## ----concrete-rand02-----------------------------------------------------
+anova(concrete.lm0)
+
+## ----concrete-rand03, fig.keep = "none", message = FALSE, warning = FALSE, seed = 123----
+SSplot(
+  lm(strength ~ limestone + water, data = Concrete),
+  lm(strength ~ limestone + rand(7), data = Concrete), n = 1000) 
+
+## ----concrete-rand03-fig, echo = FALSE, results = "hide", message = FALSE, warning = FALSE, seed = 123----
+SSplot(
+  lm(strength ~ limestone + water, data = Concrete),
+  lm(strength ~ limestone + rand(7), data = Concrete), n = 1000) 
+last_plot() + xlim(0, 2)
+
+## ----concrete-rand04, fig.keep = "none", message = FALSE, warning = FALSE, seed = 123----
+SSplot(
+  lm(strength ~ water + limestone, data = Concrete),
+  lm(strength ~ water + rand(7), data = Concrete), n = 100) 
+
+## ----concrete-rand04-fig, echo = FALSE, results = "hide", message = FALSE, warning = FALSE, seed = 123----
+SSplot(
+  lm(strength ~ water + limestone, data = Concrete),
+  lm(strength ~ water + rand(7), data = Concrete), n = 100) 
+last_plot() + xlim(0, 2)
 
 ## ----concrete-aic--------------------------------------------------------
 # these two methods give different numerical values
@@ -6725,126 +6757,261 @@ AIC(concrete.lm0)
 AIC(concrete.lm1)
 extractAIC(concrete.lm0)
 extractAIC(concrete.lm1)
-# and neither agrees with our definition
-aic0 <- 2 * 3 + 9 * log(sum(resid(concrete.lm0)^2)); aic0
-aic1 <- 2 * 2 + 9 * log(sum(resid(concrete.lm1)^2)); aic1
 # but differences between models are equivalent
-aic0 - aic1
 AIC(concrete.lm0) - AIC(concrete.lm1)
 extractAIC(concrete.lm0)[2] - extractAIC(concrete.lm1)[2]
 
-## ----concrete-plot1, fig.show="hide"-------------------------------------
-xplot(concrete.lm0, which = 2)
-xplot(concrete.lm0, which = 3)
-xplot(concrete.lm0, which = 5, add.smooth = FALSE)
-xyplot(resid(concrete.lm1) ~ fitted(concrete.lm1),
-               main = "residuals vs fits",
-               ylab = "residuals",
-               xlab = "fitted values",
-               sub  = "lm(strength ~ limestone + water)" )
+## ----concrete-plot, fig.show = "hide"------------------------------------
+plot(concrete.lm0, which = c(1, 2, 3, 5))
 
-## ----concrete-plot1-fig, echo=FALSE--------------------------------------
-xplot(concrete.lm0, which = 2)
-xplot(concrete.lm0, which = 3)
-xplot(concrete.lm0, which = 5, add.smooth = FALSE)
-xyplot(resid(concrete.lm1) ~ fitted(concrete.lm1),
-               main = "residuals vs fits",
-               ylab = "residuals",
-               xlab = "fitted values",
-               sub  = "lm(strength ~ limestone + water)" )
+## ----concrete-plot-fig, echo = FALSE, results = "hide"-------------------
+plot(concrete.lm0, which = c(1, 2, 3, 5))
 
-## ----additive------------------------------------------------------------
-x1 = rep(rep(1:4, each=4),4);  x2 = rep(rep(1:4, times=4),4)
-fit = 1 + 2 * x1 - 4 * x2; e = rnorm(4*4*4,sd=1)
-plot1 <- xyplot(fit~x2,groups=x1,type='r',
-      main=expression(paste("Model fits for fixed values of ",x[1])))
-plot2 <- xyplot(fit~x1,groups=x2,type='r',
-      main=expression(paste("Model fits for fixed values of ",x[2])))
-plot3 <- xyplot(I(fit+e)~x2,groups=x1,type=c('p','r'),pch=16,
-      main=expression(paste("Simulated data grouped by ",x[1])))
-plot4 <- xyplot(I(fit+e)~x1,groups=x2,type=c('p','r'),pch=16,
-      main=expression(paste("Simulated data grouped by ",x[2])))
-plot5 <- xyplot(I(fit+4*e)~x2,groups=x1,type=c('p','r'),pch=16,
-      main=expression(paste("Simulated data grouped by ",x[1], 
-                "(larger ", sigma,")")))
-plot6 <- xyplot(I(fit+4*e)~x1,groups=x2,type=c('p','r'),pch=16,
-      main=expression(paste("Simulated data grouped by ",x[2], 
-                "(larger ", sigma,")")))
+## ----punting04-----------------------------------------------------------
+# regressions of y and x1 on x2
+punting.lmy2 <- lm(distance ~ rFlexibility, data = Punting)
+punting.lm12 <- lm(rStrength ~ rFlexibility, data = Punting)
+# regressions of y and x2 on x1
+punting.lmy1 <- lm(distance ~ rStrength, data = Punting)
+punting.lm21 <- lm(rFlexibility ~ rStrength, data = Punting)
+# these slopes match coefficients from y ~ x1 + x2
+coef(lm(resid(punting.lmy2) ~ resid(punting.lm12)))
+coef(lm(resid(punting.lmy1) ~ resid(punting.lm21)))
+coef(punting.lm)
 
-## ----additive-fig, echo=FALSE--------------------------------------------
-plot1
-plot2
-plot3
-plot4
-plot5
-plot6
+## ----punting05, fig.keep = "none"----------------------------------------
+# partial regression plots (a.k.a. added-variable plots)
+xyplot(resid(punting.lmy2) ~ resid(punting.lm12), type = c("p", "r"))
+xyplot(resid(punting.lmy1) ~ resid(punting.lm21), type = c("p", "r"))
 
-## ----utilities-lm1, fig.show="hide", tidy = FALSE------------------------
-# subset the data:
-#   * remove first few months where there appears to have been a bad
-#         meter reading (year == 2000 & month <= 6)
-#   * remove months where there is little need to heat (temp > 60)
-Ut <- Utilities2 %>% filter((year > 2000 | month > 6) & temp <= 60)
-ut.lm1 <- lm(thermsPerDay ~ temp, data = Ut)
-summary(ut.lm1)
-xplot(ut.lm1)
+## ----punting05-fig, echo = FALSE, results = "hide"-----------------------
+# partial regression plots (a.k.a. added-variable plots)
+xyplot(resid(punting.lmy2) ~ resid(punting.lm12), type = c("p", "r"))
+xyplot(resid(punting.lmy1) ~ resid(punting.lm21), type = c("p", "r"))
 
-## ----utilities-lm1-fig, echo=FALSE---------------------------------------
-# subset the data:
-#   * remove first few months where there appears to have been a bad
-#         meter reading (year == 2000 & month <= 6)
-#   * remove months where there is little need to heat (temp > 60)
-Ut <- Utilities2 %>% filter((year > 2000 | month > 6) & temp <= 60)
-ut.lm1 <- lm(thermsPerDay ~ temp, data = Ut)
-summary(ut.lm1)
-xplot(ut.lm1)
+## ----punting06, opts.label = "fig1", fig.keep = "none"-------------------
+car::avPlots(punting.lm)
 
-## ----utilities-presid, fig.show="hide"-----------------------------------
-# partial residual plot
-xyplot(resid(ut.lm1) ~ kwhpday, data = Ut, type=c('p','r'))
+## ----punting06-fig, echo = FALSE, results = "hide", opts.label = "fig1"----
+car::avPlots(punting.lm)
 
-## ----utilities-presid-fig, echo=FALSE------------------------------------
-# partial residual plot
-xyplot(resid(ut.lm1) ~ kwhpday, data = Ut, type=c('p','r'))
+## ----concrete-effects01, fig.keep = "none"-------------------------------
+require(effects)
+Effect(c("water", "limestone"), concrete.lm0) %>% 
+  plot("water")
+Effect(c("water", "limestone"), concrete.lm0) %>% 
+  plot("limestone")
 
-## ----utilities-kwh, fig.show="hide"--------------------------------------
-ut.lm2 <- lm(thermsPerDay ~ temp + kwhpday, data = Ut)
-summary(ut.lm2)
-xplot(ut.lm2)
+## ----concrete-effects01-fig, echo = FALSE, results = "hide"--------------
+require(effects)
+Effect(c("water", "limestone"), concrete.lm0) %>% 
+  plot("water")
+Effect(c("water", "limestone"), concrete.lm0) %>% 
+  plot("limestone")
 
-## ----utilities-kwh-fig, echo=FALSE---------------------------------------
-ut.lm2 <- lm(thermsPerDay ~ temp + kwhpday, data = Ut)
-summary(ut.lm2)
-xplot(ut.lm2)
+## ----concrete-effects02, fig.keep = "none"-------------------------------
+Effect(
+  c("water", "limestone"), concrete.lm0,  partial.resid = TRUE) %>% 
+  plot("water")
 
-## ----gpa1----------------------------------------------------------------
+## ----concrete-effects02-fig, echo = FALSE, results = "hide"--------------
+Effect(
+  c("water", "limestone"), concrete.lm0,  partial.resid = TRUE) %>% 
+  plot("water")
+
+## ----concrete-effect04---------------------------------------------------
+concrete.lm6 <- 
+  lm(strength ~ limestone + water + limestone:water, data = Concrete)
+
+## ----concrete-effect05, fig.keep = "none"--------------------------------
+lm(strength ~ limestone + water + limestone:water, 
+   data = Concrete) %>%
+  Effect(c("water", "limestone"), . , partial.residuals = TRUE) %>%
+  plot("water")
+
+## ----concrete-effect05-fig, echo = FALSE, results = "hide"---------------
+lm(strength ~ limestone + water + limestone:water, 
+   data = Concrete) %>%
+  Effect(c("water", "limestone"), . , partial.residuals = TRUE) %>%
+  plot("water")
+
+## ----concrete-effect06---------------------------------------------------
+lm(strength ~ limestone + water, data = Concrete) %>% 
+  msummary()
+lm(strength ~ limestone + water + limestone * water, data = Concrete) %>% 
+  msummary()
+
+## ----effect-sim, fig.keep = "none", seed = 1234--------------------------
+D <- data_frame(
+  x1 = runif(100, 0, 10),
+  x2 = runif(100, 0, 10),
+  y1 = 5 + 2 * x1 + 3 * x2 + rnorm(100, sd = 4),
+  y2 = 5 + 2 * x1 + 3 * x2 - x1 * x2 + rnorm(100, sd = 4)
+)
+lm(y1 ~ x1 + x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+lm(y2 ~ x1 + x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+lm(y1 ~ x1 + x2 + x1*x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+lm(y2 ~ x1 + x2 + x1*x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+
+## ----effect-sim-fig, echo = FALSE, results = "hide", seed = 1234---------
+D <- data_frame(
+  x1 = runif(100, 0, 10),
+  x2 = runif(100, 0, 10),
+  y1 = 5 + 2 * x1 + 3 * x2 + rnorm(100, sd = 4),
+  y2 = 5 + 2 * x1 + 3 * x2 - x1 * x2 + rnorm(100, sd = 4)
+)
+lm(y1 ~ x1 + x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+lm(y2 ~ x1 + x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+lm(y1 ~ x1 + x2 + x1*x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+lm(y2 ~ x1 + x2 + x1*x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1")
+
+## ----utilities-kwh01-----------------------------------------------------
+Utilities2 <- 
+  Utilities %>% 
+  filter(year > 2000 | month > 6) %>%  # remove bad meter reading
+  filter(temp <= 60) %>%               # remove warm months 
+  mutate(kwhpday = kwh / billingDays)
+
+## ----utilities-kwh02, fig.show = "hide"----------------------------------
+# fit additive and interaction models
+ut.lm    <- lm(thermsPerDay ~ temp + kwhpday, data = Utilities2)
+ut.lmint <- lm(thermsPerDay ~ temp * kwhpday, data = Utilities2)
+msummary(ut.lm)
+msummary(ut.lmint)
+plot(ut.lm, 1:2)
+plot(ut.lmint, 1:2)
+ut.lm %>% 
+  Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
+  plot("temp", sub = "additive model")
+ut.lmint %>% 
+  Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
+  plot("temp", sub = "interation model")
+
+## ----utilities-kwh02-fig, echo = FALSE, results = "hide"-----------------
+# fit additive and interaction models
+ut.lm    <- lm(thermsPerDay ~ temp + kwhpday, data = Utilities2)
+ut.lmint <- lm(thermsPerDay ~ temp * kwhpday, data = Utilities2)
+msummary(ut.lm)
+msummary(ut.lmint)
+plot(ut.lm, 1:2)
+plot(ut.lmint, 1:2)
+ut.lm %>% 
+  Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
+  plot("temp", sub = "additive model")
+ut.lmint %>% 
+  Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
+  plot("temp", sub = "interation model")
+
+## ----utilities-kwh03-----------------------------------------------------
+coef(ut.lmint)[1] +  coef(ut.lmint)[3] * 25
+coef(ut.lmint)[2] +  coef(ut.lmint)[4] * 25
+coef(ut.lm)
+
+## ----utilities-month01, fig.show = "hide"--------------------------------
+# remove first few observations because of bad meter read
+Ut3 <- Utilities %>% filter(year > 2000 | month > 6)
+ut.lm3 <- lm(thermsPerDay ~ month + I(month^2), data = Ut3)
+msummary(ut.lm3)
+plotModel(ut.lm3)
+ut.lm3 %>% Effect("month", ., partial.residuals = TRUE) %>% plot("month")
+plot(ut.lm3, w = 1:2)
+
+## ----utilities-month-fig, echo = FALSE, results = "hide"-----------------
+# remove first few observations because of bad meter read
+Ut3 <- Utilities %>% filter(year > 2000 | month > 6)
+ut.lm3 <- lm(thermsPerDay ~ month + I(month^2), data = Ut3)
+msummary(ut.lm3)
+plotModel(ut.lm3)
+ut.lm3 %>% Effect("month", ., partial.residuals = TRUE) %>% plot("month")
+plot(ut.lm3, w = 1:2)
+
+## ----utilities-month02, fig.keep = "none"--------------------------------
+Ut3 <- Ut3 %>% 
+  mutate(monthShifted  = (month - 2) %% 12)
+ut.lm4 <- lm(thermsPerDay ~ monthShifted + I(monthShifted^2), data = Ut3)
+msummary(ut.lm4)
+plotModel(ut.lm4)
+ut.lm4 %>% Effect("monthShifted", ., partial.residuals = TRUE) %>% 
+  plot("monthShifted")
+plot(ut.lm4, w = 1:2)
+
+## ----utilities-month02-fig, echo = FALSE, results = "hide"---------------
+Ut3 <- Ut3 %>% 
+  mutate(monthShifted  = (month - 2) %% 12)
+ut.lm4 <- lm(thermsPerDay ~ monthShifted + I(monthShifted^2), data = Ut3)
+msummary(ut.lm4)
+plotModel(ut.lm4)
+ut.lm4 %>% Effect("monthShifted", ., partial.residuals = TRUE) %>% 
+  plot("monthShifted")
+plot(ut.lm4, w = 1:2)
+
+## ----utilities-month03---------------------------------------------------
+ut.lm4a <- lm(thermsPerDay ~ poly(monthShifted, 2), data = Ut3)
+msummary(ut.lm4a)
+favstats( ~ (fitted(ut.lm4a) - fitted(ut.lm4)))
+
+## ----utilities-month-sol-------------------------------------------------
+ut.mod <-
+  Ut3 %>% mutate(monthShifted2 = (month + 5) %% 12) %>%
+  lm(thermsPerDay ~ poly(monthShifted2, 2), data = .) 
+msummary(ut.mod)
+plot(ut.mod, 1:2)
+ut.mod %>% Effect("monthShifted2", ., partial.residuals = TRUE) %>%
+  plot("monthShifted2")
+
+## ----eval = FALSE--------------------------------------------------------
+## px <- poly(Ut2$monthShifted, 2); px
+
+## ------------------------------------------------------------------------
+    model1 <- lm (thermsPerDay ~ monthShifted, data = Ut2)
+    model2 <- lm (thermsPerDay ~ monthShifted + I(monthShifted^2), data = Ut2)
+model1poly <- lm (thermsPerDay ~ poly(monthShifted, 1),  data = Ut2)
+model2poly <- lm (thermsPerDay ~ poly(monthShifted, 2),  data = Ut2)
+
+## ----gpa01---------------------------------------------------------------
 gpa.lm <- lm(gpa ~ satm + satv + act, data = GPA)
-summary(gpa.lm)
+msummary(gpa.lm)
 
-## ----gpa2----------------------------------------------------------------
+## ----gpa02---------------------------------------------------------------
 gpa.lm1<- lm(gpa ~ satm, data = GPA)
-summary(gpa.lm1)
+msummary(gpa.lm1)
 
-## ----gpa3----------------------------------------------------------------
-gpa.lm2 <- lm(satm ~ satv + act, data = GPA); summary(gpa.lm2)
-gpa.lm3 <- lm(satm ~ satv, data = GPA); summary(gpa.lm3)
-gpa.lm4 <- lm(satm ~ act, data = GPA); summary(gpa.lm4)
+## ----gpa03---------------------------------------------------------------
+gpa.lm2 <- lm(satm ~ satv + act, data = GPA); msummary(gpa.lm2)
+gpa.lm3 <- lm(satm ~ satv, data = GPA); msummary(gpa.lm3)
+gpa.lm4 <- lm(satm ~ act,  data = GPA); msummary(gpa.lm4)
 
-## ----gpa4----------------------------------------------------------------
-gpa.lm5 <- lm(gpa ~ act + satv, data = GPA); summary(gpa.lm5)
-gpa.lm6 <- lm(satv ~ act, data = GPA); summary(gpa.lm6)
+## ----gpa04---------------------------------------------------------------
+gpa.lm5 <- lm(gpa ~ act + satv, data = GPA); msummary(gpa.lm5)
+gpa.lm6 <- lm(satv ~ act, data = GPA); msummary(gpa.lm6)
 
-## ----gpa-mct1------------------------------------------------------------
+## ----gpa-mct01-----------------------------------------------------------
 # fit some models
 #
 gpa.lm <- lm(gpa ~ satm + satv + act, data = GPA)
 gpa.lma <- lm(gpa ~ -1 + satm + satv + act, data = GPA)
 #
-# model comparison tests for 5 p-values in summary(gpa.lm)
+# model comparison tests for 5 p-values in msummary(gpa.lm)
 #
 anova(gpa.lma, gpa.lm)
 
-## ----gpa-mct-------------------------------------------------------------
+## ----gpa-mct-sol01-------------------------------------------------------
 # fit some models
 gpa.lm <- lm(gpa ~ satm + satv + act, data = GPA)
 gpa.lma <- lm(gpa ~ -1 + satm + satv + act, data = GPA)
@@ -6853,149 +7020,177 @@ gpa.lmc <- lm(gpa ~ satm + act, data = GPA)
 gpa.lmd <- lm(gpa ~ satm + satv, data = GPA)
 gpa.lme <- lm(gpa ~ 1, data = GPA)
 
-## ------------------------------------------------------------------------
-# model comparison tests for 5 p-values in summary(gpa.lm)
+## ----gpa-mct-sol02-------------------------------------------------------
+# model comparison tests for 5 p-values in msummary(gpa.lm)
 anova(gpa.lma, gpa.lm)
 anova(gpa.lmb, gpa.lm)
 
-## ------------------------------------------------------------------------
+## ----gpa-mct-sol03-------------------------------------------------------
 anova(gpa.lmc, gpa.lm)
 anova(gpa.lmd, gpa.lm)
 
-## ------------------------------------------------------------------------
+## ----gpa-mct-sol04-------------------------------------------------------
 anova(gpa.lme, gpa.lm)
-summary(gpa.lm)
+msummary(gpa.lm)
 
-## ------------------------------------------------------------------------
+## ----gpa-mct-sol05-------------------------------------------------------
 # combined SAT verses subscore
 gpa.lmf <- lm(gpa ~ I(satv + satm) + act, data = GPA)
 anova(gpa.lmf, gpa.lm)
 
-## ----pheno-weight-prob---------------------------------------------------
+## ----pheno-weight-sol----------------------------------------------------
 # testing beta_1 = 2
 t <- ( 1.0754 - 2.0) / 0.0121; t
-2 * pt(-abs(t) , df=2237)
+2 * pt(-abs(t) , df = 2237)
 # testing beta_1 = 1
 t <- ( 1.0754- 1.0) / 0.0121; t
-2 * pt(-abs(t) , df=2237)
+2 * pt(-abs(t) , df = 2237)
 # testing beta_2 = 1
 t <- ( 0.8942 - 1.0) / 0.0302; t
-2 * pt(-abs(t) , df=2237)
+2 * pt(-abs(t) , df = 2237)
 
-## ----students1-----------------------------------------------------------
+## ----students-sol01------------------------------------------------------
 summary(Students)
 
-## ----students2-----------------------------------------------------------
+## ----students-sol02------------------------------------------------------
 summary(Students)
-model <- lm(ACT ~ SAT, data = Students); summary(model)
+model <- lm(ACT ~ SAT, data = Students); msummary(model)
 
-## ----students3-----------------------------------------------------------
+## ----students-sol03------------------------------------------------------
 confint(model)
 confint(lm( act ~ I(satm + satv), data = GPA))
 
-## ----pheno-weight--------------------------------------------------------
-pheno.lm <- lm(log(weight) ~ log(waist) + log(height), data = Pheno)
-summary(pheno.lm)
+## ----pheno-weight01------------------------------------------------------
+pheno.lm <- 
+  lm(log(weight) ~ log(waist) + log(height), data = Pheno)
+msummary(pheno.lm)
 
-## ----pheno-weight-confint------------------------------------------------
+## ----pheno-weight02------------------------------------------------------
 confint(pheno.lm) 
 
-## ----pheno-weight-resid, fig.show="hide"---------------------------------
-xplot(pheno.lm, w=1:2)
+## ----pheno-weight03, fig.show = "hide"-----------------------------------
+plot(pheno.lm, w = 1:2)
 
-## ----pheno-weight-resid-fig, echo=FALSE----------------------------------
+## ----pheno-weight-fig, echo = FALSE, results = "hide"--------------------
 
-## ----pheno-weight-resid--------------------------------------------------
-xplot(pheno.lm, w=1:2)
+## ----pheno-weight03------------------------------------------------------
+plot(pheno.lm, w = 1:2)
 
-## ------------------------------------------------------------------------
-pheno.male <- lm(log(weight) ~ log(waist) + log(height), Pheno %>% filter(sex=="M"))
-pheno.female <- lm(log(weight) ~ log(waist) + log(height), Pheno %>% filter(sex=="F"))
-summary(pheno.male)
-summary(pheno.female)
-mplot(pheno.male, title="males only")
-mplot(pheno.female, title="females only")
-mplot(pheno.lm, title="all subjects")
+## ----pheno-sex-sol-------------------------------------------------------
+pheno.male <- 
+  lm(log(weight) ~ log(waist) + log(height), data = Pheno %>% filter(sex == "M"))
+pheno.female <- 
+  lm(log(weight) ~ log(waist) + log(height), data = Pheno %>% filter(sex == "F"))
+msummary(pheno.male)
+msummary(pheno.female)
+plot(pheno.male)     # males only
+plot(pheno.female)   # females only
+plot(pheno.lm)       # all subjects
 
-
-## ----opts.label="figbig"-------------------------------------------------
+## ----pheno-case-sol01, opts.label = "figbig"-----------------------------
 pheno.case <- lm(log(weight) ~ log(waist) + log(height),
-                 data = Pheno %>% filter(t2d=="case"))
+                 data = Pheno %>% filter(t2d == "case"))
 pheno.control<- lm(log(weight) ~ log(waist) + log(height),
-                 data = Pheno %>% filter(t2d=="control"))
-summary(pheno.case)
-summary(pheno.control)
+                 data = Pheno %>% filter(t2d == "control"))
+msummary(pheno.case)
+msummary(pheno.control)
 
-## ----opts.label="figbig"-------------------------------------------------
-mplot(pheno.case, title="cases only")
-mplot(pheno.control, title="controls only")
-mplot(pheno.lm, title="all subjects")
+## ----pheno-case-sol02, opts.label = "figbig"-----------------------------
+plot(pheno.case)    # cases only
+plot(pheno.control) # controls only
+plot(pheno.lm)      # all subjects
 
-## ------------------------------------------------------------------------
+## ----pheno-plain-sol-----------------------------------------------------
 pheno.plain <- lm(weight ~ waist + height, data = Pheno)
 c(plain = rsquared(pheno.plain), transformed = rsquared(pheno.lm))
 c(plain = AIC(pheno.plain), transformed = AIC(pheno.lm))
-mplot(pheno.plain, w=2)
-mplot(pheno.lm, w=2)
+plot(pheno.plain, w = 2)
+plot(pheno.lm, w = 2)
 
-## ----coag-look, fig.show="hide"------------------------------------------
-data(coagulation, package="faraway") 
+## ----coag01, fig.show = "hide"-------------------------------------------
+data(coagulation, package = "faraway") 
 favstats(coag ~ diet, data = coagulation)
-xyplot(coag~diet, coagulation)
-bwplot(coag~diet, coagulation)
+xyplot(coag ~ diet, coagulation)
+bwplot(coag ~ diet, coagulation)
 
-## ----coag-look-fig, echo=FALSE-------------------------------------------
-data(coagulation, package="faraway") 
+## ----coag01-fig, echo = FALSE, results = "hide"--------------------------
+data(coagulation, package = "faraway") 
 favstats(coag ~ diet, data = coagulation)
-xyplot(coag~diet, coagulation)
-bwplot(coag~diet, coagulation)
+xyplot(coag ~ diet, coagulation)
+bwplot(coag ~ diet, coagulation)
 
-## ----coag-lm-------------------------------------------------------------
-coag.model <- lm(coag ~ diet, data = coagulation)
-summary(coag.model)
+## ----coag02--------------------------------------------------------------
+coag.lm <- lm(coag ~ diet, data = coagulation)
+msummary(coag.lm)
 
-## ----coag-mct, tidy = FALSE----------------------------------------------
-coag.model <- lm(coag ~ diet, data = coagulation)
-coag.model1 <- lm(coag ~ 1, data = coagulation)
-anova(coag.model1, coag.model)
+## ----coag03, tidy = FALSE------------------------------------------------
+coag.lm  <- lm(coag ~ diet, data = coagulation)
+coag.lm1 <- lm(coag ~ 1,    data = coagulation)
+anova(coag.lm1, coag.lm)
 
-## ----coag-anova----------------------------------------------------------
-anova(coag.model)
+## ----coag04--------------------------------------------------------------
+anova(coag.lm)
 
-## ----coag-geom-----------------------------------------------------------
+## ----coag05--------------------------------------------------------------
+data(coagulation, package = "faraway")
+# group-by-group tally
 coagulation %>%
+  mutate(grand.mean = mean(coag)) %>%
   group_by(diet) %>%
-  summarise(n=n(), mean = mean(coag), SS = sum((coag - mean(coag))^2))
+  summarise(n = n(), group.mean = mean(coag), 
+            SSE = sum((coag - group.mean)^2),
+            SSM = sum((group.mean - grand.mean)^2),
+            SST = sum((coag - grand.mean)^2))
+
+# individuala tally
 coagulation <- 
   coagulation %>% 
-  group_by(diet) %>%
-  mutate(group_mean = mean(coag))
+  mutate(grand.mean = mean(coag)) %>%
+  group_by(diet) %>% mutate(group.mean = mean(coag)) %>%
+  ungroup()
+coagulation %>% sample(5)
 
-grandMean <- mean( ~ coag, data = coagulation); grandMean
-groupMean <- coagulation$group_mean; groupMean
-SST <- sum((coagulation$coag - grandMean)^2); SST  # total variation
-SSE <- sum((coagulation$coag - groupMean)^2); SSE  # w/in group variation
-SSM <- sum((groupMean - grandMean)^2 ); SSM        # b/w group variation
+data.frame(
+  SST = sum( ~ (coag - grand.mean)^2, data = coagulation),
+  SSE = sum( ~ (coag - group.mean)^2, data = coagulation),
+  SSM = sum( ~ (group.mean - grand.mean)^2, data = coagulation))
 
-## ----coag-anova2---------------------------------------------------------
-anova(coag.model)
+## ----coag04r-------------------------------------------------------------
+anova(coag.lm)
 
-## ----coag-lm2------------------------------------------------------------
-coag.model <- lm(coag ~ diet, data = coagulation)
-summary(coag.model)
+## ----coag02r-------------------------------------------------------------
+coag.lm <- lm(coag ~ diet, data = coagulation)
+msummary(coag.lm)
 
-## ----coag-alt------------------------------------------------------------
+## ----coag06, eval = FALSE------------------------------------------------
+## model.matrix(coag.lm)
+
+## ----coag-alt01----------------------------------------------------------
 coag.altmodel <- lm(coag ~ -1 + diet, data = coagulation)
-summary(coag.altmodel)
+msummary(coag.altmodel)
 
-## ----airp-summary--------------------------------------------------------
+## ----coag-alt02, eval = FALSE--------------------------------------------
+## model.matrix(coag.altmodel);
+
+## ----coag-recenter-------------------------------------------------------
+data(coagulation, package = "faraway")
+Coag0 <-
+  coagulation %>%
+  mutate(grand.mean = mean(coag)) %>%
+  group_by(diet) %>% 
+  mutate(coag0 = coag - grand.mean) %>%
+  ungroup()
+lm(coag0 ~ -1 + diet, data = Coag0) %>%
+  msummary()
+
+## ----airp01--------------------------------------------------------------
 mean(pollution ~ location, data = AirPollution)
 
-## ----airp-anova----------------------------------------------------------
-airp.model <- lm(pollution ~ location, data = AirPollution)
-anova(airp.model)
+## ----airp02--------------------------------------------------------------
+airp.lm <- lm(pollution ~ location, data = AirPollution)
+anova(airp.lm)
 
-## ----seed=1234, include = FALSE, digits = 2------------------------------
+## ----seed = 1234, include = FALSE, digits = 2----------------------------
 Study <- data.frame(
   type = rep(LETTERS[1:3], each = 5),
   yield = rnorm(15, mean = rep(c(17.5, 19, 20), each = 5), sd = 0.75)
@@ -7004,7 +7199,7 @@ Study <- data.frame(
 ## ----digits = 3----------------------------------------------------------
 favstats(yield ~ type, data = Study)
 
-## ------------------------------------------------------------------------
+## ----anova-table-sol-----------------------------------------------------
 favstats(yield ~ type, data = Study)
 anova(lm(yield ~ type, data = Study))
 group.means <- round(c(mean(yield ~ type, data = Study)), 1); group.means
@@ -7015,210 +7210,226 @@ data_frame(
   SSM = sum(5 * (group.means - y.bar)^2), MSM = SSM / 2, 
   F = MSM/MSE, p = 1 - pf(F, 2, 12))
 
-## ----petstress-----------------------------------------------------------
+## ----petstress-sol01-----------------------------------------------------
 pet.lm <- lm(rate ~ group, data = PetStress)
 favstats(rate ~ group, data = PetStress)
 
-## ------------------------------------------------------------------------
+## ----petstress-sol02-----------------------------------------------------
 anova(pet.lm)
 
-## ------------------------------------------------------------------------
-summary(pet.lm)
+## ----petstress-sol03-----------------------------------------------------
+msummary(pet.lm)
 
-## ----airp-modcomp1, tidy = FALSE-----------------------------------------
+## ----airp-modcomp01, tidy = FALSE----------------------------------------
 # convert location to a numeric variable for convenience
 AirP <- AirPollution %>%
   mutate(loc = as.numeric(location))
 model <- lm(pollution ~ location, data = AirP)
-model2 <- lm(pollution ~  1 + (loc==3), data = AirP)
+model2 <- lm(pollution ~  1 + (loc == 3), data = AirP)
 anova(model2, model)
 
-## ----airp-modcomp2-------------------------------------------------------
+## ----airp-modcomp02------------------------------------------------------
 # build a variable that makes the model easier to describe 
-AirP <- AirP %>% mutate(x  = (loc==2) + 0.5 * (loc==3))
+AirP <- AirP %>% mutate(x  = (loc == 2) + 0.5 * (loc == 3))
 model3 <- lm(pollution ~ 1 + x, data = AirP)
 anova(model3, model)
 
-## ----airp-modcomp2a, tidy = FALSE----------------------------------------
+## ----airp-modcomp03, tidy = FALSE----------------------------------------
 # build two variables that make the model easier to describe 
 AirP <- AirP %>% mutate(
-  x1 = (loc==1) + 0.5 * (loc==3),
-  x2 = (loc==2) + 0.5 * (loc==3))
+  x1 = (loc == 1) + 0.5 * (loc == 3),
+  x2 = (loc == 2) + 0.5 * (loc == 3))
 model3 <- lm(pollution ~ -1 + x1 + x2, data = AirP)
 anova(model3, model)
 
 ## ----airp-vectors--------------------------------------------------------
-u1 <- 1/2 * c(1,1,-1,-1,0,0)
-u2 <- 1/sqrt(12) * c(1,1,1,1,-2,-2)
+u1 <- 1/2 * c(1, 1, -1, -1, 0, 0)
+u2 <- 1 / sqrt(12) * c(1, 1, 1, 1, -2, -2)
 dot(AirPollution$pollution, u1)
 dot(AirPollution$pollution, u2)
 t1 <- dot(AirPollution$pollution, u1) / sqrt(202/3); t1
 t2 <- dot(AirPollution$pollution, u2) / sqrt(202/3); t2
 t1^2
 t2^2
-2 * pt(- abs(t1), df=3 )
-2 * pt(- abs(t2), df=3 )
+2 * pt( - abs(t1), df = 3)
+2 * pt( - abs(t2), df = 3)
 
-## ----coag-lm3------------------------------------------------------------
-coag.model <- lm(coag ~ diet, data = coagulation)
-summary(coag.model)
+## ----coag07--------------------------------------------------------------
+msummary(coag.lm)
 
 ## ----airp-TukeyHSD-------------------------------------------------------
-airp.model <- lm(pollution ~ location, data = AirPollution)
-TukeyHSD(airp.model)
+airp.lm <- lm(pollution ~ location, data = AirPollution)
+TukeyHSD(airp.lm)
 
-## ----airp-glht-----------------------------------------------------------
-require(multcomp)
-airp.cint <- confint(glht(airp.model, mcp(location = "Tukey")))
+## ----airp-glht01, fig.keep = "none"--------------------------------------
+require(multcomp) 
+airp.cint <- confint(glht(airp.lm, mcp(location = "Tukey")))
 airp.cint  
 plot(airp.cint)
-mplot(TukeyHSD(airp.model))  
+mplot(TukeyHSD(airp.lm))  
+
+## ----airp-glht01-fig, echo = FALSE, results = "hide"---------------------
+require(multcomp) 
+airp.cint <- confint(glht(airp.lm, mcp(location = "Tukey")))
+airp.cint  
+plot(airp.cint)
+mplot(TukeyHSD(airp.lm))  
 
 ## ----coag-TukeyHSD-------------------------------------------------------
-coag.model <- lm(coag ~ diet, data = coagulation); coag.model
-TukeyHSD(coag.model)
+coag.lm <- lm(coag ~ diet, data = coagulation)
+TukeyHSD(coag.lm)
 
 ## ----coag-glht, fig.show="hide"------------------------------------------
 require(multcomp)
-coag.glht <- glht(coag.model, mcp(diet = "Tukey"))
-summary(coag.glht)  
-mplot(TukeyHSD(coag.model)) 
+coag.glht <- glht(coag.lm, mcp(diet = "Tukey"))
+msummary(coag.glht)  
 plot(confint(coag.glht))
+mplot(TukeyHSD(coag.lm)) 
 
-## ----coag-glht-fig, echo=FALSE, results="hide", message = FALSE----------
-mplot(TukeyHSD(coag.model)) 
+## ----coag-glht-fig, echo = FALSE, results = "hide", message = FALSE------
+require(multcomp)
+coag.glht <- glht(coag.lm, mcp(diet = "Tukey"))
+msummary(coag.glht)  
+plot(confint(coag.glht))
+mplot(TukeyHSD(coag.lm)) 
 
-## ----airp-glht1, tidy=FALSE----------------------------------------------
+## ----airp-glht02, tidy = FALSE-------------------------------------------
 airp.lm1 <- lm(pollution ~ location, data = AirPollution)
 # specify contrasts by giving the coefficients
 contr <- rbind(
-	c(0,1,0),
-	c(0,0.5,-1))
+	c(0, 1, 0),
+	c(0, 0.5, -1))
 # we can give our contrasts custom names if we like
 contr1 <- rbind(
-	"hill - plains" = c(0,1,0),
-	"suburb - urban" = c(0,0.5,-1))
-summary(glht(airp.lm1, contr1))
+	"hill - plains" = c(0, 1, 0),
+	"suburb - urban" = c(0, 0.5, -1))
+msummary(glht(airp.lm1, contr1))
 
-## ----airp-glht1a, tidy = FALSE-------------------------------------------
+## ----airp-glht03, tidy = FALSE-------------------------------------------
 # these look nicer if we parameterize differently in the model
 airp.lm2 <- lm(pollution ~ -1 + location, data = AirPollution)
 contr2 <- rbind(
-	"hill - plains" = c(1,-1,0),
-	"suburb - urban" = c(1,1,-2))
-summary(glht(airp.lm2, contr2))
+	"hill - plains" = c(1, -1, 0),
+	"suburb - urban" = c(1, 1, -2))
+msummary(glht(airp.lm2, contr2))
 
-## ----airp-glht1b, tidy = FALSE-------------------------------------------
+## ----airp-glht04, tidy = FALSE-------------------------------------------
 # using mcp() to help build the contrasts
 airp.lm3 <- lm(pollution ~ location, data = AirPollution)
 contr3 <- mcp(location = rbind(
-	"hill - plains" = c(1,-1,0),
-	"suburb - urban" = c(1,1,-2)
+	"hill - plains" = c(1, -1, 0),
+	"suburb - urban" = c(1, 1, -2)
 	))
-summary(glht(airp.lm3, contr3))
+msummary(glht(airp.lm3, contr3))
 
-## ----airp-glht1c---------------------------------------------------------
+## ----airp-glht05---------------------------------------------------------
 # unadjusted p-values 
 2 * pt(-0.731, df = 3)
 2 * pt(-2.533, df = 3)
 
-## ----airp-glht1d, tidy = FALSE-------------------------------------------
+## ----airp-glht06, tidy = FALSE-------------------------------------------
 airp.lm4 <- lm(pollution ~ location, data = AirPollution)
 contr4 <- mcp(location = rbind(
-	"hill - plains" = c(1,-1,0)))
-summary(glht(airp.lm4, contr4))
+	"hill - plains" = c(1, -1, 0)))
+msummary(glht(airp.lm4, contr4))
 
-## ----cholesterol, fig.show="hide"----------------------------------------
+## ----cholesterol01, fig.show = "hide"------------------------------------
 data(cholesterol, package = "multcomp")
-chol.model <- lm(response ~ trt, data = cholesterol)
-plot(chol.model, w = c(5, 2))       # diagnostic plots
-summary(chol.model)
-anova(chol.model)
+chol.lm <- lm(response ~ trt, data = cholesterol)
+plot(chol.lm, w = c(5, 2))       # diagnostic plots
+msummary(chol.lm)
+anova(chol.lm)
 
-## ----cholesterol-fig, echo=FALSE-----------------------------------------
+## ----cholesterol01-fig, echo = FALSE, results = "hide"-------------------
 data(cholesterol, package = "multcomp")
-chol.model <- lm(response ~ trt, data = cholesterol)
-plot(chol.model, w = c(5, 2))       # diagnostic plots
-summary(chol.model)
-anova(chol.model)
+chol.lm <- lm(response ~ trt, data = cholesterol)
+plot(chol.lm, w = c(5, 2))       # diagnostic plots
+msummary(chol.lm)
+anova(chol.lm)
 
-## ----cholesterol-HSD-----------------------------------------------------
-chol.glht <- confint(glht(chol.model, mcp(trt = "Tukey")))
-summary(chol.glht)
+## ----cholesterol02, fig.keep = "none"------------------------------------
+chol.glht <- confint(glht(chol.lm, mcp(trt = "Tukey")))
+msummary(chol.glht)
 plot(confint(chol.glht))
 
-## ----chol-contrasts, tidy = FALSE----------------------------------------
-###hop:9-15
-summary(glht(chol.model, mcp(trt = 
-    rbind(
-        "1time - 2times" = c(1,-1,0,0,0),
-        "(1 or 2 times) - 4times" = c(0.5,0.5,-1,0,0),
-        "new - old" = c(2,2,2,-3,-3)/6,
-        "drugD - drugE" = c(0,0,0,1,-1))
-    )))
+## ----cholesterol02-fig, echo = FALSE, results = "hide"-------------------
+chol.glht <- confint(glht(chol.lm, mcp(trt = "Tukey")))
+msummary(chol.glht)
+plot(confint(chol.glht))
 
-## ----chol-contrast, tidy = FALSE-----------------------------------------
-confint(glht(chol.model, mcp(trt = 
+## ----cholesterol03, tidy = FALSE-----------------------------------------
+glht(chol.lm, 
+     mcp(trt = 
+           rbind(
+             "1time - 2times" = c(1, -1, 0, 0, 0),
+             "(1 or 2 times) - 4times" = c(0.5, 0.5, -1, 0, 0),
+             "new - old" = c(2, 2, 2, -3, -3)/6,
+             "drugD - drugE" = c(0, 0, 0, 1, -1))
+     )) %>%
+  summary()
+
+## ----cholesterol04, tidy = FALSE-----------------------------------------
+confint(glht(chol.lm, mcp(trt = 
     rbind(
-        "new - old" = c(2,2,2,-3,-3)/6)
+        "new - old" = c(2, 2, 2, -3, -3)/6)
     )))
 
 ## ----coag-dunnet---------------------------------------------------------
-summary(glht(coag.model, mcp(diet = "Dunnet")))
+glht(coag.lm, mcp(diet = "Dunnet")) %>% 
+  summary()
 
-## ----taste-anova, fig.show="hide"----------------------------------------
+## ----taste-anova, fig.show = "hide"--------------------------------------
 favstats(score ~ type, data = TasteTest)
 xyplot(score ~ type, data = TasteTest)
 taste.lm <- lm(score ~ type, data = TasteTest)
 anova(taste.lm)
-taste.cint <- confint(glht(taste.lm, mcp(type="Tukey"))); taste.cint
+taste.cint <- confint(glht(taste.lm, mcp(type = "Tukey"))); taste.cint
 plot(taste.cint)
 
-## ----taste-anova-fig, echo=FALSE-----------------------------------------
+## ----taste-anova-fig, echo = FALSE, results = "hide"---------------------
 favstats(score ~ type, data = TasteTest)
 xyplot(score ~ type, data = TasteTest)
 taste.lm <- lm(score ~ type, data = TasteTest)
 anova(taste.lm)
-taste.cint <- confint(glht(taste.lm, mcp(type="Tukey"))); taste.cint
+taste.cint <- confint(glht(taste.lm, mcp(type = "Tukey"))); taste.cint
 plot(taste.cint)
 
-## ----cholesterol-comb----------------------------------------------------
-model1 <- lm(response ~ trt, data = cholesterol)
+## ----cholesterol05-------------------------------------------------------
+chol.lm1 <- lm(response ~ trt, data = cholesterol)
 cholesterol <- 
   cholesterol %>% 
   mutate(x1 = trt == "drugD", x2 = trt == "drugE")
-model2 <- lm(response~ 1 + x1 + x2 , cholesterol)
-anova(model1, model2)
+chol.lm2 <- lm(response~ 1 + x1 + x2 , cholesterol)
+anova(chol.lm1, chol.lm2)
 
 ## ----bugs----------------------------------------------------------------
 model <- aov(sqrt(trapped) ~ color, data = Bugs)
 TukeyHSD(model)
 model <- lm(sqrt(trapped) ~ color, data = Bugs)
-summary(glht(model,mcp(Color="Tukey")))
+glht(model, mcp(color = "Tukey")) %>%
+  summary()          
 
-## ----taste-xtab----------------------------------------------------------
+## ----taste01-------------------------------------------------------------
 mean(score ~ scr + liq, data = TasteTest, .format = "table")
 
-## ----taste-2way-anova----------------------------------------------------
+## ----taste02-------------------------------------------------------------
 taste.lm <- lm(score ~ scr * liq, data = TasteTest)
 anova(taste.lm)
 
-## ----taste-2way-read-----------------------------------------------------
-
-## ----taste-2way-lm-------------------------------------------------------
+## ----taste03-------------------------------------------------------------
 taste.lm <- lm(score ~ scr * liq, data = TasteTest)
-summary(taste.lm)
+msummary(taste.lm)
 
-## ----taste-2way-matrix---------------------------------------------------
-M <- cbind(                                    # model matrix
-        "C1" = rep(c(-1,-1,1,1),each=4)/2,     # C1
-        "C2" = rep(c(-1,1,-1,1),each=4)/2,     # C2
-        "C3" = rep(c(1,-1,-1,1),each=4)/4      # C3
+## ----taste04-------------------------------------------------------------
+M <- cbind(                                # model matrix
+        "C1" = rep(c(-1, -1, 1, 1), each = 4)/8,     # C1
+        "C2" = rep(c(-1, 1, -1, 1), each = 4)/8,     # C2
+        "C3" = rep(c(1, -1, -1, 1), each = 4)/4      # C3
         )
 taste.lm2 <- lm(score ~ M, data = TasteTest)
-summary(taste.lm2)
+msummary(taste.lm2)
 
-## ----taste-mct-----------------------------------------------------------
+## ----taste05-------------------------------------------------------------
 NTaste <- data.frame(score = TasteTest$score,
                      scr   = as.numeric(TasteTest$scr) - 1,
                      liq   = as.numeric(TasteTest$liq) - 1,
@@ -7228,8 +7439,8 @@ NTaste <- data.frame(score = TasteTest$score,
 
 Omega <- lm(score ~ scr * liq, data= TasteTest)
 M <- model.matrix(Omega)
-M2 <- cbind(M[,3], M[,2] - 2 * M[,4])
-M3 <- cbind(M[,2], M[,3] - 2 * M[,4])
+M2 <- cbind(M[, 3], M[, 2] - 2 * M[, 4])
+M3 <- cbind(M[, 2], M[, 3] - 2 * M[, 4])
 
 omega1  <- lm(score ~ scr + liq, data = TasteTest)
 omega2  <- lm(score ~ M2, data = TasteTest)
@@ -7239,346 +7450,316 @@ omega3a <- lm(score~ scr + I(liq - 2 * scrliq), data = NTaste)
 
 anova(omega1, Omega)   # test for interaction
 # test main effect for scr
-# anova(omega2a,Omega)  # this gives the same result as line below
+# anova(omega2a, Omega)  # this gives the same result as line below
 anova(omega2, Omega)   
 # test main effect for liq
-# anova(omega3a,Omega)  # this gives the same result as line below
+# anova(omega3a, Omega)  # this gives the same result as line below
 anova(omega3, Omega)   
 
-## ----noise-math1---------------------------------------------------------
-model1 <- lm(score ~ noise + group, data = MathNoise)
-anova(model1)
+## ----noise01-------------------------------------------------------------
+noise.lm <- lm(score ~ noise + group, data = MathNoise)
+anova(noise.lm)
 favstats(score ~ group, data = MathNoise)
 
-## ----noise-math2---------------------------------------------------------
-model2 <- lm(score ~ noise * group, data = MathNoise)
-anova(model2)
+## ----noise02-------------------------------------------------------------
+noise.lm2 <- lm(score ~ noise * group, data = MathNoise)
+anova(noise.lm2)
 
-## ----noise-math-plots, fig.show="hide"-----------------------------------
+## ----noise03, fig.show = "hide"------------------------------------------
 xyplot(score ~ noise, groups = group, data = MathNoise,
-    type='a', auto.key = list(lines=T, points=F, columns=2))
-xyplot(score ~ noise, groups = group, data = MathNoise,
-    auto.key = list(lines=F, points=T, columns=2))
+    type = c("p", "a"), jitter.x = TRUE,
+    auto.key = list(lines = TRUE, points = TRUE, columns = 2))
 xyplot(score ~ group, groups = noise, data = MathNoise,
-    type='a', auto.key = list(lines=T,points=F,columns=2))
-xyplot(score ~ group, groups = noise, data = MathNoise,
-    auto.key = list(lines=F,points=T,columns=2))
+    type = c("p", "a"), jitter.x = TRUE,
+    auto.key = list(lines = TRUE, points = TRUE, columns = 2))
 
-## ----noise-math-plots-fig, echo=FALSE------------------------------------
+## ----noise03-fig, echo = FALSE, results = "hide", seed = 1234------------
 xyplot(score ~ noise, groups = group, data = MathNoise,
-    type='a', auto.key = list(lines=T, points=F, columns=2))
-xyplot(score ~ noise, groups = group, data = MathNoise,
-    auto.key = list(lines=F, points=T, columns=2))
+    type = c("p", "a"), jitter.x = TRUE,
+    auto.key = list(lines = TRUE, points = TRUE, columns = 2))
 xyplot(score ~ group, groups = noise, data = MathNoise,
-    type='a', auto.key = list(lines=T,points=F,columns=2))
-xyplot(score ~ group, groups = noise, data = MathNoise,
-    auto.key = list(lines=F,points=T,columns=2))
+    type = c("p", "a"), jitter.x = TRUE,
+    auto.key = list(lines = TRUE, points = TRUE, columns = 2))
 
-## ----poison--------------------------------------------------------------
-poison.lm <- lm(time~factor(poison) * factor(treatment), data = Poison)
+## ----poison01------------------------------------------------------------
+poison.lm <- 
+  lm(time ~ factor(poison) * factor(treatment), data = Poison)
 anova(poison.lm)
 
-## ----poison-resid, fig.show="hide"---------------------------------------
-xplot(poison.lm, w = c(4, 2))
+## ----poison02, fig.show = "hide"-----------------------------------------
+plot(poison.lm, w = 1:2)
 
-## ----poison-resid-fig, echo=FALSE----------------------------------------
-xplot(poison.lm, w = c(4, 2))
+## ----poison02-fig, echo = FALSE, results = "hide"------------------------
+plot(poison.lm, w = 1:2)
 
-## ----poison-trans, fig.show="hide"---------------------------------------
-poison.lm2 <- lm(1/time ~ factor(poison) * factor(treatment), data = Poison)
-xplot(poison.lm2, w = c(4, 2))
+## ----poison03, fig.show = "hide"-----------------------------------------
+poison.lm2 <- 
+  lm(1/time ~ factor(poison) * factor(treatment), data = Poison)
+plot(poison.lm2, w = 1:2)
 
-## ----poison-trans-fig, echo=FALSE----------------------------------------
-poison.lm2 <- lm(1/time ~ factor(poison) * factor(treatment), data = Poison)
-xplot(poison.lm2, w = c(4, 2))
+## ----poison-trans-fig, echo = FALSE, results = "hide"--------------------
+
 
 ## ----poison-trans-anova--------------------------------------------------
 anova(poison.lm2)
 
-## ----pallets-1way--------------------------------------------------------
-pal.lm1 <- lm(pallets ~ employee, data = Pallets)
-anova(pal.lm1)
+## ----pallets01-----------------------------------------------------------
+pallets.lm1 <- lm(pallets ~ employee, data = Pallets)
+anova(pallets.lm1)
 
-## ----pallets-blocking----------------------------------------------------
-pal.lm2 <- lm(pallets ~ employee + day, data = Pallets)
-anova(pal.lm2)
+## ----pallets02-----------------------------------------------------------
+pallets.lm2 <- lm(pallets ~ day + employee, data = Pallets)
+anova(pallets.lm2)
 
-## ----pallets-summary-----------------------------------------------------
-summary(pal.lm2) 
+## ----pallets03, fig.keep = "none"----------------------------------------
+xyplot(
+  pallets ~ day, data = Pallets,
+  groups = employee,
+  type="b", auto.key = list(columns = 2, lines = TRUE))
 
-## ----pallets-plot-fig, tidy = FALSE--------------------------------------
-xyplot(pallets ~ day, data = Pallets,
-			groups = employee,
-			type='b', auto.key = list(columns = 2, lines = TRUE))
+## ----pallets03-fig, tidy = FALSE, echo = FALSE, results = "hide"---------
+xyplot(
+  pallets ~ day, data = Pallets,
+  groups = employee,
+  type="b", auto.key = list(columns = 2, lines = TRUE))
 
-## ----pallets-percs-------------------------------------------------------
-pal <- Pallets$pallets; dim(pal) <- c(5,4); pal
-palperc <- 100 * row.perc(pal); palperc
-Pallets$palperc <- as.vector(palperc)
+## ----pallets04-----------------------------------------------------------
+msummary(pallets.lm2)
 
 ## ----pallets-perc--------------------------------------------------------
-pal <- Pallets$pallets; dim(pal) <- c(5,4); pal
-palperc <- 100 * row.perc(pal); palperc
-Pallets$palperc <- as.vector(palperc)
+Pallets2 <-
+  Pallets %>% 
+  group_by(day) %>% mutate(total = sum(pallets)) %>%
+  group_by(day, employee) %>% mutate(perc = 100 * pallets / total)
 
-## ------------------------------------------------------------------------
-anova(lm(palperc ~ employee, data = Pallets))
-confint(glht(lm(palperc ~ employee, data = Pallets), 
-             mcp(employee = 'Tukey')))
+## ----pallets-perc-sol01--------------------------------------------------
 
-## ------------------------------------------------------------------------
-anova(lm(palperc ~ employee + day, data = Pallets))
-confint(glht(lm(palperc ~ employee + day, data = Pallets), mcp(employee = 'Tukey')))
-plot(confint(glht(lm(palperc ~ employee + day, Pallets), mcp(employee = 'Tukey'))))
+## ----palets-perc---------------------------------------------------------
+anova(lm(perc ~ employee, data = Pallets2))
+confint(glht(lm(perc ~ employee, data = Pallets2), 
+             mcp(employee = "Tukey")))
 
-## ----utilities-kwh-int, fig.show="hide"----------------------------------
-ut.lm3 <- lm(thermsPerDay ~ temp * kwhpday, data = Utilities2)
-summary(ut.lm3)
-xplot(ut.lm3)
-
-## ----utilities-kwh-int-fig, echo=FALSE-----------------------------------
-ut.lm3 <- lm(thermsPerDay ~ temp * kwhpday, data = Utilities2)
-summary(ut.lm3)
-xplot(ut.lm3)
-
-## ----utilities-kwh-int2--------------------------------------------------
-coef(ut.lm3)[1] +  coef(ut.lm3)[2] * 36
-coef(ut.lm3)[3] +  coef(ut.lm3)[4] * 36
-
-## ----utilities-uniroot---------------------------------------------------
-f <- function(x) { 
-        coef(ut.lm3)[4] * x + coef(ut.lm3)[3] - coef(ut.lm2)[3] 
-}
-uniroot( f, c(20,50) )$root 
-
-## ----utilities-month, fig.show="hide"------------------------------------
-# remove first few observations because of bad meter read
-Ut2 <- Utilities %>% filter(year > 2000 | month > 6)
-Ut2.lm <- lm(thermsPerDay ~ month + I(month^2), data = Ut2)
-summary(Ut2.lm)
-plotModel(Ut2.lm)
-xplot(Ut2.lm, w=1:2)
-
-## ----utilities-month-fig, echo=FALSE-------------------------------------
-
-
-## ----utilities-month2----------------------------------------------------
-Ut2$monthShifted <- (Ut2$month - 2) %% 12
-Ut2.lm2 <- lm(thermsPerDay ~ monthShifted + I(monthShifted^2), data = Ut2)
-summary(Ut2.lm2)
-plotModel(Ut2.lm2)
-xplot(Ut2.lm2, w = 1:2)
-
-## ----utilities-month3----------------------------------------------------
-Ut2.lm3 <- lm(thermsPerDay ~ poly(monthShifted, 2), data = Ut2)
-summary(Ut2.lm3)
-quantile(fitted(Ut2.lm2) - fitted(Ut2.lm3))
-
-## ----eval=FALSE----------------------------------------------------------
-## px <- poly(Ut2$monthShifted, 2); px
-
-## ------------------------------------------------------------------------
-    model1 <- lm (thermsPerDay ~ monthShifted, data = Ut2)
-    model2 <- lm (thermsPerDay ~ monthShifted + I(monthShifted^2), data = Ut2)
-model1poly <- lm (thermsPerDay ~ poly(monthShifted,1),  data = Ut2)
-model2poly <- lm (thermsPerDay ~ poly(monthShifted,2),  data = Ut2)
+## ----pallets-perc-sol02--------------------------------------------------
+anova(lm(perc ~ employee + day, data = Pallets2))
+confint(glht(lm(perc ~ employee + day, data = Pallets2), mcp(employee = "Tukey")))
+plot(confint(glht(lm(perc ~ employee + day, Pallets2), mcp(employee = "Tukey"))))
 
 ## ----domedata------------------------------------------------------------
 data(domedata, package = "alr3") 
-summary(domedata)
+msummary(domedata)
 
-## ----domedata-step-------------------------------------------------------
-dome.lm1 <- lm(Dist ~ Velocity + Angle + BallWt + BallDia + Cond, data=domedata)
-step(dome.lm1, direction="both")
-dome.lm2 <- lm(Dist ~ Velocity + Cond, data = domedata)
-summary(dome.lm2)
-anova(dome.lm2,dome.lm1)
-dome.lm3 <- lm(Dist ~ Velocity + Cond + BallDia, data = domedata)
-anova(dome.lm2, dome.lm3)
+## ----domedata-step01-----------------------------------------------------
+dome.lm1 <- 
+  lm(Dist ~ Velocity + Angle + BallWt + BallDia + Cond, data = domedata)
+step(dome.lm1, direction = "both", trace = FALSE)
+
+## ----domedata-step02-----------------------------------------------------
+step(
+  lm(Dist ~ 1, data = domedata),  # starting point
+  scope = Dist ~ Velocity + Angle + BallWt + BallDia + Cond, 
+  direction = "forward", trace = FALSE)
 
 ## ----seatpos-lm----------------------------------------------------------
 data(seatpos, package = "faraway")
 seatpos.lm1 <- lm(hipcenter ~ ., data = seatpos)
-summary(seatpos.lm1)
+msummary(seatpos.lm1)
 
 ## ----seatpos-vif---------------------------------------------------------
 faraway::vif(seatpos.lm1)
 
-## ----seatpos-cor, fig.show="hide"----------------------------------------
+## ----seatpos-cor, fig.show = "hide"--------------------------------------
 car::scatterplotMatrix(
   ~ Age + Arm + hipcenter + Ht + HtShoes + Leg + Seated + Thigh + Weight, 
   data = seatpos,
   reg.line = lm, smooth = TRUE, span = 0.5, 
-  diagonal = 'density')
+  diagonal = "density")
 round(cor(seatpos), 2)
+corrgram::corrgram(seatpos, order = TRUE)
 
-## ----seatpos-cor-fig, echo=FALSE, results="hide", opts.label="figbig"----
+## ----seatpos-cor-fig, echo = FALSE, results = "hide", opts.label = "figbig"----
 car::scatterplotMatrix(
   ~ Age + Arm + hipcenter + Ht + HtShoes + Leg + Seated + Thigh + Weight, 
   data = seatpos,
   reg.line = lm, smooth = TRUE, span = 0.5, 
-  diagonal = 'density')
+  diagonal = "density")
 round(cor(seatpos), 2)
-require(corrgram)
-corplot <- corrgram(seatpos, order=T)
+corrgram::corrgram(seatpos, order = TRUE)
 
 ## ----seatpos-lm2---------------------------------------------------------
 seatpos.lm2 <- lm(hipcenter ~ Age + Weight + Ht, data = seatpos)
-summary(seatpos.lm2)
+msummary(seatpos.lm2)
 faraway::vif(seatpos.lm2)
 
 ## ----seatpos-pc----------------------------------------------------------
-pc=with(seatpos,princomp(cbind(HtShoes,Ht,Seated,Arm,Thigh,Leg),
-    scores=T))
-summary(pc, loadings=T)
-seatpos.lmpc <-lm(hipcenter ~ Age + Weight + pc$scores[,1], data = seatpos)
-summary(seatpos.lmpc)
+pc = with(seatpos, 
+          princomp(cbind(HtShoes, Ht, Seated, Arm, Thigh, Leg),
+                   scores = TRUE))
+msummary(pc, loadings = TRUE)
+seatpos.lmpc <-lm(hipcenter ~ Age + Weight + pc$scores[, 1], data = seatpos)
+msummary(seatpos.lmpc)
 faraway::vif(seatpos.lmpc)
+
+## ----eval = FALSE--------------------------------------------------------
+## x <- 0.65*HtShoes + 0.65*Ht + 0.27*Seated + 0.15*Arm + 0.17*Thigh + 0.18*Leg
 
 ## ----seatpos-step--------------------------------------------------------
 # trace=0 turns off intermediate reporting
 seatpos.lmstep <- step(seatpos.lm1, trace = 0)  
-summary(seatpos.lmstep)
+msummary(seatpos.lmstep)
 faraway::vif(seatpos.lmstep)
-anova(seatpos.lm1, seatpos.lmstep)
 
-## ----ice-baseline-summary------------------------------------------------
-mean(b1930 ~ location + treatment, data = Ice, .format = "table")
+## ----ice01---------------------------------------------------------------
+Ice %>% 
+  group_by(location, treatment) %>%
+  summarise(mean(b1930))
 
-## ----ice-baseline-int----------------------------------------------------
+## ----ice02---------------------------------------------------------------
 base.lmint <- lm(b1930 ~ location * treatment, data = Ice)
 anova(base.lmint)
 
-## ----ice-baseline-add, fig.show='hide'-----------------------------------
+## ----ice03, fig.show = "hide"--------------------------------------------
 base.lmadd <- lm(b1930 ~ location + treatment, data = Ice)
 anova(base.lmadd)
-xplot(base.lmadd, w = c(5, 2))
+plot(base.lmadd, w = c(5, 2))
 
-## ----ice-baseline-add-fig, echo=FALSE------------------------------------
+## ----ice03-fig, echo = FALSE, results = "hide"---------------------------
 base.lmadd <- lm(b1930 ~ location + treatment, data = Ice)
 anova(base.lmadd)
-xplot(base.lmadd, w = c(5, 2))
+plot(base.lmadd, w = c(5, 2))
 
-## ----ice-baseline-tukey--------------------------------------------------
+## ----ice04---------------------------------------------------------------
 require(multcomp) 
 confint(glht(base.lmadd, mcp(treatment = "Tukey")), level = 0.9)
 
-## ----ice-treatment-------------------------------------------------------
+## ----ice05---------------------------------------------------------------
 ice.trt <- lm(t1930 - b1930 ~ treatment * location, data = Ice)
 anova(ice.trt)
 
-## ----ice-treatment-intr--------------------------------------------------
+## ----ice06---------------------------------------------------------------
 ice.trt2 <- lm(t1930 - b1930 ~ treatment, data = Ice,
-                 subset = location == 'intramuscular')
-summary(ice.trt2)
+                 subset = location == "intramuscular")
+msummary(ice.trt2)
+confint(glht(ice.trt2, mcp(treatment = "Tukey")), level = 0.90)
 
-confint(glht(ice.trt2, mcp(treatment = 'Tukey')), level = 0.90)
+## ----ice07---------------------------------------------------------------
+Ice2 <-
+  Ice %>% 
+  select(subject, treatment, location, t1930) %>% 
+  tidyr::spread(location, t1930) %>% 
+  rename(surfTemp = surface, intraTemp = intramuscular)
+anova(lm(surfTemp - intraTemp ~ treatment, data = Ice2))
 
-## ----ice-diff------------------------------------------------------------
-surface <- Ice[Ice$location=='surface', c("treatment", "t1930")]
-intra <- Ice[Ice$location == 'intramuscular', "t1930"]
-newdata <- cbind(surface, intra)
-names(newdata) <- c('treatment', 'surfTemp', 'intraTemp')
-anova(lm(surfTemp - intraTemp ~ treatment, data = newdata))
+## ----fusion01------------------------------------------------------------
+# merge FUSION1 and Pheno keeping only id's that are in both
+Fusion1m <- merge(FUSION1, Pheno, by = "id", all = FALSE) 
 
-## ----fusion1-merged------------------------------------------------------
-# merge FUSION1 and pheno keeping only id's that are in both
-Fusion1m <- merge(FUSION1, Pheno, by='id', all=FALSE) 
-
-## ----fusion1-dose--------------------------------------------------------
+## ----fusion02------------------------------------------------------------
 tally(t2d ~ Gdose, Fusion1m) 
 
-## ----fusion1-glm1, tidy = FALSE------------------------------------------
+## ----fusion03, tidy = FALSE----------------------------------------------
 f1.glm1 <-  
-    glm( factor(t2d) ~ Gdose, Fusion1m, family=binomial)
+    glm( factor(t2d) ~ Gdose, Fusion1m, family = binomial)
 f1.glm1
 
-## ----fusion1-glm1-or-----------------------------------------------------
+## ----fusion04------------------------------------------------------------
 coef(f1.glm1)
 exp(coef(f1.glm1)) 
 
-## ----fusion1-glm1-sum----------------------------------------------------
-summary(f1.glm1) 
+## ----fusion05------------------------------------------------------------
+msummary(f1.glm1) 
 
-## ----fusion1-glm1-mut----------------------------------------------------
-1 - pchisq(3393.6 - 3376.4, df=1)
+## ----fusion06------------------------------------------------------------
+1 - pchisq(3231.4 - 3213.0, df = 1)
 
-## ----fusion1-glm1-dev----------------------------------------------------
-f1.glm0 <- glm(factor(t2d) ~ 1, Fusion1m, family=binomial) 
+## ----fusion07------------------------------------------------------------
+f1.glm0 <- glm(factor(t2d) ~ 1, Fusion1m, family = binomial) 
 deviance(f1.glm0)
 deviance(f1.glm1)
 df1 <- df.residual(f1.glm0) - df.residual(f1.glm1); df1
-1 - pchisq(deviance(f1.glm0) - deviance(f1.glm1), df=df1)
+1 - pchisq(deviance(f1.glm0) - deviance(f1.glm1), df = df1)
 
-## ----fusion1-glm2--------------------------------------------------------
+## ----fusion08------------------------------------------------------------
 f1.glm2 <- 
-    glm(factor(t2d) ~ Gdose + sex, data = Fusion1m, family = binomial())
-f1.glm2
-summary(f1.glm2)
+    glm(factor(t2d) ~ Gdose + sex, data = Fusion1m, 
+        family = binomial())
+msummary(f1.glm2)
 
-## ----fusion1-glm2-dev----------------------------------------------------
+## ----fusion09------------------------------------------------------------
 deviance(f1.glm0)
 deviance(f1.glm2)
 df2 <- df.residual(f1.glm0) - df.residual(f1.glm2); df2
 1 - pchisq(deviance(f1.glm0) - deviance(f1.glm2), df = df2)
 
-## ----step, fig.show="hide"-----------------------------------------------
-step.model <- lm(HR - restHR ~ height * freq, data = Step)
-summary(step.model)
-anova(step.model)
-xyplot(HR - restHR ~ freq, data = Step, groups = height, type='a')
+## ----step, fig.show = "hide"---------------------------------------------
+step.lm <- lm(HR - restHR ~ height * freq, data = Step)
+msummary(step.lm)
+anova(step.lm)
+xyplot(HR - restHR ~ freq, data = Step, groups = height, type = "a")
 
-## ----step-fig, echo=FALSE------------------------------------------------
-step.model <- lm(HR - restHR ~ height * freq, data = Step)
-summary(step.model)
-anova(step.model)
-xyplot(HR - restHR ~ freq, data = Step, groups = height, type='a')
+## ----step-fig, echo = FALSE, results = "hide"----------------------------
+step.lm <- lm(HR - restHR ~ height * freq, data = Step)
+msummary(step.lm)
+anova(step.lm)
+xyplot(HR - restHR ~ freq, data = Step, groups = height, type = "a")
 
-## ----rat-anova, fig.show="hide"------------------------------------------
+## ----rat01, fig.show = "hide"--------------------------------------------
 rat.lm <- lm(consumption ~ location + flavor, data = RatPoison)
 anova(rat.lm)
-plot(rat.lm)
+plot(rat.lm, w=c(1, 2, 5))
+xyplot(consumption ~ flavor, groups = location, data = RatPoison,
+       type = c("p", "a"), 
+       auto.key = list(points = TRUE, lines = TRUE))
 
-## ----rat-anova-fig, echo=FALSE-------------------------------------------
+## ----rat01-fig, echo = FALSE, results = "hide"---------------------------
 rat.lm <- lm(consumption ~ location + flavor, data = RatPoison)
 anova(rat.lm)
-plot(rat.lm)
+plot(rat.lm, w=c(1, 2, 5))
+xyplot(consumption ~ flavor, groups = location, data = RatPoison,
+       type = c("p", "a"), 
+       auto.key = list(points = TRUE, lines = TRUE))
 
-## ----rat-1way------------------------------------------------------------
+## ----rat02---------------------------------------------------------------
 rat.lm1 <- lm(consumption ~ flavor, data = RatPoison)
+anova(rat.lm)
 anova(rat.lm1)
 summary(rat.lm)$sigma
 summary(rat.lm1)$sigma
-(summary(rat.lm1)$sigma/summary(rat.lm)$sigma)^2
-summary(rat.lm)
-summary(rat.lm1)
+summary(rat.lm1)$sigma^2/summary(rat.lm)$sigma^2
 
-## ----concrete-lm1a-------------------------------------------------------
-concrete.lm1 <- lm(strength ~ limestone * water, concrete)
+## ----concrete-perm01-----------------------------------------------------
+concrete.lm <- lm(strength ~ limestone + water, data = Concrete)
 
-## ----concrete-summary----------------------------------------------------
-summary(concrete.lm0)
+## ----concrete-perm02-----------------------------------------------------
+msummary(concrete.lm)
+msummary(concrete.lm)$fstat[1] 
 
-## ----concrete-perm-f, cache=TRUE-----------------------------------------
-fstats <- replicate(5000,
-    {
-    concrete.lm <- lm(sample(strength) ~ limestone * water, concrete)
-    summary(concrete.lm)$fstat[1]
-    }
-)
-mean( fstats > summary(concrete.lm1)$fstat[1] ) 
+## ----concrete-perm03, seed = 12345---------------------------------------
+Null.F <- 
+  do(5000) * lm(shuffle(strength) ~ limestone + water, data = Concrete)
+Null.F %>% head(3)
+prop( ~ (F > summary(concrete.lm)$fstat[1]), data = Null.F) 
 
-## ----concrete-perm-t, cache=TRUE-----------------------------------------
-tstats <- replicate(1000,
-    {
-    concrete.lm <- lm(sample(strength) ~ limestone * water, concrete)
-    summary(concrete.lm)$coef[3,3]
-    }
-)
-mean( abs(tstats) > abs(summary(concrete.lm1)$coef[3,3]) ) 
+## ----concrete-perm04, cache = TRUE, seed = 12345-------------------------
+Null.t2 <- 
+  do(10000) * 
+    lm(strength ~ shuffle(limestone) + water, data = Concrete) %>%
+    coef() %>% getElement(2)
+  
+Null.t3 <- 
+  do(10000) * {
+      lm(strength ~ limestone + shuffle(water), data = Concrete) %>%
+      coef() %>% getElement(3)
+  }
+Null.t2 %>% head(3)
+2 * prop( ~ (result >= coef(concrete.lm)[2]), data = Null.t2)
+2 * prop( ~ (result <= coef(concrete.lm)[3]), data = Null.t3)
 
-## ----smoke-perm, cache=TRUE----------------------------------------------
-tally( ~ student + parents, data = FamilySmoking, margin=FALSE) -> smokeTab; 
+## ----concrete-perm-sol---------------------------------------------------
+histogram( ~ Estimate | factor(.row), data = Null.t, scales = "free",
+           v = c(0, mean(~strength, data = Concrete)))
+
+## ----smoke-perm, cache = TRUE--------------------------------------------
+tally( ~ student + parents, data = FamilySmoking, margin = FALSE) -> smokeTab; 
 smokeTab
 chisq.test(smokeTab)
 observedStat <- chisq.test(smokeTab)$stat
@@ -7587,21 +7768,26 @@ stats <- do(2000) *
                          data = FamilySmoking, margin = FALSE)))
 stats <- stats$X.squared
 sum(stats >= observedStat) -> x; x / length(stats)   # p-value
-binom.test(x, length(stats), alternative = "less")$conf.int
+binom.test(x, length(stats), alternative = "less") %>% confint()
 
 ## ----concrete-anova------------------------------------------------------
-anova(lm(strength ~ limestone * water, concrete))
-anova(lm(strength ~ water * limestone, concrete))
-anova(lm(strength ~ limestone:water + limestone + water, concrete))
-anova(lm(strength ~ limestone:water +  water + limestone, concrete))
+anova(lm(strength ~ limestone * water, data = Concrete))
+anova(lm(strength ~ water * limestone, data = Concrete))
+anova(lm(strength ~ limestone:water + limestone + water, data = Concrete))
+anova(lm(strength ~ limestone:water +  water + limestone, data = Concrete))
 
 ## ----rat-liver-----------------------------------------------------------
-data(rat, package = "alr3")
+data(rat, package = "alr3")  
 rat.lm <- lm(y ~ BodyWt * LiverWt, data = rat)
-summary(rat.lm)
+msummary(rat.lm)
+
+## ----rabbit-table, eval = FALSE------------------------------------------
+## data(rabbit, package = "faraway")
+## tally( ~ treat + block, data = rabbit)
+## xtabs(gain ~ treat + block, data = rabbit)
 
 ## ----rabbit--------------------------------------------------------------
-data(rabbit,package="faraway")
+data(rabbit, package = "faraway")
 rabbit.lm1 <- lm(gain ~ block + treat, data = rabbit)
 rabbit.lm2 <- lm(gain ~ treat + block, data = rabbit)
 rabbit.lm3 <- lm(gain ~ block, data = rabbit)
@@ -7613,7 +7799,7 @@ anova(rabbit.lm1, rabbit.lm3)
 
 ## ------------------------------------------------------------------------
 anova(rabbit.lm2)
-anova(rabbit.lm2,rabbit.lm4)
+anova(rabbit.lm2, rabbit.lm4)
 
 ## ------------------------------------------------------------------------
 # width of Tukey HSD intervals:
@@ -7627,14 +7813,14 @@ eggprod.lm <- lm(eggs ~ block + treat, data = eggprod)
 anova(eggprod.lm)
 
 ## ------------------------------------------------------------------------
-summary(eggprod.lm)
-coef(summary(eggprod.lm))
+msummary(eggprod.lm)
+coef(msummary(eggprod.lm))
 
 ## ------------------------------------------------------------------------
 eggprod.lm1way <- lm(eggs ~ treat, data = eggprod)
 anova(eggprod.lm1way)
 # width of Tukey HSD intervals:
-2 * qtukey(0.95, 3, 6) / sqrt(4) * summary(eggprod.lm)$sigma
+2 * qtukey(0.95, 3, 6) / sqrt(4) * msummary(eggprod.lm)$sigma
 # TukeyHSD() can automate this:
 TukeyHSD(aov(eggs ~ block + treat, eggprod), "treat")
 
@@ -7655,18 +7841,18 @@ F <- dot(y, u)^2 / MSE; F
 1 - pf(F, 1, DFE)                # p-value
 
 ## ------------------------------------------------------------------------
-C_hat <- sum( c(1,2,-3) * mean(pollution ~ location, data = AirPollution)); C_hat
+C_hat <- sum( c(1, 2, -3) * mean(pollution ~ location, data = AirPollution)); C_hat
 t <- (C_hat - C) / (s/kappa)
-2 * pt( - abs(t), df=DFE)
+2 * pt( - abs(t), df = DFE)
 
 ## ------------------------------------------------------------------------
 ### model comparison
 AirPollution <- 
   AirPollution %>%
   mutate(
-    x0 = as.numeric(location==levels(location)[1]),
-    x1 = as.numeric(location==levels(location)[2]),
-    x2 = as.numeric(location==levels(location)[3])
+    x0 = as.numeric(location == levels(location)[1]),
+    x1 = as.numeric(location == levels(location)[2]),
+    x2 = as.numeric(location == levels(location)[3])
   )
 AirPollution
 # using mu1 = 3 * mu3 - 2 * mu2
@@ -7676,7 +7862,7 @@ anova(model2, model)
 model3 <- lm(pollution ~ 1 + I(1.5 * x1 + x2), data = AirPollution)
 anova(model3, model)
 
-## ----include=FALSE-------------------------------------------------------
+## ----include = FALSE-----------------------------------------------------
 data(AirPollution)  # restore data to orignal form
 
 
@@ -7684,7 +7870,879 @@ data(AirPollution)  # restore data to orignal form
 
 
 
-## ----MathNotation, child="MathNotation.Rnw", eval=includeApp[1]----------
+## ----RIntro, child="RIntro.Rnw", eval=includeApp[1]----------------------
+
+## ----include = FALSE-----------------------------------------------------
+knitr::opts_chunk$set(cache.path = "cache/R-") 
+
+## ----install-tidyr, eval = FALSE-----------------------------------------
+## install.packages("tidyr") # fetch package from CRAN to local machine.
+## require(tidyr)            # load the package so it can be used.
+
+## ----install-tidyr-lib, eval = FALSE-------------------------------------
+## install.packages("tidyr", lib = "~/R/library")
+
+## ----install-github, eval = FALSE----------------------------------------
+## # install.packages("devtools")
+## devtools::install_github("hadley/dplyr", build_vignettes = FALSE)
+## devtools::install_github("hadley/lazyeval", build_vignettes = FALSE)
+## devtools::install_github("rstudio/ggvis", build_vignettes = FALSE)
+
+## ----fastR2-github, eval = FALSE-----------------------------------------
+## install_github("rpruim/fastR2")
+
+## ----eval = FALSE--------------------------------------------------------
+## install.packages("some-package.tar.gz",
+##                   repos = NULL)           # use a file, not a repository
+
+## ----eval = FALSE--------------------------------------------------------
+## ?Startup
+
+## ----eval = FALSE--------------------------------------------------------
+## # always load my favorite packages
+## require(fastR2)
+## # adjust lattice settings
+## trellis.par.set(theme = col.fastR())
+
+## ----eval = FALSE--------------------------------------------------------
+## TEXINPUTS=:.:./inputs//:$TEXINPUTS
+## TEXINPUTS=$TEXINPUTS:/usr/local/texlive/2016/texmf-dist/tex//
+## R_PDFLATEXCMD=/Library/TeX/texbin/pdflatex
+## R_PAPERSIZE=letter
+## R_PDFVIEWER="/usr/bin/open -a skim"
+
+## ----search--------------------------------------------------------------
+search()
+find("logit")
+
+## ----logit-faraway-------------------------------------------------------
+ mosaic::logit(0.3)
+faraway::logit(0.3)
+    car::logit(0.3)
+# using percent rather than proportion -- only works in the car version
+    car::logit(30)
+faraway::logit(30)         
+ mosaic::logit(30)         
+
+## ----data-package01------------------------------------------------------
+data(Traffic, package = "MASS")
+head(Traffic)
+data(Traffic, package = "fastR2")
+head(Traffic)
+
+## ----data-package02------------------------------------------------------
+head(MASS::Traffic)
+head(fastR2::Traffic)
+
+## ----help, eval = FALSE--------------------------------------------------
+## ?c
+## ?"for"
+
+## ----apropos-------------------------------------------------------------
+apropos("hist")
+
+## ----args----------------------------------------------------------------
+args(require)
+args(mean)
+
+## ----usage---------------------------------------------------------------
+formatR::usage(sum)
+
+## ----example, eval = FALSE-----------------------------------------------
+## example(histogram)
+
+## ----savehistory, eval = FALSE-------------------------------------------
+## savehistory("someRCommandsIalmostLost.R")
+
+## ----packageData-iris----------------------------------------------------
+# first line only necessary if iris is already in use 
+data(iris)         
+str(iris)           # get a summary of the data set
+dim(iris)           # just the dimensions
+glimpse(iris)       # take a quick look at the data
+inspect(iris)       # another quick look at the data
+
+## ----read-table----------------------------------------------------------
+# need header = TRUE because there is a header line.
+# could also use read.file() without header = TRUE
+Traffic <- 
+    read.table("http://www.calvin.edu/~rpruim/fastR/trafficTufte.txt", 
+    header = TRUE)
+Traffic
+
+## ----read-sas------------------------------------------------------------
+traffic <- 
+    read.csv("http://www.calvin.edu/~rpruim/fastR/trafficTufte.csv", 
+    na.strings = c(".", "NA", ""))
+
+## ----scan01, eval = FALSE------------------------------------------------
+## myData1 <- scan()
+
+## ----include = FALSE-----------------------------------------------------
+myData1 <- c(15, 18, 12, 21, 23, 50, 15)
+
+## ----scan02--------------------------------------------------------------
+myData1
+
+## ----scan03, eval = FALSE------------------------------------------------
+## myData2 <- scan(what = "character")
+
+## ----include = FALSE-----------------------------------------------------
+myData2 <- c("red", "red", "orange", "green", "blue", "blue", "red")
+
+## ----scan04--------------------------------------------------------------
+myData2
+
+## ----dataframe-----------------------------------------------------------
+myDataFrame <- data.frame(color = myData2, number = myData1)
+myDataFrame
+
+## ----generating-data01---------------------------------------------------
+x <- 5:20; x                 # all integers in a range
+# structured sequences
+seq(0, 50, by = 5)               
+seq(0, 50, length = 7)               
+rep(1:5, each = 3)
+rep(1:5, times = 3)
+c(1:5, 10, 3:5)              # c() concatenates 
+
+## ----generating-data02, seed = 1234, fig.keep = "none"-------------------
+rnorm(10, mean = 10, sd = 2)  # random normal draws
+histogram( ~ rnorm(1000, mean = 10, sd = 2))
+
+## ----generating-data02-fig, echo = FALSE, results = "hide"---------------
+rnorm(10, mean = 10, sd = 2)  # random normal draws
+histogram( ~ rnorm(1000, mean = 10, sd = 2))
+
+## ----generating-data03, seed = 12345-------------------------------------
+sample(Births78, 3)       # sample 3 rows from Births78
+Births78 %>% sample(3)    # sample 3 rows from Births78
+sample(1:10, size = 5)    # random sample of size 5 (w/o replacement)
+resample(1:10, size = 5)  # random sample of size 5 (w/ replacement)
+
+## ----writingData---------------------------------------------------------
+args(write.table)
+SomeData <- data.frame(x = 1:3, y = LETTERS[1:3])
+SomeData
+write.table(SomeData, "SomeData.txt")
+write.csv(SomeData, "SomeData.csv")
+# this system call should work on a Mac or Linux machine
+system("head SomeData.txt SomeData.csv")
+
+## ----savingData----------------------------------------------------------
+greeting <- "hello, world!"
+save(SomeData, greeting, file = "mystuff.rda")  # saves both objects in 1 file
+load("mystuff.rda")                             # loads them both
+
+## ------------------------------------------------------------------------
+saveRDS(SomeData, file = "SomeData.rds")
+EEE <- readRDS("SomeData.rds")
+EEE
+
+## ----births-cumsum, fig.keep = "none"------------------------------------
+data(Births78)
+Births78 <- 
+  mutate(Births78, runningTotal = cumsum(births))
+head(Births78, 3)
+xyplot(runningTotal ~ date, data = Births78, type = "l") 
+
+## ----births-cumsum-fig, echo = FALSE, results = "hide"-------------------
+data(Births78)
+Births78 <- 
+  mutate(Births78, runningTotal = cumsum(births))
+head(Births78, 3)
+xyplot(runningTotal ~ date, data = Births78, type = "l") 
+
+## ----cps85-mutate--------------------------------------------------------
+CPS85 <- mutate(CPS85, workforce.years = age - 6 - educ)
+favstats( ~ workforce.years, data = CPS85)
+
+## ----CPS85-tally---------------------------------------------------------
+tally( ~ (exper - workforce.years), data = CPS85)
+
+## ----tidy = FALSE--------------------------------------------------------
+HELP2 <- mutate( HELPrct, 
+  newsex = factor(female, labels = c("M", "F")) )
+
+## ----HELP2-tally---------------------------------------------------------
+tally( ~ newsex + female, data = HELP2 )
+
+## ----derivedFactor, tidy = FALSE, fig.keep = "none"----------------------
+HELP3 <- mutate(HELPrct, 
+  risklevel = derivedFactor(
+    low = sexrisk < 5, 
+	medium = sexrisk < 10,
+	high = sexrisk >= 10,
+	.method = "first"      # use first rule that applies
+	)
+)
+xyplot(sexrisk ~ risklevel, data = HELP3, jitter.x = TRUE, alpha = 0.4)
+
+## ----derivedFactor-fig, echo = FALSE, results = "hide"-------------------
+HELP3 <- mutate(HELPrct, 
+  risklevel = derivedFactor(
+    low = sexrisk < 5, 
+	medium = sexrisk < 10,
+	high = sexrisk >= 10,
+	.method = "first"      # use first rule that applies
+	)
+)
+xyplot(sexrisk ~ risklevel, data = HELP3, jitter.x = TRUE, alpha = 0.4)
+
+## ----select01------------------------------------------------------------
+CPS1 <- select(CPS85, - workforce.years)
+head(CPS1, 2)
+
+## ----select02------------------------------------------------------------
+CPS2 <- select(CPS85, workforce.years, exper)
+head(CPS2, 2)
+
+## ----select03------------------------------------------------------------
+CPSsmall <- select(CPS85, 1:4)
+head(CPSsmall, 2)
+
+## ----select04------------------------------------------------------------
+head(select(HELPrct, contains("risk")), 2)
+
+## ----chain01-------------------------------------------------------------
+HELPrct %>% select(contains("risk")) %>% head(2)
+
+## ----eval = FALSE--------------------------------------------------------
+## bop(
+##   scoop(
+##     hop(foo_foo, through = forest),
+##     up = field_mice
+##   ),
+##   on = head
+## )
+
+## ----eval = FALSE--------------------------------------------------------
+## foo_foo %>%
+##   hop(through = forest) %>%
+##   scoop(up = field_mouse) %>%
+##   bop(on = head)
+
+## ----chain-2, tidy = FALSE-----------------------------------------------
+HELPrct %>% 
+  select(ends_with("e")) %>% 
+  head(2)
+HELPrct %>% 
+  select(starts_with("h")) %>% 
+  head(2)
+HELPrct %>% 
+  select(matches("i[12]")) %>% # regex matching
+  head(2)  
+
+## ----faithful-names------------------------------------------------------
+names(faithful)
+
+## ----names01-------------------------------------------------------------
+names(faithful) <- c("duration", "time_til_next")
+head(faithful, 3)
+
+## ----data-revert, eval = TRUE--------------------------------------------
+# don't execute this unless you want to revert to the original data
+data(faithful)  
+
+## ----rename01------------------------------------------------------------
+faithful <- 
+  faithful %>%
+  rename(duration = eruptions, time_til_next = waiting)
+
+## ----faithful-xy---------------------------------------------------------
+xyplot(time_til_next ~ duration, data = faithful)
+
+## ----rename02------------------------------------------------------------
+CPS85 %>% 
+  rename(education = educ) %>%
+  head(4)
+
+## ----tidy = FALSE--------------------------------------------------------
+CPS85 %>% 
+  select(education = educ, wage, race) %>%
+  head(3)
+
+## ----faithful-long, fig.keep = "none"------------------------------------
+# any logical can be used to create subsets
+data(faithful)
+faithfulLong <- 
+  faithful %>%
+  rename(duration = eruptions, time_til_next = waiting) %>%
+  filter(duration > 3) 
+xyplot(time_til_next ~ duration, data = faithfulLong)
+
+## ----faithful-log-fig, echo = FALSE, results = "hide"--------------------
+# any logical can be used to create subsets
+data(faithful)
+faithfulLong <- 
+  faithful %>%
+  rename(duration = eruptions, time_til_next = waiting) %>%
+  filter(duration > 3) 
+xyplot(time_til_next ~ duration, data = faithfulLong)
+
+## ----faithful-long-alt, eval = FALSE, tidy = FALSE, fig.keep = "last", fig.show = "hide"----
+## xyplot(time_til_next ~ duration,
+##        data = faithfulLong %>% filter( duration > 3))
+## xyplot(time_til_next ~ duration, data = faithfulLong,
+##        subset = duration > 3)
+## xyplot(time_til_next ~ duration, data = faithfulLong, xlim = c(3, NA))
+
+## ----summarise01---------------------------------------------------------
+HELPrct %>% 
+  summarise(x.bar = mean(age), s = sd(age))
+
+## ----summarise-group_by--------------------------------------------------
+HELPrct %>% 
+  group_by(sex, substance) %>%
+  summarise(x.bar = mean(age), s = sd(age))
+
+## ----dplyr-vs-mosaic-----------------------------------------------------
+favstats(age ~ sex + substance, data = HELPrct)
+    mean(age ~ sex + substance, data = HELPrct, .format = "table")
+      sd(age ~ sex + substance, data = HELPrct, .format = "table")
+
+## ----arrange, tidy = FALSE-----------------------------------------------
+HELPrct %>% 
+  group_by(sex, substance) %>%
+  summarise(x.bar = mean(age), s = sd(age)) %>% 
+  arrange(x.bar)
+
+## ----FUSION-Pheno--------------------------------------------------------
+head(FUSION1, 3)
+head(Pheno, 3)
+
+## ----merge-join, tidy = FALSE--------------------------------------------
+# merge FUSION1 and Pheno keeping only id's that are in both
+FUSION1m <- merge(FUSION1, Pheno, by.x = "id", by.y = "id", 
+                  all.x = FALSE, all.y = FALSE)
+head(FUSION1m, 3)
+left_join(Pheno, FUSION1, by = "id") %>% dim()
+inner_join( Pheno, FUSION1, by = "id") %>% dim()
+# which ids are only in Pheno?
+setdiff(Pheno$id, FUSION1$id)   
+anti_join(Pheno, FUSION1)
+
+## ----fusion1-xtabs-------------------------------------------------------
+tally( ~ t2d + genotype + marker, data = FUSION1m)
+
+## ----mergin-sol----------------------------------------------------------
+FUSION1m2 <- 
+  FUSION1 %>%
+  merge(Pheno, by.x = "id", by.y = "id", all.x = FALSE, all.y = FALSE)
+Pheno %>%  left_join(FUSION1, by = "id") %>% dim()
+Pheno %>% inner_join(FUSION1, by = "id") %>% dim()
+
+## ----FUSION-names--------------------------------------------------------
+names(FUSION1)
+names(FUSION2)
+
+## ----births-range--------------------------------------------------------
+data(Births)
+range( ~ date, data = Births)
+
+## ----births-sol01--------------------------------------------------------
+Births %>% 
+  group_by(moth, day) %>%
+  summarise(bpd = mean(births)) %>% 
+  arrange(-bpd) %>% head(4)
+Births %>% 
+  group_by(month, day) %>%
+  summarise(bpd = mean(births)) %>% 
+  arrange(bpd) %>% head(4)
+
+## ----births-sol02--------------------------------------------------------
+Births %>% 
+  group_by(month) %>%
+  summarise(bpd = mean(births)) %>% 
+  arrange(-bpd) %>% head(3)
+Births %>% 
+  group_by(month) %>%
+  summarise(bpd = mean(births)) %>% 
+  arrange(bpd) %>% head(3)
+
+## ----births-sol03--------------------------------------------------------
+Births %>% 
+  group_by(wday) %>%
+  summarise(bpd = mean(births)) %>% 
+  arrange(-bpd) 
+
+## ----Utilities-temp------------------------------------------------------
+Temp <-
+  Utilities %>% 
+  select(month, year, temp) 
+head(Temp, 3)
+
+## ----Temp-spread---------------------------------------------------------
+require(tidyr) 
+Temp2 <- 
+  Temp %>%
+  spread(key = month, value = temp)
+Temp2
+
+## ----Temp-gather---------------------------------------------------------
+Temp3 <- 
+  Temp2 %>%
+  gather(key = month, value = temp, `1` : `12`)  
+Temp3 %>% head
+
+## ----Temp-gather-numeric-------------------------------------------------
+Temp3a <- 
+  Temp2 %>%
+  gather(key = month, value = temp, 2 : 13)  
+Temp3a %>% head
+
+## ----tidy = FALSE, warning = FALSE---------------------------------------
+# connect to a UCSC database
+UCSCdata <- src_mysql(
+  host = "genome-mysql.cse.ucsc.edu",
+  user = "genome",
+  dbname = "mm9")
+# grab one of the many tables in the database
+KnownGene <- tbl(UCSCdata, "knownGene")
+
+# Get the gene name, chromosome, start and end sites for genes on Chromosome 1
+Chrom1 <-
+  KnownGene %>% 
+  select( name, chrom, txStart, txEnd ) %>%
+  filter( chrom == "chr1" )
+
+## ------------------------------------------------------------------------
+class(Chrom1)
+
+## ----Chrom1l, tidy = FALSE-----------------------------------------------
+Chrom1l <-
+  Chrom1 %>% mutate(length = (txEnd - txStart)/1000)
+Chrom1l
+
+## ----tidy = FALSE--------------------------------------------------------
+Chrom1df <- collect(Chrom1l)       # collect into a data frame
+histogram( ~ length, data = Chrom1df, xlab = "gene length (kb)")
+
+## ----mode01--------------------------------------------------------------
+w <- 2.5; mode(w); length(w)
+x <- c(1, 2); mode(x); length(x)
+y <- "foo"; mode(y); length(y)
+y[1]; y[2]             # not an error to ask for y[2]
+z <- TRUE; mode(z); length(z)
+abc <- letters[1:3]
+abc; mode(abc); length(abc)
+abc[3]
+abc[6] <- "Z"; abc     # NAs fill in to make vector long enough
+
+## ------------------------------------------------------------------------
+L <- list(a = 5, b = "X", c = 2.3, d = c("A", "B")); mode(L); length(L)
+L[[4]]        # 4th element of list
+L[["d"]]      # element named "d"
+L$d           # element named "d"
+L[["d"]] <- 1:3; str(L)
+L[["b"]] <- NULL; str(L)     # removing an item from a list
+
+## ----access--------------------------------------------------------------
+xm <- matrix(1:16, nrow = 4); xm
+xm[5]
+xm[, 2]                   # this is 1 dimensional (a vector)
+xm[, 2, drop = FALSE]     # this is 2 dimensional (still a matrix)
+
+## ----rows-and-cols-------------------------------------------------------
+DDD <- data.frame(number = 1:5, letter = letters[1:5])
+dim(DDD)
+nrow(DDD)
+ncol(DDD)
+names(DDD)
+row.names(DDD)
+row.names(DDD) <- c("Abe", "Betty", "Claire", "Don", "Ethel")
+DDD                 # row.names affects how a data.frame prints
+
+## ------------------------------------------------------------------------
+attributes(DDD)
+
+## ----what-is-it----------------------------------------------------------
+xm <- matrix(1:16, nrow = 4); xm
+mode(xm); class(xm)
+c(is.numeric(xm), is.character(xm), is.integer(xm), is.logical(xm))
+c(is.vector(xm), is.matrix(xm), is.array(xm))
+
+## ----as-you-like-it------------------------------------------------------
+apropos("^as\\.")[1:10]      # just a small sample
+# convert numbers to strings (this drops attributes)
+as.character(xm)             
+# convert matrix to vector
+as.vector(xm)
+as.logical(xm)
+alpha <- c("a", "1", "b", "0.5")    
+mode(alpha)
+as.numeric(alpha)      # can't do the coersion, so NAs are introduced
+as.integer(alpha)      # notice coersion of 0.5 to 0
+
+## ----vectors01-----------------------------------------------------------
+x <- 1:5; y <- seq(10, 60, by = 10); z <- rnorm(10); x; y
+y + 1
+x * 10
+x < 3
+x^2
+log(x); log(x, base = 10)            # natural and base 10 logs
+
+## ----vectors02-----------------------------------------------------------
+# compare round() and signif() by binding rowwise into matrix
+rbind(round(z, digits = 2), signif(z, digits = 2))   
+
+## ----vectors03-----------------------------------------------------------
+x <- 1:10; z <- rnorm(100)
+mean(z); sd(z); var(z); median(z)  # basic statistical functions
+range(z)                           # range returns a vector of length 2
+
+## ----vectors04-----------------------------------------------------------
+sum(x); prod(x)                         # sums and products
+z <- rnorm(5); z
+sort(z); rank(z); order(z)              # sort, rank, order
+rev(x)                                  # reverse x
+diff(x)                                 # pairwise differences
+cumsum(x)                               # cumulative sum
+cumprod(x)                              # cumulative product
+
+## ----vectors05-----------------------------------------------------------
+x <- 1:5; y <- seq(10, 70, by = 10)
+x + y
+
+## ----vectors06-----------------------------------------------------------
+x <- seq(2, 20, by = 2)
+x[1:5]; x[c(1, 4, 7)]
+
+## ----vectors07-----------------------------------------------------------
+x <- seq(2, 20, by = 2)
+x[c(TRUE, TRUE, FALSE)]      # skips every third element (recycling!)
+x[x > 10]                    # more typical use of boolean in selection
+
+## ----vectors08-----------------------------------------------------------
+x <- 1:10; x[-7]; x[-c(1, 2, 4, 8)]; x[-length(x)]
+
+## ----vectors09-----------------------------------------------------------
+notes <- toupper(letters[1:7]); a <- 1:5; b <- seq(10, 100, by = 10)
+toupper(letters[5:10])                
+paste(letters[1:5], 1:3, sep = "-")
+a+b
+(a+b)[ a+b > 50]
+length((a+b)[a+b > 50])
+table(a+b > 50)
+
+## ----function01----------------------------------------------------------
+fstats <- function(x) {
+    mean(x)
+    median(x)
+    sd(x)
+}
+
+fstats((1:20)^2)
+
+## ----defFun02------------------------------------------------------------
+fstats <- function(x) {
+    print(mean(x))
+    print(median(x))
+    print(sd(x))
+}
+
+fstats((1:20)^2)
+
+## ----defFun02-cat--------------------------------------------------------
+altfstats <- function(x) {
+    cat(paste("  mean:", format(mean(x), 4), "\n"))
+    cat(paste(" edian:", format(median(x), 4), "\n"))
+    cat(paste("    sd:", format(sd(x), 4), "\n"))
+}
+altfstats((1:20)^2)
+
+## ----defFun02a-----------------------------------------------------------
+temp <- fstats((1:20)^2)
+temp
+
+## ----defFun03------------------------------------------------------------
+fstats <- function(x) {
+	c(mean(x), median(x), sd(x))
+}
+fstats((1:20)^2)
+
+## ----defFun04------------------------------------------------------------
+fstats <- function(x) {
+	result <- c(min(x), max(x), mean(x), median(x), sd(x))
+    names(result) <- c("min", "max", "mean", "median", "sd")
+    return(result)
+}
+fstats((1:20)^2)
+
+## ----apply---------------------------------------------------------------
+sapply(KidsFeet, class)    # determine the class of each variable
+lapply(iris, function(x) if (is.numeric(x)) favstats(x) else tally(x))
+M <- rbind(1:3, 4:6, 7:9); M
+apply(M, 1, sum)           # row sums
+rowSums(M)                 # dedicated row sums function
+# tapply version of mean(length ~ sex, data = KidsFeet)
+tapply(KidsFeet$length, KidsFeet$sex, mean)
+
+## ----iris-splom, fig.show = "hide"---------------------------------------
+splom(iris)
+
+## ----iris-splom-fig, echo = FALSE, opts.label = "figbig"-----------------
+splom(iris)
+
+## ----iris-parallel, fig.show = "hide"------------------------------------
+parallel(~ iris[1:4] | Species, data = iris)
+set.seed(123)
+iris.sample <- iris[sample(1:(dim(iris)[1]), 15), ]
+parallel(~ iris.sample[1:4] | Species, data = iris.sample)
+
+## ----iris-parallel-fig, echo = FALSE-------------------------------------
+parallel(~ iris[1:4] | Species, data = iris)
+set.seed(123)
+iris.sample <- iris[sample(1:(dim(iris)[1]), 15), ]
+parallel(~ iris.sample[1:4] | Species, data = iris.sample)
+
+## ----xyplot-type, eval = FALSE-------------------------------------------
+## xyplot(y ~ x , type = "l")
+
+## ----iris-splom02, fig.show = "hide"-------------------------------------
+splom(~iris[1:4], data = iris, groups = Species,
+    pch = c(21, 23, 25), 
+    cex = 0.8,
+    alpha = 0.7,
+    col = "gray50",
+    fill = trellis.par.get("superpose.symbol")$col
+    )
+
+## ----iris-splom02-fig, echo = FALSE, opts.label = "figbig"---------------
+splom(~iris[1:4], data = iris, groups = Species,
+    pch = c(21, 23, 25), 
+    cex = 0.8,
+    alpha = 0.7,
+    col = "gray50",
+    fill = trellis.par.get("superpose.symbol")$col
+    )
+
+## ----set-pch-------------------------------------------------------------
+trellis.par.get("plot.symbol")
+# set plot symbol default to be a blue diamond with black border
+trellis.par.set(plot.symbol = list(pch = 23, col = "black", fill = "lightblue"))  
+trellis.par.get("plot.symbol")
+
+## ----lattice-settings01--------------------------------------------------
+trellis.par.set(theme = col.whitebg())
+
+## ----lattice-settings02, eval = FALSE------------------------------------
+## trellis.par.get()
+
+## ----fastR-theme---------------------------------------------------------
+trellis.par.set(theme = col.fastR())
+
+## ----mytheme, include = FALSE--------------------------------------------
+mytheme <- function() {
+    list(background = list(col = "transparent"), 
+        plot.polygon = list(col = "navy"), 
+        box.rectangle = list(col = "navy"), 
+        box.umbrella = list(col = "navy"), 
+        dot.line = list(col = "#e8e8e8"), 
+        dot.symbol = list(col = "navy", pch = 16), 
+        plot.line = list(col = "navy", lwd = 2), 
+        plot.symbol = list(col = "navy", pch = 16), 
+        regions = list(col = heat.colors(100)), 
+        reference.line = list(col = "#e8e8e8"), 
+        superpose.line = list(lty = 1:7,
+                    col = c("navy", "red", "darkgreen", "turquoise", "orange",
+                        "purple", "pink", "lightgreen")),
+        superpose.symbol = list(pch = c(16, 1, 3, 6, 0, 5, 17), 
+            cex = rep(0.7, 7), 
+            col = c("navy", "red", "darkgreen", "turquoise", "orange",
+                        "purple", "pink", "lightgreen")),
+        strip.background = list(alpha = 1,
+           col = c("#ffe5cc", "#ccffff",
+                 "#cce6ff", "#ffccff", "#ffcccc", "#ffffcc")
+            ),
+        strip.shingle = list(alpha = 1,
+            col = c("#ff7f00", "#00ffff",
+                 "#0080ff", "#ff00ff", "#ff0000", "#ffff00"))
+        )
+}
+
+## ----lattice-settings03, opts.label = "figbig", fig.keep = "none"--------
+show.settings()
+
+## ----lattice-settings03-fig, opts.label = "figbig", echo = FALSE, results = "hide"----
+show.settings()
+
+## ----defFun11------------------------------------------------------------
+x = (0:10)/10
+myData = data.frame(x = x, y = sin(x))
+panel.xyplotWithDiag <- function(x, y, ...) {
+    panel.xyplot(x, y, ...)
+    panel.abline(a = 0, b = 1, col = "gray30", lwd = 2)
+}
+
+## ----defFun12, fig.show = "hide"-----------------------------------------
+xyplot(y~x, data = myData, panel = panel.xyplotWithDiag)
+panel.xyplotWithLine <- function(x, y, intercept = 0, slope = 1, ...) {
+    panel.xyplot(x, y, ...)
+    panel.abline(a = intercept, b = slope, ...)
+}
+xyplot(y~x, data = myData, panel = panel.xyplotWithLine)
+xyplot(y~x, data = myData, 
+    inter = 0.5, slope = 0, pch = 16,
+    lwd = 2, col = "gray30", lty = 2,
+    panel = panel.xyplotWithLine,
+)
+
+## ----defFun12-fig, echo = FALSE------------------------------------------
+xyplot(y~x, data = myData, panel = panel.xyplotWithDiag)
+panel.xyplotWithLine <- function(x, y, intercept = 0, slope = 1, ...) {
+    panel.xyplot(x, y, ...)
+    panel.abline(a = intercept, b = slope, ...)
+}
+xyplot(y~x, data = myData, panel = panel.xyplotWithLine)
+xyplot(y~x, data = myData, 
+    inter = 0.5, slope = 0, pch = 16,
+    lwd = 2, col = "gray30", lty = 2,
+    panel = panel.xyplotWithLine,
+)
+
+## ----histogram-rug-density, fig.show = "hide"----------------------------
+x <- rnorm(100)
+histogram(~x, type = "density",
+            panel = function(x, y, ...) {
+                panel.rug(x, ...)
+                panel.histogram(x, ...)
+                panel.mathdensity(
+                    dmath = dnorm, args = list(mean = mean(x), sd = sd(x)),
+                    lwd = 5, col = "black", lty = 1, alpha = 0.5,
+                    ...)
+            }
+     )
+
+## ----histogram-rug-density-grid, fig.show = "hide"-----------------------
+x <- rnorm(100)
+histogram(~x, type = "density",
+            panel = function(x, y, ...) {
+                panel.rug(x, ...)
+                panel.histogram(x, ...)
+                panel.mathdensity(
+                    dmath = dnorm, args = list(mean = mean(x), sd = sd(x)),
+                    lwd = 5, col = "black", lty = 1, alpha = 0.5,
+                    ...)
+                grid::grid.text("Look Here",
+                    x = 0.5, y = 0.48,
+                    just = "left",
+                    default.units = "npc",
+                    rot = 33,
+                    gp = grid::gpar(col = "black", cex = 2)
+                    )
+                grid::grid.segments( 
+                    x0 = 0.48, x1 = unit(-0.92, "native"),
+                    y0 = 0.45, y1 = unit(0.085, "native"),
+                    arrow = grid::arrow(),           # default arrow
+                    default.units = "npc",
+                    gp = grid::gpar(col = "black")
+                    )
+                grid::grid.rect(x = -2, y = 0, width = 1, height = 0.15, 
+                    default.units = "native",
+                    just = c("left", "bottom"), 
+                    gp = grid::gpar(
+                      col = "black", fill = "gray40", alpha = 0.6)
+                    )
+            }
+     )
+
+## ----histogram-rug-fig, echo = FALSE-------------------------------------
+x <- rnorm(100)
+histogram(~x, type = "density",
+            panel = function(x, y, ...) {
+                panel.rug(x, ...)
+                panel.histogram(x, ...)
+                panel.mathdensity(
+                    dmath = dnorm, args = list(mean = mean(x), sd = sd(x)),
+                    lwd = 5, col = "black", lty = 1, alpha = 0.5,
+                    ...)
+            }
+     )
+x <- rnorm(100)
+histogram(~x, type = "density",
+            panel = function(x, y, ...) {
+                panel.rug(x, ...)
+                panel.histogram(x, ...)
+                panel.mathdensity(
+                    dmath = dnorm, args = list(mean = mean(x), sd = sd(x)),
+                    lwd = 5, col = "black", lty = 1, alpha = 0.5,
+                    ...)
+                grid::grid.text("Look Here",
+                    x = 0.5, y = 0.48,
+                    just = "left",
+                    default.units = "npc",
+                    rot = 33,
+                    gp = grid::gpar(col = "black", cex = 2)
+                    )
+                grid::grid.segments( 
+                    x0 = 0.48, x1 = unit(-0.92, "native"),
+                    y0 = 0.45, y1 = unit(0.085, "native"),
+                    arrow = grid::arrow(),           # default arrow
+                    default.units = "npc",
+                    gp = grid::gpar(col = "black")
+                    )
+                grid::grid.rect(x = -2, y = 0, width = 1, height = 0.15, 
+                    default.units = "native",
+                    just = c("left", "bottom"), 
+                    gp = grid::gpar(
+                      col = "black", fill = "gray40", alpha = 0.6)
+                    )
+            }
+     )
+
+## ----whats-up, eval = FALSE----------------------------------------------
+## odds <- 1 + 2 * (0:4)
+## primes <- c(2, 3, 5, 7, 11, 13)
+## length(odds)
+## length(primes)
+## odds + 1
+## odds + primes
+## odds * primes
+## odds > 5
+## sum(odds > 5)
+## sum(primes < 5 | primes > 9)
+## odds[3]
+## odds[10]
+## odds[-3]
+## primes[odds]
+## primes[primes >= 7]
+## sum(primes[primes > 5])
+## sum(odds[odds > 5])
+## odds[10] <- 1 + 2 * 9
+## odds
+## y <- 1:10
+## (x <- 1:5)
+
+## ----whats-up-sol--------------------------------------------------------
+
+## ----chickwt-sol01-------------------------------------------------------
+ChickWeight %>% 
+  filter(Time == 21) %>%
+  arrange(weight) %>%
+  head(1)
+ChickWeight %>% 
+  filter(Time == 21) %>%
+  arrange(weight) %>%
+  tail(1)
+
+## ----chickwt-sol02-------------------------------------------------------
+Chicks <- 
+  ChickWeight %>% 
+  filter(Time > 15) %>%   # remove chicks that were only measured a few times
+  group_by(Chick) %>%
+  summarise(
+    weight = max(weight),
+    diet = Diet[1],
+    time = max(Time)
+    ) %>%
+  ungroup() %>%     # need this for arrange to work properly
+  arrange(weight) 
+Chicks %>% head(1)
+Chicks %>% tail(1)
+
+
+## ----MathNotation, child="MathNotation.Rnw", eval=includeApp[2]----------
 
 ## ----include = FALSE-----------------------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/Math-")
@@ -7703,836 +8761,22 @@ sum(p*x^2);
 fractions( sum(p*x^2) );
 
 
-## ----RDump, child="RDump.Rnw", eval=includeApp[2]------------------------
-
-## ----include = FALSE-----------------------------------------------------
-knitr::opts_chunk$set(cache.path = "cache/R-")
-
-## ----faithful-stemleaf, message = FALSE----------------------------------
-require(aplpack) 
-stem.leaf(faithful$eruptions, style='bare')
-
-## ----apropos-------------------------------------------------------------
-apropos('hist')
-
-## ----args----------------------------------------------------------------
-args(require)
-args(mean)
-args(sum)
-
-## ----packageData-iris----------------------------------------------------
-# first line only necessary if iris is already in use 
-data(iris)         
-str(iris)           # get a summary of the data set
-dim(iris)           # just the dimensions
-
-## ----read-table----------------------------------------------------------
-# need header=TRUE because there is a header line.
-# could also use read.file() without header=TRUE
-traffic <- 
-    read.table("http://www.calvin.edu/~rpruim/fastR/trafficTufte.txt", 
-    header=TRUE)
-traffic
-
-## ----read-sas------------------------------------------------------------
-traffic <- 
-    read.csv("http://www.calvin.edu/~rpruim/fastR/trafficTufte.csv", 
-    na.strings=c(".","NA",""))
-
-## ----scan, eval=FALSE----------------------------------------------------
-## myData1 <- scan()
-
-## ----include=FALSE-------------------------------------------------------
-myData1 <- c(15,18,12, 21, 23, 50, 15)
-
-## ----scan2---------------------------------------------------------------
-myData1
-
-## ----scan3, eval=FALSE---------------------------------------------------
-## myData2 <- scan(what="character")
-
-## ----include=FALSE-------------------------------------------------------
-myData2 <- c("red","red","orange","green","blue","blue","red")
-
-## ----scan4---------------------------------------------------------------
-myData2
-
-## ----dataframe-----------------------------------------------------------
-myDataFrame <- data.frame(color=myData2,number=myData1)
-myDataFrame
-
-## ----Births-make,fig.width=6,out.width=".8\\textwidth", tidy=FALSE-------
-data(Births78)
-Births78 <- 
-  mutate(Births78, runningTotal = cumsum(births))
-head(Births78, 3)
-
-## ----Births-plot,fig.width=6,out.width="\\textwidth", tidy=FALSE---------
-xyplot(runningTotal ~ date, Births78, type = "l") 
-
-## ----CPS85-mutate--------------------------------------------------------
-CPS85 <- mutate(CPS85, workforce.years = age - 6 - educ)
-favstats(~workforce.years, data = CPS85)
-
-## ----CPS85-tally---------------------------------------------------------
-tally(~ (exper - workforce.years), data = CPS85)
-
-## ----tidy=FALSE----------------------------------------------------------
-HELP2 <- mutate( HELPrct, 
-  newsex = factor(female, labels = c('M', 'F')) )
-
-## ----HELP2-tally---------------------------------------------------------
-tally( ~ newsex + female, data = HELP2 )
-
-## ----tidy=FALSE----------------------------------------------------------
-HELP3 <- mutate(HELPrct, 
-  risklevel = derivedFactor(
-    low = sexrisk < 5, 
-	medium = sexrisk < 10,
-	high = sexrisk >= 10,
-	.method = "first"      # use first rule that applies
-	)
-)
-head(HELP3, 4)
-
-## ----select-1------------------------------------------------------------
-CPS1 <- select(CPS85, - workforce.years)
-head(CPS1, 2)
-
-## ----select-2------------------------------------------------------------
-CPS2 <- select(CPS85, workforce.years, exper)
-head(CPS2, 2)
-
-## ----select-3------------------------------------------------------------
-CPSsmall <- select(CPS85, 1:4)
-head(CPSsmall, 2)
-
-## ----select-4------------------------------------------------------------
-head( select(HELPrct, contains("risk")), 2 )
-
-## ----chain-1-------------------------------------------------------------
-HELPrct %>% select(contains("risk")) %>% head(2)
-
-## ----chain-2, tidy=FALSE-------------------------------------------------
-HELPrct %>% 
-  select( ends_with("e")) %>% 
-  head(2)
-HELPrct %>% 
-  select( starts_with("h")) %>% 
-  head(2)
-HELPrct %>% 
-  select( matches("i[12]")) %>% # regex matching
-  head(2)  
-
-## ----faithful-names------------------------------------------------------
-names(faithful)
-
-## ----faithful-rename-1---------------------------------------------------
-names(faithful) <- c('duration', 'time_til_next')
-head(faithful, 3)
-
-## ----data-revert, eval=TRUE----------------------------------------------
-# don't execute this unless you want to revert to the original data
-data(faithful)
-
-## ----rename--------------------------------------------------------------
-faithful <-
-  faithful %>%
-  rename(duration = eruptions, time_til_next = waiting)
-
-## ----faithful-xy---------------------------------------------------------
-xyplot(time_til_next ~ duration, data = faithful)
-
-## ----rename-2------------------------------------------------------------
-CPS85 %>% 
-  rename( education = educ) %>%
-  head(4)
-
-## ----tidy=FALSE----------------------------------------------------------
-CPS85 %>% 
-  select( education = educ, wage, race) %>%
-  head(3)
-
-## ----faithful-long-xy----------------------------------------------------
-# any logical can be used to create subsets
-data(faithful)
-faithfulLong <- 
-  faithful %>%
-  rename(duration = eruptions, time_til_next = waiting) %>%
-  filter(duration > 3) 
-xyplot( time_til_next ~ duration, faithfulLong )
-
-## ----eval=FALSE, tidy=FALSE, fig.keep="last", fig.show="hide"------------
-## xyplot( time_til_next ~ duration,
-##         data = faithful2 %>% filter( duration > 3) )
-## xyplot( time_til_next ~ duration, data = faithful2,
-##         subset = duration > 3 )
-
-## ----summarise-1---------------------------------------------------------
-HELPrct %>% 
-  summarise(x.bar = mean(age), s = sd(age))
-
-## ----summarise-group_by--------------------------------------------------
-HELPrct %>% 
-  group_by(sex, substance) %>%
-  summarise(x.bar = mean(age), s = sd(age))
-
-## ----dplyr-vs-mosaic-----------------------------------------------------
-favstats( age ~ sex + substance, data = HELPrct )
-mean( age ~ sex + substance, data = HELPrct, .format = "table" )
-sd( age ~ sex + substance, data = HELPrct, .format = "table" )
-
-## ----arrange, tidy = FALSE-----------------------------------------------
-HELPrct %>% 
-  group_by(sex, substance) %>%
-  summarise(x.bar = mean(age), s = sd(age)) %>% 
-  arrange(x.bar)
-
-## ----FUSION-Pheno--------------------------------------------------------
-require(fastR2)
-head(FUSION1, 3)
-head(Pheno, 3)
-
-## ----merge-join, tidy=FALSE----------------------------------------------
-# merge FUSION1 and Pheno keeping only id's that are in both
-FUSION1m <- merge(FUSION1, Pheno, by.x = 'id', by.y = 'id', 
-                  all.x = FALSE, all.y = FALSE)
-head(FUSION1m, 3)
-left_join( Pheno, FUSION1, by = "id") %>% dim()
-inner_join( Pheno, FUSION1, by = "id") %>% dim()
-# which ids are only in \dataframe{Pheno}?
-setdiff(Pheno$id, FUSION1$id)   
-
-## ----fusion1-xtabs-------------------------------------------------------
-tally(~t2d + genotype + marker, data = FUSION1m)
-
-## ----mergin-sol----------------------------------------------------------
-FUSION1m2 <- 
-  FUSION1 %>%
-  merge(Pheno, by.x = 'id', by.y = 'id', all.x = FALSE, all.y = FALSE)
-Pheno %>%  left_join(FUSION1, by = "id") %>% dim()
-Pheno %>% inner_join(FUSION1, by = "id") %>% dim()
-
-## ----FUSION-names--------------------------------------------------------
-names(FUSION1)
-names(FUSION2)
-
-## ----births-range--------------------------------------------------------
-data(Births)
-range(~ date, data = Births)
-
-## ------------------------------------------------------------------------
-Births %>% 
-  group_by(moth, day) %>%
-  summarise(bpd = mean(births)) %>% 
-  arrange(-bpd) %>% head(4)
-Births %>% 
-  group_by(month, day) %>%
-  summarise(bpd = mean(births)) %>% 
-  arrange(bpd) %>% head(4)
-
-## ------------------------------------------------------------------------
-Births %>% 
-  group_by(month) %>%
-  summarise(bpd = mean(births)) %>% 
-  arrange(-bpd) %>% head(3)
-Births %>% 
-  group_by(month) %>%
-  summarise(bpd = mean(births)) %>% 
-  arrange(bpd) %>% head(3)
-
-## ------------------------------------------------------------------------
-Births %>% 
-  group_by(wday) %>%
-  summarise(bpd = mean(births)) %>% 
-  arrange(-bpd) 
-
-## ----Utilities-temp------------------------------------------------------
-Temp <-
-  Utilities %>% 
-  select(month, year, temp) 
-head(Temp)
-
-## ----Temp-spread---------------------------------------------------------
-require(tidyr)
-Temp2 <- 
-  Temp %>%
-  spread(key = month, value = temp)
-Temp2
-
-## ----Temp-gather---------------------------------------------------------
-Temp3 <- 
-  Temp2 %>%
-  gather(key = month, value = temp, `1` : `12`)  
-Temp3 %>% head
-
-## ----Temp-gather-numeric-------------------------------------------------
-Temp3a <- 
-  Temp2 %>%
-  gather(key = month, value = temp, 2 : 13)  
-Temp3a %>% head
-
-## ----tidy=FALSE, warning = FALSE-----------------------------------------
-# connect to a UCSC database
-UCSCdata <- src_mysql(
-  host = "genome-mysql.cse.ucsc.edu",
-  user = "genome",
-  dbname = "mm9")
-# grab one of the many tables in the database
-KnownGene <- tbl(UCSCdata, "knownGene")
-
-# Get the gene name, chromosome, start and end sites for genes on Chromosome 1
-Chrom1 <-
-  KnownGene %>% 
-  select( name, chrom, txStart, txEnd ) %>%
-  filter( chrom == "chr1" )
-
-## ------------------------------------------------------------------------
-class(Chrom1)
-
-## ----Chrom1l, tidy=FALSE-------------------------------------------------
-Chrom1l <-
-  Chrom1 %>% mutate(length = (txEnd - txStart)/1000)
-Chrom1l
-
-## ----tidy=FALSE----------------------------------------------------------
-Chrom1df <- collect(Chrom1l)       # collect into a data frame
-histogram( ~length, data = Chrom1df, xlab = "gene length (kb)" )
-
-## ----generatingData01----------------------------------------------------
-x <- 5:20; x                 # all integers in a range
-# structured sequences
-seq(0,50,by=5)               
-seq(0,50,length=7)               
-rep(1:5,each=3)
-rep(1:5,times=3)
-c(1:5,10,3:5)                # c() concatenates vectors
-
-## ----generatingData02----------------------------------------------------
-rnorm(10,mean=10,sd=2)    # random draws from normal distribution
-x <- 5:20                 # all integers in a range
-sample(x,size=5)          # random sample of size 5 from x (no replacement)
-
-## ----writingData---------------------------------------------------------
-args(write.table)
-SomeData <- data.frame(x = 1:3, y = LETTERS[1:3])
-SomeData
-write.table(SomeData, "SomeData.txt")
-write.csv(SomeData, "SomeData.csv")
-# this system call should work on a Mac or Linux machine
-system("head -20 SomeData.txt SomeData.csv")
-
-## ----savingData----------------------------------------------------------
-greeting <- "hello, world!"
-save(SomeData, greeting, file="saved_objects.zip")  # saves both objects in 1 file
-load("saved_objects.zip")                           # loads them both
-
-## ------------------------------------------------------------------------
-saveRDS(SomeData, file = "SomeData.rds")
-EEE <- readRDS("SomeData.rds")
-EEE
-
-## ----mode01--------------------------------------------------------------
-w <- 2.5; x <- c(1,2); y <- "foo"; z <- TRUE; abc <- letters[1:3]
-mode(w); length(w)
-mode(x); length(x)
-mode(y); length(y)
-y[1]; y[2]             # not an error to ask for y[2]
-mode(z); length(z)
-abc
-mode(abc); length(abc)
-abc[3]
-
-## ----access--------------------------------------------------------------
-xm <- matrix(1:16, nrow=4); xm
-xm[5]
-xm[,2]                   # this is 1 dimensional (a vector)
-xm[,2,drop=FALSE]        # this is 2 dimensional (still a matrix)
-
-## ----attributes----------------------------------------------------------
-ddd <- data.frame(number=1:5,letter=letters[1:5])
-attributes(ddd)
-dim(ddd)
-nrow(ddd)
-ncol(ddd)
-names(ddd)
-row.names(ddd)
-row.names(ddd) <- c("Abe","Betty","Claire","Don","Ethel")
-ddd                 # row.names affects how a data.frame prints
-
-## ----whatIsThis----------------------------------------------------------
-xm <- matrix(1:16, nrow=4); xm
-mode(xm); class(xm)
-c(is.numeric(xm), is.character(xm), is.integer(xm), is.logical(xm))
-c(is.vector(xm), is.matrix(xm), is.array(xm))
-
-## ----asYouLikeIt---------------------------------------------------------
-apropos("^as\\.")[1:10]      # just a small sample
-# convert numbers to strings (this drops attributes)
-as.character(xm)             
-# convert matrix to vector
-as.vector(xm)
-as.logical(xm)
-alpha <- c("a","1","b","0.5")    
-mode(alpha)
-as.numeric(alpha)      # can't do the coersion, so NAs are introduced
-as.integer(alpha)      # notice coersion of 0.5 to 0
-
-## ----vectors01-----------------------------------------------------------
-x <- 1:5; y <- seq(10,60,by=10); z <- rnorm(10); x; y
-y + 1
-x * 10
-x < 3
-x^2
-log(x); log(x, base=10)            # natural and base 10 logs
-
-## ----vectors01a----------------------------------------------------------
-# compare round() and signif() by binding rowwise into matrix
-rbind(round(z,digits=2), signif(z,digits=2))   
-
-## ----vectors02-----------------------------------------------------------
-x <- 1:10; z <- rnorm(100)
-mean(z); sd(z); var(z); median(z)  # basic statistical functions
-range(z)                           # range returns a vector of length 2
-
-## ----vectors02a----------------------------------------------------------
-sum(x); prod(x)                         # sums and products
-z <- rnorm(5); z
-sort(z); rank(z); order(z)              # sort, rank, order
-rev(x)                                  # reverse x
-diff(x)                                 # pairwise differences
-cumsum(x)                               # cumulative sum
-cumprod(x)                              # cumulative product
-
-## ----vectors03-----------------------------------------------------------
-x <- 1:5; y <- seq(10,70,by=10)
-x + y
-
-## ----vectors04a----------------------------------------------------------
-x <- seq(2,20,by=2)
-x[1:5]; x[c(1,4,7)]
-
-## ----vectors04b----------------------------------------------------------
-x <- seq(2,20,by=2)
-x[c(TRUE,TRUE,FALSE)]        # skips every third element (recycling!)
-x[x > 10]                    # more typical use of boolean in selection
-
-## ----vectors04c----------------------------------------------------------
-x <- 1:10; x[-7]; x[-c(1,2,4,8)]; x[-length(x)]
-
-## ----vectors04d----------------------------------------------------------
-notes <- toupper(letters[1:7]); a <- 1:5; b <- seq(10,100,by=10)
-toupper(letters[5:10])                
-paste(letters[1:5],1:3,sep='-')
-a+b
-(a+b)[ a+b > 50]
-length((a+b)[a+b > 50])
-table(a+b > 50)
-
-## ----iris-vectors--------------------------------------------------------
-table(iris$Species)
-range(iris$Sepal.Length)
-table(cut(iris$Sepal.Length,seq(4,8,by=0.5)))
-mean(iris$Sepal.Length)
-quantile(iris$Sepal.Length)
-
-## ----iris-Hmisc-summary-q------------------------------------------------
-require(Hmisc)
-summary(Sepal.Length~Species,data=iris)
-summary(Sepal.Length~Species,data=iris, fun=quantile)
-
-## ----iris-xtabs----------------------------------------------------------
-xtabs(~Species+cut(Sepal.Length,4:8), data=iris)
-
-## ----adding-variable-----------------------------------------------------
-iris$SLength <- cut(iris$Sepal.Length,4:8)
-
-## ----adding-variable2----------------------------------------------------
-summary(iris)
-
-## ----traffic-reshape-----------------------------------------------------
-traffic
-
-reshape(traffic[,-2], idvar="year",ids=row.names(traffic),
-        times=names(traffic)[3:6],timevar="state",
-        varying=list(names(traffic)[3:6]),
-        v.names="deathRate",
-        direction="long") -> longTraffic
-head(longTraffic)
-
-## ----iris-xyplot01, fig.show="hide"--------------------------------------
-p <- xyplot(Sepal.Length~Sepal.Width|Species,data=iris)
-print(p)
-
-## ----iris-xyplot01-fig, echo=FALSE---------------------------------------
-p <- xyplot(Sepal.Length~Sepal.Width|Species,data=iris)
-print(p)
-
-## ----iris-histogram01, fig.show="hide"-----------------------------------
-histogram(~Sepal.Length|Species,iris)
-histogram(~Sepal.Width|Species,iris)
-
-## ----iris-histogram01-fig, echo=FALSE------------------------------------
-histogram(~Sepal.Length|Species,iris)
-histogram(~Sepal.Width|Species,iris)
-
-## ----iris-histogram02, fig.show="hide"-----------------------------------
-histogram(~Sepal.Length | Sepal.Width, data=iris)
-histogram(~Sepal.Length | equal.count(Sepal.Width,number=4), data=iris)
-
-## ----iris-histogram02-fig, echo=FALSE------------------------------------
-histogram(~Sepal.Length | Sepal.Width, data=iris)
-histogram(~Sepal.Length | equal.count(Sepal.Width,number=4), data=iris)
-
-## ----rd-iris-bwplot, fig.show="hide"-------------------------------------
-bwplot(Sepal.Length~Species,data=iris)
-bwplot(Species~Sepal.Length,data=iris)
-
-## ----rd-iris-bwplot-fig, echo=FALSE--------------------------------------
-bwplot(Sepal.Length~Species,data=iris)
-bwplot(Species~Sepal.Length,data=iris)
-
-## ----rd-qqmath01, fig.show="hide"----------------------------------------
-qqmath(~Sepal.Length|Species,data=iris)
-set.seed(1)                      # use fixed random seed
-qqmath(~rnorm(150) | factor(rep(1:3,each=50)))
-
-## ----rd-qqmath01-fig, echo=FALSE-----------------------------------------
-qqmath(~Sepal.Length|Species,data=iris)
-set.seed(1)                      # use fixed random seed
-qqmath(~rnorm(150) | factor(rep(1:3,each=50)))
-
-## ----rd-qqmath03, fig.show="hide"----------------------------------------
-set.seed(1)                      # use fixed "random" seed
-someData <- data.frame(x=runif(300),group=factor(rep(1:3,each=100)))
-qqmath(~x|group, data=someData, distribution=qunif)
-
-## ----rd-qqmath04, fig.show="hide"----------------------------------------
-qlogunif <- function(p,a=0,b=1,base=10) {
-    -log(1-qunif(p,a,b),base)
-}
-qqmath(~ -log10(x) | group, data=someData, distribution=qlogunif)
-
-## ----rd-qqmath0304-fig, echo=FALSE---------------------------------------
-set.seed(1)                      # use fixed "random" seed
-someData <- data.frame(x=runif(300),group=factor(rep(1:3,each=100)))
-qqmath(~x|group, data=someData, distribution=qunif)
-qlogunif <- function(p,a=0,b=1,base=10) {
-    -log(1-qunif(p,a,b),base)
-}
-qqmath(~ -log10(x) | group, data=someData, distribution=qlogunif)
-
-## ----rd-iris-splom, fig.show="hide"--------------------------------------
-splom(iris)
-
-## ----iris-splom-fig, echo=FALSE, opts.label="figbig"---------------------
-
-
-## ----iris-parallel, fig.show="hide"--------------------------------------
-parallel(~ iris[1:4] | Species, data=iris)
-set.seed(123)
-iris.sample <- iris[sample(1:(dim(iris)[1]),15), ]
-parallel(~ iris.sample[1:4] | Species, data=iris.sample)
-
-## ----iris-parallel-fig, echo=FALSE---------------------------------------
-parallel(~ iris[1:4] | Species, data=iris)
-set.seed(123)
-iris.sample <- iris[sample(1:(dim(iris)[1]),15), ]
-parallel(~ iris.sample[1:4] | Species, data=iris.sample)
-
-## ----iris-splom02, fig.show="hide"---------------------------------------
-splom(~iris[1:4],data=iris, groups=Species,
-    pch=c(21,23,25), 
-    cex=0.8,
-    alpha=0.7,
-    col='gray50',
-    fill=trellis.par.get('superpose.symbol')$col
-    )
-
-## ----iris-splom02-fig, echo=FALSE, opts.label="figbig"-------------------
-splom(~iris[1:4],data=iris, groups=Species,
-    pch=c(21,23,25), 
-    cex=0.8,
-    alpha=0.7,
-    col='gray50',
-    fill=trellis.par.get('superpose.symbol')$col
-    )
-
-## ----set-pch-------------------------------------------------------------
-trellis.par.get("plot.symbol")
-# set plot symbol default to be a blue diamond with black border
-trellis.par.set(plot.symbol=list(pch=23,col="black",fill="lightblue"))  
-trellis.par.get("plot.symbol")
-
-## ----fastR-theme---------------------------------------------------------
-trellis.par.set(theme=col.fastR(bw=TRUE))
-
-## ----mytheme-------------------------------------------------------------
-mytheme <- function() {
-    list(background = list(col = "transparent"), 
-        plot.polygon = list(col = "navy"), 
-        box.rectangle = list(col = "navy"), 
-        box.umbrella = list(col = "navy"), 
-        dot.line = list(col = "#e8e8e8"), 
-        dot.symbol = list(col = "navy",pch=16), 
-        plot.line = list(col = "navy",lwd=2), 
-        plot.symbol = list(col = "navy",pch=16), 
-        regions = list(col = heat.colors(100)), 
-        reference.line = list(col = "#e8e8e8"), 
-        superpose.line = list(lty=1:7,
-                    col = c("navy","red","darkgreen","turquoise","orange",
-                        "purple","pink","lightgreen")),
-        superpose.symbol = list(pch = c(16,1, 3, 6, 0, 5, 17), 
-            cex = rep(0.7, 7), 
-            col = c("navy","red","darkgreen","turquoise","orange",
-                        "purple","pink","lightgreen")),
-        strip.background=list(alpha=1,
-           col=c("#ffe5cc","#ccffff",
-                 "#cce6ff","#ffccff","#ffcccc","#ffffcc")
-            ),
-        strip.shingle=list(alpha=1,
-            col = c("#ff7f00","#00ffff",
-                 "#0080ff","#ff00ff","#ff0000","#ffff00"))
-        )
-}
-
-## ----defFun01------------------------------------------------------------
-favstats <- function(x) {
-    mean(x)
-    median(x)
-    sd(x)
-}
-
-favstats((1:20)^2)
-
-## ----defFun02------------------------------------------------------------
-favstats <- function(x) {
-    print(mean(x))
-    print(median(x))
-    print(sd(x))
-}
-
-favstats((1:20)^2)
-
-## ----defFun02-cat--------------------------------------------------------
-altfavstats <- function(x) {
-    cat(paste("  mean:", format(mean(x),4),"\n"))
-    cat(paste(" edian:", format(median(x),4),"\n"))
-    cat(paste("    sd:", format(sd(x),4),"\n"))
-}
-altfavstats((1:20)^2)
-
-## ----defFun02a-----------------------------------------------------------
-temp <- favstats((1:20)^2)
-temp
-
-## ----defFun03------------------------------------------------------------
-favstats <- function(x) {
-	c(mean(x),median(x), sd(x))
-}
-favstats((1:20)^2)
-
-## ----defFun04------------------------------------------------------------
-favstats <- function(x) {
-	result <- c(min(x),max(x),mean(x),median(x), sd(x))
-    names(result) <- c("min","max","mean","median","sd")
-    return(result)
-}
-favstats((1:20)^2)
-summary(Sepal.Length~Species,data=iris,fun=favstats)
-
-## ----defFun11------------------------------------------------------------
-x = (0:10)/10
-
-myData=data.frame(x=x, y=sin(x))
-
-panel.xyplotWithDiag <- function(x,y,...) {
-    panel.xyplot(x,y,...)
-    panel.abline(a=0,b=1,col="gray30",lwd=2)
-}
-
-## ----defFun12, fig.show="hide"-------------------------------------------
-xyplot(y~x, data=myData,panel=panel.xyplotWithDiag)
-panel.xyplotWithLine <- function(x,y,intercept=0,slope=1,...) {
-    panel.xyplot(x,y,...)
-    panel.abline(a=intercept,b=slope,...)
-}
-xyplot(y~x, data=myData, panel=panel.xyplotWithLine)
-xyplot(y~x, data=myData, 
-    inter=0.5, slope=0, pch=16,
-    lwd=2, col="gray30", lty=2,
-    panel=panel.xyplotWithLine,
-)
-
-## ----defFun12-fig, echo=FALSE--------------------------------------------
-xyplot(y~x, data=myData,panel=panel.xyplotWithDiag)
-panel.xyplotWithLine <- function(x,y,intercept=0,slope=1,...) {
-    panel.xyplot(x,y,...)
-    panel.abline(a=intercept,b=slope,...)
-}
-xyplot(y~x, data=myData, panel=panel.xyplotWithLine)
-xyplot(y~x, data=myData, 
-    inter=0.5, slope=0, pch=16,
-    lwd=2, col="gray30", lty=2,
-    panel=panel.xyplotWithLine,
-)
-
-## ----histogram-rug-density, fig.show="hide"------------------------------
-x <- rnorm(100)
-histogram(~x, type='density',
-            panel=function(x,y,...) {
-                panel.rug(x,...)
-                panel.histogram(x,...)
-                panel.mathdensity(
-                    dmath=dnorm, args=list(mean=mean(x),sd=sd(x)),
-                    lwd=5, col="black", lty=1, alpha=0.5,
-                    ...)
-            }
-     )
-
-## ----histogram-rug-density-grid, fig.show="hide"-------------------------
-x <- rnorm(100)
-histogram(~x, type='density',
-            panel=function(x,y,...) {
-                panel.rug(x,...)
-                panel.histogram(x,...)
-                panel.mathdensity(
-                    dmath=dnorm, args=list(mean=mean(x),sd=sd(x)),
-                    lwd=5, col="black", lty=1, alpha=0.5,
-                    ...)
-                grid.text("Look Here",
-                    x= 0.5, y=0.48,
-                    just="left",
-                    default.units="npc",
-                    rot=33,
-                    gp=gpar(col="black",cex=2)
-                    )
-                grid.segments( 
-                    x0= 0.48, x1= unit(-0.92,"native"),
-                    y0= 0.45, y1= unit(0.085,"native"),
-                    arrow = arrow(),                  # default arrow
-                    default.units="npc",
-                    gp=gpar(col="black")
-                    )
-                grid.rect( x = -2, y=0, width=1, height=0.15, #unit(0.15,"npc"),
-                    default.units="native",
-                    just=c("left","bottom"), 
-                    gp=gpar(col="black", fill="gray40", alpha=0.6)
-                    )
-            }
-     )
-
-## ----histogram-rug-fig, echo=FALSE---------------------------------------
-x <- rnorm(100)
-histogram(~x, type='density',
-            panel=function(x,y,...) {
-                panel.rug(x,...)
-                panel.histogram(x,...)
-                panel.mathdensity(
-                    dmath=dnorm, args=list(mean=mean(x),sd=sd(x)),
-                    lwd=5, col="black", lty=1, alpha=0.5,
-                    ...)
-            }
-     )
-x <- rnorm(100)
-histogram(~x, type='density',
-            panel=function(x,y,...) {
-                panel.rug(x,...)
-                panel.histogram(x,...)
-                panel.mathdensity(
-                    dmath=dnorm, args=list(mean=mean(x),sd=sd(x)),
-                    lwd=5, col="black", lty=1, alpha=0.5,
-                    ...)
-                grid.text("Look Here",
-                    x= 0.5, y=0.48,
-                    just="left",
-                    default.units="npc",
-                    rot=33,
-                    gp=gpar(col="black",cex=2)
-                    )
-                grid.segments( 
-                    x0= 0.48, x1= unit(-0.92,"native"),
-                    y0= 0.45, y1= unit(0.085,"native"),
-                    arrow = arrow(),                  # default arrow
-                    default.units="npc",
-                    gp=gpar(col="black")
-                    )
-                grid.rect( x = -2, y=0, width=1, height=0.15, #unit(0.15,"npc"),
-                    default.units="native",
-                    just=c("left","bottom"), 
-                    gp=gpar(col="black", fill="gray40", alpha=0.6)
-                    )
-            }
-     )
-
-## ----plot----------------------------------------------------------------
-plot
-
-## ----plot-methods--------------------------------------------------------
-methods(plot)
-
-## ----xplot---------------------------------------------------------------
-xplot
-methods(xplot)
-xplot.default
-
-## ----xqqmath-------------------------------------------------------------
-require(fastR2); 
-methods(xqqmath)
-xqqmath.formula
-
-## ----panel-xqqmath-------------------------------------------------------
-panel.xqqmath
-
-## ----xqqmath-example, fig.show="hide"------------------------------------
-x = rnorm(100)
-qqmath(~x, main='QQ-plot using qqmath()')
-xqqmath(~x, main='QQ-plot using xqqmath()')
-
-## ----xqqmath-example-fig, echo=FALSE-------------------------------------
-x = rnorm(100)
-qqmath(~x, main='QQ-plot using qqmath()')
-xqqmath(~x, main='QQ-plot using xqqmath()')
-
-## ----whats-up------------------------------------------------------------
-odds <- 1 + 2*(0:4);
-primes <- c(2,3,5,7,11,13);
-length(odds);
-length(primes);
-
-## ------------------------------------------------------------------------
-odds + 1;
-odds + primes;
-odds * primes;
-odds > 5;
-sum(odds > 5);
-sum(primes < 5 | primes > 9);
-
-## ------------------------------------------------------------------------
-odds[3];
-odds[-3];
-primes[odds];
-primes[primes >=7];
-sum(primes[primes > 5]);
-sum(odds[odds > 5]);
-
-
 ## ----LinearAlgebra, child="LinearAlgebra.Rnw", eval=includeApp[3]--------
 
 ## ----include = FALSE-----------------------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/LA-")
 
-## ----vec-mult------------------------------------------------------------
-x <- c(1,2,3)
+## ----vec-mult01----------------------------------------------------------
+x <- c(1, 2, 3)
 4 * x
 
-## ----vec-mult2-----------------------------------------------------------
-u <- c(1,2,3)
-v <- c(4,5,6)
+## ----vec-mult02----------------------------------------------------------
+u <- c(1, 2, 3)
+v <- c(4, 5, 6)
 u * v
 
-## ----vec-dotprod---------------------------------------------------------
-dot(u,v)
+## ----vec-dot-------------------------------------------------------------
+dot(u, v)
 
 ## ----vlength-def---------------------------------------------------------
 vlength
@@ -8551,41 +8795,63 @@ dot(x, v) / vlength(v)^2
 project(x, v, type = 'length') 
 dot(x, v) / vlength(v)
 
-## ----vdecomp-------------------------------------------------------------
-vdecomp2 <- function(x,v1,v2) {
-  w1 <- v1 - project(v1,v2); w2 <- v2 - project(v2,v1) 
-  p1 <- project(x,w1);       p2 <- project(x,w2) 
+## ----vdecomp2------------------------------------------------------------
+vdecomp2 <- function(x, v1, v2) {
+  w1 <- v1 - project(v1, v2); w2 <- v2 - project(v2, v1) 
+  p1 <- project(x, w1);       p2 <- project(x, w2) 
   # need to be careful about 0 vectors
-  a  <- if (vlength(w1) == 0) 0 else sign( dot(w1, p1) ) * vlength(p1) / vlength(w1)
-  b  <- if (vlength(w2) == 0) 0 else sign( dot(w2, p2) ) * vlength(p2) / vlength(w2)
+  a  <- if (vlength(w1) == 0) { 0 } else {
+    sign(dot(w1, p1)) * vlength(p1) / vlength(w1)
+  }
+  b  <- if (vlength(w2) == 0) { 0 } else { 
+    sign(dot(w2, p2)) * vlength(p2) / vlength(w2)
+  }
   list( 
-    coefficients=c(a,b), 
-    projection =     a * v1 + b * v2,
-    remainder  = x - a * v1 - b * v2
+    coefficients = c(a, b), 
+    projection   = a * v1 + b * v2,
+    remainder    = x - a * v1 - b * v2
   )
 }
 
-## ----vector-decomp1------------------------------------------------------
-v1 <- c(1,1)
-v2 <- c(2,3)
-x  <- c( 2,5)
-vdecomp2(x,v1,v2)
+## ----vector-decomp01-----------------------------------------------------
+v1 <- c(1, 1)
+v2 <- c(2, 3)
+x  <- c(2, 5)
+vdecomp2(x, v1, v2)
 
-## ----vector-decomp2------------------------------------------------------
-v1 <- c(1,0,0)
-v2 <- c(1,1,1)
-x  <- c( 2,3,5)
-vdecomp2(x,v1,v2)
-h <- vdecomp2(x,v1,v2)$remainder; 
-round(h,8)
-round(dot(h,v1),8)
-round(dot(h,v2),8)
+## ----vector-decomp02-----------------------------------------------------
+v1 <- c(1, 0, 0)
+v2 <- c(1, 1, 1)
+x  <- c(2, 3, 5)
+vdecomp2(x, v1, v2)
+h <- vdecomp2(x, v1, v2)$remainder; 
+round(h, 8)
+round(dot(h, v1), 8)
+round(dot(h, v2), 8)
 
-## ----tidy = FALSE--------------------------------------------------------
+## ----vector-decomp03-----------------------------------------------------
+v1 <- c(1, 0, 0)
+v2 <- c(1, 1, 1)
+v3 <- c(1, 2, 3)
+x  <- c(2, 7, 3)
+vdecomp2(x, v1, v2) %>% lapply(round, digits = 8)
+a1 <- vdecomp2(x, v1, v2)$coefficients[1]; a1
+b1 <- vdecomp2(x, v1, v2)$coefficients[2]; b1
+x1 <- a1 * v1 + b1 * v2; x1
+# decompose x into x1 and v3 
+vdecomp2(x, x1, v3) %>% lapply(round, digits = 8)
+a2 <- vdecomp2(x, x1, v3)$coefficients[1]; a2
+b2 <- vdecomp2(x, x1, v3)$coefficients[2]; b2
+# this should equal x
+a2 * (a1 * v1 + b1* v2) + b2 * v3 
+# the three coefficients
+c(a2 * a1, a2 * b1, b2)
+
+## ----vector-decomp04, tidy = FALSE---------------------------------------
 vdecomp <- function(x, ...) {
   v <- list(...)
   projection <- project(x, v[[1]])
-  coefs <-project(x, v[[1]], type="coef")
+  coefs <-project(x, v[[1]], type = "coef")
   for (i in 2:length(v)) {
     decomp <- vdecomp2(x, projection, v[[i]])
     coefs <- c(coefs * decomp$coefficients[1], decomp$coefficients[2])
@@ -8595,94 +8861,101 @@ vdecomp <- function(x, ...) {
        remainder = x - projection)
 }
 
-## ----vector-decomp3------------------------------------------------------
-v1 <- c(1,0,0)
-v2 <- c(1,1,1)
-v3 <- c(1,2,3)
-x  <- c(2,7,3)
-vdecomp(x,v1,v2)
-a1 <- vdecomp2(x,v1,v2)$coefficients[1]
-b1 <- vdecomp2(x,v1,v2)$coefficients[2]
-x1 <- a1 * v1 + b1 * v2; x1
-# decompose x into x1 and v3 
-vdecomp(x,x1,v3)
-a2 <- vdecomp2(x,x1,v3)$coefficients[1]
-b2 <- vdecomp2(x,x1,v3)$coefficients[2]
-# this should equal x
-a2 * (a1 * v1 + b1* v2) + b2 * v3 
-# the three coefficients
-c(a2 * a1, a2 * b1, b2)
+## ----vector-decomp05-----------------------------------------------------
+v1 <- c(1, 0, 0)
+v2 <- c(1, 1, 1)
+v3 <- c(1, 2, 3)
+x  <- c(2, 7, 3)
+vdecomp(x, v1, v2, v3) %>% lapply(round, digits = 8)
 
-## ----projections-01------------------------------------------------------
-project(c(1,0), c(1,1))
-project(c(1,0), c(1,-1))
-project(c(1,0), c(1,2))
-project(c(1,2,3), c(1,1,1))
-fractions(project(c(1,1,1), c(1,2,3)))
-project(c(1,2,3), c(1,-1,0))
-project(c(1,2,3,4), c(1,1,-1,-1))
-project(c(1,1,-1,-1), c(1,-1,1,-1))
+## ----projections01-------------------------------------------------------
+project(c(1, 0), c(1, 1))
+project(c(1, 0), c(1, -1))
+project(c(1, 0), c(1, 2))
+project(c(1, 2, 3), c(1, 1, 1))
+fractions(project(c(1, 1, 1), c(1, 2, 3)))
+project(c(1, 2, 3), c(1, -1, 0))
+project(c(1, 2, 3, 4), c(1, 1, -1, -1))
+project(c(1, 1, -1, -1), c(1, -1, 1, -1))
 
 ## ----orthonormal-s1------------------------------------------------------
-x <- c(1,1,1)
-y <- c(1,1,-2)
-w <- y - project(y,x)
-dot(x,w)                                    # confirm normality
+x <- c(1, 1, 1)
+y <- c(1, 1, -2)
+w <- y - project(y, x)
+dot(x, w)                                    # confirm normality
 # these two column vectors are orthogonal and have correct span
 cbind( x / vlength(x), w / vlength(w) )
 
-## ----mat-dim-------------------------------------------------------------
+## ----mat-dim01-----------------------------------------------------------
 M = 1:12
-dim(M) = c(3,4)
+dim(M) = c(3, 4)
 M
 
-## ----mat-checkdim--------------------------------------------------------
+## ----mat-dim02-----------------------------------------------------------
 dim(M)
 
 ## ----matrix--------------------------------------------------------------
 x <- 1:12
-matrix(x,nr=2)                     # 2 rows, entries columnwise
-matrix(x,nr=3,byrow=TRUE)          # 3 rows, entries rowwise
-matrix(x,nc=3,byrow=TRUE)          # 3 columns, entries rowwise
+matrix(x, nr = 2)                  # 2 rows, entries columnwise
+matrix(x, nr = 3, byrow = TRUE)    # 3 rows, entries rowwise
+matrix(x, nc = 3, byrow = TRUE)    # 3 columns, entries rowwise
 x                                  # x is unchanged
 
 ## ----matrix-recycle------------------------------------------------------
-matrix(1,nr=4,nc=3)                # matrix of all 1's
-matrix(nr=3,nc=2)                  # matrix of missing data
+matrix(1, nr = 4, nc = 3)          # matrix of all 1's
+matrix(nr = 3, nc = 2)             # matrix of missing data
 
-## ----mat-bind------------------------------------------------------------
-A = rbind(1:3,4:6); A
-B = cbind(c(5,2,4),c(1,3,-1)); B
+## ----rbind-cbind---------------------------------------------------------
+A = rbind(1:3, 4:6); A
+B = cbind(c(5, 2, 4), c(1, 3, -1)); B
 
 ## ----as-matrix-----------------------------------------------------------
-as.matrix(1:4)
+x <- 1:3
+A %*% x       # vector x treated as a column matrix
+as.matrix(x)  # explicit conversion to a column matrix
 
 ## ----matrix-t------------------------------------------------------------
 t(1:4)                             # transpose column into row
 M
 t(M)                              
 
-## ----mat-mult------------------------------------------------------------
+## ----matrix-mult---------------------------------------------------------
 A %*% B            # Note: A*B does not work
 B %*% A
 
-## ----mat-dot-------------------------------------------------------------
+## ----matrix-dot----------------------------------------------------------
 1:4 %*% 1:4
 sum(1:4 * 1:4)
 
-## ----mat-outer-----------------------------------------------------------
+## ----matrix-outer--------------------------------------------------------
 outer(1:4, 1:4)
 
-## ----mat-outer-fun-------------------------------------------------------
-outer(1:4, 1:4, FUN=function(x,y) {paste(x,':',y,sep='')})
+## ----matrix-outer-fun----------------------------------------------------
+outer(1:4, 1:4, 
+      FUN = function(x, y) {paste(x, ':', y, sep = '')})
 
-## ----mat-solve-----------------------------------------------------------
-x <- as.matrix(c(3,1))            # vector as column matrix
-A <- rbind(c(5,2),c(3,1))
+## ----matrix-solve--------------------------------------------------------
+x <- as.matrix(c(3, 1))           # vector as column matrix
+A <- rbind(c(5, 2), c(3, 1))
 Ainv <- solve(A); Ainv            # solve() computes inverse
 A %*% Ainv
 Ainv %*% A
 Ainv %*% x                        # solution to system
+
+## ----project-matrix01----------------------------------------------------
+v1 <- c(1, 1, 1, 1)
+v2 <- c(1, 2, -3, 0)
+A <- cbind(v1 / vlength(v1), v2 / vlength(v2))
+
+## ----project-matrix02----------------------------------------------------
+t(A) %*% v1 
+t(A) %*% v2
+x <- 1:4
+coefs <- t(A) %*% x; coefs
+pr <- A %*% coefs; pr
+remainder <- x - pr; remainder
+dot(remainder, v1)    # should be 0
+dot(remainder, v2)    # should be 0
 
 
 ## ----Chap1-4Review, child="Chap1-4Review.Rnw", eval=includeApp[4]--------
@@ -8873,6 +9146,22 @@ round(moment.cont(dunif, k=1:4, centered=TRUE), 5)
 round(moment.cont(dnorm, k=1:4, centered=TRUE), 5)
 round( moment.cont(function(x) {dnorm(x, 10, 3)}, k=1:4, centered=TRUE), 5)
 
+
+## ----additional-packages, include = FALSE--------------------------------
+require(grid)
+require(MASS)
+require(car)
+require(effects)
+require(DAAG)
+require(faraway)
+require(alr3)
+require(multcomp)
+require(knitr)
+require(corrgram)
+require(latticeExtra)
+require(knitr)
+require(cubature)
+require(vcd)
 
 ## ----session-info--------------------------------------------------------
 devtools::session_info()
