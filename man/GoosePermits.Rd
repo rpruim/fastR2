@@ -31,14 +31,8 @@ ggplot(data = GoosePermits) +
   scale_size_area() + 
   labs(y = "probabity of selling")
   
-GPA, ACT, and SAT scores
-
-GPA, ACT, and SAT scores for a sample of students.
-
-
 }
 \references{
 Bishop and Heberlein (Amer. J. Agr. Econ. 61, 1979).
 }
-\keyword{datasets}
 

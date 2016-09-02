@@ -21,14 +21,14 @@ question was on the survey} \item{pulse}{ self-reported pulse}
 \item{TVver}{ which of three versions of the TV question was on the
 survey} \item{tvBox}{ a factor with levels \code{<1} \code{>4}
 \code{>8} \code{1-2} \code{2-4} \code{4-8} \code{none} \code{other}}
-\item{tvHours}{ a numeric vector} \item{surpriseVer}{ which of
+\item{tvHours}{ a numeric vector} \item{surprisever}{ which of
 two versions of the 'surprise' question was on the survey}
 \item{surprise}{ a factor with levels \code{no} \code{yes}}
-\item{playVer}{ which of two versions of the 'play' question was on
+\item{playver}{ which of two versions of the 'play' question was on
 the survey} \item{play}{ a factor with levels \code{no} \code{yes}}
-\item{diseaseVer}{ which of two versions of the 'play' question was
+\item{diseasever}{ which of two versions of the 'play' question was
 on the survey} \item{disease}{ a factor with levels \code{A}
-\code{B}} \item{homeworkVer}{ which of two versions of the 'homework'
+\code{B}} \item{homeworkver}{ which of two versions of the 'homework'
 question was on the survey} \item{homework}{ a factor with levels
 \code{A} \code{B}} }}
 \description{
@@ -39,8 +39,8 @@ multiple versions and distributed randomly to the students.
 \examples{
 
 data(LittleSurvey)
-tally(surprise ~ surpriseVer, data = LittleSurvey)
-tally(disease ~ diseaseVer, data = LittleSurvey)
+tally(surprise ~ surprisever, data = LittleSurvey)
+tally(disease ~ diseasever, data = LittleSurvey)
 
 }
 \keyword{datasets}

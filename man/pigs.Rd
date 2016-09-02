@@ -54,7 +54,7 @@ worth 40 rather than 20.
 \examples{
 
 data(Pigs)
-tally( ~blackF, data = Pigs )
+tally( ~ black, data = Pigs )
 if (require(tidyr)) {
   Pigs \%>\% 
   select(roll, black, pink) \%>\%

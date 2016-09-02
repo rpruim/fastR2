@@ -18,7 +18,7 @@
 #' @examples
 #'
 #' data(Jordan8687)
-#' qqmath(~ Points, data = Jordan8687)
+#' qqmath(~ points, data = Jordan8687)
 #' 
 NULL
 
@@ -687,7 +687,7 @@ NULL
 #'   labs(y = "probabity of selling")
 #'   
 
-
+NULL
 
 #' GPA, ACT, and SAT scores
 #' 
@@ -908,22 +908,22 @@ NULL
 #' \item{TVver}{ which of three versions of the TV question was on the
 #' survey} \item{tvBox}{ a factor with levels \code{<1} \code{>4}
 #' \code{>8} \code{1-2} \code{2-4} \code{4-8} \code{none} \code{other}}
-#' \item{tvHours}{ a numeric vector} \item{surpriseVer}{ which of
+#' \item{tvHours}{ a numeric vector} \item{surprisever}{ which of
 #' two versions of the 'surprise' question was on the survey}
 #' \item{surprise}{ a factor with levels \code{no} \code{yes}}
-#' \item{playVer}{ which of two versions of the 'play' question was on
+#' \item{playver}{ which of two versions of the 'play' question was on
 #' the survey} \item{play}{ a factor with levels \code{no} \code{yes}}
-#' \item{diseaseVer}{ which of two versions of the 'play' question was
+#' \item{diseasever}{ which of two versions of the 'play' question was
 #' on the survey} \item{disease}{ a factor with levels \code{A}
-#' \code{B}} \item{homeworkVer}{ which of two versions of the 'homework'
+#' \code{B}} \item{homeworkver}{ which of two versions of the 'homework'
 #' question was on the survey} \item{homework}{ a factor with levels
 #' \code{A} \code{B}} }
 #' @keywords datasets
 #' @examples
 #' 
 #' data(LittleSurvey)
-#' tally(surprise ~ surpriseVer, data = LittleSurvey)
-#' tally(disease ~ diseaseVer, data = LittleSurvey)
+#' tally(surprise ~ surprisever, data = LittleSurvey)
+#' tally(disease ~ diseasever, data = LittleSurvey)
 #' 
 NULL
 
@@ -1363,7 +1363,7 @@ NULL
 #' @examples
 #' 
 #' data(Pigs)
-#' tally( ~blackF, data = Pigs )
+#' tally( ~ black, data = Pigs )
 #' if (require(tidyr)) {
 #'   Pigs %>% 
 #'   select(roll, black, pink) %>%
@@ -1449,11 +1449,11 @@ NULL
 #' 
 #' data(poison)
 #' poison.lm <- lm(time~factor(poison) * factor(treatment), data = Poison) 
-#' xplot(poison.lm,w = c(4,2))
+#' plot(poison.lm,w = c(4,2))
 #' anova(poison.lm)
 #' # improved fit using a transformation
-#' poison.lm2 <- lm(1/time~factor(poison) * factor(treatment), data = Poison) 
-#' xplot(poison.lm2,w = c(4,2))
+#' poison.lm2 <- lm(1/time ~ factor(poison) * factor(treatment), data = Poison) 
+#' plot(poison.lm2,w = c(4,2))
 #' anova(poison.lm)
 #' 
 NULL
@@ -1562,8 +1562,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(Rubberband)
-#' xyplot(distance ~ stretch, data = Rubberband, type = c("p","r"))
+#' data(RubberBand)
+#' xyplot(distance ~ stretch, data = RubberBand, type = c("p","r"))
 #' 
 NULL
 
@@ -1642,7 +1642,7 @@ NULL
 #' @examples
 #' 
 #' data(Soap)
-#' xyplot(weight~day, data = Soap)
+#' xyplot(weight ~ day, data = Soap)
 #' 
 NULL
 
@@ -1751,8 +1751,8 @@ NULL
 #' @examples
 #' 
 #' data(Stereogram)
-#' favstats(time~group, data = Stereogram)
-#' xyplot(time~group, data = Stereogram, jitter.x = TRUE)
+#' favstats(time ~ group, data = Stereogram)
+#' xyplot(time ~ group, data = Stereogram, jitter.x = TRUE)
 #' 
 NULL
 
