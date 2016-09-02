@@ -27,6 +27,9 @@
 #' device and to any devices opened by the demo code. If this is evaluated to
 #' \code{TRUE} and the session is interactive, the user is asked to press
 #' RETURN to start.
+#' @param regex a logical indicating whether regular expression matching will 
+#' be used.
+#' @param max.files an integer limiting the number of files retrieved.
 #' @author Randall Pruim
 #' @seealso \code{\link{demo}}, \code{\link{source}}.
 #' @keywords utilities
@@ -34,17 +37,11 @@
 snippet <-
 function (name, execute = TRUE, view = !execute, echo = TRUE, 
     ask = getOption("demo.ask"), verbose = getOption("verbose"), 
-    lib.loc = NULL, character.only = FALSE) 
+    lib.loc = NULL, character.only = FALSE, regex = TRUE, max.files = 10L) 
 {
     package <- "fastR2"
     paths <- find.package(package, lib.loc, verbose = verbose)
     paths <- paths[file_test("-d", file.path(paths, "snippet"))]
-    if (missing(name)) {
-        noName = TRUE
-    }
-    else {
-        noName = FALSE
-    }
     available <- character(0L)
     paths <- file.path(paths, "snippet")
     if (missing(name)) {
@@ -55,20 +52,25 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
         }
         return(available)
     }
-    for (p in paths) {
-        files <- basename(tools::list_files_with_type(p, "code"))
-        files <- files[name == tools::file_path_sans_ext(files)]
-        if (length(files)) 
-            available <- c(available, file.path(p, files))
-    }
     if (!character.only) 
         name <- as.character(substitute(name))
+    for (p in paths) {
+        snippet_files <- basename(tools::list_files_with_type(p, "code"))
+        if (regex) {
+          matching_files <- grep(name, snippet_files, value = TRUE)
+        } else {
+          matching_files <- files[name == tools::file_path_sans_ext(files)]
+        }
+        if (length(matching_files)) 
+            available <- c(available, file.path(p, matching_files))
+    }
     if (length(available) == 0L) 
-        stop(gettextf("No snippet named '%s'", name), domain = NA)
-    if (length(available) > 1L) {
-        available <- available[1L]
-        warning(gettextf("Snippet  '%s' found more than once,\nusing the one found in '%s'", 
-            name, dirname(available[1L])), domain = NA)
+        stop(gettextf("No snippet matching '%s'", name), domain = NA)
+    if (length(available) > max.files) {
+        available <- head(available, max.files)
+        warning(
+          gettextf("Limiting to %i files.  Increase max.files if you want more.", max.files)
+        )
     }
     if (ask == "default") 
         ask <- echo && grDevices::dev.interactive(orNone = TRUE)
@@ -78,20 +80,21 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
     }
     op <- options(device.ask.default = ask)
     on.exit(options(op), add = TRUE)
-    if (echo) {
-        cat("\n\n", "\tsnippet(", name, ")\n", "\t------- ", 
-            rep.int("~", nchar(name, type = "w")), "\n", sep = "")
-    }
-    if (view) {
-        file <- srcfile(available)
-        lines <- getSrcLines(file, 1, 5000)
+    for (file in available) {
+      fname <- basename(tools::file_path_sans_ext(file))
+      if (echo) {
+        cat(paste0("\n", "## snippet: ", fname, "\n"))
+      }
+      if (view) {
+        lines <- getSrcLines(srcfile(file), 1, 5000)
         cat(paste(lines, collapse = "\n"))
-    }
-    if (execute) {
+      }
+      if (execute) {
         if (ask && interactive()) {
-            readline("\nType  <Return>\t to start : ")
+          readline("\nType  <Return>\t to start : ")
         }
-        source(available, echo = echo, max.deparse.length = Inf, 
-            keep.source = TRUE)
+        source(file, echo = echo, max.deparse.length = Inf, 
+               keep.source = TRUE)
+      }
     }
 }
