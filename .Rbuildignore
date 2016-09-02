@@ -14,3 +14,4 @@
 ^cran-comments\.md$
 ^README\.html$
 ^data-raw$
+^inst/snippet/.R$
