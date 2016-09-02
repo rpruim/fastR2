@@ -1,2 +1,0 @@
-confint(concrete.lm0)
-
