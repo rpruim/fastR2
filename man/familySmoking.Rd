@@ -19,7 +19,7 @@ parents smoke from a study conducted in the 1960's.
 \examples{
 
 data(FamilySmoking)
-xchisq.test( tally(Parents ~ Student, data = FamilySmoking) )
+xchisq.test( tally(parents ~ student, data = FamilySmoking) )
 
 }
 \references{

@@ -459,12 +459,12 @@ NULL
 #' @examples
 #' 
 #' data(Endurance)
-#' t.test(Endurance$Vitamin, Endurance$Placebo, paired = TRUE)
-#' t.test(log(Endurance$Vitamin), log(Endurance$Placebo), paired = TRUE)
-#' t.test(1/Endurance$Vitamin, 1/Endurance$Placebo, paired = TRUE)
-#' xqqmath( ~ Vitamin - Placebo, data = Endurance)
-#' xqqmath( ~ log(Vitamin) - log(Placebo), data = Endurance)
-#' xqqmath( ~ 1/Vitamin - 1/Placebo, data = Endurance)
+#' t.test(Endurance$vitamin, Endurance$placebo, paired = TRUE)
+#' t.test(log(Endurance$vitamin), log(Endurance$placebo), paired = TRUE)
+#' t.test(1/Endurance$vitamin, 1/Endurance$placebo, paired = TRUE)
+#' xqqmath( ~ vitamin - placebo, data = Endurance)
+#' xqqmath( ~ log(vitamin) - log(placebo), data = Endurance)
+#' xqqmath( ~ 1/vitamin - 1/placebo, data = Endurance)
 #' 
 NULL
 
@@ -495,7 +495,7 @@ NULL
 #' @examples
 #' 
 #' data(FamilySmoking)
-#' xchisq.test( tally(Parents ~ Student, data = FamilySmoking) )
+#' xchisq.test( tally(parents ~ student, data = FamilySmoking) )
 #' 
 NULL
 
@@ -613,9 +613,9 @@ NULL
 #' 
 #' data(Pheno); data(FUSION1); data(FUSION2)
 #' FUSION1m <- merge(FUSION1, Pheno, by = "id", all.x = FALSE, all.y = FALSE) 
-#' xtabs(~t2d + genotype, data = FUSION1m) 
-#' xtabs(~t2d + Gdose, data = FUSION1m) 
-#' chisq.test( xtabs( ~t2d + genotype, data = FUSION1m ) )
+#' xtabs( ~ t2d + genotype, data = FUSION1m) 
+#' xtabs( ~ t2d + Gdose, data = FUSION1m) 
+#' chisq.test( xtabs( ~ t2d + genotype, data = FUSION1m ) )
 #' f1.glm <- glm( factor(t2d) ~ Gdose, data = FUSION1m, family = binomial) 
 #' summary(f1.glm)
 #' 
@@ -733,7 +733,7 @@ NULL
 #' 
 #' data(HeliumFootballs)
 #' xyplot(helium ~ air, data = HeliumFootballs)
-#' bwplot(~(helium-air), data = HeliumFootballs)
+#' bwplot( ~ (helium - air), data = HeliumFootballs)
 #' 
 NULL
 

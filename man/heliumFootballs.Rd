@@ -22,7 +22,7 @@ each kick. The experimenter recorded the distance traveled by each ball.
 
 data(HeliumFootballs)
 xyplot(helium ~ air, data = HeliumFootballs)
-bwplot(~(helium-air), data = HeliumFootballs)
+bwplot( ~ (helium - air), data = HeliumFootballs)
 
 }
 \references{

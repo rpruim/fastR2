@@ -35,12 +35,12 @@ The study was conducted in a double-blind manner with crossover.
 \examples{
 
 data(Endurance)
-t.test(Endurance$Vitamin, Endurance$Placebo, paired = TRUE)
-t.test(log(Endurance$Vitamin), log(Endurance$Placebo), paired = TRUE)
-t.test(1/Endurance$Vitamin, 1/Endurance$Placebo, paired = TRUE)
-xqqmath( ~ Vitamin - Placebo, data = Endurance)
-xqqmath( ~ log(Vitamin) - log(Placebo), data = Endurance)
-xqqmath( ~ 1/Vitamin - 1/Placebo, data = Endurance)
+t.test(Endurance$vitamin, Endurance$placebo, paired = TRUE)
+t.test(log(Endurance$vitamin), log(Endurance$placebo), paired = TRUE)
+t.test(1/Endurance$vitamin, 1/Endurance$placebo, paired = TRUE)
+xqqmath( ~ vitamin - placebo, data = Endurance)
+xqqmath( ~ log(vitamin) - log(placebo), data = Endurance)
+xqqmath( ~ 1/vitamin - 1/placebo, data = Endurance)
 
 }
 \references{
