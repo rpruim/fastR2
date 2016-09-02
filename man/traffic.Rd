@@ -25,11 +25,13 @@ to 1956 can be attributed to the stricter enforcement.
 
 data(Traffic)
 xyplot(cn.deaths ~ year, data = Traffic, type = c('l','g'))
-TrafficLong <- reshape(traffic,direction = 'long', idvar = "year", 
-				varying = list(3:6), v.names = 'deathRate',
-				times = names(traffic)[3:6], timevar = 'state')
-xyplot(deathRate~year, groups = state, data = TrafficLong, type = 'b',
-		auto.key = list(lines = TRUE, points = FALSE, columns = 2))
+TrafficLong <- 
+  Traffic \%>\% 
+  select(-2) \%>\%
+  tidyr::gather(state, fatality.rate, ny:ri)
+xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
+		auto.key = list(lines = TRUE, points = FALSE, columns = 2),
+		ylim = c(0, NA))
 
 }
 \references{
