@@ -13,6 +13,7 @@
 #' @param \dots additional arguments passed to \code{nlm}.  Note that \code{p} is a required
 #' argument for \code{nlm}.  See the help for \code{\link{nlm}} for details.
 #' 
+#' @importFrom stats nlm 
 #' @export
 #' @examples
 #' summary( nlmax( function(x) 5 - 3*x - 5*x^2, p=0 ) )
@@ -22,7 +23,7 @@ function (f, ...)
     g <- function(...) {
         -f(...)
     }
-    result <- nlm(g, ...)
+    result <- stats::nlm(g, ...)
     result$minimum <- -result$minimum
     names(result)[1] <- "maximum"
     class(result) <- c("nlmax", class(result))
@@ -34,7 +35,7 @@ function (f, ...)
 nlmin <-
 function (f, ...) 
 {
-    result <- nlm(f, ...)
+    result <- stats::nlm(f, ...)
     class(result) <- c("nlmin", class(result))
     return(result)
 }

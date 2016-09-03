@@ -11,6 +11,7 @@
 #' @param size1,size2,size3 Sizes of the line segments in the plot
 #' @param ... additional arguments (currently ignored)
 #' @param env an environment in which to evaluate the models.
+#' @importFrom dplyr data_frame
 #' 
 #' @export
 #' @examples
@@ -36,20 +37,20 @@ SSplot <-
       n <- length(e)
       idx <- 0:length(e)
       idx <- union(idx[(idx + dfe) <= n], n)
-      data_frame(df = idx, SS = cumsum(c(0,e^2))[1 + idx])
+      dplyr::data_frame(df = idx, SS = cumsum(c(0,e^2))[1 + idx])
     }
     
     DD <- do(n) * SS(eval(model2$call, env))
     SSM1 <- SS(model1)
     ggplot2::ggplot() + 
       ggplot2::geom_line(
-        data = DD %>% filter(df <= model2$rank - 1) , 
+        data = DD %>% dplyr::filter(df <= model2$rank - 1) , 
         aes(x = df, y = SS, group = .index), color = col1,
         alpha = 1/sqrt(n), size = size1) +
       ggplot2::geom_line(
-        data = SSM1 %>% filter(df <= model1$rank - 1),
+        data = SSM1 %>% dplyr::filter(df <= model1$rank - 1),
         aes(x = df, y = SS), color = col2, alpha = 0.8, size = size2) +
       ggplot2::geom_line(
-        data = SSM1 %>% filter(df >= model1$rank - 1),
+        data = SSM1 %>% dplyr::filter(df >= model1$rank - 1),
         aes(x = df, y = SS), colour = col3, alpha = 0.8, size = size3) 
   }  

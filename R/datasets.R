@@ -181,8 +181,8 @@ NULL
 #' had regrown.
 #' 
 #' 
-#' @name buckthorn
-#' @rdname buckthorn
+#' @name Buckthorn
+#' @rdname Buckthorn
 #' @docType data
 #' @format A data frame with 165 observations on the following 3 variables.
 #' \itemize{ \item{shoots}{ number of new shoots coming from stump}
@@ -192,7 +192,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(buckthorn)
+#' data(Buckthorn)
 #' 
 NULL
 
@@ -1886,13 +1886,15 @@ NULL
 #' 
 #' data(Traffic)
 #' xyplot(cn.deaths ~ year, data = Traffic, type = c('l','g'))
-#' TrafficLong <- 
-#'   Traffic %>% 
-#'   select(-2) %>%
-#'   tidyr::gather(state, fatality.rate, ny:ri)
-#' xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
+#' if (require(tidyr)) {
+#'   TrafficLong <- 
+#'     Traffic %>% 
+#'     select(-2) %>%
+#'     gather(state, fatality.rate, ny:ri)
+#'   xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
 #' 		auto.key = list(lines = TRUE, points = FALSE, columns = 2),
 #' 		ylim = c(0, NA))
+#' }
 #' 
 NULL
 
@@ -1935,8 +1937,30 @@ NULL
 NULL
 
 
+#' Unemployment data
+#' 
+#' Unemployment data
+#' 
+#' @docType data
+#' @name Unemployment
+#' @usage data(Unemployment)
+#' @format  A data.frame with 10 observations on the following 4 variables.
+#' \itemize{
+#'    item{code{unemp }}{unemployment rate}
+#'    item{code{production }}{[numeric]}
+#'    item{code{year }}{}
+#'    item{code{iyear }}{indexed year}
+#' }
+#' 
+#' @source 
+#' Paul F. Velleman and Roy E. Welsch. 
+#' "Efficient Computing of Regression Diagnostics",
+#' The American Statistician, Vol. 35, No. 4 (Nov., 1981), pp. 234-242.
+#' (http://www.jstor.org/stable/2683296)
+#' @examples
+#' data(Unemployment)
 
-
+NULL
 
 
 

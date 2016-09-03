@@ -25,13 +25,15 @@ to 1956 can be attributed to the stricter enforcement.
 
 data(Traffic)
 xyplot(cn.deaths ~ year, data = Traffic, type = c('l','g'))
-TrafficLong <- 
-  Traffic \%>\% 
-  select(-2) \%>\%
-  tidyr::gather(state, fatality.rate, ny:ri)
-xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
+if (require(tidyr)) {
+  TrafficLong <- 
+    Traffic \%>\% 
+    select(-2) \%>\%
+    gather(state, fatality.rate, ny:ri)
+  xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
 		auto.key = list(lines = TRUE, points = FALSE, columns = 2),
 		ylim = c(0, NA))
+}
 
 }
 \references{

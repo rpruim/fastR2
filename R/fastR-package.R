@@ -20,6 +20,7 @@
 
 #' @import lattice
 #' @import grid
+#' @importFrom stats coef df qnorm
 NULL
 
 

@@ -10,6 +10,15 @@
 \item{x}{an object of class \code{"maxLik2"}}
 
 \item{y}{ignored}
+
+\item{ci}{a character vector with values among
+\code{"Wald"} and \code{"likelihood"} specifying the type of 
+interval to display}
+
+\item{hline}{a logical indicating whether a horizontal line should 
+be added}
+
+\item{...}{additional arguments, currently ignored.}
 }
 \description{
 See \code{\link{maxLik2}} and \code{\link{maxLik}} for how to create

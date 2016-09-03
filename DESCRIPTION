@@ -1,6 +1,6 @@
 Package: fastR2
 Type: Package
-Title: Foundations and Applications of Statistics Using R (2nd ed)
+Title: Foundations and Applications of Statistics Using R (2nd Edition)
 Version: 0.1.9006
 Date: 2016-09-02
 Author: Randall Pruim
@@ -18,8 +18,10 @@ Depends:
 Imports:
     lattice,
     grid,
-    maxLik
+    maxLik,
+    numDeriv
 Suggests:
+    tidyr,
     ggplot2,
     MASS,
     faraway,

@@ -3,12 +3,12 @@
 #' This version of \code{\link{maxLik}} stores additional information in the 
 #' returned object enabling a plot method.
 #' 
-#' @import maxLik
 #' 
 #' @param loglik a log-likelihood function as for \code{\link{maxLik}}
 #' @param ... additional arguments passed to \code{\link{maxLik}}
 #' @param env an environment in which to evaluate \code{loglik}.
 #' @importFrom numDeriv grad hessian
+#' @importFrom maxLik maxLik hessian
 #' @export
 
 maxLik2 <- function(loglik, ..., env = parent.frame()) {
@@ -37,6 +37,14 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
 #' 
 #' @param x an object of class \code{"maxLik2"}
 #' @param y ignored
+#' @param ci a character vector with values among
+#' \code{"Wald"} and \code{"likelihood"} specifying the type of 
+#' interval to display
+#' @param hline a logical indicating whether a horizontal line should 
+#' be added 
+#' @param ... additional arguments, currently ignored.
+
+#' @importFrom stats coef filter 
 #' @export
 
 plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
@@ -50,7 +58,7 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
       se <- stdEr(ml)
       S <- Vectorize(function(.x) {   numDeriv::grad(   Vectorize(ml$loglik), .x) })
       I <- Vectorize(function(.x) { - numDeriv::hessian(Vectorize(ml$loglik), .x) })
-      Q <- function(.x) { ml$loglik(coef(ml)) - 1/2 * I(coef(ml)) * (.x - coef(ml))^2}
+      Q <- function(.x) { ml$loglik(coef(ml)) - 1/2 * I(coef(ml)) * (.x - coef(ml))^2 }
       G <- data.frame(theta = c(coef(ml) - 3 * se, coef(ml) + 3 * se))
       p <- 
         ggplot(G, aes(x = theta)) + 
@@ -71,8 +79,8 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
             x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
             y = suppressWarnings(ml$loglik(x))
           ) %>% 
-          filter(!is.na(y), !is.nan(y), is.finite(y)) %>%
-          filter(y > max(y, na.rm = TRUE) - 2)
+          dplyr::filter(!is.na(y), !is.nan(y), is.finite(y)) %>%
+          dplyr::filter(y > max(y, na.rm = TRUE) - 2)
       }
       
       if ("likelihood" %in% ci) {
@@ -100,7 +108,7 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
       names(G) <- c("p1", "p2")
       G$loglik <- apply(G, 1, ml$loglik)
       levelplot( loglik ~ p1 + p2, data = G, contour = TRUE, 
-                 col.regions = topo.colors(100),
+                 col.regions = grDevices::topo.colors(100),
                  xlab = names(coef(ml))[1],
                  ylab = names(coef(ml))[2]
       )
@@ -109,6 +117,13 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
   )
 }
 
+#' Information
+#' 
+#' Extract information from a maxLik object
+#' 
+#' @param object an object of class \code{"maxLik"}.
+#' @param ... additional arguments
+#' 
 #' @export
 information <- function(object, ...) {
   UseMethod("information")

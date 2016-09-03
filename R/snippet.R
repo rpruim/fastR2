@@ -33,6 +33,7 @@
 #' @author Randall Pruim
 #' @seealso \code{\link{demo}}, \code{\link{source}}.
 #' @keywords utilities
+#' @importFrom utils file_test head
 #' @export
 snippet <-
 function (name, execute = TRUE, view = !execute, echo = TRUE, 
@@ -41,7 +42,7 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
 {
     package <- "fastR2"
     paths <- find.package(package, lib.loc, verbose = verbose)
-    paths <- paths[file_test("-d", file.path(paths, "snippet"))]
+    paths <- paths[utils::file_test("-d", file.path(paths, "snippet"))]
     available <- character(0L)
     paths <- file.path(paths, "snippet")
     if (missing(name)) {
@@ -67,7 +68,7 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
     if (length(available) == 0L) 
         stop(gettextf("No snippet matching '%s'", name), domain = NA)
     if (length(available) > max.files) {
-        available <- head(available, max.files)
+        available <- utils::head(available, max.files)
         warning(
           gettextf("Limiting to %i files.  Increase max.files if you want more.", max.files)
         )

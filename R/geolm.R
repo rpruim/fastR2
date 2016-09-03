@@ -21,6 +21,8 @@ tryCatch(utils::globalVariables(c('gp')),
 #' @author Randall Pruim
 #' @seealso \code{\link{lm}}.
 #' @keywords stats
+#' @importFrom stats effects lm 
+
 #' @export
 #' @examples
 #' 
@@ -31,8 +33,8 @@ geolm <-
 function (formula, data = parent.env(), type = "xz", version = 1, 
     plot = TRUE, ...) 
 {
-    model <- lm(formula, data = data, ...)
-    ef <- -1 * effects(model)
+    model <- stats::lm(formula, data = data, ...)
+    ef <- -1 * stats::effects(model)
     w.int <- which(names(ef) == "(Intercept)")
     w.resid <- which(names(ef) == "")
     w.effect <- (1:length(ef))[-1 * c(w.int, w.resid)]
