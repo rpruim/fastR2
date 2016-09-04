@@ -1,3 +1,5 @@
+utils::globalVariables(c(".index"))
+
 #' Sum of Squares Plots
 #' 
 #' This function creates plots showing the "consumption" of residual
@@ -44,13 +46,13 @@ SSplot <-
     SSM1 <- SS(model1)
     ggplot2::ggplot() + 
       ggplot2::geom_line(
-        data = DD %>% dplyr::filter(df <= model2$rank - 1) , 
+        data = dplyr::filter(DD, df <= model2$rank - 1) , 
         aes(x = df, y = SS, group = .index), color = col1,
         alpha = 1/sqrt(n), size = size1) +
       ggplot2::geom_line(
-        data = SSM1 %>% dplyr::filter(df <= model1$rank - 1),
+        data = dplyr::filter(SSM1, df <= model1$rank - 1),
         aes(x = df, y = SS), color = col2, alpha = 0.8, size = size2) +
       ggplot2::geom_line(
-        data = SSM1 %>% dplyr::filter(df >= model1$rank - 1),
+        data = dplyr::filter(SSM1, df >= model1$rank - 1),
         aes(x = df, y = SS), colour = col3, alpha = 0.8, size = size3) 
   }  

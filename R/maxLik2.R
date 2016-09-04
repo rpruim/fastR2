@@ -1,3 +1,5 @@
+utils::globalVariables("theta")
+
 #' Augmented version of maxLik
 #' 
 #' This version of \code{\link{maxLik}} stores additional information in the 
@@ -7,8 +9,9 @@
 #' @param loglik a log-likelihood function as for \code{\link{maxLik}}
 #' @param ... additional arguments passed to \code{\link{maxLik}}
 #' @param env an environment in which to evaluate \code{loglik}.
-#' @importFrom numDeriv grad hessian
-#' @importFrom maxLik maxLik hessian
+#' @importFrom numDeriv grad 
+#' @importFrom maxLik maxLik 
+# avoid importing hessian from either
 #' @export
 
 maxLik2 <- function(loglik, ..., env = parent.frame()) {
@@ -44,7 +47,9 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
 #' be added 
 #' @param ... additional arguments, currently ignored.
 
-#' @importFrom stats coef filter 
+#' @importFrom stats coef
+#' @importFrom dplyr filter
+#' @importFrom miscTools stdEr 
 #' @export
 
 plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
@@ -78,9 +83,9 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
           data_frame(
             x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
             y = suppressWarnings(ml$loglik(x))
-          ) %>% 
-          dplyr::filter(!is.na(y), !is.nan(y), is.finite(y)) %>%
-          dplyr::filter(y > max(y, na.rm = TRUE) - 2)
+          ) 
+        D <- dplyr::filter(D, !is.na(y), !is.nan(y), is.finite(y))
+        D <- dplyr::filter(D, y > max(y, na.rm = TRUE) - 2)
       }
       
       if ("likelihood" %in% ci) {

@@ -20,6 +20,8 @@
 
 #' @import lattice
 #' @import grid
+#' @import mosaic
+#' @import ggplot2
 #' @importFrom stats coef df qnorm
 NULL
 

@@ -209,6 +209,9 @@ sample(iris, 6)      # this requires mosaic::sample()
 ## ----eval=FALSE----------------------------------------------------------
 ## snippet("iris-glimpse", exec = FALSE)
 
+## ----eval = FALSE--------------------------------------------------------
+## snippet("deathPenalty")
+
 ## ----iris-vector---------------------------------------------------------
 iris$Sepal.Length    # get one variable and display as vector
 
@@ -485,7 +488,7 @@ x <- c(1:20, 16 + 1.51 * iqr)
 boxplot.stats(x)$out
 ###
 
-## ----intro-dispersion02--------------------------------------------------
+## ----dispersion01--------------------------------------------------------
 x <- c(1, 3, 5, 5, 6, 8, 9, 14, 14, 20)
 n <- length(x); n
 mean(x)
@@ -501,7 +504,7 @@ var(x)
 sd(x)
 sd(x)^2
 
-## ----dispersion-template-------------------------------------------------
+## ----dispersion02--------------------------------------------------------
 mean(Sepal.Length ~ Species, data = iris)
 var(Sepal.Length ~ Species, data = iris)
 sd(Sepal.Length ~ Species, data = iris)
@@ -9164,5 +9167,7 @@ require(cubature)
 require(vcd)
 
 ## ----session-info--------------------------------------------------------
-devtools::session_info()
+PP <- devtools::session_info()
+PP$packages[, "source"] <- substr(PP$packages[, "source"], 1, 15)
+PP
 

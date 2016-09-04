@@ -17,12 +17,15 @@ Depends:
     mosaic
 Imports:
     lattice,
+    ggplot2,
     grid,
+    magrittr,
+    dplyr,
     maxLik,
-    numDeriv
+    numDeriv,
+    miscTools
 Suggests:
     tidyr,
-    ggplot2,
     MASS,
     faraway,
     Hmisc,
