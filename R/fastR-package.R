@@ -1,3 +1,5 @@
+#' @import mosaicCalc
+NA 
 
 #' Foundations and Applications of Statistics
 #' 
