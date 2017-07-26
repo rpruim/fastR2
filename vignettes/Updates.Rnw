@@ -33,6 +33,7 @@
 <<include=FALSE,message=FALSE>>=
 require(fastR)
 require(mosaicData)
+require(mosaicCalc)
 require(knitr)
 opts_chunk$set(
 			   fig.show="hold",
@@ -71,6 +72,7 @@ the \pkg{mosaicData} package separately to access the data sets.
 
 <<>>=
 require(mosaicData)
+require(mosaicCalc)
 @
 
 \subsection{Taking Advantage of Formulas}
@@ -265,7 +267,7 @@ for example, \function{integrate()} which returns an object from which the value
 fprime <- D(f(x) ~ x)
 fprime(2)
 fprime
-gprime <- D(g(x) ~ x)
+gprime <- D(g(x, A, B, C) ~ x, A = 1, B = 2, C = 3)
 gprime(3)
 gprime(3, A = 3, B = 2, C = 1)
 h <- makeFun( sin(x^2) ~ x )
