@@ -54,6 +54,16 @@ of recovery} }
 
 data(Ice)
 xyplot(weight ~ skinfold, groups = sex, data = Ice, auto.key = TRUE)
+if (require(readr) && require(tidyr) && require(ggplot2) && require(dplyr)) {
+  Ice2 <- Ice \%>\% 
+  gather("key", "temp", b0:r12000) \%>\% 
+  separate(key, c("phase", "time"), sep = 1) \%>\% 
+  mutate(time = parse_number(time), subject = as.character(subject))  
+  
+  ggplot(Ice2 \%>\% filter(phase == "t")) + 
+    geom_line(aes(x = time, y = temp, group = subject, color = sex)) + 
+    facet_grid( treatment ~ location)
+}
 
 }
 \keyword{datasets}
