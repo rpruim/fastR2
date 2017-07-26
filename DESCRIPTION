@@ -1,8 +1,8 @@
 Package: fastR
 Type: Package
 Title: Foundations and Applications of Statistics Using R
-Version: 0.10.2
-Date: 2015-12-17
+Version: 0.10.3
+Date: 2017-07-26
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
 Description: Data sets and utilities to accompany
@@ -14,7 +14,8 @@ Description: Data sets and utilities to accompany
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
-    mosaic
+    mosaic,
+    mosaicCalc
 Imports:
     lattice,
     grid,
