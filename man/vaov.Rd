@@ -3,6 +3,7 @@
 \name{vaov}
 \alias{vaov}
 \alias{vaov.formula}
+\alias{vaov.formula}
 \title{ANOVA vectors}
 \usage{
 vaov(x, ...)
@@ -12,9 +13,9 @@ vaov(x, ...)
 \arguments{
 \item{x}{a formula.}
 
-\item{data}{a data frame.}
-
 \item{\dots}{additional arguments.}
+
+\item{data}{a data frame.}
 }
 \value{
 A data frame with variables including \code{grandMean},
@@ -40,4 +41,3 @@ vaov(pollution ~ location, data=airpollution)
 Randall Pruim
 }
 \keyword{stats}
-

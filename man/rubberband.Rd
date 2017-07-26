@@ -18,4 +18,3 @@ xyplot(Distance ~ Stretch, data=rubberband, type=c("p","r"))
 
 }
 \keyword{datasets}
-

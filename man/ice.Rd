@@ -57,4 +57,3 @@ xyplot(Weight ~ Skinfold, groups=Sex, data=ice, auto.key=TRUE)
 
 }
 \keyword{datasets}
-

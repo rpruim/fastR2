@@ -33,4 +33,3 @@ random-dot stereograms," \emph{Perception}, 4, (1975), pp. 173-178.
 Cleveland, W. S. \emph{Visualizing Data}. 1993.
 }
 \keyword{datasets}
-

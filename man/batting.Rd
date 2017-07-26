@@ -28,4 +28,3 @@ histogram(~HR,batting)
 
 }
 \keyword{datasets}
-

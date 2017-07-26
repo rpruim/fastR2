@@ -3,8 +3,8 @@
 \docType{data}
 \name{concrete}
 \alias{concrete}
-\alias{concrete28}
 \alias{concreteAll}
+\alias{concrete28}
 \title{Concrete Compressive Strength Data}
 \format{\code{concreteAll} is a data frame with the following 9 variables.
 \itemize{ \item{cement}{ amount of cement (kg/m^3)}
@@ -39,4 +39,3 @@ concrete using artificial neural networks," \cite{Cement and Concrete
 Research}, Vol. 28, No. 12, pp. 1797-1808.
 }
 \keyword{datasets}
-

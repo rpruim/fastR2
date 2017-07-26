@@ -44,4 +44,3 @@ xtabs(~disease+diseaseVer, data=littleSurvey)
 
 }
 \keyword{datasets}
-

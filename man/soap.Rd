@@ -40,4 +40,3 @@ xyplot(Weight~Day, data=soap)
 
 }
 \keyword{datasets}
-

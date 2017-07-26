@@ -4,6 +4,7 @@
 \alias{nlmax}
 \alias{nlmax,}
 \alias{nlmin}
+\alias{nlmin}
 \alias{summary.nlmax}
 \alias{summary.nlmin}
 \title{Nonlinear maximization and minimization}
@@ -19,12 +20,12 @@ nlmin(f, ...)
 \arguments{
 \item{f}{a function to optimize}
 
+\item{\dots}{additional arguments passed to \code{nlm}.  Note that \code{p} is a required
+argument for \code{nlm}.  See the help for \code{\link{nlm}} for details.}
+
 \item{object}{an object returned from \code{nlmin} or \code{nlmax}}
 
 \item{nsmall}{a numeric passed through to \code{\link{format}}}
-
-\item{\dots}{additional arguments passed to \code{nlm}.  Note that \code{p} is a required
-argument for \code{nlm}.  See the help for \code{\link{nlm}} for details.}
 }
 \description{
 \code{nlmin} and \code{nlmax} are thin wrappers around \code{\link{nlm}}, a non-linear minimizer.
@@ -36,4 +37,3 @@ for humnans to read.
 \examples{
 summary( nlmax( function(x) 5 - 3*x - 5*x^2, p=0 ) )
 }
-

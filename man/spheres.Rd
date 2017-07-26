@@ -19,4 +19,3 @@ steel ball bearings.
 data(spheres)
 }
 \keyword{datasets}
-

@@ -39,4 +39,3 @@ xyplot(gasbillpday ~ temp, data=utilities2)
 
 }
 \keyword{datasets}
-

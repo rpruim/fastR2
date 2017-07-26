@@ -2,8 +2,8 @@
 % Please edit documentation in R/datasets.R
 \docType{data}
 \name{pigs}
-\alias{pigConfig}
 \alias{pigs}
+\alias{pigConfig}
 \title{Pass the Pigs}
 \format{A data frame with 6000 observations on the following 6 variables.
 \itemize{ \item{roll}{ roll number (1-6000)}
@@ -62,4 +62,3 @@ table(pigConfig[pigs$black])
 
 }
 \keyword{datasets}
-

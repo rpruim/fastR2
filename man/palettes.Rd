@@ -35,4 +35,3 @@ xyplot(palettes~day, data=palettes,
 
 }
 \keyword{datasets}
-

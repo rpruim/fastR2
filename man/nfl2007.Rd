@@ -28,4 +28,3 @@ table(nfl$dscore > nfl$line)
 
 }
 \keyword{datasets}
-

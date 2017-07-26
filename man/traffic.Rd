@@ -42,4 +42,3 @@ Time-Series Quasi-Experiment" \emph{Law & Society Review}, Vol. 3, No. 1
 (Aug., 1968), pp. 55-76.
 }
 \keyword{datasets}
-

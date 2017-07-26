@@ -18,4 +18,3 @@ splom(gpa)
 
 }
 \keyword{datasets}
-

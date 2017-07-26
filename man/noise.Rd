@@ -27,4 +27,3 @@ xyplot(score~volume,noise2, groups=frequency, type='a',
 
 }
 \keyword{datasets}
-

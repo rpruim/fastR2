@@ -49,4 +49,3 @@ on maximum grip strength and muscular endurance.  \emph{Journal of Sports
 Medicine and Physical Fitness}, 23, 253-256.
 }
 \keyword{datasets}
-

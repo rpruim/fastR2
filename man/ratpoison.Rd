@@ -20,4 +20,3 @@ data(ratpoison)
 
 }
 \keyword{datasets}
-

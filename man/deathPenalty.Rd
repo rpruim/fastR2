@@ -2,8 +2,8 @@
 % Please edit documentation in R/datasets.R
 \docType{data}
 \name{deathPenalty}
-\alias{deathPen}
 \alias{deathPenalty}
+\alias{deathPen}
 \title{Death Penalty and Race}
 \format{A data frame with 326 observations.  The factors are coded more
 succinctly in \code{deathPen}, but otherwise the data are the same.
@@ -26,4 +26,3 @@ xtabs(~Defendant+Victim+Penalty,deathPenalty)
 
 }
 \keyword{datasets}
-

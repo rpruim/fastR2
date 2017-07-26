@@ -4,6 +4,8 @@
 \alias{xplot}
 \alias{xplot.default}
 \alias{xplot.lm}
+\alias{xplot.default}
+\alias{xplot.lm}
 \title{Augmented functions}
 \usage{
 xplot(x, ...)
@@ -25,6 +27,8 @@ xplot(x, ...)
 }
 \arguments{
 \item{x}{A numeric vector or formula.}
+
+\item{\dots}{arguments passed to other functions.}
 
 \item{which}{A numeric vector indicating which plots to produce}
 
@@ -68,8 +72,6 @@ xplot(x, ...)
 
 \item{cex.caption}{cex for the caption}
 
-\item{\dots}{arguments passed to other functions.}
-
 \item{panel}{a panel function}
 }
 \description{
@@ -85,4 +87,3 @@ xplot( lm ( 2*x + 5 + rnorm(20) ~ x ) )
 \seealso{
 \code{\link{plot}}.
 }
-

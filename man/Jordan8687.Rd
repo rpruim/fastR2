@@ -20,4 +20,3 @@ if (require(mosaicData)) {
 
 }
 \keyword{datasets}
-

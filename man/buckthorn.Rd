@@ -24,4 +24,3 @@ data(buckthorn)
 
 }
 \keyword{datasets}
-

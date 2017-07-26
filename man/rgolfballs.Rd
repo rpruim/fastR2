@@ -14,4 +14,3 @@ data(rgolfballs)
 
 }
 \keyword{datasets}
-

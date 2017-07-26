@@ -30,4 +30,3 @@ xyplot(W ~ Rdiff, data=mlb2004)
 
 }
 \keyword{datasets}
-

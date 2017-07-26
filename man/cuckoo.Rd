@@ -31,4 +31,3 @@ library
 (\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \keyword{datasets}
-

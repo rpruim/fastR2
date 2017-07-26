@@ -63,4 +63,3 @@ conducted by statistics students? \emph{Journal of Statistics Education}, 2,
 no 1.
 }
 \keyword{datasets}
-

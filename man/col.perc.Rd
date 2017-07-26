@@ -3,6 +3,7 @@
 \name{col.perc}
 \alias{col.perc}
 \alias{row.perc}
+\alias{row.perc}
 \title{Row and Column Percentages}
 \usage{
 col.perc(x)
@@ -26,4 +27,3 @@ row.perc(xtabs(~Airline+Result,airlineArrival))
 Randall Pruim
 }
 \keyword{array}
-

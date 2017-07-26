@@ -28,4 +28,3 @@ summary(NumTrap ~ Color, bugs, fun=favstats)
 
 }
 \keyword{datasets}
-

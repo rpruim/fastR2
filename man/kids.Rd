@@ -47,4 +47,3 @@ Social Determinant for Children," Research Quarterly for Exercise and Sport,
 63, 418-424.
 }
 \keyword{datasets}
-

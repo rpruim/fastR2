@@ -2,8 +2,8 @@
 % Please edit documentation in R/datasets.R
 \docType{data}
 \name{tastetest}
-\alias{taste1}
 \alias{tastetest}
+\alias{taste1}
 \title{Taste test data}
 \format{A data frame with 16 observations on 2 (\code{taste1}) or 4
 (\code{tastetest}) variables.  \itemize{ \item{score}{ taste score
@@ -39,4 +39,3 @@ favstats(score~scr, data=tastetest)
 
 }
 \keyword{datasets}
-

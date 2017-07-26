@@ -33,4 +33,3 @@ These and similar data appear in many text books under the topic
 of Simpson's paradox.
 }
 \keyword{datasets}
-

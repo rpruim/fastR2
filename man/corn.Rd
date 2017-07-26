@@ -34,4 +34,3 @@ W.S. Gosset, "The Probable Error of a Mean," Biometrika, 6
 (1908), pp 1-25.
 }
 \keyword{datasets}
-

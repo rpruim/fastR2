@@ -23,4 +23,3 @@ chisq.test(golfballs, p=rep(.25,4))
 
 }
 \keyword{datasets}
-

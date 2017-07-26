@@ -2,9 +2,9 @@
 % Please edit documentation in R/datasets.R
 \docType{data}
 \name{ncaa2010}
-\alias{ncaa2008}
-\alias{ncaa2009}
 \alias{ncaa2010}
+\alias{ncaa2009}
+\alias{ncaa2008}
 \title{NCAA Division I Basketball Results}
 \format{Seven variables describing NCAA Division I basketball games.
 \itemize{ \item{date}{ date on which game was played}
@@ -36,4 +36,3 @@ ncaa2010$numHomeTeamWon <- -1 + 2 * as.numeric(ncaa2010$homeTeamWon)
 
 }
 \keyword{datasets}
-

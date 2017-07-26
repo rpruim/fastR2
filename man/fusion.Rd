@@ -2,9 +2,9 @@
 % Please edit documentation in R/datasets.R
 \docType{data}
 \name{pheno}
+\alias{pheno}
 \alias{fusion1}
 \alias{fusion2}
-\alias{pheno}
 \title{FUSION type 2 diabetes study}
 \format{Data frames with the following variables.  \itemize{
 \item{id}{ subject ID number for matching between data sets}
@@ -56,4 +56,3 @@ summary(f1.glm)
 
 }
 \keyword{datasets}
-

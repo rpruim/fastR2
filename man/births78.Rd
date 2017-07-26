@@ -19,4 +19,3 @@ xyplot(births ~ dayofyear, births78)
 
 }
 \keyword{datasets}
-

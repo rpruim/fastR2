@@ -28,4 +28,3 @@ xyplot(labor72 ~ labor68, workingWomen)
 
 }
 \keyword{datasets}
-

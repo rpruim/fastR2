@@ -25,4 +25,3 @@ xyplot(period ~ length, data=pendulum)
 
 }
 \keyword{datasets}
-
