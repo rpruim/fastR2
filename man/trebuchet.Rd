@@ -36,4 +36,3 @@ xyplot(distance ~ projectileWt, groups = projectileWt, data = Trebuchet)
 
 }
 \keyword{datasets}
-

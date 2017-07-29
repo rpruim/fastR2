@@ -29,11 +29,10 @@ show.settings()
 trellis.par.set(theme=col.fastR())
 show.settings()
 }
-\author{
-Randall Pruim
-}
 \seealso{
 \code{\link{trellis.par.set}}, \code{\link{show.settings}}
 }
+\author{
+Randall Pruim
+}
 \keyword{graphics}
-

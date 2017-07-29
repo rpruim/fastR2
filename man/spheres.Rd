@@ -21,4 +21,3 @@ xyplot( mass ~ diameter, data = Spheres )
 xyplot( mass ~ diameter, data = Spheres, scales = list(log = TRUE) )
 }
 \keyword{datasets}
-

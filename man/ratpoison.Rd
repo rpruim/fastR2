@@ -21,4 +21,3 @@ xyplot(consumption ~ flavor, groups = location, data = RatPoison,
   type = c("p","l"), auto.key = TRUE)
 }
 \keyword{datasets}
-

@@ -17,4 +17,3 @@ maxLik2(loglik, ..., env = parent.frame())
 This version of \code{\link{maxLik}} stores additional information in the 
 returned object enabling a plot method.
 }
-

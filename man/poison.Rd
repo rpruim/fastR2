@@ -43,4 +43,3 @@ modelling dispersion in generalized linear models. Environmetrics 10,
 696-709. \url{http://www.statsci.org/smyth/pubs/ties98tr.html}.
 }
 \keyword{datasets}
-

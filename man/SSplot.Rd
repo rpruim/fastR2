@@ -39,4 +39,3 @@ SSplot(
   lm(strength ~ water + rand(7), data = Concrete),
   n = 1000) 
 }
-

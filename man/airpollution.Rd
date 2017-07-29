@@ -23,4 +23,3 @@ summary(lm(pollution ~ location, data = AirPollution))
 
 }
 \keyword{datasets}
-

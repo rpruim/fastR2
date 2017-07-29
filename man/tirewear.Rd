@@ -26,4 +26,3 @@ R. D. Stichler, G. G. Richey, and J. Mandel, "Measurement of
 Treadware of Commercial Tires", \emph{Rubber Age}, 73:2 (May 1953).
 }
 \keyword{datasets}
-

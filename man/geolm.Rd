@@ -3,6 +3,7 @@
 \name{geolm}
 \alias{geolm}
 \alias{to2d}
+\alias{to2d}
 \title{Geometric representation of linear model}
 \usage{
 geolm(formula, data = parent.env(), type = "xz", version = 1,
@@ -24,12 +25,12 @@ of the plot to display.}
 
 \item{plot}{a logical: should the plot be displayed?}
 
+\item{\dots}{other arguments passed to \code{\link{lm}}}
+
 \item{x, y, z}{numeric.}
 
 \item{xas, yas, zas}{numeric vector of length 2 indicating the projection of
 \code{c(1,0,0)}, \code{c(0,1,0)}, and \code{c(0,0,1)}.}
-
-\item{\dots}{other arguments passed to \code{\link{lm}}}
 }
 \description{
 \code{geolm} create a graphical representation of the fit of a linear model.
@@ -40,11 +41,10 @@ geolm(pollution ~ location, data = AirPollution)
 geolm(distance ~ projectileWt, data = Trebuchet2)
 
 }
-\author{
-Randall Pruim
-}
 \seealso{
 \code{\link{lm}}.
 }
+\author{
+Randall Pruim
+}
 \keyword{stats}
-

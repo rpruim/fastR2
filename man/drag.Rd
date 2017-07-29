@@ -32,4 +32,3 @@ xyplot(velocity ~ mass, data = Drag)
 
 }
 \keyword{datasets}
-

@@ -24,4 +24,3 @@ tally(penalty ~ defendant + victim, data = DeathPenalty)
 
 }
 \keyword{datasets}
-

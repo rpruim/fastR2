@@ -67,4 +67,3 @@ if (require(readr) && require(tidyr) && require(ggplot2) && require(dplyr)) {
 
 }
 \keyword{datasets}
-

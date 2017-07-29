@@ -30,4 +30,3 @@ Lafferty, M. B. (1993), "OSU scientists get a kick out of sports
 controversy", \emph{The Columbus Dispatch} (November, 21, 1993), B7.
 }
 \keyword{datasets}
-

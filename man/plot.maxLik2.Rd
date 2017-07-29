@@ -24,4 +24,3 @@ be added}
 See \code{\link{maxLik2}} and \code{\link{maxLik}} for how to create
 the objects this method prints.
 }
-

@@ -21,4 +21,3 @@ xyplot(gradGPA ~ hsGPA, data = Students)
 
 }
 \keyword{datasets}
-

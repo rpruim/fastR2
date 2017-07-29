@@ -35,4 +35,3 @@ ggplot(data = GoosePermits) +
 \references{
 Bishop and Heberlein (Amer. J. Agr. Econ. 61, 1979).
 }
-

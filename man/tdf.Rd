@@ -29,4 +29,3 @@ t.test( length ~ sex, data=KidsFeet )
 tdf( fs[1,'sd'], fs[2,'sd'], fs[1,'n'], fs[2,'n'])
 
 }
-

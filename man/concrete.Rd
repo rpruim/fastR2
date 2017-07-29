@@ -37,4 +37,3 @@ concrete using artificial neural networks," \cite{Cement and Concrete
 Research}, Vol. 28, No. 12, pp. 1797-1808.
 }
 \keyword{datasets}
-

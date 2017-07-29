@@ -35,4 +35,3 @@ histogram(~ FTPct, data = MIAA05)
 
 }
 \keyword{datasets}
-

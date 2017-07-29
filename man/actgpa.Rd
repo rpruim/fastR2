@@ -15,4 +15,3 @@ xyplot(GPA ~ ACT, data = ACTgpa)
 
 }
 \keyword{datasets}
-

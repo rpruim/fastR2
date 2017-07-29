@@ -36,4 +36,3 @@ Brigitte Baldi and David S. Moore, \emph{The Practice of Statistics in the
 Life Sciences}, Freeman, 2009.
 }
 \keyword{datasets}
-

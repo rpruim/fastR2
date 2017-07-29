@@ -30,4 +30,3 @@ These data are also available from DASL, the data and story
 library (\url{http://lib.stat.cmu.edu/DASL/}).
 }
 \keyword{datasets}
-

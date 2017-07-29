@@ -26,4 +26,3 @@ Unemployment data
 \examples{
 data(Unemployment)
 }
-

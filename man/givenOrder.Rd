@@ -16,4 +16,3 @@ appear in the vector or factor \code{x}.
 \examples{
 givenOrder(c("First", "Second", "Third", "Fourth", "Fifth", "Sixth"))
 }
-

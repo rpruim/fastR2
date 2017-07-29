@@ -65,4 +65,3 @@ if (require(tidyr)) {
 
 }
 \keyword{datasets}
-

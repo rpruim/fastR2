@@ -19,4 +19,3 @@ xyplot(time ~ height, data = BallDrop)
 
 }
 \keyword{datasets}
-

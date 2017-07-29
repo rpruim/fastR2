@@ -51,11 +51,10 @@ R}.
 \code{snippet} works much like \code{\link{demo}}, but the interface is
 simplified.
 }
-\author{
-Randall Pruim
-}
 \seealso{
 \code{\link{demo}}, \code{\link{source}}.
 }
+\author{
+Randall Pruim
+}
 \keyword{utilities}
-

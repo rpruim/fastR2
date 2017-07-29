@@ -28,4 +28,3 @@ favstats(trapped ~ color, data = Bugs)
 
 }
 \keyword{datasets}
-

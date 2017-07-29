@@ -33,4 +33,3 @@ xyplot(IPouts/3 ~ W, data = Pitching2005, ylab = "innings pitched", xlab = "wins
 
 }
 \keyword{datasets}
-

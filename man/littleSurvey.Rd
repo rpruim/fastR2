@@ -44,4 +44,3 @@ tally(disease ~ diseasever, data = LittleSurvey)
 
 }
 \keyword{datasets}
-

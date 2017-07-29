@@ -39,4 +39,3 @@ NCAA2010 <-
   )
 }
 \keyword{datasets}
-

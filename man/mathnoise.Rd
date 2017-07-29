@@ -25,4 +25,3 @@ xyplot(score ~ noise, data = MathNoise, group = group, type = 'a',
 
 }
 \keyword{datasets}
-

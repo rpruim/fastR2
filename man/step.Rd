@@ -48,4 +48,3 @@ xyplot(HR-restHR ~ height, data = Step, groups = freq, type = c('p','a'))
 
 }
 \keyword{datasets}
-

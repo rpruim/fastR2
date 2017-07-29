@@ -19,4 +19,3 @@ qqmath(~ points, data = Jordan8687)
 
 }
 \keyword{datasets}
-

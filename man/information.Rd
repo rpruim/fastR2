@@ -14,4 +14,3 @@ information(object, ...)
 \description{
 Extract information from a maxLik object
 }
-
