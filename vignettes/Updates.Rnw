@@ -33,6 +33,7 @@
 <<include=FALSE,message=FALSE>>=
 require(fastR2)
 require(mosaic)
+require(mosaicCalc)
 require(knitr)
 opts_chunk$set(
 			   fig.show="hold",
