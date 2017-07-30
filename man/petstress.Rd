@@ -27,6 +27,8 @@ during the task was used as a measure of stress.
 
 data(PetStress)
 xyplot(rate ~ group, data = PetStress, jitter.x = TRUE, type = c('p', 'a'))
+gf_jitter(rate ~ group, data = PetStress, width = 0.1, height = 0) \%>\%
+  gf_line(group = 1, stat = "summary", color = "red")
 
 }
 \references{

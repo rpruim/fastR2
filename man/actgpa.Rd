@@ -11,7 +11,7 @@ ACT scores and college GPA for a small sample of college students.
 }
 \examples{
 
-xyplot(GPA ~ ACT, data = ACTgpa)
+gf_point(GPA ~ ACT, data = ACTgpa)
 
 }
 \keyword{datasets}

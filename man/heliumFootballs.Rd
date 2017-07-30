@@ -21,8 +21,8 @@ each kick. The experimenter recorded the distance traveled by each ball.
 \examples{
 
 data(HeliumFootballs)
-xyplot(helium ~ air, data = HeliumFootballs)
-bwplot( ~ (helium - air), data = HeliumFootballs)
+gf_point(helium ~ air, data = HeliumFootballs)
+gf_dhistogram( ~ (helium - air), data = HeliumFootballs, bins = 15, boundary = 0, fill = ~ (helium > air))
 
 }
 \references{

@@ -35,7 +35,10 @@ NCAA2010 <-
     homeTeamWon = dscore > 0,
     numHomeTeamWon <- -1 + 2 * as.numeric(homeTeamWon),
     winner = ifelse(homeTeamWon, home, away),
-    loser  = ifelse(homeTeamWon, away, home)
+    loser  = ifelse(homeTeamWon, away, home),
+    wscore = ifelse(homeTeamWon, hscore, ascore),
+    lscore = ifelse(homeTeamWon, ascore, hscore)
   )
+NCAA2010 \%>\% select(date, winner, loser, wscore, lscore, dscore, homeTeamWon) \%>\% head()
 }
 \keyword{datasets}

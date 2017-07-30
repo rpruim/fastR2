@@ -31,7 +31,7 @@ Athletic Association basketball season.
 \examples{
 
 data(MIAA05)
-histogram(~ FTPct, data = MIAA05)
+gf_histogram(~ FTPct, data = MIAA05)
 
 }
 \keyword{datasets}

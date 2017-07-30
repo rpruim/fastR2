@@ -18,7 +18,7 @@
 #' @examples
 #'
 #' data(Jordan8687)
-#' qqmath(~ points, data = Jordan8687)
+#' gf_qq(~ points, data = Jordan8687)
 #' 
 NULL
 
@@ -39,7 +39,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #'
-#' xyplot(GPA ~ ACT, data = ACTgpa)
+#' gf_point(GPA ~ ACT, data = ACTgpa)
 #' 
 NULL
 
@@ -78,13 +78,23 @@ NULL
 #'   group_by(airport, airline) %>%
 #'   mutate(total = sum(count), percent = count/total * 100) %>% 
 #'   filter(result == "Delayed") 
-#'   xyplot( percent ~ airport, groups = airline, data = AirlineArrival2,
-#'     type = "l", auto.key = list(points = FALSE, lines = TRUE), ylab = "percent delayed")
+#' AirlineArrival3 <- 
+#'   AirlineArrival %>% 
+#'   group_by(airline, result) %>% 
+#'   summarise(count = n()) %>%
+#'   group_by(airline) %>%
+#'   mutate(total = sum(count), percent = count/total * 100) %>% 
+#'   filter(result == "Delayed") 
+#'   gf_line( percent ~ airport, color = ~ airline, group = ~ airline, data = AirlineArrival2) %>%
+#'     gf_point( percent ~ airport, color = ~ airline, size = ~total, data = AirlineArrival2) %>%
+#'     gf_hline( yintercept = ~ percent, color = ~airline, data = AirlineArrival3, linetype = "dashed") %>%
+#'     gf_labs(y = "percent delayed") 
 #'   ggplot(data = AirlineArrival2) + 
 #'     geom_line(aes(x = airport, y = percent, colour = airline, group = airline)) +
 #'     geom_point(aes(x = airport, y = percent, colour = airline, size = total)) +
+#'     geom_hline(aes(yintercept = percent, color = airline), data = AirlineArrival3, linetype = "dashed") +
 #'     ylab("percent delayed")
-#' 
+ 
 NULL
 
 
@@ -133,7 +143,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' xyplot(time ~ height, data = BallDrop)
+#' gf_point(time ~ height, data = BallDrop)
 #' 
 NULL
 
@@ -167,7 +177,7 @@ NULL
 #' @examples
 #' 
 #' data(Batting)
-#' histogram( ~ HR, data = Batting)
+#' gf_histogram( ~ HR, data = Batting)
 #' 
 NULL
 
@@ -406,7 +416,7 @@ NULL
 #' @examples
 #' 
 #' data(Cuckoo)
-#' bwplot(length ~ species, data = Cuckoo)
+#' gf_boxplot(length ~ species, data = Cuckoo)
 #' 
 NULL
 
@@ -473,7 +483,7 @@ NULL
 #' 
 #' data(Drag)
 #' with(Drag, force.drag / mass)
-#' xyplot(velocity ~ mass, data = Drag)
+#' gf_point(velocity ~ mass, data = Drag)
 #' 
 NULL
 
@@ -519,9 +529,9 @@ NULL
 #' t.test(Endurance$vitamin, Endurance$placebo, paired = TRUE)
 #' t.test(log(Endurance$vitamin), log(Endurance$placebo), paired = TRUE)
 #' t.test(1/Endurance$vitamin, 1/Endurance$placebo, paired = TRUE)
-#' xqqmath( ~ vitamin - placebo, data = Endurance)
-#' xqqmath( ~ log(vitamin) - log(placebo), data = Endurance)
-#' xqqmath( ~ 1/vitamin - 1/placebo, data = Endurance)
+#' gf_qq( ~ vitamin - placebo, data = Endurance)
+#' gf_qq( ~ log(vitamin) - log(placebo), data = Endurance)
+#' gf_qq( ~ 1/vitamin - 1/placebo, data = Endurance)
 #' 
 NULL
 
@@ -594,13 +604,13 @@ NULL
 #' table(factor(Fumbles$week1,levels = 0:m))
 #' favstats( ~ week1, data = Fumbles)
 #' # compare with Poisson distribution
-#' signif( cbind(
+#' cbind(
 #' 		  fumbles = 0:m,
 #' 		  observedCount = table(factor(Fumbles$week1,levels = 0:m)),
 #' 		  modelCount= 120* dpois(0:m,mean(Fumbles$week1)),
 #' 		  observedPct = table(factor(Fumbles$week1,levels = 0:m))/120,
 #' 		  modelPct= dpois(0:m,mean(Fumbles$week1))
-#' 	) ,3)
+#' 	) %>% signif(3)
 #' showFumbles <- function(x,lambda = mean(x),...) {
 #' 	mx <- max(x)
 #'     result <- histogram(~x, type = "density", xlim = c(-.5,(mx+2.5)),
@@ -729,11 +739,22 @@ NULL
 #'  
 #' @examples
 #' goose.mod <- glm( cbind(sell, keep) ~ log(bid), data = GoosePermits, family = binomial())
+#' gf_point(0 ~ bid, size = ~keep, color = "gray50", data = GoosePermits) %>%
+#'   gf_point(1 ~ bid, size = ~ sell, color = "navy") %>%
+#'   gf_function(fun = makeFun(goose.mod)) %>%
+#'   gf_refine(guides(size = "none"))
+#'   
 #' ggplot(data = GoosePermits) +
 #'   geom_point( aes(x = bid, y = 0, size = keep), colour = "gray50") +
 #'   geom_point( aes(x = bid, y = 1, size = sell), colour = "navy") +
 #'   stat_function(fun = makeFun(goose.mod)) +
 #'   guides( size = "none")
+#'   
+#' gf_point( (sell / (sell + keep)) ~ bid, size = ~ sell + keep, colour = "navy", data = GoosePermits) %>%
+#'   gf_function(fun = makeFun(goose.mod))  %>%
+#'   gf_text(label = ~ as.character(sell + keep), colour = "white", size = 3) %>%
+#'   gf_refine(scale_size_area()) %>% 
+#'   gf_labs(y = "probabity of selling")
 #'   
 #' ggplot(data = GoosePermits) +
 #'   stat_function(fun = makeFun(goose.mod)) +
@@ -789,8 +810,8 @@ NULL
 #' @examples
 #' 
 #' data(HeliumFootballs)
-#' xyplot(helium ~ air, data = HeliumFootballs)
-#' bwplot( ~ (helium - air), data = HeliumFootballs)
+#' gf_point(helium ~ air, data = HeliumFootballs)
+#' gf_dhistogram( ~ (helium - air), data = HeliumFootballs, bins = 15, boundary = 0, fill = ~ (helium > air))
 #' 
 NULL
 
@@ -849,16 +870,16 @@ NULL
 #' @examples
 #' 
 #' data(Ice)
-#' xyplot(weight ~ skinfold, groups = sex, data = Ice, auto.key = TRUE)
-#' if (require(readr) && require(tidyr) && require(ggplot2) && require(dplyr)) {
+#' gf_point(weight ~ skinfold, color = ~ sex, data = Ice)
+#' if (require(readr) && require(tidyr) && require(dplyr)) {
 #'   Ice2 <- Ice %>% 
 #'   gather("key", "temp", b0:r12000) %>% 
 #'   separate(key, c("phase", "time"), sep = 1) %>% 
 #'   mutate(time = parse_number(time), subject = as.character(subject))  
 #'   
-#'   ggplot(Ice2 %>% filter(phase == "t")) + 
-#'     geom_line(aes(x = time, y = temp, group = subject, color = sex)) + 
-#'     facet_grid( treatment ~ location)
+#'   gf_line( temp ~ time, data = Ice2 %>% filter(phase == "t"), 
+#'            color = ~ sex,  group = ~subject, alpha = 0.6) %>%
+#'     gf_facet_grid( treatment ~ location)
 #' }
 #' 
 NULL
@@ -1014,9 +1035,13 @@ NULL
 #' @examples
 #' 
 #' data(MathNoise)
-#' xyplot(score ~ noise, data = MathNoise, group = group, type = 'a', 
+#' xyplot (score ~ noise, data = MathNoise, group = group, type = 'a', 
 #' 		auto.key = list(columns = 2, lines = TRUE, points = FALSE))
 #' 
+#' gf_jitter(score ~ noise, data = MathNoise, color = ~ group, alpha = 0.4, 
+#'           width = 0.1, height = 0) %>%
+#'   gf_line(score ~ noise, data = MathNoise, color = ~ group, group = ~ group,
+#'         stat = "summary")
 NULL
 
 
@@ -1054,7 +1079,7 @@ NULL
 #' @examples
 #' 
 #' data(MIAA05)
-#' histogram(~ FTPct, data = MIAA05)
+#' gf_histogram(~ FTPct, data = MIAA05)
 #' 
 NULL
 
@@ -1090,7 +1115,7 @@ NULL
 #' @examples
 #' 
 #' data(MLB2004)
-#' xyplot(W ~ Rdiff, data = MLB2004)
+#' gf_point(W ~ Rdiff, data = MLB2004)
 #' 
 NULL
 
@@ -1133,8 +1158,11 @@ NULL
 #'     homeTeamWon = dscore > 0,
 #'     numHomeTeamWon <- -1 + 2 * as.numeric(homeTeamWon),
 #'     winner = ifelse(homeTeamWon, home, away),
-#'     loser  = ifelse(homeTeamWon, away, home)
+#'     loser  = ifelse(homeTeamWon, away, home),
+#'     wscore = ifelse(homeTeamWon, hscore, ascore),
+#'     lscore = ifelse(homeTeamWon, ascore, hscore)
 #'   )
+#' NCAA2010 %>% select(date, winner, loser, wscore, lscore, dscore, homeTeamWon) %>% head()
 NULL
 
 
@@ -1159,7 +1187,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(NFL2007); NFL <- NFL2007
+#' data(NFL2007) 
+#' NFL <- NFL2007 
 #' NFL$dscore <- NFL$homeScore - NFL$visitorScore 
 #' w <- which(NFL$dscore > 0) 
 #' NFL$winner <- NFL$visitor; NFL$winner[w] <- NFL$home[w] 
@@ -1199,8 +1228,15 @@ NULL
 #' Noise2 <- Noise %>% filter(volume != 'none')
 #' model <- lm(score ~ volume * frequency, data = Noise2) 
 #' anova(model)
-#' xyplot(score ~ volume, data = Noise2, groups = frequency, 
-#'    type = 'a',	auto.key = list(columns = 2, points = FALSE, lines = TRUE))
+#' gf_jitter(score ~ volume, data = Noise2, color = ~ frequency, 
+#'           alpha = 0.4, width = 0.1, height = 0) %>%
+#'   gf_line(score ~ volume, data = Noise2, group = ~frequency, color = ~ frequency,
+#'           stat = "summary")
+#'         
+#' gf_jitter(score ~ frequency, data = Noise2, color = ~ volume, 
+#'           alpha = 0.4, width = 0.1, height = 0) %>%
+#'   gf_line(score ~ frequency, data = Noise2, group = ~ volume, color = ~ volume,
+#'           stat = "summary")
 #' 
 NULL
 
@@ -1236,10 +1272,11 @@ NULL
 #' # Now using day as a blocking variable
 #' pal.lm2 <- lm(pallets ~ employee + day, data = Pallets) 
 #' anova(pal.lm2)
-#' xyplot(pallets ~ day, data = Pallets,
-#' 		groups = employee,
-#' 		main = "Productivity by day and employee",
-#' 		type = 'b',auto.key = list(columns = 4,points = FALSE,lines = TRUE))
+#' gf_line(pallets ~ day, data = Pallets,
+#' 		group = ~employee,
+#' 		color = ~employee) %>%
+#'   gf_point() %>%
+#'   gf_labs(title = "Productivity by day and employee")
 #' 
 NULL
 
@@ -1331,7 +1368,7 @@ NULL
 #' @examples
 #' 
 #' data(Pendulum)
-#' xyplot(period ~ length, data = Pendulum)
+#' gf_point(period ~ length, data = Pendulum)
 #' 
 NULL
 
@@ -1368,6 +1405,8 @@ NULL
 #' 
 #' data(PetStress)
 #' xyplot(rate ~ group, data = PetStress, jitter.x = TRUE, type = c('p', 'a'))
+#' gf_jitter(rate ~ group, data = PetStress, width = 0.1, height = 0) %>%
+#'   gf_line(group = 1, stat = "summary", color = "red")
 #' 
 NULL
 
@@ -1431,7 +1470,7 @@ NULL
 #' 
 #' data(Pigs)
 #' tally( ~ black, data = Pigs )
-#' if (require(tidyr)) {
+#' if (require(dplyr) && require(tidyr)) {
 #'   Pigs %>% 
 #'   select(roll, black, pink) %>%
 #'   gather(pig, state, black, pink) %>%
@@ -1476,7 +1515,7 @@ NULL
 #' @examples
 #' 
 #' data(Pitching2005)
-#' xyplot(IPouts/3 ~ W, data = Pitching2005, ylab = "innings pitched", xlab = "wins")
+#' gf_point(IPouts/3 ~ W, data = Pitching2005, ylab = "innings pitched", xlab = "wins")
 #' 
 NULL
 
@@ -1559,7 +1598,7 @@ NULL
 #' @examples
 #' 
 #' data(Punting)
-#' xyplot(hang ~ distance, data = Punting)
+#' gf_point(hang ~ distance, data = Punting)
 #' 
 NULL
 
@@ -1586,8 +1625,8 @@ NULL
 #' @examples
 #' 
 #' data(RatPoison)
-#' xyplot(consumption ~ flavor, groups = location, data = RatPoison, 
-#'   type = c("p","l"), auto.key = TRUE)
+#' gf_line(consumption ~ flavor, group = ~ location, color = ~ location, data = RatPoison) %>%
+#'   gf_point()
 NULL
 
 
@@ -1630,7 +1669,8 @@ NULL
 #' @examples
 #' 
 #' data(RubberBand)
-#' xyplot(distance ~ stretch, data = RubberBand, type = c("p","r"))
+#' gf_point(distance ~ stretch, data = RubberBand) %>%
+#'   gf_lm(interval = "confidence")
 #' 
 NULL
 
@@ -1709,7 +1749,7 @@ NULL
 #' @examples
 #' 
 #' data(Soap)
-#' xyplot(weight ~ day, data = Soap)
+#' gf_point(weight ~ day, data = Soap)
 #' 
 NULL
 
@@ -1734,8 +1774,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' data(Spheres)
-#' xyplot( mass ~ diameter, data = Spheres )
-#' xyplot( mass ~ diameter, data = Spheres, scales = list(log = TRUE) )
+#' gf_point(mass ~ diameter, data = Spheres)
+#' gf_point(mass ~ diameter, data = Spheres) %>%
+#'   gf_refine(scale_x_log10(), scale_y_log10())
 NULL
 
 
@@ -1783,9 +1824,12 @@ NULL
 #' @examples
 #' 
 #' data(Step)
-#' xyplot(HR-restHR ~ freq, data = Step, groups = height, type = c('p','a'))
-#' xyplot(HR-restHR ~ height, data = Step, groups = freq, type = c('p','a'))
-#' 
+#' gf_jitter(HR-restHR ~ freq, color = ~height, data = Step, group = ~height,
+#'           height = 0, width = 0.1) %>%
+#'   gf_line(stat = "summary", group = ~height)
+#' gf_jitter(HR-restHR ~ height, color = ~freq, data = Step, group = ~freq,
+#'           height = 0, width = 0.1) %>%
+#'   gf_line(stat = "summary", group = ~freq)
 NULL
 
 
@@ -1819,7 +1863,8 @@ NULL
 #' 
 #' data(Stereogram)
 #' favstats(time ~ group, data = Stereogram)
-#' xyplot(time ~ group, data = Stereogram, jitter.x = TRUE)
+#' gf_violin(time ~ group, data = Stereogram, alpha = 0.2, fill = "skyblue") %>%
+#' gf_jitter(time ~ group, data = Stereogram, height = 0, width = 0.25)
 #' 
 NULL
 
@@ -1845,8 +1890,8 @@ NULL
 #' @examples
 #' 
 #' data(Students)
-#' xyplot(ACT ~ SAT, data = Students)
-#' xyplot(gradGPA ~ hsGPA, data = Students)
+#' gf_point(ACT ~ SAT, data = Students)
+#' gf_point(gradGPA ~ hsGPA, data = Students)
 #' 
 NULL
 
@@ -1884,9 +1929,9 @@ NULL
 #' 
 #' data(TasteTest)
 #' data(Taste1)
-#' xyplot(score~scr, data = TasteTest, jitter.x = TRUE)
-#' xyplot(score~scr, groups = liq, data = TasteTest, type = c('p','a'), jitter.x = TRUE)
-#' favstats(score~scr, data = TasteTest)
+#' gf_jitter(score ~ scr, data = TasteTest, color = ~liq, width = 0.2, height =0) %>%
+#'   gf_line(stat = "summary", group = ~liq)
+#' df_stats(score ~ scr | liq, data = TasteTest)
 #' 
 NULL
 
@@ -1913,7 +1958,7 @@ NULL
 #' @examples
 #' 
 #' data(TireWear)
-#' xyplot(weight ~ groove, data = TireWear)
+#' gf_point(weight ~ groove, data = TireWear)
 #' 
 NULL
 
@@ -1952,15 +1997,15 @@ NULL
 #' @examples
 #' 
 #' data(Traffic)
-#' xyplot(cn.deaths ~ year, data = Traffic, type = c('l','g'))
-#' if (require(tidyr)) {
+#' gf_line(cn.deaths ~ year, data = Traffic)
+#' if (require(dplyr) && require(tidyr)) {
 #'   TrafficLong <- 
 #'     Traffic %>% 
 #'     select(-2) %>%
 #'     gather(state, fatality.rate, ny:ri)
-#'   xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
-#' 		auto.key = list(lines = TRUE, points = FALSE, columns = 2),
-#' 		ylim = c(0, NA))
+#'    gf_line(fatality.rate ~ year, group = ~state, color = ~state, data = TrafficLong) %>%
+#'      gf_point(fatality.rate ~ year, group = ~state, color = ~state, data = TrafficLong) %>%
+#' 		  gf_lims(y = c(0, NA))
 #' }
 #' 
 NULL
@@ -1997,9 +2042,10 @@ NULL
 #' @examples
 #' 
 #' data(Trebuchet); data(Trebuchet1); data(Trebuchet2)
-#' xyplot(distance ~ projectileWt, data = Trebuchet1)
-#' xyplot(distance ~ projectileWt, data = Trebuchet2)
-#' xyplot(distance ~ projectileWt, groups = projectileWt, data = Trebuchet)
+#' gf_point(distance ~ projectileWt, data = Trebuchet1)
+#' gf_point(distance ~ projectileWt, data = Trebuchet2)
+#' gf_point(distance ~ projectileWt, color = ~ factor(counterWt), data = Trebuchet) %>%
+#'   gf_smooth(alpha = 0.2, fill = ~factor(counterWt))
 #' 
 NULL
 
@@ -2055,7 +2101,7 @@ NULL
 #' @examples
 #' 
 #' data(WorkingWomen)
-#' xyplot(labor72 ~ labor68, WorkingWomen)
+#' gf_point(labor72 ~ labor68, data = WorkingWomen)
 #' 
 NULL
 

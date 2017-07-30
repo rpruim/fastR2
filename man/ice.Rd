@@ -53,16 +53,16 @@ of recovery} }
 \examples{
 
 data(Ice)
-xyplot(weight ~ skinfold, groups = sex, data = Ice, auto.key = TRUE)
-if (require(readr) && require(tidyr) && require(ggplot2) && require(dplyr)) {
+gf_point(weight ~ skinfold, color = ~ sex, data = Ice)
+if (require(readr) && require(tidyr) && require(dplyr)) {
   Ice2 <- Ice \%>\% 
   gather("key", "temp", b0:r12000) \%>\% 
   separate(key, c("phase", "time"), sep = 1) \%>\% 
   mutate(time = parse_number(time), subject = as.character(subject))  
   
-  ggplot(Ice2 \%>\% filter(phase == "t")) + 
-    geom_line(aes(x = time, y = temp, group = subject, color = sex)) + 
-    facet_grid( treatment ~ location)
+  gf_line( temp ~ time, data = Ice2 \%>\% filter(phase == "t"), 
+           color = ~ sex,  group = ~subject, alpha = 0.6) \%>\%
+    gf_facet_grid( treatment ~ location)
 }
 
 }

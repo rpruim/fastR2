@@ -30,13 +30,13 @@ m <- max(Fumbles$week1)
 table(factor(Fumbles$week1,levels = 0:m))
 favstats( ~ week1, data = Fumbles)
 # compare with Poisson distribution
-signif( cbind(
+cbind(
 		  fumbles = 0:m,
 		  observedCount = table(factor(Fumbles$week1,levels = 0:m)),
 		  modelCount= 120* dpois(0:m,mean(Fumbles$week1)),
 		  observedPct = table(factor(Fumbles$week1,levels = 0:m))/120,
 		  modelPct= dpois(0:m,mean(Fumbles$week1))
-	) ,3)
+	) \%>\% signif(3)
 showFumbles <- function(x,lambda = mean(x),...) {
 	mx <- max(x)
     result <- histogram(~x, type = "density", xlim = c(-.5,(mx+2.5)),

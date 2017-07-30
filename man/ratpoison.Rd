@@ -17,7 +17,7 @@ influence the consumption by rats.
 \examples{
 
 data(RatPoison)
-xyplot(consumption ~ flavor, groups = location, data = RatPoison, 
-  type = c("p","l"), auto.key = TRUE)
+gf_line(consumption ~ flavor, group = ~ location, color = ~ location, data = RatPoison) \%>\%
+  gf_point()
 }
 \keyword{datasets}

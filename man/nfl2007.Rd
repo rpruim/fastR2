@@ -16,7 +16,8 @@ Results of National Football League games (2007 season, including playoffs)
 }
 \examples{
 
-data(NFL2007); NFL <- NFL2007
+data(NFL2007) 
+NFL <- NFL2007 
 NFL$dscore <- NFL$homeScore - NFL$visitorScore 
 w <- which(NFL$dscore > 0) 
 NFL$winner <- NFL$visitor; NFL$winner[w] <- NFL$home[w] 

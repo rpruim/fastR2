@@ -32,9 +32,9 @@ for the group.
 
 data(TasteTest)
 data(Taste1)
-xyplot(score~scr, data = TasteTest, jitter.x = TRUE)
-xyplot(score~scr, groups = liq, data = TasteTest, type = c('p','a'), jitter.x = TRUE)
-favstats(score~scr, data = TasteTest)
+gf_jitter(score ~ scr, data = TasteTest, color = ~liq, width = 0.2, height =0) \%>\%
+  gf_line(stat = "summary", group = ~liq)
+df_stats(score ~ scr | liq, data = TasteTest)
 
 }
 \keyword{datasets}

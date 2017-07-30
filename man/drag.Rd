@@ -28,7 +28,7 @@ masses were drop from higher heights and used sensors more widely spaced.
 
 data(Drag)
 with(Drag, force.drag / mass)
-xyplot(velocity ~ mass, data = Drag)
+gf_point(velocity ~ mass, data = Drag)
 
 }
 \keyword{datasets}

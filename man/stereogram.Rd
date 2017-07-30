@@ -23,7 +23,8 @@ group (group VV) received both verbal information and visual information
 
 data(Stereogram)
 favstats(time ~ group, data = Stereogram)
-xyplot(time ~ group, data = Stereogram, jitter.x = TRUE)
+gf_violin(time ~ group, data = Stereogram, alpha = 0.2, fill = "skyblue") \%>\%
+gf_jitter(time ~ group, data = Stereogram, height = 0, width = 0.25)
 
 }
 \references{

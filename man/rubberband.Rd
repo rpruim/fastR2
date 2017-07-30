@@ -14,7 +14,8 @@ was stretched prior to launch.
 \examples{
 
 data(RubberBand)
-xyplot(distance ~ stretch, data = RubberBand, type = c("p","r"))
+gf_point(distance ~ stretch, data = RubberBand) \%>\%
+  gf_lm(interval = "confidence")
 
 }
 \keyword{datasets}

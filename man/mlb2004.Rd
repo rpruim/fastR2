@@ -26,7 +26,7 @@ League Baseball season.
 \examples{
 
 data(MLB2004)
-xyplot(W ~ Rdiff, data = MLB2004)
+gf_point(W ~ Rdiff, data = MLB2004)
 
 }
 \keyword{datasets}

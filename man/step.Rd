@@ -43,8 +43,11 @@ block.
 \examples{
 
 data(Step)
-xyplot(HR-restHR ~ freq, data = Step, groups = height, type = c('p','a'))
-xyplot(HR-restHR ~ height, data = Step, groups = freq, type = c('p','a'))
-
+gf_jitter(HR-restHR ~ freq, color = ~height, data = Step, group = ~height,
+          height = 0, width = 0.1) \%>\%
+  gf_line(stat = "summary", group = ~height)
+gf_jitter(HR-restHR ~ height, color = ~freq, data = Step, group = ~freq,
+          height = 0, width = 0.1) \%>\%
+  gf_line(stat = "summary", group = ~freq)
 }
 \keyword{datasets}

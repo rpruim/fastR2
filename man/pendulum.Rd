@@ -21,7 +21,7 @@ length of the string was varied from 10cm to 16 m.
 \examples{
 
 data(Pendulum)
-xyplot(period ~ length, data = Pendulum)
+gf_point(period ~ length, data = Pendulum)
 
 }
 \keyword{datasets}

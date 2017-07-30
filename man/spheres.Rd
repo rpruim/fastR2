@@ -17,7 +17,8 @@ steel ball bearings.
 }
 \examples{
 data(Spheres)
-xyplot( mass ~ diameter, data = Spheres )
-xyplot( mass ~ diameter, data = Spheres, scales = list(log = TRUE) )
+gf_point(mass ~ diameter, data = Spheres)
+gf_point(mass ~ diameter, data = Spheres) \%>\%
+  gf_refine(scale_x_log10(), scale_y_log10())
 }
 \keyword{datasets}

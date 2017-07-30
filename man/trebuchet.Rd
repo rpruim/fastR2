@@ -30,9 +30,10 @@ to a single value of \code{counterWt}
 \examples{
 
 data(Trebuchet); data(Trebuchet1); data(Trebuchet2)
-xyplot(distance ~ projectileWt, data = Trebuchet1)
-xyplot(distance ~ projectileWt, data = Trebuchet2)
-xyplot(distance ~ projectileWt, groups = projectileWt, data = Trebuchet)
+gf_point(distance ~ projectileWt, data = Trebuchet1)
+gf_point(distance ~ projectileWt, data = Trebuchet2)
+gf_point(distance ~ projectileWt, color = ~ factor(counterWt), data = Trebuchet) \%>\%
+  gf_smooth(alpha = 0.2, fill = ~factor(counterWt))
 
 }
 \keyword{datasets}

@@ -22,7 +22,7 @@ egg is related to the species of the host bird.
 \examples{
 
 data(Cuckoo)
-bwplot(length ~ species, data = Cuckoo)
+gf_boxplot(length ~ species, data = Cuckoo)
 
 }
 \references{

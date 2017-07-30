@@ -24,15 +24,15 @@ to 1956 can be attributed to the stricter enforcement.
 \examples{
 
 data(Traffic)
-xyplot(cn.deaths ~ year, data = Traffic, type = c('l','g'))
-if (require(tidyr)) {
+gf_line(cn.deaths ~ year, data = Traffic)
+if (require(dplyr) && require(tidyr)) {
   TrafficLong <- 
     Traffic \%>\% 
     select(-2) \%>\%
     gather(state, fatality.rate, ny:ri)
-  xyplot(fatality.rate ~ year, groups = state, data = TrafficLong, type = 'b',
-		auto.key = list(lines = TRUE, points = FALSE, columns = 2),
-		ylim = c(0, NA))
+   gf_line(fatality.rate ~ year, group = ~state, color = ~state, data = TrafficLong) \%>\%
+     gf_point(fatality.rate ~ year, group = ~state, color = ~state, data = TrafficLong) \%>\%
+		  gf_lims(y = c(0, NA))
 }
 
 }

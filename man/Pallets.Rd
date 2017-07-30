@@ -28,10 +28,11 @@ anova(pal.lm1)
 # Now using day as a blocking variable
 pal.lm2 <- lm(pallets ~ employee + day, data = Pallets) 
 anova(pal.lm2)
-xyplot(pallets ~ day, data = Pallets,
-		groups = employee,
-		main = "Productivity by day and employee",
-		type = 'b',auto.key = list(columns = 4,points = FALSE,lines = TRUE))
+gf_line(pallets ~ day, data = Pallets,
+		group = ~employee,
+		color = ~employee) \%>\%
+  gf_point() \%>\%
+  gf_labs(title = "Productivity by day and employee")
 
 }
 \keyword{datasets}

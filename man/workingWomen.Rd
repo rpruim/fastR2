@@ -24,7 +24,7 @@ of women in 1972 # 3. labor68: Labor Force Participation rate of women in
 \examples{
 
 data(WorkingWomen)
-xyplot(labor72 ~ labor68, WorkingWomen)
+gf_point(labor72 ~ labor68, data = WorkingWomen)
 
 }
 \keyword{datasets}

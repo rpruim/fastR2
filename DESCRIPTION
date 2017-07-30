@@ -14,10 +14,10 @@ Description: Data sets and utilities to accompany the 2nd edition of
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
+    ggformula,
     mosaic
 Imports:
     lattice,
-    ggplot2,
     grid,
     magrittr,
     dplyr,

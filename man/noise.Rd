@@ -22,8 +22,15 @@ data(Noise)
 Noise2 <- Noise \%>\% filter(volume != 'none')
 model <- lm(score ~ volume * frequency, data = Noise2) 
 anova(model)
-xyplot(score ~ volume, data = Noise2, groups = frequency, 
-   type = 'a',	auto.key = list(columns = 2, points = FALSE, lines = TRUE))
+gf_jitter(score ~ volume, data = Noise2, color = ~ frequency, 
+          alpha = 0.4, width = 0.1, height = 0) \%>\%
+  gf_line(score ~ volume, data = Noise2, group = ~frequency, color = ~ frequency,
+          stat = "summary")
+        
+gf_jitter(score ~ frequency, data = Noise2, color = ~ volume, 
+          alpha = 0.4, width = 0.1, height = 0) \%>\%
+  gf_line(score ~ frequency, data = Noise2, group = ~ volume, color = ~ volume,
+          stat = "summary")
 
 }
 \keyword{datasets}

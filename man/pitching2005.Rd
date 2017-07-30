@@ -29,7 +29,7 @@ Major League Baseball pitching statistics for the 2005 season.
 \examples{
 
 data(Pitching2005)
-xyplot(IPouts/3 ~ W, data = Pitching2005, ylab = "innings pitched", xlab = "wins")
+gf_point(IPouts/3 ~ W, data = Pitching2005, ylab = "innings pitched", xlab = "wins")
 
 }
 \keyword{datasets}

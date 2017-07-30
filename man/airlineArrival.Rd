@@ -29,13 +29,22 @@ AirlineArrival2 <-
   group_by(airport, airline) \%>\%
   mutate(total = sum(count), percent = count/total * 100) \%>\% 
   filter(result == "Delayed") 
-  xyplot( percent ~ airport, groups = airline, data = AirlineArrival2,
-    type = "l", auto.key = list(points = FALSE, lines = TRUE), ylab = "percent delayed")
+AirlineArrival3 <- 
+  AirlineArrival \%>\% 
+  group_by(airline, result) \%>\% 
+  summarise(count = n()) \%>\%
+  group_by(airline) \%>\%
+  mutate(total = sum(count), percent = count/total * 100) \%>\% 
+  filter(result == "Delayed") 
+  gf_line( percent ~ airport, color = ~ airline, group = ~ airline, data = AirlineArrival2) \%>\%
+    gf_point( percent ~ airport, color = ~ airline, size = ~total, data = AirlineArrival2) \%>\%
+    gf_hline( yintercept = ~ percent, color = ~airline, data = AirlineArrival3, linetype = "dashed") \%>\%
+    gf_labs(y = "percent delayed") 
   ggplot(data = AirlineArrival2) + 
     geom_line(aes(x = airport, y = percent, colour = airline, group = airline)) +
     geom_point(aes(x = airport, y = percent, colour = airline, size = total)) +
+    geom_hline(aes(yintercept = percent, color = airline), data = AirlineArrival3, linetype = "dashed") +
     ylab("percent delayed")
-
 }
 \references{
 These and similar data appear in many text books under the topic

@@ -15,7 +15,7 @@ regular season.
 \examples{
 
 data(Jordan8687)
-qqmath(~ points, data = Jordan8687)
+gf_qq(~ points, data = Jordan8687)
 
 }
 \keyword{datasets}
