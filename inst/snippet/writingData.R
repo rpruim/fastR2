@@ -1,4 +1,4 @@
-args(write.table)
+args(write.table) 
 SomeData <- data.frame(x = 1:3, y = LETTERS[1:3])
 SomeData
 write.table(SomeData, "SomeData.txt")

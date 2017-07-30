@@ -6,14 +6,14 @@ D <- data_frame(
 )
 lm(y1 ~ x1 + x2, data = D) %>%
   Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
-  plot("x1")
-lm(y2 ~ x1 + x2, data = D) %>%
-  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
-  plot("x1")
+  plot("x1", main = "additive model; y1")
 lm(y1 ~ x1 + x2 + x1*x2, data = D) %>%
   Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
-  plot("x1")
+  plot("x1", main = "interaction model; y1")
+lm(y2 ~ x1 + x2, data = D) %>%
+  Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
+  plot("x1", main = "additive model; y2")
 lm(y2 ~ x1 + x2 + x1*x2, data = D) %>%
   Effect(c("x1", "x2"), ., partial.residuals = TRUE) %>%
-  plot("x1")
+  plot("x1", main = "interaction model; y2")
 

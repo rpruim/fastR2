@@ -1,2 +1,2 @@
-## example(histogram)
+## example(gf_histogram)
 

@@ -1,5 +1,3 @@
-ice.trt2 <- lm(t1930 - b1930 ~ treatment, data = Ice,
-                 subset = location == "intramuscular")
-msummary(ice.trt2)
-confint(glht(ice.trt2, mcp(treatment = "Tukey")), level = 0.90)
+ice.trt <- lm(t1930 - b1930 ~ treatment * location, data = Ice)
+anova(ice.trt)
 

@@ -12,8 +12,8 @@ plaplace2 <- function(q, theta = 0, lambda = 1) {
     return(0.5 + 0.5 * pexp(q-theta, lambda))
     }
 # should get same results either way:
-plaplace1(3, lambda = 2, theta = 1)
-plaplace1(3, lambda = 2, theta = 1) - plaplace1(-3, lambda = 2, theta = 1)
-plaplace2(3, lambda = 2, theta = 1)
-plaplace2(3, lambda = 2, theta = 1) - plaplace2(-3, lambda = 2, theta = 1)
+plaplace1(3, lambda = 1, theta = 2)
+plaplace1(3, lambda = 1, theta = 2) - plaplace1(0, lambda = 2, theta = 1)
+plaplace2(3, lambda = 1, theta = 2)
+plaplace2(3, lambda = 1, theta = 2) - plaplace2(0, lambda = 2, theta = 1)
 

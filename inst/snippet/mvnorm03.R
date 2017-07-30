@@ -1,3 +1,6 @@
-# find q such that Prob( X_1 <= q & X_2 <= q & X_3 <= q) = 0.5
-qmvnorm(0.5, mean = mu, sigma = Sigma)
+# By the result above, this should be just under 0.5
+mvtnorm::pmvnorm(upper = c(2, 2, 2), mean = mu, sigma = Sigma)
+# Prob(all three are between -1 and 1)
+mvtnorm::pmvnorm(lower = c(-1, -1, -1), upper = c(1, 1, 1), 
+        mean = mu, sigma = Sigma)
 

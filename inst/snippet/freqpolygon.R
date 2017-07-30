@@ -1,3 +1,3 @@
-freqpolygon( ~ Sepal.Length, groups = Species, data = iris, 
-             auto.key = TRUE)
+gf_freqpoly( ~ Sepal.Length, color = ~ Species, data = iris, 
+             binwidth = 0.5) 
 

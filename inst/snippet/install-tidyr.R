@@ -1,3 +1,5 @@
-## install.packages("tidyr") # fetch package from CRAN to local machine.
-## require(tidyr)            # load the package so it can be used.
+## # fetch package from CRAN to local machine.
+## install.packages("tidyr")
+## # load (and attach) the package so it can be used.
+## require(tidyr)      # or library(tidyr)
 

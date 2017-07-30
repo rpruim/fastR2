@@ -8,7 +8,7 @@ coagulation %>%
             SSM = sum((group.mean - grand.mean)^2),
             SST = sum((coag - grand.mean)^2))
 
-# individuala tally
+# individual tally
 coagulation <- 
   coagulation %>% 
   mutate(grand.mean = mean(coag)) %>%

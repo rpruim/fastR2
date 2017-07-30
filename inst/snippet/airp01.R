@@ -1,2 +1,2 @@
-mean(pollution ~ location, data = AirPollution)
+mean(pollution ~ location, data = AirPollution) 
 

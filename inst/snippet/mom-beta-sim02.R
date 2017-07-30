@@ -1,7 +1,6 @@
-## xyplot(shape2 ~ shape1, data = Results, alpha = 0.4,
-## 	   panel = function(x, y, ...){
-##             panel.abline(a = 0, b = 5/2)
-##             panel.xyplot(x, y, ...)
-##             })
-## histogram( ~ shape2 / shape1, data = Results, type = "density", v = 2.5)
+## gf_point(shape2 ~ shape1, data = Results, alpha = 0.4) %>%
+##   gf_abline(intercept = 0, slope = 5/2)
+## 
+## gf_dhistogram( ~ (shape2 / shape1), data = Results, bins = 30) %>%
+##   gf_vline(xintercept = 2.5)
 

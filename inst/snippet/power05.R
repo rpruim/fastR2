@@ -11,7 +11,7 @@
 ##     plab = paste("alt prob =", as.character(p_alt))
 ##   )
 ## 
-## xyplot(power ~ n | plab, data = PowerData,
-##        ylab = "power", xlab = "number of coin tosses",
-##        ylim = c(0, 1.1), type = "l", lwd = 2)
+## gf_line(power ~ n | plab, data = PowerData, size = 1) %>%
+##   gf_labs(y = "power", x = "number of coin tosses") %>%
+##   gf_lims(y = c(0, 1.1))
 

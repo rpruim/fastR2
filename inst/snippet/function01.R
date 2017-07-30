@@ -4,5 +4,3 @@ fstats <- function(x) {
     sd(x)
 }
 
-fstats((1:20)^2)
-

@@ -6,7 +6,7 @@ ml <- maxLik(loglik.faithful, x = geyser$duration,
              start = c(0.5, m - 1, m + 1, s, s))
 mle <- coef(ml); mle
 loglik.faithful(mle, x = geyser$duration)
-logLik(ml)        # makLik can caclulate this log-likelihood for us
+logLik(ml)        # makLik::logLik can caclulate this log-likelihood for us
 
 ml0 <- maxLik(loglik0.faithful, x = geyser$duration,
               start = c(m - 1, m + 1, s, s))

@@ -1,8 +1,12 @@
-rm <- seq(-5, 5, by = 0.1)
-wp <- makeFun(glm.bb)(runmargin = rm)
-xyplot(winP ~ runmargin, data = BB, xlim = c(-2.5, 2.5), ylim = c(0, 1),
-    panel = function(x, y, ...){
-        panel.xyplot(x, y, ...)
-        panel.xyplot(rm, wp, type = "l", col = "gray50")
-    })
+BB <- 
+  BB %>% 
+  mutate( 
+    winP = W / G, 
+    predWinP = makeFun(bb.glm)(runmargin), 
+    winPdiff = winP - predWinP
+    ) 
+BB %>% arrange(-abs(winPdiff)) %>% select(1, 22:24) %>% head()
+
+gf_point(winP ~ predWinP, data = BB) %>%
+  gf_abline(slope = 1, intercept = 0)
 

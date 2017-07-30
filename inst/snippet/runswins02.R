@@ -1,15 +1,7 @@
-BB <- 
-  BB %>% 
-  mutate( 
-    winP = W / G, 
-    predWinP = makeFun(glm.bb)(runmargin), 
-    winPdiff = winP - predWinP
-    ) 
-BB %>% arrange(-abs(winPdiff)) %>% select(1, 22:24) %>% head()
+BB <- MLB2004 %>% 
+  mutate(runmargin = (R - OR) / G)
 
-xyplot(winP ~ predWinP, data = BB,
-    panel = function(x, y, ...) {
-        panel.xyplot(x, y, ...)
-        panel.abline(0, 1)
-    })
+# data frame has summarized data for each team, so different syntax here:
+bb.glm <- glm(cbind(W, L) ~ runmargin, data = BB, family = "binomial") 
+msummary(bb.glm)
 

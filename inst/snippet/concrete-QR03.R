@@ -1,3 +1,4 @@
-diag(R)
-c(vlength(v0), vlength(v1), vlength(v2))
+R <- t(Q) %*% X; R %>% round(4)   # should be upper triangular
+Q %*% R %>% round(4)              # should be X
+X
 

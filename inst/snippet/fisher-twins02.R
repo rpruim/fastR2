@@ -1,2 +1,2 @@
-fisher.test(convictions)
+fisher.test(convictions) %>% pval()
 

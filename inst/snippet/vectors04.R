@@ -1,8 +1,5 @@
-sum(x); prod(x)                         # sums and products
-z <- rnorm(5); z
-sort(z); rank(z); order(z)              # sort, rank, order
-rev(x)                                  # reverse x
-diff(x)                                 # pairwise differences
-cumsum(x)                               # cumulative sum
-cumprod(x)                              # cumulative product
+as.numeric(u)                    # creates nameless version
+u                                # but doesn't change its input
+names(u) <- NULL                 # this removes the names from u
+u                                # no more names
 

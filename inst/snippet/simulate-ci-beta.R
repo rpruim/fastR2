@@ -1,4 +1,4 @@
-mu <- 0.4 / (0.4 + 0.6); mu           # mean for beta dist
+mu <- 0.4 / (0.4 + 0.6); mu           # mean for beta dist 
 v <- (0.4 * 0.6) / ((0.4 + 0.6)^2 * (0.4 + 0.6 + 1)); v  # var for beta dist
 #
 # 10,000 simulated samples of sizes 2, 5, and 20

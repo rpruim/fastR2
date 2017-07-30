@@ -1,2 +1,6 @@
-chisq.test(tally( ~ status, data = Sims), p = c(0.95, 0.025, 0.025))
+sim()       # one simulation
+Sims <- do(5000) * sim()   # lot of simulations
+Sims <-
+  Sims %>% 
+  mutate(status = ifelse(lo > 5, "hi", ifelse(hi < 5, "lo", "good"))) 
 

@@ -1,5 +1,5 @@
 # "exact" p-value
-binom.test(60, 100);                             
+binom.test(60, 100)
 # approximate p-value
 z <- (0.6 - 0.5) / sqrt(0.5 * 0.5 / 100); z
 2 * (1 - pnorm(z))                         

@@ -1,6 +1,6 @@
-xyplot(velocity^2 ~ force.drag, data= Drag, groups = height)
+gf_point(velocity^2 ~ force.drag, data= Drag, color = ~ factor(height))
 plot(model1, w = 1)
-xyplot(velocity ~ force.drag, data = Drag, 
-       scales = list(log = T), groups = height)
+gf_point(velocity ~ force.drag, data = Drag,  color = ~ factor(height)) %>%
+  gf_refine(scale_x_log10(), scale_y_log10()) 
 plot(model3, w = 1)
 

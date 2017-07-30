@@ -1,5 +1,4 @@
-xyplot(
-  pallets ~ day, data = Pallets,
-  groups = employee,
-  type="b", auto.key = list(columns = 2, lines = TRUE))
+gf_point(pallets ~ day, data = Pallets, 
+         color = ~ employee) %>%
+  gf_line(group = ~ employee)
 

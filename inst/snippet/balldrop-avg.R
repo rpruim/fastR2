@@ -5,7 +5,8 @@ BallDropAvg <-
 BallDropAvg
 ball.modelA <- lm(time ~ sqrt(height), data = BallDropAvg)
 msummary(ball.modelA)
-xyplot(time ~ height, BallDropAvg,
-                panel = panel.lm, model = ball.modelA)
+gf_point(time ~ height, data = BallDropAvg) %>%
+  gf_lm(formula = y ~ sqrt(x), fill = "skyblue") %>%
+  gf_lm(formula = y ~ sqrt(x), interval = "confidence") 
 plot(ball.modelA, w = 1)
 

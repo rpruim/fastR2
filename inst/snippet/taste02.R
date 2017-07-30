@@ -1,3 +1,3 @@
-taste.lm <- lm(score ~ scr * liq, data = TasteTest)
-anova(taste.lm)
+taste.model <- lm(score ~ scr, data = TasteTest) 
+msummary(taste.model)
 

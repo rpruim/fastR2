@@ -1,4 +1,4 @@
-x <- seq(0, 10, by = 0.25)
+x <- seq(0, 10, by = 0.25) 
 resid <- rnorm(length(x))
 y1 <- x + resid
 y2 <- (x - 5)^2 / 5 + resid
@@ -24,10 +24,10 @@ rdata <- data.frame(
             residual = c(resid1, resid2, resid3, resid4),
             stresidual = c(stresid1, stresid2, stresid3, stresid4),
             group = group)
-xyplot(stresidual ~ fit|group,
-                    data = rdata,
-                    ylab = "residual",
-                    scales = list(x = list(relation = "free"), draw = F),
-                    ylim = c(-1.1, 1.1) * max(abs(rdata$stresidual)),
-                    as.table = T)
+gf_point(stresidual ~ fit, data = rdata) %>%
+  gf_facet_wrap(~ group, scale = "free") %>%
+  gf_labs(y = "residual") %>%
+  gf_theme(axis.ticks = element_blank(), axis.text = element_blank())
+                    # ylim = c(-1.1, 1.1) * max(abs(rdata$stresidual)),
+                    # as.table = T)
 

@@ -1,4 +1,4 @@
-# set up the v an u vectors
+# set up the v and u vectors
 v0 <- rep(1, 4); v0
 u0 <- v0 / vlength(v0); u0
 v1 <- x - mean(x); v1

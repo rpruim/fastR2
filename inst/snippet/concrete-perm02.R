@@ -1,3 +1,3 @@
 msummary(concrete.lm)
-msummary(concrete.lm)$fstat[1] 
+obsF <- msummary(concrete.lm)$fstat[1]; obsF
 

@@ -23,5 +23,5 @@ X <- power(x, a)
 Y <- power(y, b)
 original <- (a==1 & b==1)
 ddd <- data.frame(X = X, Y = Y, a = a, b = b, original = original)
-xyplot(y ~ x)
+gf_point(y ~ x)
 

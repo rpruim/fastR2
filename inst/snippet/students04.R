@@ -1,0 +1,2 @@
+msummary(sat.glm)
+

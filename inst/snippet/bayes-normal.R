@@ -1,5 +1,5 @@
 x <- c(20, 24, 27, 28, 28, 28, 29, 30, 
-	   30, 30, 30, 32, 33, 34, 35, 38)
+       30, 30, 30, 32, 33, 34, 35, 38)
 mean(x)
 sd(x)
 posterior <- function(x, mu0, sigma0, sigma = 5) {
@@ -16,5 +16,7 @@ posterior(x, 20, 1)
 posterior(x, 20, 4)
 posterior(x, 20, 16)
 posterior(x, 20, 1000)
+# with very difuse prior, all the precision is coming from the data
+# so sigma1 is sigma/sqrt(n)
 5 / sqrt(length(x))
 

@@ -1,6 +1,4 @@
-ml0a <- maxLik(loglik.faithful, x = geyser$duration,
-            start = c(0.5, m - 1, m + 1, s, s),
-            fixed = 1)       # first parameter is fixed at start value
-coef(ml0a)
-logLik(ml0a)
+lrt.stat <- 2 * (logLik(ml) - logLik(ml0)) %>% as.vector() 
+lrt.stat
+1 - pchisq(lrt.stat, df = 1)     # p-value based on asymptotic distribution
 

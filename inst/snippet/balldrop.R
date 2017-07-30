@@ -1,5 +1,6 @@
 ball.model <- lm(time ~ height, BallDrop)
 msummary(ball.model)
-xyplot(time ~ height, data = BallDrop, type = c("p", "r"))
+gf_lm(time ~ height, data = BallDrop) %>%
+  gf_point()
 plot(ball.model, w = 1)
 

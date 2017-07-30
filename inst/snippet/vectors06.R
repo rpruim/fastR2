@@ -1,3 +1,3 @@
-x <- seq(2, 20, by = 2)
-x[1:5]; x[c(1, 4, 7)]
+# compare round() and signif() by binding rowwise into matrix
+rbind(round(z, digits = 2), signif(z, digits = 2))   
 

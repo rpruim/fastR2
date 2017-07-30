@@ -5,7 +5,9 @@ Sims <-
   method = c("Wald", "Wilson", "score"), 
   rep = 1:2000) %>%
   group_by(n, pi, method, rep) %>% 
-  do(confint(binom.test(rbinom(1, .$n, .$pi), n = .$n, ci.method = .$method)))
+  do(
+    confint(
+      binom.test(rbinom(1, .$n, .$pi), n = .$n, ci.method = .$method)))
 
 Sims %>%
   group_by(n, pi, method) %>% 

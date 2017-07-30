@@ -1,3 +1,4 @@
-base.lmint <- lm(b1930 ~ location * treatment, data = Ice)
-anova(base.lmint)
+Ice2 %>% filter(time == 1930, phase == "b") %>%
+  group_by(location, treatment, phase) %>%
+  summarise(mean(temp))
 

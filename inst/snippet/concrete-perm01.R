@@ -1,2 +1,3 @@
-concrete.lm <- lm(strength ~ limestone + water, data = Concrete)
+concrete.lm <- 
+  lm(strength ~ limestone + water, data = Concrete)
 

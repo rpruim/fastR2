@@ -1,28 +1,16 @@
-temps <- seq(30, 100, by = 2)
-xyplot(damage / 6 ~ temp, data = orings, 
-    xlim = c(30, 100),
-    ylim = c(-0.05, 1.05),
-    ylab = "percent of O-rings damaged",
-    alpha = 0.7,
-    panel = function(x, y, ...){
-        panel.xyplot(temps, 
-            predict(orings.model, type = "response", 
-                newdata = data.frame(temp = temps)),
-            type = "l", lwd = 2)
-        panel.xyplot(x, y, ...)
-    }
-    )
-xyplot(failure ~ temp, data = orings, 
-    xlim = c(30, 100),
-    ylim = c(-0.05, 1.05),
-    ylab = "probability of failure",
-    alpha = 0.7,
-    panel = function(x, y, ...){
-        panel.xyplot(temps, 
-            predict(orings.model, type = "response", 
-                newdata = data.frame(temp = temps)),
-            type = "l", lwd = 2)
-        panel.xyplot(x, y, ...)
-    }
-    )
+pred_damage <- makeFun(orings.model)
+Pred_data <- 
+  data_frame(
+    temp = seq(30, 100, by = 2),
+    pred = pred_damage(temp))
+gf_point(damage / 6 ~ temp, data = orings, alpha = 0.7) %>%
+  gf_line(pred ~ temp, data = Pred_data) %>%
+  gf_lims(x = c(30, 100), y = c(-0.05, 1.05)) %>%
+  gf_labs(y = "proportion of O-rings damaged")
+
+orings <- orings %>% mutate(fail = as.numeric(failure))
+gf_point(fail ~ temp, data = orings, alpha = 0.7) %>%
+  gf_line(pred ~ temp, data = Pred_data) %>%
+  gf_lims(x = c(30, 100), y = c(-0.05, 1.05)) %>%
+  gf_labs(y = "O-ring failure (1 = yes, 0 = no)")
 

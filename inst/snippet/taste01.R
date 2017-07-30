@@ -1,2 +1,2 @@
-mean(score ~ scr + liq, data = TasteTest, .format = "table")
+favstats(score ~ scr, data = TasteTest)
 

@@ -1,22 +1,18 @@
-includeChapter <- rep(TRUE, 7)
-includeChapter <- c(TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
-includeChapter <- rep(c(FALSE, TRUE), c(5, 2))
-includeChapter <- rep(TRUE, 7)
-includeApp <- rep(TRUE, 5)
-includeApp <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
+includeChapter <- 1:7 %in% (1:7) # [-6]
+includeApp <- 1:4 %in% 1:3
 
 require(MASS)  # make sure this comes before dplyr loads
 require(fastR2)
 require(mosaic)
-theme_set(theme_minimal())
+theme_set(theme_bw())
 require(knitr)
 require(xtable)
 options(xtable.floating = FALSE)
-opts_knit$set(width=75)
+opts_knit$set(width=74)
 opts_knit$set(self.contained=FALSE)
 opts_chunk$set(
   digits = 3,
-  dev=c("pdf","postscript"),
+  dev="pdf",  # don't need EPS files anymore
   dev.args=list(colormodel="cmyk"),
   comment="##",
   prompt=FALSE,
@@ -25,8 +21,8 @@ opts_chunk$set(
   cache.path='cache/c-',
   cache.lazy=FALSE,
   tidy=FALSE,
-  fig.width=8*.75,
-  fig.height=5*.75,
+  fig.width=8*.45,
+  fig.height=6*.45,
   fig.show="hold",
   fig.align="center",
   out.width=".47\\textwidth",
@@ -36,9 +32,10 @@ opts_chunk$set(
   boxedLabel=TRUE
   )
 
-opts_template$set(fig3 = list(fig.height = 5*.35, fig.width = 8*.35, out.width=".31\\textwidth"))
-opts_template$set(fig1 = list(fig.height = 3, fig.width = 8, out.width=".95\\textwidth"))
-opts_template$set(figbig = list(fig.height = 9, fig.width = 12, out.width=".95\\textwidth"))
+opts_template$set(fig3 = list(fig.height = 7*.40, fig.width = 8*.40, out.width=".31\\textwidth"))
+opts_template$set(figtall = list(fig.height = 8*.45, fig.width = 8*.45, out.width=".47\\textwidth"))
+opts_template$set(fig1 = list(fig.height = 3*0.9, fig.width = 8 * 0.9, out.width=".95\\textwidth"))
+opts_template$set(figbig = list(fig.height = 9*0.9, fig.width = 12*0.9, out.width=".95\\textwidth"))
 
 knit_hooks$set(seed = function(before, options, envir) {
     if (before) set.seed(options$seed) 
@@ -58,7 +55,7 @@ knit_hooks$set(
     sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)
     gsub(
       "\\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}",
-      "\\definecolor{shadecolor}{gray}{0.9}", x, fixed = TRUE)
+      "\\definecolor{shadecolor}{gray}{0.8}", x, fixed = TRUE)
   }
 )
 
@@ -115,36 +112,36 @@ options(show.signif.stars=FALSE)
 options(digits=3)
 
 
-# omit some of the output from summary( lm( ) )
-print.summary.lm <- 
-  function (x, digits = max(3L, getOption("digits") - 3L), symbolic.cor = x$symbolic.cor, 
-            signif.stars = getOption("show.signif.stars"), ...) 
-  {
-    output <- capture.output( stats:::print.summary.lm(x, digits=digits, symbolic.cor = symbolic.cor,
-                              signif.stars=signif.stars, ...) )
-    l <- sapply( output, nchar )
-    w1 <- min( grep("Call", output) ) 
-    w2 <- min( grep("Resid", output) ) 
-    w3 <- min( grep("Coef", output) ) 
-	rows <- 1:length(output)
-	keep <- (rows >= w1 & rows < w2) | (rows >=w3)
-    cat( paste(output[keep], collapse="\n") )
-    return(invisible(x))
-  }
-
-print.summary.glm <- 
-  function (x, digits = max(3L, getOption("digits") - 3L), symbolic.cor = x$symbolic.cor, 
-            signif.stars = getOption("show.signif.stars"), ...) 
-  {
-    output <- capture.output( stats:::print.summary.glm(x, digits=digits, symbolic.cor = symbolic.cor,
-                              signif.stars=signif.stars, ...) )
-    l <- sapply( output, nchar )
-    w1 <- min( grep("Call", output) ) 
-    w2 <- min( grep("Resid", output) ) 
-    w3 <- min( grep("Coef", output) ) 
-	rows <- 1:length(output)
-	keep <- (rows >= w1 & rows < w2) | (rows >=w3)
-    cat( paste(output[keep], collapse="\n") )
-    return(invisible(x))
-  }
+# # omit some of the output from summary( lm( ) )
+# print.summary.lm <- 
+#   function (x, digits = max(3L, getOption("digits") - 3L), symbolic.cor = x$symbolic.cor, 
+#             signif.stars = getOption("show.signif.stars"), ...) 
+#   {
+#     output <- capture.output( stats:::print.summary.lm(x, digits=digits, symbolic.cor = symbolic.cor,
+#                               signif.stars=signif.stars, ...) )
+#     l <- sapply( output, nchar )
+#     w1 <- min( grep("Call", output) ) 
+#     w2 <- min( grep("Resid", output) ) 
+#     w3 <- min( grep("Coef", output) ) 
+# 	rows <- 1:length(output)
+# 	keep <- (rows >= w1 & rows < w2) | (rows >=w3)
+#     cat( paste(output[keep], collapse="\n") )
+#     return(invisible(x))
+#   }
+# 
+# print.summary.glm <- 
+#   function (x, digits = max(3L, getOption("digits") - 3L), symbolic.cor = x$symbolic.cor, 
+#             signif.stars = getOption("show.signif.stars"), ...) 
+#   {
+#     output <- capture.output( stats:::print.summary.glm(x, digits=digits, symbolic.cor = symbolic.cor,
+#                               signif.stars=signif.stars, ...) )
+#     l <- sapply( output, nchar )
+#     w1 <- min( grep("Call", output) ) 
+#     w2 <- min( grep("Resid", output) ) 
+#     w3 <- min( grep("Coef", output) ) 
+# 	rows <- 1:length(output)
+# 	keep <- (rows >= w1 & rows < w2) | (rows >=w3)
+#     cat( paste(output[keep], collapse="\n") )
+#     return(invisible(x))
+#   }
 

@@ -1,7 +1,5 @@
-Ice2 <-
-  Ice %>% 
-  select(subject, treatment, location, t1930) %>% 
-  tidyr::spread(location, t1930) %>% 
-  rename(surfTemp = surface, intraTemp = intramuscular)
-anova(lm(surfTemp - intraTemp ~ treatment, data = Ice2))
+ice.trt2 <- lm(t1930 - b1930 ~ treatment, data = Ice,
+                 subset = location == "intramuscular")
+msummary(ice.trt2)
+confint(glht(ice.trt2, mcp(treatment = "Tukey")), level = 0.90)
 

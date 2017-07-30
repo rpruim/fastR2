@@ -1,0 +1,2 @@
+rsquared(treb.model)
+

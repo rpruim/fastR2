@@ -1,3 +1,3 @@
-concrete.lmmod %>% qr() %>% qr.Q()
-concrete.lmmod %>% qr() %>% qr.R()
+A %>% round(3) 
+solve(R) %*% t(Q) %>% round(3)
 
