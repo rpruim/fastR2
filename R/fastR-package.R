@@ -1,6 +1,3 @@
-#' @import mosaicCalc
-NA 
-
 #' Foundations and Applications of Statistics
 #' 
 #' Data sets and utility functions to accompany \cite{Foundations and
