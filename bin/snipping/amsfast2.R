@@ -2,7 +2,8 @@
 includeChapter <- 1:7 %in% (1:7) # [-6]
 includeApp <- 1:4 %in% 1:3
 
-require(MASS)  # make sure this comes before dplyr loads
+require(MASS)   # make sure this comes before dplyr loads
+require(Matrix) # make sure this comes before mosaic loads
 require(fastR2)
 require(mosaic)
 theme_set(theme_bw())
@@ -166,21 +167,18 @@ show_source <-
 ## snippet("snippet")
 
 ## ----snippet2, eval=FALSE------------------------------------------------
-## snippet("snippet", exec=FALSE)
+## snippet("snippet", exec = FALSE)
 
 
 ## ----IntroChapter, child="IntroChapter.Rnw", eval=TRUE-------------------
 
-## ----include = FALSE-----------------------------------------------------
+## ----intro-setup, include = FALSE----------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/Intro-")
 
 
 ## ----Data, child="Data.Rnw", eval=includeChapter[1]----------------------
 
-## ----include=FALSE-------------------------------------------------------
-set_parent("amsfast2.Rnw")
-
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----data-setup, include = FALSE, cache = FALSE--------------------------
 knitr::opts_chunk$set(cache.path = "cache/Data-")
 require(ggformula)
 
@@ -389,18 +387,24 @@ gf_histogram( ~ pulse, data = LittleSurvey)
 gf_histogram( ~ pulse, data = LittleSurvey %>% filter(pulse > 30))
 df_stats(~ pulse, data = LittleSurvey %>% filter(pulse > 30),  median, mean)
 
-## ----number-prob-sol-----------------------------------------------------
-t <- tally( ~ number, data = LittleSurvey); t
+## ----number-prob01-sol---------------------------------------------------
 gf_histogram( ~ number, data = LittleSurvey, binwidth = 1)
+
+## ----number-prob02-sol---------------------------------------------------
+t <- tally( ~ number, data = LittleSurvey); t
 max(t)
 t[which(t == max(t))]
 t[which(t == min(t))]
 tally(~ (number %% 2 == 0), data = LittleSurvey)
+
+## ----number-prob03-sol---------------------------------------------------
 # Alternative method
 LittleSurvey %>%
   group_by(number) %>%
   summarise(total = n()) %>%
   filter(total == min(total))
+
+## ----number-prob04-sol---------------------------------------------------
 LittleSurvey %>%
   group_by(number) %>%
   summarise(total = n()) %>%
@@ -548,6 +552,7 @@ mean(Sepal.Length ~ Species, data = iris)
 var(Sepal.Length ~ Species, data = iris)
 sd(Sepal.Length ~ Species, data = iris)
 favstats(Sepal.Length ~ Species, data = iris)
+df_stats(Sepal.Length ~ Species, data = iris, mean, var, sd)
 
 ## ----inspect-------------------------------------------------------------
 inspect(iris)
@@ -563,7 +568,7 @@ median(abs(iris$Sepal.Length - median(iris$Sepal.Length))) * 1.4826
 Pitching2 <- filter(Pitching2005, GS > 4)
 favstats(ERA ~ lgID, data = Pitching2)
 gf_boxplot(ERA ~ lgID, data = Pitching2) %>% gf_refine(coord_flip())
-gf_histogram( ~ ERA | lgID, data = Pitching2, binwidth = .2)
+gf_histogram( ~ ERA | lgID ~ ., data = Pitching2, binwidth = 0.3)
 
 ## ----batting-ba-sol------------------------------------------------------
 Batting2 <- droplevels(filter(Batting, AB >= 200))
@@ -634,7 +639,7 @@ gf_boxplot(births ~ wday, color = ~wday, data = Births, size = 0.5) %>%
 
 ## ----DiscreteDistribution, child="DiscreteDistributions.Rnw", eval=includeChapter[2]----
 
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----discrete-setup, include = FALSE, cache = FALSE----------------------
 knitr::opts_chunk$set(cache.path = "cache/Disc-")
 
 ## ----dice-sample-space-sol, tidy=FALSE-----------------------------------
@@ -853,8 +858,8 @@ choose(13 - 3, 2) /            # two of remaining 10 spades
 choose(52 - 5, 2)              # two of 47 remaining cards in deck
 
 ## ----socks-sol, tidy=FALSE-----------------------------------------------
-8 * 5 * 4 / choose(17, 3)        # 1 sock of each kind means no pairs
-1 - (8 * 5 * 4 / choose(17, 3))  # so this is prob of getting a pair
+8 * 5 * 4 / choose(17, 3)       # 1 sock of each kind means no pairs
+1 - (8 * 5 * 4 / choose(17, 3)) # so this is prob of getting a pair
 
 # or do it this way
 ( choose(8, 2) * 9 + choose(5, 2) * 12 + choose(4, 2) * 13 +
@@ -990,7 +995,7 @@ gf_point(probs ~ misses) %>%
 
 ## ----playoffs-part-------------------------------------------------------
 ### using binomial dist
-1 - pbinom(1, 3, 0.6)              # win at least 2 of 3
+1 - pbinom(1, 3, 0.6)             # win at least 2 of 3
 ### using neg binomial dist
 pnbinom(1, 2, 0.6)                # lose <= 1 time  before 2 wins
 
@@ -1550,7 +1555,7 @@ sum((1 - prob) / prob^2)
 
 ## ----ContinuousDistributions, child="ContinuousDistributions.Rnw", eval=includeChapter[3]----
 
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----cont-setup, include = FALSE, cache = FALSE--------------------------
 knitr::opts_chunk$set(cache.path = "cache/Cont-")
 require(grid)
 
@@ -1608,7 +1613,8 @@ integrate(f, 0, 1)
 integrate(f, 0, 1) %>% value()       # just the approximation value
 # find nearby fraction
 integrate(f, 0, 1) %>% value() %>% fractions() 
-gf_fun(f(x) ~ x, xlim = c(-1, 4)) %>%
+gf_line(y ~ x, data = data_frame(x = seq(-1, 4, by = 0.01), y = f(x)),
+        group = ~ (x > 3)) %>%
   gf_labs(y = "f(x)")
 
 ## ----pdf, fig.keep = "none"----------------------------------------------
@@ -1621,7 +1627,8 @@ integrate(f, 0, 1)
 integrate(f, 0, 1) %>% value()       # just the approximation value
 # find nearby fraction
 integrate(f, 0, 1) %>% value() %>% fractions() 
-gf_fun(f(x) ~ x, xlim = c(-1, 4)) %>%
+gf_line(y ~ x, data = data_frame(x = seq(-1, 4, by = 0.01), y = f(x)),
+        group = ~ (x > 3)) %>%
   gf_labs(y = "f(x)")
 
 ## ----integrate-----------------------------------------------------------
@@ -1668,13 +1675,18 @@ integrate(f, 7, 15)
 
 ## ----unif-pdf-cdf-fig, echo=FALSE----------------------------------------
 
-gf_fun(dunif(x) ~ x, xlim = c(-0.5, 1.5), n = 1000) %>%
-  gf_labs(title = "pdf for Unif(0,1)",
-          x = "x", y = expression(f(x)))
+gf_line(y ~ x, 
+        data = data_frame(x = seq(-0.5, 1.5, by = 0.001), y = dunif(x)),
+        group = ~ (x < 0) + (x<=1) ) %>%
+  gf_labs(y = "f(x)")
+
+# gf_fun(dunif(x) ~ x, xlim = c(-0.5, 1.5), n = 1000) %>%
+#   gf_labs(title = "pdf for Unif(0,1)",
+#           x = "x", y = expression(f(x)))
 
 gf_fun(punif(x) ~ x, xlim = c(-0.5, 1.5)) %>%
   gf_labs(title = "cdf for Unif(0,1)",
-          x = "x", y = expression(F(x)))
+          x = "x", y = "F(x)")
 
 ## ----unif02--------------------------------------------------------------
 runif(6, 0, 10)     # 6 random values on [0,10]
@@ -1686,10 +1698,26 @@ qunif(0.25, 0, 10)  # 1/4 of the distribution is below 2.5
 g <- function(y) { 1 / (2 * sqrt(y)) * (0 <= y & y <= 1) }
 integrate(g, 0, 1)
 
-## ----cdf-method02--------------------------------------------------------
+## ----cdf-method02, fig.keep = "none"-------------------------------------
 fV <- function(v)  (0 <= v & v <= 4) * 0.25 / sqrt(abs(v)) 
 integrate(fV, 0, 4)
+# gf_fun is not clever about discontinuities
 gf_fun(fV(v) ~ v, xlim = c(-1, 5), n = 1000) %>%
+  gf_lims(y = c(0, 1))
+# we can be clever if we do things manually
+gf_line(y ~ v, data = data_frame(v = seq(-1, 5, by = 0.01), y = fV(v)),
+        group =  ~(v < 0) + (v <=4)) %>%
+  gf_lims(y = c(0, 1))
+
+## ----cdf-method02-fig, echo = FALSE, results = "hide"--------------------
+fV <- function(v)  (0 <= v & v <= 4) * 0.25 / sqrt(abs(v)) 
+integrate(fV, 0, 4)
+# gf_fun is not clever about discontinuities
+gf_fun(fV(v) ~ v, xlim = c(-1, 5), n = 1000) %>%
+  gf_lims(y = c(0, 1))
+# we can be clever if we do things manually
+gf_line(y ~ v, data = data_frame(v = seq(-1, 5, by = 0.01), y = fV(v)),
+        group =  ~(v < 0) + (v <=4)) %>%
   gf_lims(y = c(0, 1))
 
 ## ----exp-pdf-cdf-fig, echo=FALSE-----------------------------------------
@@ -2522,7 +2550,7 @@ Sigma[2:3, 2:3] - Sigma[2:3, 1] %*% solve(Sigma[1, 1]) %*% Sigma[1, 2:3]
 
 ## ----CLT, child="CLT.Rnw", eval=includeChapter[4]------------------------
 
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----clt-setup, include = FALSE, cache = FALSE---------------------------
 knitr::opts_chunk$set(cache.path = "cache/CLT-")
 require(parallel)
 options(`mosaic:parallelMessage` = FALSE)
@@ -2640,7 +2668,7 @@ gf_dhistogram( ~ sample.mean, data = SamplingDist,
 
 gf_qq( ~ sample.mean, data = SamplingDist)
 
-## ----do00, eval = FALSE--------------------------------------------------
+## ----do, eval = FALSE----------------------------------------------------
 ## mean(rnorm(16, 100, 12))
 
 ## ----mom-beta-sim01, fig.show = "hide"-----------------------------------
@@ -2899,30 +2927,34 @@ Plot_data <-
     p = ppoints(50)
   ) %>%
   mutate(
+    label = paste("n=", n, "; pi=", pi, sep = ""),
+    group = paste("pi=", pi, "; n=", n, sep = ""),
     y = qbinom(p, n, pi),
     x = qnorm(p, n * pi, sqrt(n * pi * (1-pi)))
   ) 
 
-# gf_qq( ~ y, data = Plot_data) %>%
-# #  gf_abline(slope = 1, intercept = 0) %>%
-#   gf_facet_grid(paste("pi=", pi, sep = "") ~ paste("n=", n, sep = ""), 
-#                 scales = "free") %>%
-#   gf_labs(
-#     y = expression(qbinom(p, n, pi)),
-#     x = expression(qnorm(p, n * pi, sqrt(n * pi * (1-pi))))
-#   ) 
-p <- xyplot(
-  y ~ x | paste("n=", n, sep = "") * paste("pi=", pi, sep = ""),
-  data = Plot_data,
-  scales = list(relation = "free"),
-  cex = 0.6,
-  ylab = expression(qbinom(p, n, pi)),
-  xlab = expression(qnorm(p, n * pi, sqrt(n * pi * (1-pi)))),
-  panel = function(x, y, ...){
-    panel.abline(0, 1, ...)
-    panel.xyplot(x, y, ...)
-  })
-latticeExtra::useOuterStrips(p)
+gf_qq( ~ y, data = Plot_data, color = ~factor(pi)) %>%
+  gf_qqline(color = "gray50") %>%
+  gf_facet_wrap( ~ label, scales = "free", ncol = 4) %>%
+  gf_labs(
+    y = expression(qbinom(p, n, pi)),
+    x = expression(qnorm(p, n * pi, sqrt(n * pi * (1-pi))))
+  ) %>%
+  gf_theme(legend.position = "top") %>%
+  gf_refine(guides(color = guide_legend(title = "pi:")))
+
+# p <- xyplot(
+#   y ~ x | paste("n=", n, sep = "") * paste("pi=", pi, sep = ""),
+#   data = Plot_data,
+#   scales = list(relation = "free"),
+#   cex = 0.6,
+#   ylab = expression(qbinom(p, n, pi)),
+#   xlab = expression(qnorm(p, n * pi, sqrt(n * pi * (1-pi)))),
+#   panel = function(x, y, ...){
+#     panel.abline(0, 1, ...)
+#     panel.xyplot(x, y, ...)
+#   })
+# latticeExtra::useOuterStrips(p)
 
 ## ----binomial-clt-fig, echo = FALSE--------------------------------------
 gf_dist("binom", params = list(size = 20, prob = 0.1)) %>%
@@ -2960,7 +2992,7 @@ binom.test(465, 980)
 ## ----battery-life-sol----------------------------------------------------
 1 - pnorm(160/3, mean = 50, sd = 5 / sqrt(3))
 
-## ----ztest-a00, eval = FALSE---------------------------------------------
+## ----z-test01, eval = FALSE----------------------------------------------
 ## z_test <-
 ##   function (x, alternative = c("two.sided", "less", "greater"),
 ##             mu = 0, sigma = 1, conf.level = 0.95)
@@ -2971,13 +3003,13 @@ binom.test(465, 980)
 ##     # your code goes here			
 ##   }
 
-## ----ztest-b00, eval = FALSE, tidy = FALSE-------------------------------
-##     Z <- "???" ; names(Z) <- "z"
+## ----z-test02, eval = FALSE, tidy = FALSE--------------------------------
+##     Z <- "???"; names(Z) <- "z"
 ##     SIGMA <- sigma; names(SIGMA) <- "sigma"
 ##     MU <- mu; names(MU) <- "mean"
-##     ESTIMATE <- "???" ; names(ESTIMATE) <- "sample mean"
+##     ESTIMATE <- "???"; names(ESTIMATE) <- "sample mean"
 ##     CINT <- "???"; attr(CINT, "conf.level") <- conf.level
-##     PVAL <- "???";
+##     PVAL <- "???"
 ## 		
 ##     structure(list(statistic = Z, parameter = SIGMA, p.value = PVAL,
 ##         conf.int = CINT, estimate = ESTIMATE, null.value = MU,
@@ -3044,7 +3076,7 @@ CIsim(n = 20, samples = 100, estimand = 500,
       rdist = rnorm, args = list(mean = 500, sd = 100),
       method = zci, method.args = list(sd = 100))
 
-## ----ci-vis-fig, echo = FALSE, message = FALSE, seed = 1234--------------
+## ----ci-vis-fig, echo = FALSE, message = FALSE, seed = 1234, opts.label = "fig1"----
 # simulate 100 intervals and plot them. 
 CIsim(n = 20, samples = 100, estimand = 500, 
       rdist = rnorm, args = list(mean = 500, sd = 100),
@@ -3156,7 +3188,7 @@ xList <- lapply(ulist, function(u) project(x,u)); xList
 vList <- lapply(ulist, function(u) project(v,u)); vList
 all.equal(xList[-1], vList[-1])
 
-## ----t-dist-fig, echo = FALSE--------------------------------------------
+## ----t-dist-fig, echo = FALSE, opts.label = "fig1"-----------------------
 x <- seq(-5, 5, by = 0.05)
 l <- length(x)
 Plot_data <- 
@@ -4253,7 +4285,10 @@ gpigs <-
     268, 270, 283, 289, 291, 311, 315, 326, 361, 373, 376, 397, 398, 
     406, 459, 466, 592, 598)
 
-## ----gpigs02-------------------------------------------------------------
+## ----gpigs02, fig.keep = "none"------------------------------------------
+gf_dhistogram( ~ gpigs, binwidth = 25)
+
+## ----gpigs02-fig, echo = FALSE, opts.label = "fig1"----------------------
 gf_dhistogram( ~ gpigs, binwidth = 25)
 
 ## ----gpigs03-------------------------------------------------------------
@@ -4595,7 +4630,7 @@ round(moment.cont(function(x) {dnorm(x, 10, 3)}, k = 1:4, centered = TRUE), 5)
 
 ## ----Likelihood, child="Likelihood.Rnw", eval=includeChapter[5]----------
 
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----lik-setup, include = FALSE, cache = FALSE---------------------------
 knitr::opts_chunk$set(cache.path = "cache/Lik-") 
 require(maxLik)
 
@@ -4767,7 +4802,7 @@ qbeta(c(0.05, 0.95), shape1 = alpha.hat, shape2 = beta.hat)
 qbeta(    0.5 / 334, alpha.hat, beta.hat)
 qbeta(1 - 0.5 / 334, alpha.hat, beta.hat)
 
-## ----baseball-ba-likelihood-fig, echo = FALSE, include=FALSE-------------
+## ----baseball-ba-likelihood-fig, echo = FALSE, include = FALSE-----------
 dat <- expand.grid(
 	alpha = seq(4, 210, by = 6),
 	beta = seq(10, 500, by = 15)
@@ -5349,8 +5384,8 @@ w
 theta <- 1.8
 set.seed(123)
 rfoo <- function(n, theta) {runif(n)^(1 / (theta + 1))}
-pfoo <- function(p, theta) {
-  x^(theta + 1)
+pfoo <- function(q, theta) {
+  q^(theta + 1)
 }
 qfoo <- function(p, theta) {
   p^(1 / (theta + 1))
@@ -5364,7 +5399,7 @@ dfoo <- function(x, theta, log = FALSE) {
   }
 }
 x <- round(rfoo(30, theta), 2); x
-gf_dhistogram(~ x, binwidth = 15) %>%
+gf_dhistogram(~ x, binwidth = 0.1) %>%
   gf_dist("foo", theta = 1.8)
 
 ## ----less-lazy-sol-------------------------------------------------------
@@ -5815,7 +5850,7 @@ nflRatings<- data.frame(
     wins = as.vector(tally( ~ winner, data = NFL)),
     losses = as.vector(tally( ~ loser, data = NFL))
     )
-rownames(nflRatings) <- NULL
+row.names(nflRatings) <- NULL
 
 nflRatings[rev(order(nflRatings$rating)), ]
 
@@ -6095,6 +6130,13 @@ gf_point(sigma ~ mu, data = PosteriorSample,
          size = 0.4, alpha = 0.15) %>%
   gf_density2d()
 
+## ----normal-grid04a, include = FALSE-------------------------------------
+gf_hex(sigma ~ mu, data = PosteriorSample, 
+       bins = 50) %>%
+  gf_density2d(color = "white", alpha = 0.5) %>% 
+  gf_refine(scale_fill_gradient2(midpoint = 400, low = "gray80", mid = "skyblue", high = "navy")) %>%
+  gf_theme(legend.position = "top")
+
 ## ----normal-grid05-------------------------------------------------------
 # 90% credible interval for the mean
 cdata( ~ mu, data = PosteriorSample, p = 0.90) 
@@ -6208,10 +6250,8 @@ gf_qq( ~ p.val, data = Sims50, distribution = qunif, geom = "line") %>%
 
 ## ----LinearModels, child="LinearModels.Rnw", eval=includeChapter[6]------
 
-## ----LM-packages, include = FALSE, cache = FALSE-------------------------
+## ----LM-setup, include = FALSE, cache = FALSE----------------------------
 require(fastR2)
-
-## ----include = FALSE, cache = FALSE--------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/LM-")
 
 ## ----eval = FALSE--------------------------------------------------------
@@ -7500,11 +7540,11 @@ lm(stretch ~ distance, data = elasticband) %>% anova()
 
 ## ----RegressionVariations, child="RegressionVariations.Rnw", eval=includeChapter[7]----
 
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----reg-setup, include = FALSE, cache = FALSE---------------------------
 knitr::opts_chunk$set(cache.path = "cache/Reg-")
 require(multcomp)
 require(effects)
-require(fastR)
+require(fastR2)
 
 ## ----punting01, tidy = FALSE---------------------------------------------
 punting.lm <- 
@@ -8395,11 +8435,22 @@ require(multcomp)
 airp.cint <- confint(glht(airp.lm, mcp(location = "Tukey")))
 airp.cint  
 plot(airp.cint)
-mplot(TukeyHSD(airp.lm))
+mplot(TukeyHSD(airp.lm), system = "gg") %>% 
+  gf_theme(legend.position = "top") %>%
+  gf_labs(title = "")
+  
 
-## ----airpglht1-fig, echo = FALSE, results = "hide", cache = FALSE--------
+## ----airp-glht01-fig, echo = FALSE, results = "hide", cache = FALSE------
+require(multcomp)   
+airp.cint <- confint(glht(airp.lm, mcp(location = "Tukey")))
+airp.cint  
 plot(airp.cint)
-mplot(TukeyHSD(airp.lm)) 
+mplot(TukeyHSD(airp.lm), system = "gg") %>% 
+  gf_theme(legend.position = "top") %>%
+  gf_labs(title = "")
+  
+# plot(airp.cint)
+# mplot(TukeyHSD(airp.lm), system = "gg") 
 
 ## ----coag-TukeyHSD-------------------------------------------------------
 coag.lm <- lm(coag ~ diet, data = coagulation)
@@ -8410,14 +8461,16 @@ require(multcomp)
 coag.glht <- glht(coag.lm, mcp(diet = "Tukey"))
 msummary(coag.glht)  
 plot(confint(coag.glht))
-mplot(TukeyHSD(coag.lm)) 
+mplot(TukeyHSD(coag.lm), system = "gg") %>%
+  gf_theme(legend.position = "top") 
 
 ## ----coag-glht-fig, echo = FALSE, results = "hide", message = FALSE------
 require(multcomp)
 coag.glht <- glht(coag.lm, mcp(diet = "Tukey"))
 msummary(coag.glht)  
 plot(confint(coag.glht))
-mplot(TukeyHSD(coag.lm)) 
+mplot(TukeyHSD(coag.lm), system = "gg") %>%
+  gf_theme(legend.position = "top") 
 
 ## ----airp-glht02, tidy = FALSE-------------------------------------------
 airp.lm1 <- lm(pollution ~ location, data = AirPollution)
@@ -8537,7 +8590,7 @@ glht(model, mcp(color = "Tukey")) %>%
   summary()          
 
 ## ----taste-anova02-------------------------------------------------------
-mean(score ~ scr + liq, data = TasteTest, .format = "table")
+df_stats(score ~ scr + liq, data = TasteTest, mean, sd)
 
 ## ----taste-anova03-------------------------------------------------------
 taste.lm <- lm(score ~ scr * liq, data = TasteTest)
@@ -8626,8 +8679,10 @@ poison.lm2 <-
   lm(1/time ~ factor(poison) * factor(treatment), data = Poison)
 plot(poison.lm2, w = 1:2)
 
-## ----poison-trans-fig, echo = FALSE, results = "hide"--------------------
-
+## ----poison03-fig, echo = FALSE, results = "hide"------------------------
+poison.lm2 <- 
+  lm(1/time ~ factor(poison) * factor(treatment), data = Poison)
+plot(poison.lm2, w = 1:2)
 
 ## ----poison-trans-anova--------------------------------------------------
 anova(poison.lm2)
@@ -8695,21 +8750,13 @@ msummary(seatpos.lm1)
 faraway::vif(seatpos.lm1)
 
 ## ----seatpos03, fig.keep = "none"----------------------------------------
-car::scatterplotMatrix(
-  ~ Age + Arm + hipcenter + Ht + HtShoes + Leg + Seated + Thigh + Weight, 
-  data = seatpos,
-  reg.line = lm, smooth = TRUE, span = 0.5, 
-  diagonal = "density")
 round(cor(seatpos), 2)
+GGally::ggpairs(seatpos)
 corrgram::corrgram(seatpos, order = TRUE)
 
 ## ----seatpos03-fig, echo = FALSE, results = "hide", opts.label = "figbig"----
-car::scatterplotMatrix(
-  ~ Age + Arm + hipcenter + Ht + HtShoes + Leg + Seated + Thigh + Weight, 
-  data = seatpos,
-  reg.line = lm, smooth = TRUE, span = 0.5, 
-  diagonal = "density")
 round(cor(seatpos), 2)
+GGally::ggpairs(seatpos)
 corrgram::corrgram(seatpos, order = TRUE)
 
 ## ----seatpos04-----------------------------------------------------------
@@ -9165,7 +9212,7 @@ data(AirPollution)  # restore data to orignal form
 
 ## ----RIntro, child="RIntro.Rnw", eval=includeApp[1]----------------------
 
-## ----include = FALSE-----------------------------------------------------
+## ----include = FALSE, cache = FALSE--------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/R-") 
 require(faraway)
 require(car)
@@ -9507,7 +9554,15 @@ faithfulLong <-
 gf_point(time_til_next ~ duration, data = faithfulLong)
 
 ## ----filter01-fig, echo = FALSE, results = "hide"------------------------
-
+# any logical can be used to create subsets
+data(faithful)
+faithful2 <-
+  faithful %>%
+  rename(duration = eruptions, time_til_next = waiting)
+faithfulLong <- 
+  faithful2 %>%
+  filter(duration > 3) 
+gf_point(time_til_next ~ duration, data = faithfulLong)
 
 ## ----filter02, eval = FALSE, tidy = FALSE, fig.keep = "last", fig.show = "hide"----
 ## gf_point(time_til_next ~ duration,
@@ -9972,7 +10027,8 @@ gf_linerange(lo + hi ~ date, color = ~ hi, data = Temps) %>%
 
 ## ----MathNotation, child="MathNotation.Rnw", eval=includeApp[2]----------
 
-## ----include = FALSE, cache = FALSE--------------------------------------
+## ----math-setup, include = FALSE, cache = FALSE--------------------------
+require(fastR2)
 knitr::opts_chunk$set(cache.path = "cache/Math-")
 
 ## ----sum-ssol------------------------------------------------------------
@@ -9991,7 +10047,7 @@ fractions( sum(p*x^2) );
 
 ## ----LinearAlgebra, child="LinearAlgebra.Rnw", eval=includeApp[3]--------
 
-## ----include = FALSE-----------------------------------------------------
+## ----LA-setup, include = FALSE-------------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/LA-")
 
 ## ----vec-mult01----------------------------------------------------------
@@ -10203,7 +10259,7 @@ dot(remainder, v2)    # should be 0
 
 ## ----Chap1-4Review, child="Chap1-4Review.Rnw", eval=includeApp[4]--------
 
-## ----include = FALSE-----------------------------------------------------
+## ----rev-setup, include = FALSE------------------------------------------
 knitr::opts_chunk$set(cache.path = "cache/Rev-")
 
 ## ----rev-data, fig.show='hide'-------------------------------------------

@@ -1,7 +1,8 @@
 includeChapter <- 1:7 %in% (1:7) # [-6]
 includeApp <- 1:4 %in% 1:3
 
-require(MASS)  # make sure this comes before dplyr loads
+require(MASS)   # make sure this comes before dplyr loads
+require(Matrix) # make sure this comes before mosaic loads
 require(fastR2)
 require(mosaic)
 theme_set(theme_bw())

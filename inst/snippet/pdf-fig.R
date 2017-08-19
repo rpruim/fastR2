@@ -7,6 +7,7 @@ integrate(f, 0, 1)
 integrate(f, 0, 1) %>% value()       # just the approximation value
 # find nearby fraction
 integrate(f, 0, 1) %>% value() %>% fractions() 
-gf_fun(f(x) ~ x, xlim = c(-1, 4)) %>%
+gf_line(y ~ x, data = data_frame(x = seq(-1, 4, by = 0.01), y = f(x)),
+        group = ~ (x > 3)) %>%
   gf_labs(y = "f(x)")
 

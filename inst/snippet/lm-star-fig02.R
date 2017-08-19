@@ -1,2 +1,0 @@
-plot(star.model2)
-

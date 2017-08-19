@@ -1,2 +1,0 @@
-splom(iris)
-

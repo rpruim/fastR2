@@ -1,2 +1,0 @@
-apropos("mvnorm")
-

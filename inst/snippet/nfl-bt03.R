@@ -6,7 +6,7 @@ nflRatings<- data.frame(
     wins = as.vector(tally( ~ winner, data = NFL)),
     losses = as.vector(tally( ~ loser, data = NFL))
     )
-rownames(nflRatings) <- NULL
+row.names(nflRatings) <- NULL
 
 nflRatings[rev(order(nflRatings$rating)), ]
 
