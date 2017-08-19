@@ -17,20 +17,20 @@ knitr::opts_chunk$set(
 ```
 
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](http://cran.r-project.org/web/packages/fastR)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](http://cran.r-project.org/package=fastR2)
 
-fastR
+fastR2
 =======
 
 This package contains data sets and some utility functions to support
-[*Foundations and Applications of Statistics: An Introduction Using R*](http://www.ams.org/bookstore-getitem/item=AMSTEXT-13) by
-Randall Pruim.
+*Foundations and Applications of Statistics: An Introduction Using R*
+by Randall Pruim.
 
 ### Installation
 
 The package can be installed from CRAN via
 ```{r eval=FALSE}
-install.packages("fastR")
+install.packages("fastR2")
 ```
 or from github
 ```{r eval=FALSE}
@@ -43,7 +43,7 @@ In addtion to data sets, `fastR` contains a `snippet()` function that
 loads and executes code found in the text.  Here is an example:
 
 ```{r message=FALSE}
-require(fastR)
+require(fastR2)
 require(multcomp)
 snippet("bugs")
 ```
