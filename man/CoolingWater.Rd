@@ -38,10 +38,14 @@ data(CoolingWater2)
 data(CoolingWater3)
 data(CoolingWater4)
 if (require(ggformula)) {
-  gf_line(temp ~ time, color = ~ condition, data = rbind(CoolingWater1, CoolingWater2))
+  gf_line(
+    temp ~ time, color = ~ condition, 
+    data = rbind(CoolingWater1, CoolingWater2))
 }
 if (require(ggformula)) {
-  gf_line(temp ~ time, color = ~ condition, data = rbind(CoolingWater3, CoolingWater4))
+  gf_line(
+    temp ~ time, color = ~ condition, 
+    data = rbind(CoolingWater3, CoolingWater4))
 }
 
 }
@@ -50,11 +54,11 @@ if (require(ggformula)) {
 \item
 R. Portmann and S. Wagon. "How quickly does hot water cool?" 
 \emph{Mathematica in Education and Research}, 
-10(3):1–9, July 2005.
+10(3):1-9, July 2005.
 \item
 R. Israel, P. Saltzman, and S. Wagon. 
-"Cooling coffee without solving differential equations". \emph{Mathematics Magazine}, 
-86(3):204–210, 2013.
+"Cooling coffee without solving differential equations". 
+\emph{Mathematics Magazine},  86(3):204-210, 2013.
 }
 }
 \keyword{datasets}

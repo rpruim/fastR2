@@ -69,8 +69,12 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' tally(airline ~ result, data = AirlineArrival, format = "perc", margins = TRUE)
-#' tally(result ~ airline + airport, data = AirlineArrival, format = "perc", margins = TRUE)
+#' tally(
+#'   airline ~ result, data = AirlineArrival, 
+#'   format = "perc", margins = TRUE)
+#' tally(
+#'   result ~ airline + airport, 
+#'   data = AirlineArrival, format = "perc", margins = TRUE)
 #' AirlineArrival2 <- 
 #'   AirlineArrival %>% 
 #'   group_by(airport, airline, result) %>% 
@@ -85,15 +89,13 @@ NULL
 #'   group_by(airline) %>%
 #'   mutate(total = sum(count), percent = count/total * 100) %>% 
 #'   filter(result == "Delayed") 
-#'   gf_line( percent ~ airport, color = ~ airline, group = ~ airline, data = AirlineArrival2) %>%
-#'     gf_point( percent ~ airport, color = ~ airline, size = ~total, data = AirlineArrival2) %>%
-#'     gf_hline( yintercept = ~ percent, color = ~airline, data = AirlineArrival3, linetype = "dashed") %>%
+#'   gf_line(percent ~ airport, color = ~ airline, group = ~ airline, 
+#'           data = AirlineArrival2) %>%
+#'     gf_point(percent ~ airport, color = ~ airline, size = ~total, 
+#'              data = AirlineArrival2) %>%
+#'     gf_hline(yintercept = ~ percent, color = ~airline, 
+#'              data = AirlineArrival3, linetype = "dashed") %>%
 #'     gf_labs(y = "percent delayed") 
-#'   ggplot(data = AirlineArrival2) + 
-#'     geom_line(aes(x = airport, y = percent, colour = airline, group = airline)) +
-#'     geom_point(aes(x = airport, y = percent, colour = airline, size = total)) +
-#'     geom_hline(aes(yintercept = percent, color = airline), data = AirlineArrival3, linetype = "dashed") +
-#'     ylab("percent delayed")
  
 NULL
 
@@ -334,11 +336,11 @@ NULL
 #' \item
 #' R. Portmann and S. Wagon. "How quickly does hot water cool?" 
 #' \emph{Mathematica in Education and Research}, 
-#' 10(3):1–9, July 2005.
+#' 10(3):1-9, July 2005.
 #' \item
 #' R. Israel, P. Saltzman, and S. Wagon. 
-#' "Cooling coffee without solving differential equations". \emph{Mathematics Magazine}, 
-#' 86(3):204–210, 2013.
+#' "Cooling coffee without solving differential equations". 
+#' \emph{Mathematics Magazine},  86(3):204-210, 2013.
 #' }
 #' @examples 
 #' data(CoolingWater1)
@@ -346,10 +348,14 @@ NULL
 #' data(CoolingWater3)
 #' data(CoolingWater4)
 #' if (require(ggformula)) {
-#'   gf_line(temp ~ time, color = ~ condition, data = rbind(CoolingWater1, CoolingWater2))
+#'   gf_line(
+#'     temp ~ time, color = ~ condition, 
+#'     data = rbind(CoolingWater1, CoolingWater2))
 #' }
 #' if (require(ggformula)) {
-#'   gf_line(temp ~ time, color = ~ condition, data = rbind(CoolingWater3, CoolingWater4))
+#'   gf_line(
+#'     temp ~ time, color = ~ condition, 
+#'     data = rbind(CoolingWater3, CoolingWater4))
 #' }
 #' 
 #' @keywords datasets
@@ -611,17 +617,12 @@ NULL
 #' 		  observedPct = table(factor(Fumbles$week1,levels = 0:m))/120,
 #' 		  modelPct= dpois(0:m,mean(Fumbles$week1))
 #' 	) %>% signif(3)
-#' showFumbles <- function(x,lambda = mean(x),...) {
-#' 	mx <- max(x)
-#'     result <- histogram(~x, type = "density", xlim = c(-.5,(mx+2.5)),
-#' 		xlab = 'number of fumbles',
-#'         panel = function(x,y,...){
-#'             panel.histogram(x,alpha = 0.8,breaks = seq(-0.5,(mx+2.5),by = 1,...))
-#'             panel.points(0:(mx+2),dpois(0:(mx+2),lambda),pch = 19,alpha = 0.8)
-#'         }
-#'     )
-#'     print(result)
-#'     return(result)
+#' showFumbles <- function(x, lambda = mean(x),...) {
+#'   result <-
+#'     gf_dhistogram( ~ week1, data = Fumbles, binwidth = 1, alpha = 0.3) %>%
+#'     gf_dist("pois", lambda = mean( ~ week1, data = Fumbles) )
+#'   print(result)
+#'   return(result)
 #' }
 #' showFumbles(Fumbles$week1)
 #' showFumbles(Fumbles$week2)
