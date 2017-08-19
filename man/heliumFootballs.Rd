@@ -22,7 +22,10 @@ each kick. The experimenter recorded the distance traveled by each ball.
 
 data(HeliumFootballs)
 gf_point(helium ~ air, data = HeliumFootballs)
-gf_dhistogram( ~ (helium - air), data = HeliumFootballs, bins = 15, boundary = 0, fill = ~ (helium > air))
+gf_dhistogram( 
+  ~ (helium - air), data = HeliumFootballs, 
+  fill = ~ (helium > air),  bins = 15, boundary = 0 
+)
 
 }
 \references{

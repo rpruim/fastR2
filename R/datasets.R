@@ -237,7 +237,7 @@ NULL
 #'
 #' @examples
 #' 
-#' data(bugs)
+#' data(Bugs)
 #' favstats(trapped ~ color, data = Bugs)
 #' 
 NULL
@@ -751,7 +751,8 @@ NULL
 #'   stat_function(fun = makeFun(goose.mod)) +
 #'   guides( size = "none")
 #'   
-#' gf_point( (sell / (sell + keep)) ~ bid, size = ~ sell + keep, colour = "navy", data = GoosePermits) %>%
+#' gf_point( (sell / (sell + keep)) ~ bid, data = GoosePermits,
+#'     size = ~ sell + keep, color = "navy") %>%
 #'   gf_function(fun = makeFun(goose.mod))  %>%
 #'   gf_text(label = ~ as.character(sell + keep), colour = "white", size = 3) %>%
 #'   gf_refine(scale_size_area()) %>% 
@@ -812,7 +813,10 @@ NULL
 #' 
 #' data(HeliumFootballs)
 #' gf_point(helium ~ air, data = HeliumFootballs)
-#' gf_dhistogram( ~ (helium - air), data = HeliumFootballs, bins = 15, boundary = 0, fill = ~ (helium > air))
+#' gf_dhistogram( 
+#'   ~ (helium - air), data = HeliumFootballs, 
+#'   fill = ~ (helium > air),  bins = 15, boundary = 0 
+#' )
 #' 
 NULL
 

@@ -23,7 +23,7 @@ leaf beetles trapped on each card.
 }
 \examples{
 
-data(bugs)
+data(Bugs)
 favstats(trapped ~ color, data = Bugs)
 
 }
