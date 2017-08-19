@@ -37,8 +37,8 @@ of the plot to display.}
 }
 \examples{
 
-geolm(pollution ~ location, data=airpollution)
-geolm(distance ~ projectileWt, data=trebuchet2)
+geolm(pollution ~ location, data = AirPollution)
+geolm(distance ~ projectileWt, data = Trebuchet2)
 
 }
 \seealso{

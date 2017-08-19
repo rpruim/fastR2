@@ -1,8 +1,8 @@
 
 %\VignetteEngine{knitr::knitr} 
 %\VignetteIndexEntry{Updates to R Programming in FASt}
-%\VignettePackage{fastR}
-%\VignetteKeywords{mosaic, fastR, vignettes, resources}
+%\VignettePackage{fastR2}
+%\VignetteKeywords{mosaic, fastR2, vignettes, resources}
 
 \documentclass[11pt]{article}
 \usepackage{hyperref} 
@@ -31,8 +31,13 @@
 \begin{document}
 
 <<include=FALSE,message=FALSE>>=
+<<<<<<< HEAD
 require(fastR)
 require(mosaicData)
+=======
+require(fastR2)
+require(mosaic)
+>>>>>>> 2e
 require(mosaicCalc)
 require(knitr)
 opts_chunk$set(
@@ -49,7 +54,7 @@ opts_chunk$set(
 Since the publication of \emph{Foundations and Applications of Statistics}, I
 have been working with colleagues from the NSF-funded Project MOSAIC to create
 and improve the \pkg{mosaic} package.  Many functions originally in the
-\pkg{fastR} package have been moved to the \pkg{mosaic} package; some of these
+\pkg{fastR2} package have been moved to the \pkg{mosaic} package; some of these
 have subsequently been improved.  Additional functionality has been added to
 the \pkg{mosaic} package over time that I would have used in \emph{Foundations
 and Applications of Statistics}, had they existed at the time the book was
@@ -100,8 +105,13 @@ removing the need for the \texttt{\$} operator or \function{with()} construction
 The \function{tally()} function provides a formula interface for constructing tables.
 
 <<>>=
+<<<<<<< HEAD
 require(fastR)
 trellis.par.set(theme = col.mosaic())   # change default colors, etc.
+=======
+require(fastR2)
+trellis.par.set(theme=col.mosaic())   # change default colors, etc.
+>>>>>>> 2e
 table( iris $ Species )
 tally( ~ Species, data = iris )
 @
@@ -145,10 +155,17 @@ to get a list of additional functions that take advantage of the formula interfa
 In analogy to functions like \function{pnorm()} and \function{qnorm()}, the \pkg{mosaic} package provides 
 \function{pdata()} and \function{qdata()}.
 <<>>=
+<<<<<<< HEAD
 qdata( ~ Sepal.Length, p = 0.5, data = iris )
 median( ~ Sepal.Length, data = iris )
 pdata( ~ Sepal.Length, 5,  data = iris )
 tally( ~ (Sepal.Length <= 5), data = iris, format = "proportion")
+=======
+qdata( ~ Sepal.Length, 0.5, data=iris )
+median( ~ Sepal.Length, data=iris )
+pdata( ~ Sepal.Length, 5, data=iris )
+tally( ~ (Sepal.Length <= 5), data=iris, format="proportion")
+>>>>>>> 2e
 @
 
 \subsection{More plots}
@@ -174,7 +191,11 @@ For example, one can choose the bins used for a histogram by setting values for 
 and \texttt{width}.  Setting \texttt{width} to 1 is often useful for histograms of integer data with relatively 
 few possible values.
 <<>>=
+<<<<<<< HEAD
 histogram( ~ week1, data = fumbles, width = 1 )
+=======
+histogram( ~ week1, data=Fumbles, width=1 )
+>>>>>>> 2e
 @
 Here are some additional features:
 <<>>=
@@ -332,7 +353,11 @@ transformations of the response variable}.  In the case of \function{glm()} mode
 is \texttt{"response"} rather than \texttt{"link"} since this is more natural for beginners.
 
 <<>>=
+<<<<<<< HEAD
 ball.model <- lm( time ~ sqrt(height), data = balldrop)
+=======
+ball.model <- lm( time ~ sqrt(height), data=BallDrop)
+>>>>>>> 2e
 time <- makeFun(ball.model)
 time( height = 0.8 )
 time( height = 0.8, interval = "confidence" )
@@ -342,8 +367,13 @@ time( height = 0.8, interval = "confidence" )
 
 We can add the model fit function to our scatter plot using \function{plotFun()}.
 <<>>=
+<<<<<<< HEAD
 xyplot( time ~ height, data = balldrop )
 plotFun( time(height) ~ height, add = TRUE )
+=======
+xyplot( time ~ height, data=BallDrop )
+plotFun( time(height) ~ height, add=TRUE )
+>>>>>>> 2e
 @
 
 \section{Chapter 7: More Linear Models}
@@ -352,10 +382,17 @@ plotFun( time(height) ~ height, add = TRUE )
 
 <<>>=
 # TukeyHSD() can take a model created by lm()
+<<<<<<< HEAD
 model <- lm( pollution ~ location, data = airpollution)
 TukeyHSD(model)
 # we can even let TukeyHSD build the model for us
 TukeyHSD( pollution ~ location, data = airpollution)
+=======
+model <- lm( pollution ~ location, data=AirPollution)
+TukeyHSD(model)
+# we can even let TukeyHSD build the model for us
+TukeyHSD( pollution ~ location, data=AirPollution)
+>>>>>>> 2e
 @
 
 

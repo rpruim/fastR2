@@ -1,0 +1,2 @@
+xchisq.test(smTab)
+

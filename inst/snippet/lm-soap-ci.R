@@ -1,1 +1,0 @@
-confint(soap.model1)

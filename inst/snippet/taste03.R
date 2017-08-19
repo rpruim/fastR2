@@ -1,0 +1,2 @@
+confint(taste.model)
+

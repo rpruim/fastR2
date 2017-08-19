@@ -12,7 +12,8 @@
 #' @export
 #' @examples
 #' 
-#' row.perc(xtabs(~Airline+Result,airlineArrival))
+#' row.perc(tally(~ airline + result, data = AirlineArrival))
+#' col.perc(tally(~ airline + result, data = AirlineArrival))
 #' 
 col.perc <- function (x) 
 {

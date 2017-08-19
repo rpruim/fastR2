@@ -5,3 +5,5 @@ sum(p*x);
 fractions( sum(p*x) );
 sum(p*x^2);
 fractions( sum(p*x^2) );
+
+

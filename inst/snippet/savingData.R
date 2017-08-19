@@ -1,2 +1,4 @@
-save(ddd,abc,file="ddd.zip")     # saves both objects in a single file
-load("ddd.zip")                  # loads them both
+greeting <- "hello, world!"
+save(SomeData, greeting, file = "mystuff.rda")  # saves both in 1 file
+load("mystuff.rda")                             # loads both
+

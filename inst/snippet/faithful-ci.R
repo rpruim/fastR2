@@ -1,17 +1,20 @@
-oldopt <- options(warn=-1)    # suppress warnings from log(0) 
-# loglik defined above
-mle <-  nlmax(loglik, p=c(0.5,m-1,m+1,s,s), x=faithful$eruptions)$estimate
-f <- function(a) {
-    loglik0 <- function(theta, x) {
-        theta <- c(a,theta)
-        return(loglik(theta,x))              
-    }
-    mle0 <- nlmax(loglik0,p=c(m-1,m+1,s,s), x=faithful$eruptions)$estimate
-    stat <- 2 * (loglik(mle,x=faithful$eruptions) 
-               - loglik0(mle0,x=faithful$eruptions)); stat
-    pval <- 1 - pchisq(stat,df=1)         
-	return(pval)
+# loglik defined above   
+data(geyser, package = "MASS")
+snippet("faithful-mle01", echo = FALSE)
+snippet("faithful-mle02", echo = FALSE)
+m <- mean( ~ duration, data = geyser)
+s <-   sd( ~ duration, data = geyser)
+ml.faithful <- maxLik(loglik.faithful, x = geyser$duration,
+             start = c(0.5, m - 1, m + 1, s, s))
+mle <- coef(ml.faithful)
+p <- function(a) {
+  ml.faithful.a <- maxLik(loglik.faithful, x = geyser$duration,
+                start = c(a, m - 1, m + 1, s, s), 
+                fixed = 1)
+  lrt.stat <- 2 * (logLik(ml.faithful) - logLik(ml.faithful.a)) 
+  pval <- 1 - pchisq(lrt.stat, df = 1)         
+  return(pval)
 }
-uniroot( function(a){f(a) - 0.05}, c(0,mle[1]))$root
-uniroot( function(a){f(a) - 0.05}, c(1,mle[1]))$root
-options(oldopt)
+lo <- uniroot(function(a){p(a) - 0.05}, c(0.1, mle[1])) %>% value(); lo
+hi <- uniroot(function(a){p(a) - 0.05}, c(0.9, mle[1])) %>% value(); hi
+

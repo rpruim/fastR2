@@ -1,1 +1,2 @@
-plot <- histogram(~eruptions,faithful,n=20)
+## gf_histogram( ~ duration, data = MASS::geyser, bins = 20)
+

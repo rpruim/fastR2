@@ -11,15 +11,14 @@
 #' @rdname Jordan8687
 #' @docType data
 #' @format A data frame with 82 observations on the following 2 variables.
-#' \itemize{ \item{Game}{a numeric vector} \item{Points}{a
-#' numeric vector} }
+#' \itemize{ 
+#'   \item{game}{a numeric vector} 
+#'   \item{points}{a numeric vector} }
 #' @keywords datasets
 #' @examples
 #'
-#' if (require(mosaicData)) {
-#'   data(Jordan8687)
-#'   xqqmath(~Points, data=Jordan8687)
-#' }
+#' data(Jordan8687)
+#' gf_qq(~ points, data = Jordan8687)
 #' 
 NULL
 
@@ -32,18 +31,15 @@ NULL
 #' ACT scores and college GPA for a small sample of college students.
 #' 
 #' 
-#' @name actgpa
-#' @rdname actgpa
+#' @name ACTgpa
+#' @rdname ACTgpa
 #' @docType data
 #' @format A data frame with 26 observations on the following 2 variables.
-#' \itemize{ \item{ACT}{ a numeric vector} \item{GPA}{ a numeric
-#' vector} }
+#' \itemize{ \item{ACT}{ACT score} \item{GPA}{GPA} }
 #' @keywords datasets
 #' @examples
 #'
-#' if (require(mosaicData)) {
-#'   xyplot(GPA ~ ACT, data=actgpa)
-#' }
+#' gf_point(GPA ~ ACT, data = ACTgpa)
 #' 
 NULL
 
@@ -57,15 +53,15 @@ NULL
 #' flight was on time.
 #' 
 #' 
-#' @name airlineArrival
-#' @rdname airlineArrival
+#' @name AirlineArrival
+#' @rdname AirlineArrival
 #' @docType data
 #' @format A data frame with 11000 observations on the following 3 variables.
-#' \itemize{ \item{Airport}{ a factor with levels \code{LosAngeles}
-#' \code{Phoenix} \code{SanDiego} \code{SanFrancisco} \code{Seattle}}
-#' \item{Result}{ a factor with levels \code{Delayed} \code{OnTime}}
-#' \item{Airline}{ a factor with levels \code{Alaska}
-#' \code{AmericaWest}} }
+#' \itemize{ 
+#'   \item{airport}{ a factor with levels \code{LosAngeles},
+#'     \code{Phoenix}, \code{SanDiego}, \code{SanFrancisco}, \code{Seattle}}
+#'   \item{result}{ a factor with levels \code{Delayed}, \code{OnTime}}
+#'   \item{airline}{ a factor with levels \code{Alaska}, \code{AmericaWest}} }
 #' @references These and similar data appear in many text books under the topic
 #' of Simpson's paradox.
 #' @source Barnett, Arnold. 1994. ``How numbers can trick you.''
@@ -73,13 +69,34 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' row.perc(xtabs(~Airline+Result, data=airlineArrival))
-#' for (city in levels(airlineArrival$Airport)) {
-#' 	cat(paste('\nArriving in ', city,':\n',sep=''))
-#' 	print(row.perc(xtabs(~Airline+Result, airlineArrival, 
-#' 		subset=Airport==city)))
-#' }
-#' 
+#' tally(
+#'   airline ~ result, data = AirlineArrival, 
+#'   format = "perc", margins = TRUE)
+#' tally(
+#'   result ~ airline + airport, 
+#'   data = AirlineArrival, format = "perc", margins = TRUE)
+#' AirlineArrival2 <- 
+#'   AirlineArrival %>% 
+#'   group_by(airport, airline, result) %>% 
+#'   summarise(count = n()) %>%
+#'   group_by(airport, airline) %>%
+#'   mutate(total = sum(count), percent = count/total * 100) %>% 
+#'   filter(result == "Delayed") 
+#' AirlineArrival3 <- 
+#'   AirlineArrival %>% 
+#'   group_by(airline, result) %>% 
+#'   summarise(count = n()) %>%
+#'   group_by(airline) %>%
+#'   mutate(total = sum(count), percent = count/total * 100) %>% 
+#'   filter(result == "Delayed") 
+#'   gf_line(percent ~ airport, color = ~ airline, group = ~ airline, 
+#'           data = AirlineArrival2) %>%
+#'     gf_point(percent ~ airport, color = ~ airline, size = ~total, 
+#'              data = AirlineArrival2) %>%
+#'     gf_hline(yintercept = ~ percent, color = ~airline, 
+#'              data = AirlineArrival3, linetype = "dashed") %>%
+#'     gf_labs(y = "percent delayed") 
+ 
 NULL
 
 
@@ -91,20 +108,21 @@ NULL
 #' Air pollution measurements at three locations.
 #' 
 #' 
-#' @name airpollution
-#' @rdname airpollution
+#' @name AirPollution
+#' @rdname AirPollution
 #' @docType data
 #' @format A data frame with 6 observations on the following 2 variables.
-#' \itemize{ \item{pollution}{ a numeric vector}
-#' \item{location}{ a factor with levels \code{Hill Suburb} \code{Plains
-#' Suburb} \code{Urban City}} }
+#' \itemize{ 
+#'   \item{pollution}{ a numeric vector}
+#'   \item{location}{a factor with levels \code{Hill Suburb}, 
+#'         \code{Plains Suburb}, \code{Urban City}} }
 #' @source David J. Saville and Graham R. Wood, \emph{Statistical methods: A
 #' geometric primer}, Springer, 1996.
 #' @keywords datasets
 #' @examples
 #' 
-#' data(airpollution)
-#' summary(lm(pollution ~ location, data=airpollution))
+#' data(AirPollution)
+#' summary(lm(pollution ~ location, data = AirPollution))
 #' 
 NULL
 
@@ -118,17 +136,16 @@ NULL
 #' ball was dropped and the time it took to reach the floor.
 #' 
 #' 
-#' @name balldrop
-#' @rdname balldrop
+#' @name BallDrop
+#' @rdname BallDrop
 #' @docType data
 #' @format A data frame with 30 observations on the following 2 variables.
-#' \itemize{ \item{height}{ height in meters} \item{time}{ time
-#' in seconds} }
+#' \itemize{ \item{height}{ height in meters} \item{time}{ time in seconds} }
 #' @source Steve Plath, Calvin College Physics Department
 #' @keywords datasets
 #' @examples
 #' 
-#' xyplot(time ~ height, data=balldrop)
+#' gf_point(time ~ height, data = BallDrop)
 #' 
 NULL
 
@@ -141,8 +158,8 @@ NULL
 #' Major League batting data for the seasons from 2000-2005.
 #' 
 #' 
-#' @name batting
-#' @rdname batting
+#' @name Batting
+#' @rdname Batting
 #' @docType data
 #' @format A data frame with 8062 observations on the following 22 variables.
 #' \itemize{ \item{player}{ unique identifier for each player}
@@ -161,38 +178,10 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(batting)
-#' histogram(~HR,batting)
+#' data(Batting)
+#' gf_histogram( ~ HR, data = Batting)
 #' 
 NULL
-
-
-
-
-
-#' Births by Day
-#' 
-#' The number of live births in the United States for each day of the year
-#' 1978.
-#' 
-#' 
-#' @name births78
-#' @rdname births78
-#' @docType data
-#' @format A data frame with 365 observations on the following 3 variables.
-#' \itemize{ \item{date}{ date (as a factor)}
-#' \item{births}{ number of live births} \item{dayofyear}{ number
-#' of days since start of year} }
-#' @keywords datasets
-#' @examples
-#' 
-#' data(births78)
-#' xyplot(births ~ dayofyear, births78)
-#' 
-NULL
-
-
-
 
 
 #' Buckthorn
@@ -204,8 +193,8 @@ NULL
 #' had regrown.
 #' 
 #' 
-#' @name buckthorn
-#' @rdname buckthorn
+#' @name Buckthorn
+#' @rdname Buckthorn
 #' @docType data
 #' @format A data frame with 165 observations on the following 3 variables.
 #' \itemize{ \item{shoots}{ number of new shoots coming from stump}
@@ -215,7 +204,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(buckthorn)
+#' data(Buckthorn)
 #' 
 NULL
 
@@ -233,8 +222,8 @@ NULL
 #' leaf beetles trapped on each card.
 #' 
 #' 
-#' @name bugs
-#' @rdname bugs
+#' @name Bugs
+#' @rdname Bugs
 #' @docType data
 #' @format A data frame with 24 observations on the following 2 variables.
 #' \itemize{ \item{Color}{ color of card; one of \code{B}(lue)
@@ -248,8 +237,8 @@ NULL
 #'
 #' @examples
 #' 
-#' data(bugs)
-#' summary(NumTrap ~ Color, bugs, fun=favstats)
+#' data(Bugs)
+#' favstats(trapped ~ color, data = Bugs)
 #' 
 NULL
 
@@ -264,10 +253,27 @@ NULL
 #' slag, fly ash, water, superplasticizer, coarse aggregate, and fine
 #' aggregate) and age.
 #' 
+#' @name Concrete
+#' @rdname Concrete
+#' @aliases Concrete
+#' @docType data
 #' 
-#' @name concrete
-#' @rdname concrete
-#' @aliases concreteAll concrete28
+#' @format \code{Concrete} is a data frame with the following 
+#' variables.
+#' \itemize{ 
+#' \item{limestone}{ percentage of limestone}
+#' \item{water}{ water-cement ratio}
+#' \item{strength}{ compressive strength (MPa) after 28 days}
+#' }
+#' 
+#' @references Appeared in Devore's "Probability and Statsistics for Engineers and 
+#' the Sciences (6th ed).  The variables have been renamed.
+#' 
+#' 
+#' 
+#' @name ConcreteAll
+#' @rdname ConcreteAll
+#' @aliases ConcreteAll Concrete28
 #' @docType data
 #' @format \code{concreteAll} is a data frame with the following 9 variables.
 #' \itemize{ \item{cement}{ amount of cement (kg/m^3)}
@@ -288,11 +294,72 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(concreteAll)
-#' data(concrete28)
+#' data(ConcreteAll)
+#' data(Concrete28)
 #' 
 NULL
 
+
+
+#' Cooling Water
+#' 
+#' Temperature of a mug of water as it cools.
+#'  
+#' @name CoolingWater
+#' @aliases CoolingWater1 CoolingWater2 CoolingWater3 CoolingWater4
+#' @usage data(CoolingWater1)
+#' @usage data(CoolingWater2)
+#' @usage data(CoolingWater3)
+#' @usage data(CoolingWater4)
+#' @docType data
+#' @format 
+#'   A data frame with the following variables.
+#'   \itemize{
+#'       \item \code{time} time in seconds
+#'       \item \code{temp} temperature in Celsius (
+#'       \code{CoolingWater1}, \code{CoolingWater2}) or 
+#'       Fahrenheit (\code{CoolingWater3}, \code{CoolingWater4})
+#'   }
+#' @source
+#' These data were collected by Stan Wagon and his students at Macelester
+#' College to explore Newton's Law of Cooling and the ways that the law 
+#' fails to capture all of the physics involved in cooling water.
+#' \code{CoolingWater1} and \code{CoolingWater2} appeared in a plot in Wagon (2013) 
+#' and were (approximatley) extracted from the plot.
+#' \code{CoolingWater3} and \code{CoolingWater4} appeared in a plot in Wagon (2005).
+#' The data in 
+#' \code{CoolingWater2} and \code{CoolingWater4} were collected with a film of oil on
+#' the surface of the water to minimize evaporation.
+#' 
+#' @references
+#' \itemize{
+#' \item
+#' R. Portmann and S. Wagon. "How quickly does hot water cool?" 
+#' \emph{Mathematica in Education and Research}, 
+#' 10(3):1-9, July 2005.
+#' \item
+#' R. Israel, P. Saltzman, and S. Wagon. 
+#' "Cooling coffee without solving differential equations". 
+#' \emph{Mathematics Magazine},  86(3):204-210, 2013.
+#' }
+#' @examples 
+#' data(CoolingWater1)
+#' data(CoolingWater2)
+#' data(CoolingWater3)
+#' data(CoolingWater4)
+#' if (require(ggformula)) {
+#'   gf_line(
+#'     temp ~ time, color = ~ condition, 
+#'     data = rbind(CoolingWater1, CoolingWater2))
+#' }
+#' if (require(ggformula)) {
+#'   gf_line(
+#'     temp ~ time, color = ~ condition, 
+#'     data = rbind(CoolingWater3, CoolingWater4))
+#' }
+#' 
+#' @keywords datasets
+NA
 
 
 
@@ -306,8 +373,8 @@ NULL
 #' kinds of seed. Each type of seed (regular and kiln-dried) was planted in
 #' adjacent plots, accounting for 11 pairs of "split" plots.
 #' 
-#' @name corn
-#' @rdname corn
+#' @name Corn
+#' @rdname Corn
 #' @docType data
 #' @format A data frame with 11 observations on the following 2 variables.
 #' \itemize{ \item{reg}{ yield of regular corn (lbs/acre)}
@@ -319,11 +386,11 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' corn2 <- stack(corn)
-#' names(corn2) <- c('yield','treatment')
-#' lm(yield ~ treatment, data = corn2)
-#' t.test(yield ~ treatment, data=corn2)
-#' t.test(corn$reg, corn$kiln)
+#' Corn2 <- stack(Corn)
+#' names(Corn2) <- c('yield','treatment')
+#' lm(yield ~ treatment, data = Corn2)
+#' t.test(yield ~ treatment, data = Corn2)
+#' t.test(Corn$reg, Corn$kiln)
 #' 
 NULL
 
@@ -339,8 +406,8 @@ NULL
 #' egg is related to the species of the host bird.
 #' 
 #' 
-#' @name cuckoo
-#' @rdname cuckoo
+#' @name Cuckoo
+#' @rdname Cuckoo
 #' @docType data
 #' @format A data frame with 120 observations on the following 2 variables.
 #' \itemize{ \item{length}{ length of egg (mm)}
@@ -355,8 +422,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(cuckoo)
-#' bwplot(length~species,cuckoo)
+#' data(Cuckoo)
+#' gf_boxplot(length ~ species, data = Cuckoo)
 #' 
 NULL
 
@@ -369,24 +436,25 @@ NULL
 #' A famous example of Simpson's paradox.
 #' 
 #' 
-#' @name deathPenalty
-#' @rdname deathPenalty
-#' @aliases deathPenalty deathPen
+#' @name DeathPenalty
+#' @rdname DeathPenalty
+#' @aliases DeathPenalty 
 #' @docType data
-#' @format A data frame with 326 observations.  The factors are coded more
-#' succinctly in \code{deathPen}, but otherwise the data are the same.
-#' \itemize{ \item{DeathPenalty}{ a factor with levels \code{Yes}
-#' \code{No}} \item{Penalty}{ a factor with levels \code{Death}
-#' \code{Not}} \item{Victim}{ a factor with levels \code{Black}
-#' \code{White} (or \code{Bl} \code{Wh})} \item{Defendant}{ a factor
-#' with levels \code{Black} \code{White} (or \code{Bl} \code{Wh})} }
+#' @format A data frame with 326 observations.  
+# The factors are coded more
+# succinctly in \code{deathPen}, but otherwise the data are the same.
+#' \itemize{ \item{death}{ a factor with levels \code{Yes}
+#' \code{No}} \item{penalty}{ a factor with levels \code{death}
+#' \code{other}} \item{victim}{ a factor with levels 
+#' \code{Bl} \code{Wh})} \item{Defendant}{ a factor
+#' with levels \code{Bl} \code{Wh} } }
 #' @source Radelet, M. (1981). Racial characteristics and imposition of the
 #' death penalty. \emph{American Sociological Review}, 46:918--927.
 #' @keywords datasets
 #' @examples
 #' 
-#' xtabs(~Defendant+Penalty,deathPenalty)
-#' xtabs(~Defendant+Victim+Penalty,deathPenalty)
+#' tally(penalty ~ defendant, data = DeathPenalty)
+#' tally(penalty ~ defendant + victim, data = DeathPenalty)
 #' 
 NULL
 
@@ -404,8 +472,8 @@ NULL
 #' masses were drop from higher heights and used sensors more widely spaced.
 #' 
 #' 
-#' @name drag
-#' @rdname drag
+#' @name Drag
+#' @rdname Drag
 #' @docType data
 #' @format A data frame with 42 observations on the following 5 variables.
 #' \itemize{ \item{time}{ time (in seconds) to travel between two
@@ -420,12 +488,11 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(drag)
-#' with(drag,force.drag / mass)
-#' xyplot(velocity ~ mass, drag)
+#' data(Drag)
+#' with(Drag, force.drag / mass)
+#' gf_point(velocity ~ mass, data = Drag)
 #' 
 NULL
-
 
 
 
@@ -448,8 +515,8 @@ NULL
 #' 
 #' The study was conducted in a double-blind manner with crossover.
 #' 
-#' @name endurance
-#' @rdname endurance
+#' @name Endurance
+#' @rdname Endurance
 #' @docType data
 #' @format A data frame with 15 observations on the following 5 variables.
 #' \itemize{ \item{Vitamin}{ number of repetitions until reaching 50%
@@ -465,13 +532,13 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(endurance)
-#' t.test(endurance$Vitamin, endurance$Placebo, paired=TRUE)
-#' t.test(log(endurance$Vitamin), log(endurance$Placebo), paired=TRUE)
-#' t.test(1/endurance$Vitamin, 1/endurance$Placebo, paired=TRUE)
-#' xqqmath( ~ Vitamin - Placebo, data = endurance)
-#' xqqmath( ~ log(Vitamin) - log(Placebo), data = endurance)
-#' xqqmath( ~ 1/Vitamin - 1/Placebo, data = endurance)
+#' data(Endurance)
+#' t.test(Endurance$vitamin, Endurance$placebo, paired = TRUE)
+#' t.test(log(Endurance$vitamin), log(Endurance$placebo), paired = TRUE)
+#' t.test(1/Endurance$vitamin, 1/Endurance$placebo, paired = TRUE)
+#' gf_qq( ~ vitamin - placebo, data = Endurance)
+#' gf_qq( ~ log(vitamin) - log(placebo), data = Endurance)
+#' gf_qq( ~ 1/vitamin - 1/placebo, data = Endurance)
 #' 
 NULL
 
@@ -485,8 +552,8 @@ NULL
 #' parents smoke from a study conducted in the 1960's.
 #' 
 #' 
-#' @name familySmoking
-#' @rdname familySmoking
+#' @name FamilySmoking
+#' @rdname FamilySmoking
 #' @docType data
 #' @format A data frame with 5375 observations on the following 2 variables.
 #' \itemize{ \item{Student}{ a factor with levels \code{DoesNotSmoke}
@@ -501,8 +568,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(familySmoking)
-#' xchisq.test( xtabs(~Parents + Student, familySmoking) )
+#' data(FamilySmoking)
+#' xchisq.test( tally(parents ~ student, data = FamilySmoking) )
 #' 
 NULL
 
@@ -523,8 +590,8 @@ NULL
 #' The fumble counts listed here are total fumbles, not fumbles lost.  Some of
 #' these fumbles were recovered by the team that fumbled.
 #' 
-#' @name fumbles
-#' @rdname fumbles
+#' @name Fumbles
+#' @rdname Fumbles
 #' @docType data
 #' @format A data frame with 120 observations on the following 7 variables.
 #' \itemize{ \item{team}{ NCAA football team} \item{rank}{ rank
@@ -539,33 +606,28 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(fumbles)
-#' m <- max(fumbles$week1)
-#' table(factor(fumbles$week1,levels=0:m))
-#' favstats( ~ week1, data=fumbles)
+#' data(Fumbles)
+#' m <- max(Fumbles$week1)
+#' table(factor(Fumbles$week1,levels = 0:m))
+#' favstats( ~ week1, data = Fumbles)
 #' # compare with Poisson distribution
-#' signif( cbind(
-#' 		  fumbles=0:m,
-#' 		  observedCount=table(factor(fumbles$week1,levels=0:m)),
-#' 		  modelCount= 120* dpois(0:m,mean(fumbles$week1)),
-#' 		  observedPct=table(factor(fumbles$week1,levels=0:m))/120,
-#' 		  modelPct= dpois(0:m,mean(fumbles$week1))
-#' 	) ,3)
-#' showFumbles <- function(x,lambda=mean(x),...) {
-#' 	mx <- max(x)
-#'     result <- histogram(~x, type="density", xlim=c(-.5,(mx+2.5)),
-#' 		xlab='number of fumbles',
-#'         panel=function(x,y,...){
-#'             panel.histogram(x,alpha=0.8,breaks=seq(-0.5,(mx+2.5),by=1,...))
-#'             panel.points(0:(mx+2),dpois(0:(mx+2),lambda),pch=19,alpha=0.8)
-#'         }
-#'     )
-#'     print(result)
-#'     return(result)
+#' cbind(
+#' 		  fumbles = 0:m,
+#' 		  observedCount = table(factor(Fumbles$week1,levels = 0:m)),
+#' 		  modelCount= 120* dpois(0:m,mean(Fumbles$week1)),
+#' 		  observedPct = table(factor(Fumbles$week1,levels = 0:m))/120,
+#' 		  modelPct= dpois(0:m,mean(Fumbles$week1))
+#' 	) %>% signif(3)
+#' showFumbles <- function(x, lambda = mean(x),...) {
+#'   result <-
+#'     gf_dhistogram( ~ week1, data = Fumbles, binwidth = 1, alpha = 0.3) %>%
+#'     gf_dist("pois", lambda = mean( ~ week1, data = Fumbles) )
+#'   print(result)
+#'   return(result)
 #' }
-#' showFumbles(fumbles$week1)
-#' showFumbles(fumbles$week2)
-#' showFumbles(fumbles$week3)
+#' showFumbles(Fumbles$week1)
+#' showFumbles(Fumbles$week2)
+#' showFumbles(Fumbles$week3)
 #' 
 NULL
 
@@ -579,9 +641,9 @@ NULL
 #' NIDDM (type 2) Diabetes (FUSION) study.
 #' 
 #' 
-#' @name pheno
-#' @rdname fusion 
-#' @aliases pheno fusion1 fusion2
+#' @name Pheno
+#' @rdname FUSION 
+#' @aliases Pheno FUSION1 FUSION2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
 #' \item{id}{ subject ID number for matching between data sets}
@@ -595,8 +657,8 @@ NULL
 #' \item{whr}{ waist hip ratio } \item{sbp}{ systolic blood
 #' pressure} \item{dbp}{ diastolic blood pressure}
 #' \item{marker}{ RS name of SNP} \item{markerID}{ numeric ID for
-#' SNP} \item{allele1}{ first allele coded as 1=A, 2=C, 3=G, 4=T}
-#' \item{allele2}{ second allele coded as 1=A, 2=C, 3=G, 4=T}
+#' SNP} \item{allele1}{ first allele coded as 1 = A, 2 = C, 3 = G, 4 = T}
+#' \item{allele2}{ second allele coded as 1 = A, 2 = C, 3 = G, 4 = T}
 #' \item{genotype}{ both alleles coded as a factor}
 #' \item{Adose}{ number of A alleles} \item{Cdose}{ number of C
 #' alleles} \item{Gdose}{ number of G alleles}
@@ -618,12 +680,12 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pheno); data(fusion1); data(fusion2)
-#' fusion1m <- merge(fusion1, pheno, by="id", all.x=FALSE, all.y=FALSE) 
-#' xtabs(~t2d + genotype, data=fusion1m) 
-#' xtabs(~t2d + Gdose, data=fusion1m) 
-#' chisq.test( xtabs( ~t2d + genotype, data=fusion1m ) )
-#' f1.glm <- glm( factor(t2d) ~ Gdose, data=fusion1m, family=binomial) 
+#' data(Pheno); data(FUSION1); data(FUSION2)
+#' FUSION1m <- merge(FUSION1, Pheno, by = "id", all.x = FALSE, all.y = FALSE) 
+#' xtabs( ~ t2d + genotype, data = FUSION1m) 
+#' xtabs( ~ t2d + Gdose, data = FUSION1m) 
+#' chisq.test( xtabs( ~ t2d + genotype, data = FUSION1m ) )
+#' f1.glm <- glm( factor(t2d) ~ Gdose, data = FUSION1m, family = binomial) 
 #' summary(f1.glm)
 #' 
 NULL
@@ -651,37 +713,82 @@ NULL
 #' 
 #' data(golfballs)
 #' golfballs/sum(golfballs)
-#' chisq.test(golfballs, p=rep(.25,4))
+#' chisq.test(golfballs, p = rep(.25,4))
 #' 
 NULL
 
+# Goose permit data found at 
+# http://www.math.umt.edu/patterson/ProfileLikelihoodCI.pdf
 
+#' Goose permits
+#' 
+#' In a 1979 study by Bishop and Heberlein, 237 hunters were each offered one of 
+#' 11 cash amounts (bids) ranging from $1 to $200 in return for their hunting permits.
+#' The data records how many hunters offered each bid kept or sold their permit.
+#' 
+#' @name GooosePermits
+#' @rdname GoosePermits
+#' @docType data
+#' @format A data frame with 11 rows and 5 columns.  
+#' Each row corresponds to a bid (in US dollars)
+#' offered for a goose permit.  The colums \code{keep} and \code{sell} indicate 
+#' how many hunters offered that bid kept or sold their permit, respectively.
+#' \code{n} is the sum of \code{keep} and \code{sell} and \code{prop_sell}
+#' is the proportion that sold.
+#' 
+#' @references
+#' Bishop and Heberlein (Amer. J. Agr. Econ. 61, 1979).
+#'  
+#' @examples
+#' goose.mod <- glm( cbind(sell, keep) ~ log(bid), data = GoosePermits, family = binomial())
+#' gf_point(0 ~ bid, size = ~keep, color = "gray50", data = GoosePermits) %>%
+#'   gf_point(1 ~ bid, size = ~ sell, color = "navy") %>%
+#'   gf_function(fun = makeFun(goose.mod)) %>%
+#'   gf_refine(guides(size = "none"))
+#'   
+#' ggplot(data = GoosePermits) +
+#'   geom_point( aes(x = bid, y = 0, size = keep), colour = "gray50") +
+#'   geom_point( aes(x = bid, y = 1, size = sell), colour = "navy") +
+#'   stat_function(fun = makeFun(goose.mod)) +
+#'   guides( size = "none")
+#'   
+#' gf_point( (sell / (sell + keep)) ~ bid, data = GoosePermits,
+#'     size = ~ sell + keep, color = "navy") %>%
+#'   gf_function(fun = makeFun(goose.mod))  %>%
+#'   gf_text(label = ~ as.character(sell + keep), colour = "white", size = 3) %>%
+#'   gf_refine(scale_size_area()) %>% 
+#'   gf_labs(y = "probabity of selling")
+#'   
+#' ggplot(data = GoosePermits) +
+#'   stat_function(fun = makeFun(goose.mod)) +
+#'   geom_point( aes(x = bid, y = sell / (sell + keep), size = sell + keep), colour = "navy") +
+#'   geom_text( aes(x = bid, y = sell / (sell + keep), label = as.character(sell + keep)), 
+#'     colour = "white", size = 3) +
+#'   scale_size_area() + 
+#'   labs(y = "probabity of selling")
+#'   
 
-
+NULL
 
 #' GPA, ACT, and SAT scores
 #' 
 #' GPA, ACT, and SAT scores for a sample of students.
 #' 
 #' 
-#' @name gpa
-#' @rdname gpa
+#' @name GPA
+#' @rdname GPA
 #' @docType data
 #' @format A data frame with 271 observations on the following 4 variables.
 #' \itemize{ \item{satm}{ SAT mathematics score}
 #' \item{satv}{ SAT verbal score} \item{act}{ ACT score}
-#' \item{gpa}{ college grade point average} }
+#' \item{GPA}{ college grade point average} }
 #' @keywords datasets
 #' @examples
 #' 
-#' data(gpa)
-#' splom(gpa)
+#' data(GPA)
+#' splom(GPA)
 #' 
 NULL
-
-
-
-
 
 #' Punting helium- and air-filled footballs
 #' 
@@ -691,12 +798,12 @@ NULL
 #' each kick. The experimenter recorded the distance traveled by each ball.
 #' 
 #' 
-#' @name heliumFootballs
-#' @rdname heliumFootballs
+#' @name HeliumFootballs
+#' @rdname HeliumFootballs
 #' @docType data
 #' @format A data frame with 39 observations on the following 3 variables.
-#' \itemize{ \item{Trial}{ trial number} \item{Air}{ distance
-#' traveled by air-filled football (yards)} \item{Helium}{ distance
+#' \itemize{ \item{trial}{ trial number} \item{air}{ distance
+#' traveled by air-filled football (yards)} \item{helium}{ distance
 #' traveled by helium-filled football (yards)} }
 #' @references Lafferty, M. B. (1993), "OSU scientists get a kick out of sports
 #' controversy", \emph{The Columbus Dispatch} (November, 21, 1993), B7.
@@ -706,9 +813,12 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(heliumFootballs)
-#' xyplot(Helium~Air, data=heliumFootballs)
-#' bwplot(~(Helium-Air), data=heliumFootballs)
+#' data(HeliumFootballs)
+#' gf_point(helium ~ air, data = HeliumFootballs)
+#' gf_dhistogram( 
+#'   ~ (helium - air), data = HeliumFootballs, 
+#'   fill = ~ (helium > air),  bins = 15, boundary = 0 
+#' )
 #' 
 NULL
 
@@ -729,35 +839,35 @@ NULL
 #' taken on the skin surface and inside the calf muscle (via a 4 cm long probe)
 #' every 30 seconds for 20 minutes prior to icing, for 20 minutes during icing,
 #' and for 2 hours after the ice had been removed.  The temperature
-#' measurements are stored in variables that begin with \code{B} (baseline),
-#' \code{T} (treatment), or \code{R} (recovery) followed by a numerical code
+#' measurements are stored in variables that begin with \code{b} (baseline),
+#' \code{t} (treatment), or \code{r} (recovery) followed by a numerical code
 #' for the elapsed time formed by concatenating the number of minutes and
 #' seconds. For example, \code{R1230} contains the temperatures 12 minutes and
 #' 30 seconds after the ice had been removed.
 #' 
 #' Variables include \itemize{ \item{Subject}{ identification number}
-#' \item{Sex}{ a factor with levels \code{female} \code{male}}
-#' \item{Weight}{ weight of subject (kg)} \item{Height}{ height
+#' \item{sex}{ a factor with levels \code{female} \code{male}}
+#' \item{weight}{ weight of subject (kg)} \item{Height}{ height
 #' of subject (cm)} \item{Skinfold}{ skinfold thickness}
-#' \item{Calf}{ calf diameter (cm)} \item{Age}{ age of subject}
-#' \item{Location}{ a factor with levels \code{intramuscular}
+#' \item{calf}{ calf diameter (cm)} \item{Age}{ age of subject}
+#' \item{location}{ a factor with levels \code{intramuscular}
 #' \code{surface}} \item{Treatment}{ a factor with levels \code{crushed}
 #' \code{cubed} \code{wet}} \item{B0}{ baseline temperature at time 0}
-#' \item{B30}{ baseline temperature 30 seconds after start}
-#' \item{B100}{ baseline temperature 1 minute after start}
-#' \item{B1930}{ baseline temperature 19 minutes 30 seconds start}
-#' \item{T0}{ treatment temperature at beginning of treatment}
-#' \item{T30}{ treatment temperature 30 seconds after start of
-#' treatment} \item{T100}{ treatment temperature 1 minute after start of
-#' treatment} \item{T1930}{ treatment temperature 19 minutes 30 seconds
+#' \item{b30}{ baseline temperature 30 seconds after start}
+#' \item{b100}{ baseline temperature 1 minute after start}
+#' \item{b1930}{ baseline temperature 19 minutes 30 seconds start}
+#' \item{t0}{ treatment temperature at beginning of treatment}
+#' \item{t30}{ treatment temperature 30 seconds after start of
+#' treatment} \item{t100}{ treatment temperature 1 minute after start of
+#' treatment} \item{t1930}{ treatment temperature 19 minutes 30 seconds
 #' after start of treatment} \item{R0}{ recovery temperature at start of
-#' recovery} \item{R30}{ recovery temperature 30 seconds after start of
-#' recovery} \item{R100}{ recovery temperature 1 minute after start of
-#' recovery} \item{R12000}{ recovery temperature 120 minutes after start
+#' recovery} \item{r30}{ recovery temperature 30 seconds after start of
+#' recovery} \item{r100}{ recovery temperature 1 minute after start of
+#' recovery} \item{r12000}{ recovery temperature 120 minutes after start
 #' of recovery} }
 #' 
-#' @name ice
-#' @rdname ice
+#' @name Ice
+#' @rdname Ice
 #' @docType data
 #' @source Dykstra, J. H., Hill, H. M., Miller, M. G., Michael T. J., Cheatham,
 #' C. C., and Baker, R.J., Comparisons of cubed ice, crushed ice, and wetted
@@ -766,8 +876,18 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(ice)
-#' xyplot(Weight ~ Skinfold, groups=Sex, data=ice, auto.key=TRUE)
+#' data(Ice)
+#' gf_point(weight ~ skinfold, color = ~ sex, data = Ice)
+#' if (require(readr) && require(tidyr) && require(dplyr)) {
+#'   Ice2 <- Ice %>% 
+#'   gather("key", "temp", b0:r12000) %>% 
+#'   separate(key, c("phase", "time"), sep = 1) %>% 
+#'   mutate(time = parse_number(time), subject = as.character(subject))  
+#'   
+#'   gf_line( temp ~ time, data = Ice2 %>% filter(phase == "t"), 
+#'            color = ~ sex,  group = ~subject, alpha = 0.6) %>%
+#'     gf_facet_grid( treatment ~ location)
+#' }
 #' 
 NULL
 
@@ -782,8 +902,8 @@ NULL
 #' countries. This datafile deals with two of these measures in 23 nations.
 #' 
 #' 
-#' @name inflation
-#' @rdname inflation
+#' @name Inflation
+#' @rdname Inflation
 #' @docType data
 #' @format A data frame with 23 observations on the following 5 variables.
 #' \itemize{ \item{country}{ country where data were collected}
@@ -799,7 +919,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(inflation)
+#' data(Inflation)
 #' 
 NULL
 
@@ -819,8 +939,8 @@ NULL
 #' information.
 #' 
 #' 
-#' @name kids
-#' @rdname kids
+#' @name Kids
+#' @rdname Kids
 #' @docType data
 #' @format A data frame with 478 observations on the following 11 variables.
 #' \itemize{ \item{Gender}{ a factor with levels \code{boy}
@@ -832,12 +952,12 @@ NULL
 #' Middle} \code{Elm} \code{Main} \code{Portage} \code{Ridge} \code{Sand}
 #' \code{Westdale Middle}} \item{Goals}{ a factor with levels
 #' \code{Grades} \code{Popular} \code{Sports}} \item{Grades}{ rank of
-#' `make good grades' (1=most important for popularity; 4=least important)}
-#' \item{Sports}{ rank of `beging good at sports' (1=most important for
-#' popularity; 4=least important)} \item{Looks}{ rank of `beging
-#' handsome or pretty' (1=most important for popularity; 4=least important)}
-#' \item{Money}{ rank of `having lots of money' (1=most important for
-#' popularity; 4=least important)} }
+#' `make good grades' (1 = most important for popularity; 4 = least important)}
+#' \item{Sports}{ rank of `beging good at sports' (1 = most important for
+#' popularity; 4 = least important)} \item{Looks}{ rank of `beging
+#' handsome or pretty' (1 = most important for popularity; 4 = least important)}
+#' \item{Money}{ rank of `having lots of money' (1 = most important for
+#' popularity; 4 = least important)} }
 #' @references Chase, M. A., and Dummer, G. M. (1992), "The Role of Sports as a
 #' Social Determinant for Children," Research Quarterly for Exercise and Sport,
 #' 63, 418-424.
@@ -847,9 +967,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(kids)
-#' xtabs(~Goals + Urban.Rural, data=kids)
-#' chisq.test(xtabs(~Goals + Urban.Rural, data=kids))
+#' data(Kids)
+#' tally(goals ~ urban.rural, data = Kids)
+#' chisq.test(tally(~ goals + urban.rural, data = Kids))
 #' 
 NULL
 
@@ -864,8 +984,8 @@ NULL
 #' multiple versions and distributed randomly to the students.
 #' 
 #' 
-#' @name littleSurvey
-#' @rdname littleSurvey
+#' @name LittleSurvey
+#' @rdname LittleSurvey
 #' @docType data
 #' @format A data frame with 279 observations on the following 20 variables.
 #' \itemize{ \item{number}{ a number between 1 and 30}
@@ -884,28 +1004,24 @@ NULL
 #' \item{TVver}{ which of three versions of the TV question was on the
 #' survey} \item{tvBox}{ a factor with levels \code{<1} \code{>4}
 #' \code{>8} \code{1-2} \code{2-4} \code{4-8} \code{none} \code{other}}
-#' \item{tvHours}{ a numeric vector} \item{surpriseVer}{ which of
+#' \item{tvHours}{ a numeric vector} \item{surprisever}{ which of
 #' two versions of the 'surprise' question was on the survey}
 #' \item{surprise}{ a factor with levels \code{no} \code{yes}}
-#' \item{playVer}{ which of two versions of the 'play' question was on
+#' \item{playver}{ which of two versions of the 'play' question was on
 #' the survey} \item{play}{ a factor with levels \code{no} \code{yes}}
-#' \item{diseaseVer}{ which of two versions of the 'play' question was
+#' \item{diseasever}{ which of two versions of the 'play' question was
 #' on the survey} \item{disease}{ a factor with levels \code{A}
-#' \code{B}} \item{homeworkVer}{ which of two versions of the 'homework'
+#' \code{B}} \item{homeworkver}{ which of two versions of the 'homework'
 #' question was on the survey} \item{homework}{ a factor with levels
 #' \code{A} \code{B}} }
 #' @keywords datasets
 #' @examples
 #' 
-#' data(littleSurvey)
-#' xtabs(~surprise+surpriseVer, data=littleSurvey)
-#' xtabs(~disease+diseaseVer, data=littleSurvey)
+#' data(LittleSurvey)
+#' tally(surprise ~ surprisever, data = LittleSurvey)
+#' tally(disease ~ diseasever, data = LittleSurvey)
 #' 
 NULL
-
-
-
-
 
 #' Test performance and noise
 #' 
@@ -913,8 +1029,8 @@ NULL
 #' mathematics test in either a quiet or loud testing environment.
 #' 
 #' 
-#' @name mathnoise
-#' @rdname mathnoise
+#' @name MathNoise
+#' @rdname MathNoise
 #' @docType data
 #' @format A data frame with 40 observations on the following 3 variables.
 #' \itemize{ \item{score}{ score on a mathematics test}
@@ -926,10 +1042,14 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(mathnoise)
-#' xyplot(score~noise, data=mathnoise, group=group, type='a', 
-#' 		auto.key=list(columns=2, lines=TRUE, points=FALSE))
+#' data(MathNoise)
+#' xyplot (score ~ noise, data = MathNoise, group = group, type = 'a', 
+#' 		auto.key = list(columns = 2, lines = TRUE, points = FALSE))
 #' 
+#' gf_jitter(score ~ noise, data = MathNoise, color = ~ group, alpha = 0.4, 
+#'           width = 0.1, height = 0) %>%
+#'   gf_line(score ~ noise, data = MathNoise, color = ~ group, group = ~ group,
+#'         stat = "summary")
 NULL
 
 
@@ -942,8 +1062,8 @@ NULL
 #' Athletic Association basketball season.
 #' 
 #' 
-#' @name miaa05
-#' @rdname miaa05
+#' @name MIAA05
+#' @rdname MIAA05
 #' @docType data
 #' @format A data frame with 134 observations on the following 27 variables.
 #' \itemize{ \item{Number}{ jersey number}
@@ -966,8 +1086,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(miaa05)
-#' histogram(~FTPct, data=miaa05)
+#' data(MIAA05)
+#' gf_histogram(~ FTPct, data = MIAA05)
 #' 
 NULL
 
@@ -981,8 +1101,8 @@ NULL
 #' League Baseball season.
 #' 
 #' 
-#' @name mlb2004
-#' @rdname mlb2004
+#' @name MLB2004
+#' @rdname MLB2004
 #' @docType data
 #' @format A data frame with 30 observations on the following 20 variables.
 #' \itemize{ \item{Team}{ team city, a factor}
@@ -1002,8 +1122,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(mlb2004)
-#' xyplot(W ~ Rdiff, data=mlb2004)
+#' data(MLB2004)
+#' gf_point(W ~ Rdiff, data = MLB2004)
 #' 
 NULL
 
@@ -1016,67 +1136,75 @@ NULL
 #' Results of NCAA basketball games
 #' 
 #' 
-#' @name ncaa2010
-#' @rdname ncaa2010
-#' @aliases ncaa2010 ncaa2009 ncaa2008
+#' @name NCAAbb
+#' @rdname NCAAbb
 #' @docType data
-#' @format Seven variables describing NCAA Division I basketball games.
-#' \itemize{ \item{date}{ date on which game was played}
-#' \item{away}{ visiting team} \item{ascore}{ visiting team's
-#' score} \item{home}{ home team} \item{hscore}{ home team's
-#' score} \item{notes}{ code indicting games played at neutral sites (n
-#' or N) or in tournaments (T)} \item{location}{ where game was played}
+#' @format Nine variables describing NCAA Division I basketball games.
+#' \itemize{ 
+#' \item{date}{ date on which game was played}
+#' \item{away}{ visiting team} 
+#' \item{ascore}{ visiting team's score} 
+#' \item{home}{ home team} 
+#' \item{hscore}{ home team's score} 
+#' \item{notes}{ code indicting games played at neutral sites (n or N) or 
+#' in tournaments (T)} 
+#' \item{location}{ where game was played}
+#' \item{season}{ a character indicating which season the game belonged to}
+#' \item{postseason}{ a logical indicating whether the game is a postseason game}
 #' }
-#' @source \url{kenpom.com}
+#' @source \url{http://kenpom.com}
 #' @keywords datasets
 #' @examples
 #' 
-#' data(ncaa2010)
-#' # add some additional variables to the data frame
-#' ncaa2010$dscore <- ncaa2010$hscore- ncaa2010$ascore
-#' ncaa2010$homeTeamWon <- ncaa2010$dscore > 0
-#' ncaa2010$numHomeTeamWon <- -1 + 2 * as.numeric(ncaa2010$homeTeamWon)
-#' w <- which(ncaa2010$homeTeamWon)
-#' ncaa2010$winner <- as.character(ncaa2010$away)
-#' ncaa2010$winner[w] <- as.character(ncaa2010$home)[w]
-#' ncaa2010$loser <- as.character(ncaa2010$home)
-#' ncaa2010$loser[w] <- as.character(ncaa2010$away)[w]
-#' ncaa2010$homeTeamWon <- ncaa2010$winner == ncaa2010$home
-#' ncaa2010$numHomeTeamWon <- -1 + 2 * as.numeric(ncaa2010$homeTeamWon)
-#' 
+#' data(NCAAbb)
+#' # select one year and add some additional variables to the data frame
+#' NCAA2010 <-
+#'   NCAAbb %>% 
+#'   filter(season == "2009-10") %>%
+#'   mutate(
+#'     dscore = hscore - ascore,
+#'     homeTeamWon = dscore > 0,
+#'     numHomeTeamWon <- -1 + 2 * as.numeric(homeTeamWon),
+#'     winner = ifelse(homeTeamWon, home, away),
+#'     loser  = ifelse(homeTeamWon, away, home),
+#'     wscore = ifelse(homeTeamWon, hscore, ascore),
+#'     lscore = ifelse(homeTeamWon, ascore, hscore)
+#'   )
+#' NCAA2010 %>% select(date, winner, loser, wscore, lscore, dscore, homeTeamWon) %>% head()
 NULL
 
 
 
-
+####### edits still needed above here  ############
 
 #' NFL 2007 season
 #' 
 #' Results of National Football League games (2007 season, including playoffs)
 #' 
 #' 
-#' @name nfl2007
-#' @rdname nfl2007
+#' @name NFL2007
+#' @rdname NFL2007
 #' @docType data
 #' @format A data frame with 267 observations on the following 7 variables.
-#' \itemize{ \item{Date}{ date on which game was played}
-#' \item{Visitor}{ visiting team} \item{VisitorScore}{ score for
+#' \itemize{ \item{date}{ date on which game was played}
+#' \item{visitor}{ visiting team} \item{VisitorScore}{ score for
 #' visiting team} \item{Home}{ home team} \item{HomeScore}{ score
 #' for home team} \item{Line}{ `betting line'}
-#' \item{TotalLine}{ 'over/under' line (for combined score of both
+#' \item{totalLine}{ 'over/under' line (for combined score of both
 #' teams)} }
 #' @keywords datasets
 #' @examples
 #' 
-#' data(nfl2007); nfl <- nfl2007
-#' nfl$dscore <- nfl$HomeScore - nfl$VisitorScore 
-#' w <- which(nfl$dscore > 0) 
-#' nfl$winner <- nfl$Visitor; nfl$winner[w] <- nfl$Home[w] 
-#' nfl$loser <- nfl$Home; nfl$loser[w] <- nfl$Visitor[w] 
+#' data(NFL2007) 
+#' NFL <- NFL2007 
+#' NFL$dscore <- NFL$homeScore - NFL$visitorScore 
+#' w <- which(NFL$dscore > 0) 
+#' NFL$winner <- NFL$visitor; NFL$winner[w] <- NFL$home[w] 
+#' NFL$loser <- NFL$home; NFL$loser[w] <- NFL$visitor[w] 
 #' # did the home team win? 
-#' nfl$homeTeamWon <- nfl$dscore > 0 
-#' table(nfl$homeTeamWon)
-#' table(nfl$dscore > nfl$line)
+#' NFL$homeTeamWon <- NFL$dscore > 0 
+#' table(NFL$homeTeamWon)
+#' table(NFL$dscore > NFL$line)
 #' 
 NULL
 
@@ -1084,16 +1212,16 @@ NULL
 
 
 
-#' Noise -- unfinished documentation
+#' Noise 
 #' 
 #' In order to test the effect of room noise, subjects were given a test under
-#' 5 diff sets of conditions: 1) no noise, 2) intermittent low volume, 3)
+#' 5 different sets of conditions: 1) no noise, 2) intermittent low volume, 3)
 #' intermittent high volume, 4) continuous low volume, and 5) continuous high
 #' volume.
 #' 
 #' 
-#' @name noise
-#' @rdname noise
+#' @name Noise
+#' @rdname Noise
 #' @docType data
 #' @format A data frame with 50 observations on the following 5 variables.
 #' \itemize{ \item{id}{ subject identifier} \item{score}{ score
@@ -1104,12 +1232,19 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(noise)
-#' noise2 <- noise[noise$volume != 'none',] 
-#' model <- lm(score~volume*frequency, data=noise2) 
+#' data(Noise)
+#' Noise2 <- Noise %>% filter(volume != 'none')
+#' model <- lm(score ~ volume * frequency, data = Noise2) 
 #' anova(model)
-#' xyplot(score~volume,noise2, groups=frequency, type='a',
-#' 		auto.key=list(columns=2, points=FALSE, lines=TRUE))
+#' gf_jitter(score ~ volume, data = Noise2, color = ~ frequency, 
+#'           alpha = 0.4, width = 0.1, height = 0) %>%
+#'   gf_line(score ~ volume, data = Noise2, group = ~frequency, color = ~ frequency,
+#'           stat = "summary")
+#'         
+#' gf_jitter(score ~ frequency, data = Noise2, color = ~ volume, 
+#'           alpha = 0.4, width = 0.1, height = 0) %>%
+#'   gf_line(score ~ frequency, data = Noise2, group = ~ volume, color = ~ volume,
+#'           stat = "summary")
 #' 
 NULL
 
@@ -1117,20 +1252,20 @@ NULL
 
 
 
-#' Palette repair data
+#' Pallet repair data
 #' 
-#' The palettes data set contains data from a firm that recycles palettes.
-#' Palettes from warehouses are bought, repaired, and resold. (Repairing a
+#' The paletts data set contains data from a firm that recycles paletts.
+#' Paletts from warehouses are bought, repaired, and resold. (Repairing a
 #' palette typically involves replacing one or two boards.) The company has
 #' four employees who do the repairs. The employer sampled five days for each
-#' employee and recorded the number of palettes repaired.
+#' employee and recorded the number of pallets repaired.
 #' 
 #' 
-#' @name palettes
-#' @rdname palettes
+#' @name Pallets
+#' @rdname Pallets
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
-#' \itemize{ \item{palettes}{ number of palettes repaired}
+#' \itemize{ \item{pallets}{ number of pallets repaired}
 #' \item{employee}{ a factor with levels \code{A} \code{B} \code{C}
 #' \code{D}} \item{day}{ a factor with levels \code{day1} \code{day2}
 #' \code{day3} \code{day4} \code{day5}} }
@@ -1138,17 +1273,18 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(palettes)
-#' # Do the employees differ in the rate at which they repair palettes?
-#' pal.lm1 <- lm(palettes~employee,palettes) 
+#' data(Pallets)
+#' # Do the employees differ in the rate at which they repair pallets?
+#' pal.lm1 <- lm(pallets ~ employee, data = Pallets) 
 #' anova(pal.lm1)
 #' # Now using day as a blocking variable
-#' pal.lm2 <- lm(palettes~employee+day,palettes) 
+#' pal.lm2 <- lm(pallets ~ employee + day, data = Pallets) 
 #' anova(pal.lm2)
-#' xyplot(palettes~day, data=palettes,
-#' 		groups=employee,
-#' 		main="Productivity by day and employee",
-#' 		type='b',auto.key=list(columns=4,points=FALSE,lines=TRUE))
+#' gf_line(pallets ~ day, data = Pallets,
+#' 		group = ~employee,
+#' 		color = ~employee) %>%
+#'   gf_point() %>%
+#'   gf_labs(title = "Productivity by day and employee")
 #' 
 NULL
 
@@ -1195,8 +1331,8 @@ NULL
 #' to eight, the random numbers were generated and accordingly the order of the
 #' experiment was found.
 #' 
-#' @name paperplanes
-#' @rdname paperplanes
+#' @name PaperPlanes
+#' @rdname PaperPlanes
 #' @docType data
 #' @format A data frame with 16 observations on the following 5 variables.
 #' \itemize{ \item{distance}{ distance plane traveled (cm)}
@@ -1211,7 +1347,7 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(paperplanes)
+#' data(PaperPlanes)
 #' 
 NULL
 
@@ -1226,8 +1362,8 @@ NULL
 #' length of the string was varied from 10cm to 16 m.
 #' 
 #' 
-#' @name pendulum
-#' @rdname pendulum
+#' @name Pendulum
+#' @rdname Pendulum
 #' @docType data
 #' @format A data frame with 27 observations on the following 3 variables.
 #' \itemize{ \item{length}{ length of the pendulum (in meters)}
@@ -1239,8 +1375,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pendulum)
-#' xyplot(period ~ length, data=pendulum)
+#' data(Pendulum)
+#' gf_point(period ~ length, data = Pendulum)
 #' 
 NULL
 
@@ -1257,12 +1393,12 @@ NULL
 #' with a friend present, or with their dog present.  The average heart rate
 #' during the task was used as a measure of stress.
 #' 
-#' @name petstress
-#' @rdname petstress
+#' @name PetStress
+#' @rdname PetStress
 #' @docType data
 #' @format A data frame with 45 observations on the following 2 variables.
-#' \itemize{ \item{Group}{ a factor with levels \code{C}ontrol,
-#' \code{F}riend, or \code{P}et} \item{Rate}{ average heart rate while
+#' \itemize{ \item{group}{ a factor with levels \code{C}ontrol,
+#' \code{F}riend, or \code{P}et} \item{rate}{ average heart rate while
 #' performing a stressful task} }
 #' @references These data also appear in
 #' 
@@ -1275,7 +1411,10 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(petstress)
+#' data(PetStress)
+#' xyplot(rate ~ group, data = PetStress, jitter.x = TRUE, type = c('p', 'a'))
+#' gf_jitter(rate ~ group, data = PetStress, width = 0.1, height = 0) %>%
+#'   gf_line(group = 1, stat = "summary", color = "red")
 #' 
 NULL
 
@@ -1319,19 +1458,16 @@ NULL
 #' both pigs have the same configuration, so, for example, two Snouters are
 #' worth 40 rather than 20.
 #' 
-#' The vector \code{pigConfig} is provided to assist in converting from the
-#' numeric codes above to pig configurations.
-#' 
-#' @name pigs
-#' @rdname pigs
-#' @aliases pigs pigConfig
+#' @name Pigs
+#' @rdname Pigs
+#' @aliases Pigs 
 #' @docType data
 #' @format A data frame with 6000 observations on the following 6 variables.
 #' \itemize{ \item{roll}{ roll number (1-6000)}
-#' \item{black}{ numerical code for position of black pig}
-#' \item{blackF}{ position of black pig coded as a factor}
-#' \item{pink}{ numerical code for position of pink pig}
-#' \item{pinkF}{ position of pink pig coded as a factor}
+#' \item{blackScore}{ numerical code for position of black pig}
+#' \item{black}{ position of black pig coded as a factor}
+#' \item{pinkScore}{ numerical code for position of pink pig}
+#' \item{pink}{ position of pink pig coded as a factor}
 #' \item{score}{ score of the roll} \item{height}{ height from
 #' which pigs were rolled (5 or 8 inches)} \item{start}{ starting
 #' position of the pigs (0 = both pigs backwards, 1 = one bacwards one
@@ -1340,8 +1476,15 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pigs)
-#' table(pigConfig[pigs$black])
+#' data(Pigs)
+#' tally( ~ black, data = Pigs )
+#' if (require(dplyr) && require(tidyr)) {
+#'   Pigs %>% 
+#'   select(roll, black, pink) %>%
+#'   gather(pig, state, black, pink) %>%
+#'   tally( state ~ pig, data = ., format = "prop", margins = TRUE)
+#' }
+#'   
 #' 
 NULL
 
@@ -1354,8 +1497,8 @@ NULL
 #' Major League Baseball pitching statistics for the 2005 season.
 #' 
 #' 
-#' @name pitching2005
-#' @rdname pitching2005
+#' @name Pitching2005
+#' @rdname Pitching2005
 #' @docType data
 #' @format A data frame with 653 observations on the following 27 variables.
 #' \itemize{ \item{playerID}{ unique identifier for each player}
@@ -1379,8 +1522,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(pitching2005)
-#' xyplot(IPouts/3 ~ W, data=pitching2005, ylab="innings pitched", xlab="wins")
+#' data(Pitching2005)
+#' gf_point(IPouts/3 ~ W, data = Pitching2005, ylab = "innings pitched", xlab = "wins")
 #' 
 NULL
 
@@ -1396,13 +1539,13 @@ NULL
 #' animals is completely randomized.
 #' 
 #' 
-#' @name poison
-#' @rdname poison
+#' @name Poison
+#' @rdname Poison
 #' @docType data
 #' @format A data frame with 48 observations on the following 3 variables.
-#' \itemize{ \item{Poison}{ type of poison (1, 2, or 3)}
-#' \item{Treatment}{ manner of treatment (1, 2, 3, or 4)}
-#' \item{Time}{ time until death (hours)} }
+#' \itemize{ \item{poison}{ type of poison (1, 2, or 3)}
+#' \item{treatment}{ manner of treatment (1, 2, 3, or 4)}
+#' \item{time}{ time until death (hours)} }
 #' @references Box, G. E. P., and Cox, D. R. (1964). An analysis of
 #' transformations (with Discussion). J. R. Statist. Soc. B, 26, 211-252.
 #' 
@@ -1419,12 +1562,12 @@ NULL
 #' @examples
 #' 
 #' data(poison)
-#' poison.lm <- lm(Time~factor(Poison) * factor(Treatment), data=poison) 
-#' xplot(poison.lm,w=c(4,2))
+#' poison.lm <- lm(time~factor(poison) * factor(treatment), data = Poison) 
+#' plot(poison.lm,w = c(4,2))
 #' anova(poison.lm)
 #' # improved fit using a transformation
-#' poison.lm2 <- lm(1/Time~factor(Poison) * factor(Treatment), data=poison) 
-#' xplot(poison.lm2,w=c(4,2))
+#' poison.lm2 <- lm(1/time ~ factor(poison) * factor(treatment), data = Poison) 
+#' plot(poison.lm2,w = c(4,2))
 #' anova(poison.lm)
 #' 
 NULL
@@ -1442,8 +1585,8 @@ NULL
 #' catches it), and a number of measures of leg strength and flexibility.
 #' 
 #' 
-#' @name punting
-#' @rdname punting
+#' @name Punting
+#' @rdname Punting
 #' @docType data
 #' @format A data frame with 13 observations on the following 7 variables.
 #' \itemize{ \item{distance}{ mean distance for 10 punts (feet) }
@@ -1462,8 +1605,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(punting)
-#' xyplot(hang ~ distance, data=punting)
+#' data(Punting)
+#' gf_point(hang ~ distance, data = Punting)
 #' 
 NULL
 
@@ -1477,8 +1620,8 @@ NULL
 #' influence the consumption by rats.
 #' 
 #' 
-#' @name ratpoison
-#' @rdname ratpoison
+#' @name RatPoison
+#' @rdname RatPoison
 #' @docType data
 #' @format A data frame with 20 observations on the following 3 variables.
 #' \itemize{ \item{consumption}{ a numeric vector}
@@ -1489,8 +1632,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(ratpoison)
-#' 
+#' data(RatPoison)
+#' gf_line(consumption ~ flavor, group = ~ location, color = ~ location, data = RatPoison) %>%
+#'   gf_point()
 NULL
 
 
@@ -1500,7 +1644,7 @@ NULL
 #' Simulated golf ball data
 #' 
 #' A matrix of random golf ball numbers simulated using
-#' \code{rmultinom(n=10000,size=486,prob=rep(0.25,4))}.
+#' \code{rmultinom(n = 10000,size = 486,prob = rep(0.25,4))}.
 #' 
 #' 
 #' @name rgolfballs
@@ -1523,8 +1667,8 @@ NULL
 #' was stretched prior to launch.
 #' 
 #' 
-#' @name rubberband
-#' @rdname rubberband
+#' @name RubberBand
+#' @rdname RubberBand
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \itemize{ \item{Stretch}{ amount rubber band was stretched before
@@ -1532,8 +1676,9 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(rubberband)
-#' xyplot(Distance ~ Stretch, data=rubberband, type=c("p","r"))
+#' data(RubberBand)
+#' gf_point(distance ~ stretch, data = RubberBand) %>%
+#'   gf_lm(interval = "confidence")
 #' 
 NULL
 
@@ -1547,8 +1692,8 @@ NULL
 #' smelling a floral scent and when they were not.
 #' 
 #' 
-#' @name scent
-#' @rdname scent
+#' @name Scent
+#' @rdname Scent
 #' @docType data
 #' @format A data frame with 21 observations on the following 12 variables.
 #' \itemize{ \item{id}{ ID number} \item{sex}{ a factor with
@@ -1570,8 +1715,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(scent)
-#' summary(scent)
+#' data(Scent)
+#' summary(Scent)
 #' 
 NULL
 
@@ -1600,20 +1745,20 @@ NULL
 #' The data ends at day 22. On day 23 the soap broke into two pieces and one
 #' piece went down the plughole.
 #' 
-#' @name soap
-#' @rdname soap
+#' @name Soap
+#' @rdname Soap
 #' @docType data
 #' @format A data frame with 15 observations on the following 3 variables.
-#' \itemize{ \item{Date}{ } \item{Day}{ days since start of soap
-#' usage and data collection} \item{Weight}{ weight of bar of soap (in
+#' \itemize{ \item{date}{ } \item{day}{ days since start of soap
+#' usage and data collection} \item{weight}{ weight of bar of soap (in
 #' grams) } }
 #' @source Data collected by Rex Boggs and available from OzDASL
 #' (\url{http://www.statsci.org/data/}).
 #' @keywords datasets
 #' @examples
 #' 
-#' data(soap)
-#' xyplot(Weight~Day, data=soap)
+#' data(Soap)
+#' gf_point(weight ~ day, data = Soap)
 #' 
 NULL
 
@@ -1627,16 +1772,20 @@ NULL
 #' steel ball bearings.
 #' 
 #' 
-#' @name spheres
-#' @rdname spheres
+#' @name Spheres
+#' @rdname Spheres
 #' @docType data
 #' @format A data frame with 12 observations on the following 2 variables.
 #' \itemize{ \item{diameter}{ diameter of bearing (m)}
 #' \item{mass}{ mass of the bearing (kg) } }
-#' @references data(spheres)
 #' @source These data were collected by Calvin College physics students under
 #' the direction of Steve Plath.
 #' @keywords datasets
+#' @examples
+#' data(Spheres)
+#' gf_point(mass ~ diameter, data = Spheres)
+#' gf_point(mass ~ diameter, data = Spheres) %>%
+#'   gf_refine(scale_x_log10(), scale_y_log10())
 NULL
 
 
@@ -1668,8 +1817,8 @@ NULL
 #' variability in the experiment. Each pair of experimenters was treated as a
 #' block.
 #' 
-#' @name step
-#' @rdname step
+#' @name Step
+#' @rdname Step
 #' @docType data
 #' @format A data frame with 30 observations on the following 7 variables.
 #' \itemize{ \item{order}{ performance order}
@@ -1684,10 +1833,13 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(step)
-#' xyplot(HR-restHR ~ freq, data=step, groups=height, type='a')
-#' xyplot(HR-restHR ~ height, data=step, groups=freq, type='a')
-#' 
+#' data(Step)
+#' gf_jitter(HR-restHR ~ freq, color = ~height, data = Step, group = ~height,
+#'           height = 0, width = 0.1) %>%
+#'   gf_line(stat = "summary", group = ~height)
+#' gf_jitter(HR-restHR ~ height, color = ~freq, data = Step, group = ~freq,
+#'           height = 0, width = 0.1) %>%
+#'   gf_line(stat = "summary", group = ~freq)
 NULL
 
 
@@ -1703,12 +1855,12 @@ NULL
 #' (e.g., a drawing of the object).
 #' 
 #' 
-#' @name stereogram
-#' @rdname stereogram
+#' @name Stereogram
+#' @rdname Stereogram
 #' @docType data
 #' @format A data frame with 78 observations on the following 2 variables.
-#' \itemize{ \item{Time}{ time until subject was able to fuse a random
-#' dot stereogram} \item{Group}{ treatment group: \code{NV}(no visual
+#' \itemize{ \item{time}{time until subject was able to fuse a random
+#' dot stereogram} \item{group}{treatment group: \code{NV}(no visual
 #' instructions) \code{VV} (visual instructions)} }
 #' @references Frisby, J. P.  and Clatworthy, J. L., "Learning to see complex
 #' random-dot stereograms," \emph{Perception}, 4, (1975), pp. 173-178.
@@ -1720,9 +1872,10 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(stereogram)
-#' require(Hmisc)
-#' favstats(Time~Group, data=stereogram)
+#' data(Stereogram)
+#' favstats(time ~ group, data = Stereogram)
+#' gf_violin(time ~ group, data = Stereogram, alpha = 0.2, fill = "skyblue") %>%
+#' gf_jitter(time ~ group, data = Stereogram, height = 0, width = 0.25)
 #' 
 NULL
 
@@ -1735,21 +1888,21 @@ NULL
 #' Standardized test scores and GPAs for 1000 students.
 #' 
 #' 
-#' @name students
-#' @rdname students
+#' @name Students
+#' @rdname Students
 #' @docType data
 #' @format A data frame with 1000 observations on the following 6 variables.
 #' \itemize{ \item{ACT}{ ACT score} \item{SAT}{ SAT score}
 #' \item{Grad}{ has the student graduated from college?}
-#' \item{GradGPA}{ college GPA at graduation} \item{HSGPA}{ high
+#' \item{gradGPA}{ college GPA at graduation} \item{hsGPA}{ high
 #' school GPA} \item{Cohort}{ year of graduation or expected graduation}
 #' }
 #' @keywords datasets
 #' @examples
 #' 
-#' data(students)
-#' xyplot(ACT ~ SAT, data=students)
-#' xyplot(GradGPA ~ HSGPA, data=students)
+#' data(Students)
+#' gf_point(ACT ~ SAT, data = Students)
+#' gf_point(gradGPA ~ hsGPA, data = Students)
 #' 
 NULL
 
@@ -1759,7 +1912,7 @@ NULL
 
 #' Taste test data
 #' 
-#' Tthe results from a study comparing different preparation methods for taste
+#' The results from a study comparing different preparation methods for taste
 #' test samples.
 #' 
 #' The samples were prepared for tasting using either a coarse screen or a fine
@@ -1769,9 +1922,9 @@ NULL
 #' (excellent).  The sum of these individual scores is the overall taste score
 #' for the group.
 #' 
-#' @name tastetest
-#' @rdname tastetest
-#' @aliases tastetest taste1
+#' @name TasteTest
+#' @rdname TasteTest
+#' @aliases TasteTest Taste1
 #' @docType data
 #' @format A data frame with 16 observations on 2 (\code{taste1}) or 4
 #' (\code{tastetest}) variables.  \itemize{ \item{score}{ taste score
@@ -1785,12 +1938,11 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(tastetest)
-#' data(taste1)
-#' require(Hmisc)
-#' xyplot(score~scr, data=tastetest)
-#' xyplot(score~scr, groups=liq, tastetest, type='a')
-#' favstats(score~scr, data=tastetest)
+#' data(TasteTest)
+#' data(Taste1)
+#' gf_jitter(score ~ scr, data = TasteTest, color = ~liq, width = 0.2, height =0) %>%
+#'   gf_line(stat = "summary", group = ~liq)
+#' df_stats(score ~ scr | liq, data = TasteTest)
 #' 
 NULL
 
@@ -1798,13 +1950,12 @@ NULL
 
 
 
-#' Estimating tirewear
+#' Estimating tire wear
 #' 
-#' Treadwear is estimated by two methods: weight loss and groove wear.
+#' Tread wear is estimated by two methods: weight loss and groove wear.
 #' 
-#' 
-#' @name tirewear
-#' @rdname tirewear
+#' @name TireWear
+#' @rdname TireWear
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \itemize{ \item{weight}{ estimated wear (1000's of miles) base on
@@ -1818,8 +1969,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(tirewear)
-#' xyplot(weight ~ groove, data=tirewear)
+#' data(TireWear)
+#' gf_point(weight ~ groove, data = TireWear)
 #' 
 NULL
 
@@ -1836,8 +1987,8 @@ NULL
 #' to 1956 can be attributed to the stricter enforcement.
 #' 
 #' 
-#' @name traffic
-#' @rdname traffic
+#' @name Traffic
+#' @rdname Traffic
 #' @docType data
 #' @format A data frame with 9 observations on the following 6 variables.
 #' \itemize{ \item{year}{ a year from 1951 to 1959}
@@ -1857,13 +2008,17 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(traffic)
-#' xyplot(cn.deaths ~ year, data=traffic, type=c('l','g'))
-#' trafficLong <- reshape(traffic,direction='long', idvar="year", 
-#' 				varying=list(3:6), v.names='deathRate',
-#' 				times=names(traffic)[3:6], timevar='state')
-#' xyplot(deathRate~year, groups=state, data=trafficLong, type='b',
-#' 		auto.key=list(lines=TRUE, points=FALSE, columns=2))
+#' data(Traffic)
+#' gf_line(cn.deaths ~ year, data = Traffic)
+#' if (require(dplyr) && require(tidyr)) {
+#'   TrafficLong <- 
+#'     Traffic %>% 
+#'     select(-2) %>%
+#'     gather(state, fatality.rate, ny:ri)
+#'    gf_line(fatality.rate ~ year, group = ~state, color = ~state, data = TrafficLong) %>%
+#'      gf_point(fatality.rate ~ year, group = ~state, color = ~state, data = TrafficLong) %>%
+#' 		  gf_lims(y = c(0, NA))
+#' }
 #' 
 NULL
 
@@ -1877,9 +2032,9 @@ NULL
 #' small trebuchet under different conditions.
 #' 
 #' 
-#' @name trebuchet
-#' @rdname trebuchet
-#' @aliases trebuchet trebuchet1 trebuchet2
+#' @name Trebuchet
+#' @rdname Trebuchet
+#' @aliases Trebuchet Trebuchet1 Trebuchet2
 #' @docType data
 #' @format Data frames with the following variables.  \itemize{
 #' \item{object}{ the object serving as projectile\code{bean} \code{big
@@ -1890,64 +2045,47 @@ NULL
 #' \item{distance}{ distance projectile traveled (in cm)}
 #' \item{form}{ a factor with levels \code{a} \code{b} \code{B} \code{c}
 #' describing the configuration of the trebuchet.} }
+#' @details
+#' \code{Trebuchet1} and \code{Trebuchet2} are subsets of \code{Trebuchet} restricted
+#' to a single value of \code{counterWt}
 #' @source Data collected by Andrew Pruim as part of a Science Olympiad
 #' competition.
 #' @keywords datasets
 #' @examples
 #' 
-#' data(trebuchet); data(trebuchet1); data(trebuchet2)
-#' xyplot(distance~projectileWt, data=trebuchet1)
-#' xyplot(distance~projectileWt, data=trebuchet2)
-#' xyplot(distance~projectileWt, groups=projectileWt, data=trebuchet)
+#' data(Trebuchet); data(Trebuchet1); data(Trebuchet2)
+#' gf_point(distance ~ projectileWt, data = Trebuchet1)
+#' gf_point(distance ~ projectileWt, data = Trebuchet2)
+#' gf_point(distance ~ projectileWt, color = ~ factor(counterWt), data = Trebuchet) %>%
+#'   gf_smooth(alpha = 0.2, fill = ~factor(counterWt))
 #' 
 NULL
 
 
-
-
-
-
-#' Utilities bills
+#' Unemployment data
 #' 
-#' Data from utility bills at a residence.
+#' Unemployment data
 #' 
-#' 
-#' @name utilities
-#' @rdname utilities
-#' @aliases utilities utilities2
 #' @docType data
-#' @format A data frame the following variables.  \itemize{
-#' \item{month}{ month (coded as a number)} \item{day}{ day of
-#' month on which bill was calculated} \item{year}{ year of bill}
-#' \item{temp}{ average temperature (F) for billing period}
-#' \item{kwh}{ electricity usage (kwh)} \item{ccf}{ gas usage
-#' (ccf)} \item{thermsPerDay}{ a numeric vector}
-#' \item{billingDays}{ number of billing days in billing period}
-#' \item{totalbill}{ total bill (in dollars)} \item{gasbill}{ gas
-#' bill (in dollars)} \item{elecbill}{ exectric bill (in dollars)}
-#' \item{notes}{ notes about the billing period}
-#' \item{ccfpday}{ average gas usage per day [\code{utilities2} only]}
-#' \item{kwhpday}{ average electric usage per day [\code{utilities2}
-#' only]} \item{gasbillpday}{ gas bill divided by billing days
-#' [\code{utilities2} only]} \item{elecbillpday}{ electric bill divided
-#' by billing days a numeric vector [\code{utilities2} only]}
-#' \item{totalbillpday}{ total bill divided by billing days a numeric
-#' vector [\code{utilities2} only]} \item{therms}{ \code{thermsPerDay *
-#' billingDays} [\code{utilities2} only]} \item{monthsSinceY2K}{ months
-#' since 2000 [\code{utilities2} only]} }
-#' @source Daniel T. Kaplan, \emph{Statistical modeling: A fresh approach},
-#' 2009.
-#' @keywords datasets
+#' @name Unemployment
+#' @usage data(Unemployment)
+#' @format  A data.frame with 10 observations on the following 4 variables.
+#' \itemize{
+#'    item{code{unemp }}{unemployment rate}
+#'    item{code{production }}{[numeric]}
+#'    item{code{year }}{}
+#'    item{code{iyear }}{indexed year}
+#' }
+#' 
+#' @source 
+#' Paul F. Velleman and Roy E. Welsch. 
+#' "Efficient Computing of Regression Diagnostics",
+#' The American Statistician, Vol. 35, No. 4 (Nov., 1981), pp. 234-242.
+#' (http://www.jstor.org/stable/2683296)
 #' @examples
-#' 
-#' data(utilities); data(utilities2)
-#' xyplot(gasbill ~ temp, data=utilities)
-#' xyplot(gasbillpday ~ temp, data=utilities2)
-#' 
+#' data(Unemployment)
+
 NULL
-
-
-
 
 
 
@@ -1961,8 +2099,8 @@ NULL
 #' of women in 1972 # 3. labor68: Labor Force Participation rate of women in
 #' 1968 # # The Data: #
 #' 
-#' @name workingWomen
-#' @rdname workingWomen
+#' @name WorkingWomen
+#' @rdname WorkingWomen
 #' @docType data
 #' @format A data frame with 19 observations on the following 3 variables.
 #' \itemize{ \item{city}{ name of a U.S. city (coded as a factor with
@@ -1975,8 +2113,8 @@ NULL
 #' @keywords datasets
 #' @examples
 #' 
-#' data(workingWomen)
-#' xyplot(labor72 ~ labor68, workingWomen)
+#' data(WorkingWomen)
+#' gf_point(labor72 ~ labor68, data = WorkingWomen)
 #' 
 NULL
 

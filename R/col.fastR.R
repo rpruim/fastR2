@@ -12,6 +12,7 @@
 #' @author Randall Pruim
 #' @seealso \code{\link{trellis.par.set}}, \code{\link{show.settings}}
 #' @keywords graphics
+#' @importFrom grDevices colorRampPalette gray heat.colors 
 #' @export
 #' @examples
 #' 
@@ -21,31 +22,31 @@
 #' show.settings()
 col.fastR <- function (bw = FALSE, lty = 1:7) 
 {
-    aBlue <- colorRampPalette(c("white", "navy"))(10)[8]
-    paleBlue <- colorRampPalette(c("white", "navy"))(10)[6]
-    lightBlue <- colorRampPalette(c("white", "steelblue"))(10)[5]
-    veryLightBlue <- colorRampPalette(c("white", "steelblue"))(12)[3]
-    darkBlue <- colorRampPalette(c("white", "navy"))(10)[9]
-    paleGreen <- colorRampPalette(c("white", "darkGreen"))(10)[8]
+    aBlue <- grDevices::colorRampPalette(c("white", "navy"))(10)[8]
+    paleBlue <- grDevices::colorRampPalette(c("white", "navy"))(10)[6]
+    lightBlue <- grDevices::colorRampPalette(c("white", "steelblue"))(10)[5]
+    veryLightBlue <- grDevices::colorRampPalette(c("white", "steelblue"))(12)[3]
+    darkBlue <- grDevices::colorRampPalette(c("white", "navy"))(10)[9]
+    paleGreen <- grDevices::colorRampPalette(c("white", "darkGreen"))(10)[8]
     if (bw) {
         return(list(background = list(col = "transparent"), axis.line = list(col = "gray30"), 
-            axis.text = list(col = "gray30"), plot.polygon = list(col = "gray80"), 
+            axis.text = list(col = "gray30"), plot.polygon = list(col = "gray75"), 
             box.rectangle = list(col = "gray10"), box.umbrella = list(col = "gray10", 
                 lty = 1), box.dot = list(col = "gray10"), dot.line = list(col = "gray50"), 
             dot.symbol = list(col = "gray30", pch = 16), plot.line = list(col = "black", 
-                lwd = 2), plot.symbol = list(col = "black", fill = "gray80", 
-                pch = 16), regions = list(col = gray((1:100)/100)), 
+                lwd = 2), plot.symbol = list(col = "black", fill = "gray75", 
+                pch = 16), regions = list(col = grDevices::gray((1:100)/100)), 
             reference.line = list(col = "gray50"), add.line = list(lty = 1, 
-                col = "gray80", lwd = 2), superpose.polygon = list(col = c("gray30", 
-                "gray70", "black", "gray50", "gray20", "gray80", 
-                "gray60", "gray40"), fill = c("gray80")), superpose.line = list(lty = lty, 
+                col = "gray75", lwd = 2), superpose.polygon = list(col = c("gray30", 
+                "gray70", "black", "gray50", "gray20", "gray75", 
+                "gray60", "gray40"), fill = c("gray75")), superpose.line = list(lty = lty, 
                 lwd = 2, col = c("gray30", "gray70", "black", 
-                  "gray50", "gray20", "gray80", "gray60", "gray40")), 
+                  "gray50", "gray20", "gray75", "gray60", "gray40")), 
             superpose.symbol = list(pch = c(16, 15, 18, 1, 3, 
                 6, 0, 5), cex = rep(0.7, 7), col = c("gray30", 
-                "gray70", "black", "gray50", "gray20", "gray80", 
+                "gray70", "black", "gray50", "gray20", "gray75", 
                 "gray60", "gray40")), strip.background = list(alpha = 1, 
-                col = c("gray80", "gray65")), strip.shingle = list(alpha = 1, 
+                col = c("gray75", "gray65")), strip.shingle = list(alpha = 1, 
                 col = c("gray60", "gray30")), par.strip.text = list(cex = 0.5)))
     }
     else {
@@ -53,7 +54,7 @@ col.fastR <- function (bw = FALSE, lty = 1:7)
             box.rectangle = list(col = darkBlue), box.umbrella = list(col = darkBlue), 
             dot.line = list(col = "#e8e8e8"), dot.symbol = list(col = darkBlue, 
                 pch = 16), plot.line = list(lwd = 2, col = darkBlue), 
-            plot.symbol = list(col = darkBlue, pch = 16), regions = list(col = heat.colors(100)), 
+            plot.symbol = list(col = darkBlue, pch = 16), regions = list(col = grDevices::heat.colors(100)), 
             reference.line = list(col = "#e8e8e8"), add.line = list(lty = 1, 
                 col = "gray20", lwd = 2), superpose.line = list(lty = lty, 
                 lwd = 2, col = c(darkBlue, "lightskyblue3", "darkgreen", 

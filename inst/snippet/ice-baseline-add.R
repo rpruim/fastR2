@@ -1,5 +1,0 @@
-base.lmadd <- lm(B1930 ~ Location + Treatment, ice)
-anova(base.lmadd)
-baseplot <- xplot(base.lmadd,w=c(5,2))
-printPlot(xplot(base.lmadd,w=5),size='medium',file='ice-base-resid1')
-printPlot(xplot(base.lmadd,w=2),size='medium',file='ice-base-resid2')

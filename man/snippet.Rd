@@ -6,7 +6,7 @@
 \usage{
 snippet(name, execute = TRUE, view = !execute, echo = TRUE,
   ask = getOption("demo.ask"), verbose = getOption("verbose"),
-  lib.loc = NULL, character.only = FALSE)
+  lib.loc = NULL, character.only = FALSE, regex = TRUE, max.files = 10L)
 }
 \arguments{
 \item{name}{name of snippet}
@@ -36,6 +36,11 @@ The default value of NULL corresponds to all libraries currently known.}
 
 \item{character.only}{logical. If \code{TRUE}, use \code{name}as character
 string.}
+
+\item{regex}{a logical indicating whether regular expression matching will 
+be used.}
+
+\item{max.files}{an integer limiting the number of files retrieved.}
 }
 \description{
 This command will display and/or execute small snippets of R code from the

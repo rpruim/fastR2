@@ -1,1 +1,0 @@
-fisher.test(convictions)

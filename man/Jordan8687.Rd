@@ -5,18 +5,17 @@
 \alias{Jordan8687}
 \title{Michael Jordan personal scoring}
 \format{A data frame with 82 observations on the following 2 variables.
-\itemize{ \item{Game}{a numeric vector} \item{Points}{a
-numeric vector} }}
+\itemize{ 
+  \item{game}{a numeric vector} 
+  \item{points}{a numeric vector} }}
 \description{
 The number of points scored by Michael Jordan in each game of the 1986-87
 regular season.
 }
 \examples{
 
-if (require(mosaicData)) {
-  data(Jordan8687)
-  xqqmath(~Points, data=Jordan8687)
-}
+data(Jordan8687)
+gf_qq(~ points, data = Jordan8687)
 
 }
 \keyword{datasets}

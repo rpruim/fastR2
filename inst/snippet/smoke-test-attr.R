@@ -1,1 +1,0 @@
-attributes((chisq.test(smokeTab)))

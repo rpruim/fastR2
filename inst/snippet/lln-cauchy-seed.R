@@ -1,5 +1,9 @@
 set.seed(123)
-x <- rcauchy(10000)
-runningMean <- cumsum(x) / 1:length(x)
-cauchyPlot <- xyplot(runningMean~1:10000,
-    ylab="running mean",xlab="n", type="l");
+Data <- data_frame(
+  n = 1:10000,
+  x =  rcauchy(10000),
+  running_mean =  cumsum(x) / (1:length(x))
+)
+gf_line(running_mean ~ n, data = Data) %>%
+  gf_labs(y = "running mean", title = "Sample from a Cauchy Distribution")
+

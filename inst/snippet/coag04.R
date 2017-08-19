@@ -1,0 +1,2 @@
+anova(coag.lm)
+

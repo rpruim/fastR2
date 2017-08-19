@@ -13,4 +13,5 @@
 ^README-.*\.png$
 ^cran-comments\.md$
 ^README\.html$
-^inst/snippet/\.R$
+^data-raw$
+^inst/snippet/.R$

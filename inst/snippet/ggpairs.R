@@ -1,0 +1,2 @@
+GGally::ggpairs(iris)
+

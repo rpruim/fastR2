@@ -1,0 +1,2 @@
+msummary(coag.lm)
+

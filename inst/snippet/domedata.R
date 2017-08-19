@@ -1,2 +1,3 @@
-require(alr3); data(domedata) 
-summary(domedata)
+data(domedata, package = "alr3") 
+msummary(domedata)
+

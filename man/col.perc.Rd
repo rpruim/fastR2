@@ -20,7 +20,8 @@ percentages of matrix-like structures, including output of
 }
 \examples{
 
-row.perc(xtabs(~Airline+Result,airlineArrival))
+row.perc(tally(~ airline + result, data = AirlineArrival))
+col.perc(tally(~ airline + result, data = AirlineArrival))
 
 }
 \author{

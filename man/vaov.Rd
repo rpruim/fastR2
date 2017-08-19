@@ -33,8 +33,8 @@ complicated models.
 }
 \examples{
 
-aov(pollution ~ location, data=airpollution)
-vaov(pollution ~ location, data=airpollution)
+aov(pollution ~ location, data = AirPollution)
+vaov(pollution ~ location, data = AirPollution)
 
 }
 \author{

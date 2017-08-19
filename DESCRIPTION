@@ -1,26 +1,34 @@
-Package: fastR
+Package: fastR2
 Type: Package
-Title: Foundations and Applications of Statistics Using R
-Version: 0.10.3
-Date: 2017-07-26
+Title: Foundations and Applications of Statistics Using R (2nd Edition)
+Version: 0.1.9008
+Date: 2017-08-18
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
-Description: Data sets and utilities to accompany
+Description: Data sets and utilities to accompany the 2nd edition of
     "Foundations and Applications of Statistics: an Introduction
-    using R" (R Pruim, published by AMS, 2011), a text covering
+    using R" (R Pruim, published by AMS, 2017), a text covering
     topics from probability and mathematical statistics at an advanced
     undergraduate level.  R is integrated throughout, and access to all
     the R code in the book is provided via the snippet function.
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
-    mosaic,
-    mosaicCalc
+    ggformula,
+    mosaic
 Imports:
     lattice,
+    ggplot2,
     grid,
-    mosaicData
+    magrittr,
+    dplyr,
+    maxLik,
+    numDeriv,
+    miscTools
 Suggests:
+    mosaicCalc,
+    tidyr,
+    readr,
     MASS,
     faraway,
     Hmisc,
@@ -32,8 +40,8 @@ Suggests:
     corrgram,
     BradleyTerry2,
     cubature,
-    Devore7,
-    knitr
+    knitr,
+    mosaicData
 VignetteBuilder: knitr
 LazyLoad: yes
 LazyData: yes

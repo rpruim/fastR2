@@ -1,0 +1,2 @@
+balldrop.nls %>% coef()
+

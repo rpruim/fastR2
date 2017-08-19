@@ -1,0 +1,2 @@
+favstats( ~ mass, data = Dimes)
+

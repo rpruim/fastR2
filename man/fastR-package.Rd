@@ -11,7 +11,7 @@ Applications of Statistics: An Introduction Using R} by Randall Pruim.
 }
 \examples{
 
-require(fastR)
+require(fastR2)
 trellis.par.set(theme=col.fastR())
 
 }

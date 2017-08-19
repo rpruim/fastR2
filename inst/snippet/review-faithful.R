@@ -1,1 +1,0 @@
-t.test(faithful$eruptions)

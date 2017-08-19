@@ -1,1 +1,0 @@
-vif(seatpos.lm1)
