@@ -22,6 +22,7 @@
 #' @import grid
 #' @import mosaic
 #' @import ggplot2
+#' @import ggformula
 #' @importFrom stats coef df qnorm
 NULL
 
