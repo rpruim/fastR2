@@ -33,9 +33,11 @@ sum of squares resulting from adding predictors to a model.
 SSplot(
   lm(strength ~ limestone + water, data = Concrete),
   lm(strength ~ limestone + rand(7), data = Concrete),
-  n = 1000) 
+  n = 50) 
+\dontrun{
 SSplot(
   lm(strength ~ water + limestone, data = Concrete),
   lm(strength ~ water + rand(7), data = Concrete),
   n = 1000) 
+}
 }
