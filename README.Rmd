@@ -17,13 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 
-<<<<<<< HEAD
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](https://cran.r-project.org/package=fastR)
-
-[![Travis-CI Build Status](https://travis-ci.org/rpruim/fastR.svg?branch=master)](https://travis-ci.org/rpruim/fastR/)
-=======
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](http://cran.r-project.org/package=fastR2)
->>>>>>> 2e
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](https://cran.r-project.org/package=fastR2)
 
 fastR2
 =======
@@ -40,12 +34,12 @@ install.packages("fastR2")
 ```
 or from github
 ```{r eval=FALSE}
-devtools::install_github("rpruim/fastR")
+devtools::install_github("rpruim/fastR2")
 ```
 
 ### Snippets
 
-In addtion to data sets, `fastR` contains a `snippet()` function that 
+In addtion to data sets, `fastR2` contains a `snippet()` function that 
 loads and executes code found in the text.  Here is an example:
 
 ```{r message=FALSE}

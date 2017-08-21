@@ -4,13 +4,7 @@
 
 
 
-<<<<<<< HEAD
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR)](https://cran.r-project.org/package=fastR)
-
-[![Travis-CI Build Status](https://travis-ci.org/rpruim/fastR.svg?branch=master)](https://travis-ci.org/rpruim/fastR/)
-=======
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](http://cran.r-project.org/package=fastR2)
->>>>>>> 2e
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](https://cran.r-project.org/package=fastR2)
 
 fastR2
 =======
@@ -29,12 +23,12 @@ install.packages("fastR2")
 or from github
 
 ```r
-devtools::install_github("rpruim/fastR")
+devtools::install_github("rpruim/fastR2")
 ```
 
 ### Snippets
 
-In addtion to data sets, `fastR` contains a `snippet()` function that 
+In addtion to data sets, `fastR2` contains a `snippet()` function that 
 loads and executes code found in the text.  Here is an example:
 
 
@@ -77,19 +71,11 @@ snippet("bugs")
 #> 
 #> Linear Hypotheses:
 #>            Estimate Std. Error t value Pr(>|t|)    
-<<<<<<< HEAD
 #> G - B == 0   1.7503     0.3946   4.436  0.00136 ** 
 #> W - B == 0   0.1469     0.3946   0.372  0.98189    
 #> Y - B == 0   3.0602     0.3946   7.755  < 0.001 ***
-#> W - G == 0  -1.6034     0.3946  -4.063  0.00305 ** 
-#> Y - G == 0   1.3099     0.3946   3.319  0.01656 *  
-=======
-#> G - B == 0   1.7503     0.3946   4.436  0.00142 ** 
-#> W - B == 0   0.1469     0.3946   0.372  0.98189    
-#> Y - B == 0   3.0602     0.3946   7.755  < 0.001 ***
-#> W - G == 0  -1.6034     0.3946  -4.063  0.00320 ** 
-#> Y - G == 0   1.3099     0.3946   3.319  0.01646 *  
->>>>>>> 2e
+#> W - G == 0  -1.6034     0.3946  -4.063  0.00312 ** 
+#> Y - G == 0   1.3099     0.3946   3.319  0.01672 *  
 #> Y - W == 0   2.9133     0.3946   7.383  < 0.001 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
