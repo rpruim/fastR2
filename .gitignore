@@ -18,3 +18,4 @@ builds/*gz
 vignettes/*/*.tex
 inst/snippet/.R
 fastR.Rproj
+README.html
