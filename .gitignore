@@ -16,4 +16,5 @@ builds/*gz
 *.Rcheck
 .Rd2dvi*
 vignettes/*/*.tex
+inst/snippet/.R
 fastR.Rproj
