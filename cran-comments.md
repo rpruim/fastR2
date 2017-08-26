@@ -1,28 +1,27 @@
 
 ## Test environments
 
- * local 
-   * R version 3.2.3 Patched (2015-12-10 r69760)
-   * Platform: x86_64-apple-darwin13.4.0 (64-bit)
-   * Running under: OS X 10.11.1 (El Capitan)
- * because mosaicCalc is not yet on CRAN (just submitted), checking with build_win() doesn't work yet.
+  * local OS X install: 
+    * R version 3.4.1 Patched (2017-07-09 r72910)
+    * Platform: x86_64-apple-darwin15.6.0 (64-bit)
+    * Running under: macOS Sierra 10.12.6
+  
+  * win-builder via devtools
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs. 
+This is a new package.  (Second edition version of previous fastR.)
 
-Strong dependencies not in mainstream repositories:
-  mosaicCalc
-  
-  * this was recently submitted to CRAN.
-  
+There were no ERRORs or WARNINGs.
+
 The following identificed as possibly mis-spelled words in DESCRIPTION:
-  AMS (10:37)
-  Pruim (10:17)
+  AMS 
+  Pruim 
+  2nd
 
 are CORRECT.
 
 
 ## Downstream dependencies
 
-Suggested by mosaic.  This update is driven by the recent mosaic update.
+None currently, this is a first submission.
