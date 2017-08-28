@@ -8,6 +8,11 @@
   
   * win-builder via devtools
 
+## Note
+
+I submitted this pacakge and three others last week, but for some reason this one did not make it 
+to CRAN like the others, so I'm resubmitting in cases something went wrong.
+
 ## R CMD check results
 
 This is a new package.  (Second edition version of previous fastR.)
