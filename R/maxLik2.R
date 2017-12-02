@@ -57,6 +57,8 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
   ci <- match.arg(tolower(ci), c("wald", "likelihood"), 
                   several.ok = TRUE)
   
+  if (length(coef(ml)) > 2) stop("Plotting only defined for likelihoods on 1 or 2 parameters")
+  
   switch(
     length(coef(ml)), 
     "1" = {
@@ -117,8 +119,7 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
                  xlab = names(coef(ml))[1],
                  ylab = names(coef(ml))[2]
       )
-    },
-    default = stop("Plotting only defined for likelihoods on 1 or 2 parameters")
+    }
   )
 }
 
