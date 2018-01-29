@@ -6,5 +6,5 @@ Sims <-
     upper = lower / 0.05^(1/n),
     cover = upper > theta
   )
-prop(cover ~ n, data = Sims)
+df_stats(cover ~ n, data = Sims, props)
 

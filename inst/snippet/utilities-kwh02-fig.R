@@ -10,5 +10,5 @@ ut.lm %>%
   plot("temp", sub = "additive model")
 ut.lmint %>% 
   Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
-  plot("temp", sub = "interation model")
+  plot("temp", sub = "interation model", alternating = FALSE)
 

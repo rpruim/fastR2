@@ -602,7 +602,8 @@ vcd::structable(~ victim + defendant + death, data = DeathPenalty)
 
 ## ----faithful-sol--------------------------------------------------------
 gf_point(waiting ~ duration, data = MASS::geyser)
-gf_point(head(waiting, -1) ~ tail(duration, -1), data = MASS::geyser)
+gf_point(lead(waiting) ~ duration, data = MASS::geyser)
+gf_point(waiting ~ lag(duration), data = MASS::geyser)
 
 ## ----utilities-sol-------------------------------------------------------
 gf_point(ccf ~ (year + month/12), data = Utilities, color = ~ factor(month)) %>%
@@ -702,8 +703,9 @@ sums <- function(n){
     for (x in 0:n) {
         for ( y in (0:(n-x)) ) {
             z <- n - x - y
-            results <- c(results, 
-                         paste(x + 1, "+", y+1, "+", z + 1, "=", x + y + z + 3))
+            results <- 
+              c(results, 
+                paste(x + 1, "+", y+1, "+", z + 1, "=", x + y + z + 3))
         }
     }
     return(results)
@@ -783,16 +785,19 @@ choose(17 + 2, 2)
 21.1 / ( 21.1 + 24.8)
 
 ## ----smokers02-sol-------------------------------------------------------
-# b) After factoring out a constant from numerator and denominator we are left with
+# b) After factoring out a constant from numerator and denominator 
+#    we are left with
 0.183 * 13 / ( 0.183 * 13 + .817 * 1 )
-# c) After factoring out a constant from numerator and denominator we are left with
+# c) After factoring out a constant from numerator and denominator 
+#    we are left with
 0.231 * 23 / ( 0.231 * 23 + .769 * 1 )
 
 ## ----defective-parts-sol, tidy=FALSE-------------------------------------
 # part a
 .20 + .27
 
-# part b: P( Wed-Thur | defective ) = P( Wed-Thur and defective ) / P(defective)
+# part b: 
+# P(Wed-Thur | defective) = P(Wed-Thur and defective) / P(defective)
 a <- .20 * .02 +       # Monday and defective
      .27 * .03         # Thursday and defective
 b <- .25 * .015 +      # Tuesday and defective
@@ -819,17 +824,21 @@ p <- c(0.01, 0.10)
 factorial(10) / (factorial(3) * factorial(3) * factorial(2))
 
 ## ----acceptance-sampling-sol---------------------------------------------
-choose(90, 4) / choose(100, 4)  # prob only good ones selected
-1 - choose(90, 4) / choose(100, 4)  # lot is rejected
+# prob only good ones selected
+choose(90, 4) / choose(100, 4)  
+# prob lot is rejected
+1 - choose(90, 4) / choose(100, 4)  
 f <- function(x) { 1 - choose(100 - x, 4) / choose(100, 4) }
 Data <- data.frame(reject=  sapply(10:100, f), defective = 10:100)
 gf_line(reject ~ defective, data = Data, col = "navy", size = 1) %>%
   gf_labs(x = "number of defective parts",
-        y = "probability of rejecting")
+          y = "probability of rejecting")
 
 ## ----acceptance-sampling-binomial-sol------------------------------------
-dbinom(0, 4, 10/100)         # prob only good ones selected
-1 - dbinom(0, 4, 10/100)     # lot is rejected
+# prob only good ones selected
+dbinom(0, 4, 10/100)     
+# prob lot is rejected
+1 - dbinom(0, 4, 10/100) 
 
 ## ----acceptance-sampling-nbinom-sol--------------------------------------
 pnbinom(3, 1, 10/100)        # lot is rejected
@@ -1047,7 +1056,17 @@ binom.test(8, 50, 0.25)                     # check with binom.test()
 binom.test(8, 10, p = 0.50)
 
 ## ----mendel-sol----------------------------------------------------------
-binom.test(428, 428 + 152, p = 0.75)           
+binom.test(428, 428 + 152, p = 0.75) %>% pval()          
+
+## ------------------------------------------------------------------------
+binom.test(427, 428 + 152, p = 0.75) %>% pval()
+1 - (binom.test(427, 428 + 152, p = 0.75) %>% pval())
+
+## ------------------------------------------------------------------------
+# expeted # of green
+(428 + 152) * 0.75
+# P(|X - 435| <= 7)
+pbinom(435 + 7, 428 + 152, 0.75) - pbinom( 435 - 7 - 1, 428 + 152, 0.75)
 
 ## ----beetles-sol---------------------------------------------------------
 binom.test(10, 10 + 17)
@@ -1082,7 +1101,7 @@ power <- 1 - (pbinom(60, 100, p) - pbinom(39, 100, p))
 gf_line(power ~ p, size = 1) %>%
   gf_labs(x = expression(pi[a]))
 
-## ----power05-bug00, eval=FALSE, include=FALSE----------------------------
+## ----eval=FALSE, include=FALSE-------------------------------------------
 ## Power_data <-
 ##   expand.grid(n = 1:2000, p = c(0.52, 0.55, 0.60)) %>%
 ##   mutate(
@@ -1094,7 +1113,7 @@ gf_line(power ~ p, size = 1) %>%
 ##   gf_labs(y = "power", x = "number of coin tosses") %>%
 ##   gf_lims(y = c(0, 1.1))
 
-## ----power05, eval=FALSE-------------------------------------------------
+## ----eval=FALSE, include = FALSE-----------------------------------------
 ## binom_power <- function(n, p_alt, alpha = 0.05, p_null = 0.50) {
 ##   critical_low <- qbinom(    alpha/2, size = n, prob = p_null) - 1
 ##   critical_hi  <- qbinom(1 - alpha/2, size = n, prob = p_null) + 1
@@ -1112,8 +1131,28 @@ gf_line(power ~ p, size = 1) %>%
 ##   gf_labs(y = "power", x = "number of coin tosses") %>%
 ##   gf_lims(y = c(0, 1.1))
 
+## ----power05, eval=FALSE-------------------------------------------------
+## binom_power <- function(n, p_alt, alpha = 0.05) {
+##   p_null <- 0.50
+##   critical_low <- qbinom(    alpha/2, size = n, prob = p_null) - 1
+##   critical_hi  <- qbinom(1 - alpha/2, size = n, prob = p_null) + 1
+##   pbinom(critical_low, n, p_alt) + 1 - pbinom(critical_hi - 1, n, p_alt)
+## }
+## 
+## PowerData <-
+##   expand.grid(n = seq(5, 10000, by = 5), p_alt = c(0.52, 0.55, 0.60)) %>%
+##   mutate(
+##     power = binom_power(n, p_alt),
+##     plab = paste("alt prob =", as.character(p_alt))
+##   )
+## 
+## gf_line(power ~ n | plab, data = PowerData, size = 1) %>%
+##   gf_labs(y = "power", x = "number of coin tosses") %>%
+##   gf_lims(y = c(0, 1.1))
+
 ## ----power05-fig, echo=FALSE, opts.label = "fig1"------------------------
-binom_power <- function(n, p_alt, alpha = 0.05, p_null = 0.50) {
+binom_power <- function(n, p_alt, alpha = 0.05) {
+  p_null <- 0.50
   critical_low <- qbinom(    alpha/2, size = n, prob = p_null) - 1
   critical_hi  <- qbinom(1 - alpha/2, size = n, prob = p_null) + 1
   pbinom(critical_low, n, p_alt) + 1 - pbinom(critical_hi - 1, n, p_alt)  
@@ -1169,8 +1208,7 @@ uniroot(function(size){ power(size)$power - 0.90 }, c(400, 5000)) %>%
   value()
 
 ## ----power05-sol, fig.keep = "last"--------------------------------------
-n <- 1040:1090
-gf_point(power ~ n, data = power(1040:1090)) %>%
+gf_point(power ~ n, data = power(1000:1090)) %>%
   gf_hline(yintercept = 0.9, color = "red", alpha = 0.5)
 
 ## ----power06-sol---------------------------------------------------------
@@ -1189,6 +1227,118 @@ Sims1075 <- do(1000) * sim_pval(n = 1075)
 tally( ~ p.value < 0.05, data = Sims200, format = "proportion")
 tally( ~ p.value < 0.05, data = Sims400, format = "proportion")
 tally( ~ p.value < 0.05, data = Sims1075, format = "proportion")
+
+## ----binomial-power-sol00, warning = FALSE, echo = FALSE, opts.label = "fig1"----
+binom_power_data <- 
+  function(n, p_alt, alpha = 0.05, p_null = 0.5) {
+    data_frame(
+      x = 0:n,            # possible value of x
+      null_prob = dbinom(x, n, p_null),  
+      alt_prob  = dbinom(x, n, p_alt)
+    )  %>% 
+      arrange(null_prob) %>%  # sort by null probability
+      mutate(
+        cumsum_prob = cumsum(null_prob), # running total
+        reject = 
+          ifelse(cumsum_prob <= alpha, 
+                 "reject", 
+                 "don't reject")
+      ) %>%
+      arrange(x)    # sort by x values again
+  }
+
+binom_power_plot <- function(n, p_alt, alpha = 0.05, p_null = 0.5) {
+  BPD <- binom_power_data(n = n, p_alt = p_alt, alpha = alpha, p_null = p_null) 
+  BPDnull <- BPD %>% mutate(case = factor("null", levels = c("null", "alternative")))
+  BPDalt <-  BPD %>% mutate(case = factor("alternative",  levels = c("null", "alternative")))
+  true_alpha <- sum( ~ null_prob, data = BPD %>% filter(cumsum_prob <= alpha))
+  power      <- sum( ~ alt_prob, data = BPD %>% filter(cumsum_prob <= alpha))
+  
+  gf_point(null_prob ~ x, color = ~ reject, alpha = 0.7, data = BPDnull) %>%
+    gf_segment(null_prob + 0 ~ x + x, color = ~ reject, alpha = 0.7, data = BPDnull) %>%
+    gf_point(alt_prob ~ x, color = ~ reject, alpha = 0.7, data = BPDalt) %>%
+    gf_segment(alt_prob + 0 ~ x + x, color = ~ reject, alpha = 0.7, data = BPDalt) %>%
+    gf_facet_grid( case ~ .) %>%
+    gf_lims(
+      x = range(c(
+        n * p_null + c(-1, 1) * sqrt(n * p_null * (1-p_null)) * 4,
+        n * p_alt + c(-1, 1) * sqrt(n * p_alt * (1-p_alt)) * 4)
+      )
+    ) %>%
+    gf_refine(scale_color_manual(values = c("navy", "red"))) %>%
+    gf_labs(
+      caption = paste("nominal alpha = ", format(round(alpha, 3)),
+                      "true alpha = ",    format(round(true_alpha, 3)), 
+                      "; power = ",       format(round(power, 3))))
+}
+
+binom_power_plot(n = 50, p_null = 1/6, p_alt = 1/3)
+
+## ----binomial-power-sol01------------------------------------------------
+binom_power_data <- 
+  function(n, p_alt, alpha = 0.05, p_null = 0.5) {
+    data_frame(
+      x = 0:n,            # possible value of x
+      null_prob = dbinom(x, n, p_null),  
+      alt_prob  = dbinom(x, n, p_alt)
+    )  %>% 
+      arrange(null_prob) %>%  # sort by null probability
+      mutate(
+        cumsum_prob = cumsum(null_prob), # running total
+        reject = 
+          ifelse(cumsum_prob <= alpha, 
+                 "reject", 
+                 "don't reject")
+      ) %>%
+      arrange(x)    # sort by x values again
+  }
+binom_power_data(10, 0.5) %>% head(3)
+
+## ----binomial-power-sol02------------------------------------------------
+binom_power <- function(n, p_alt, alpha = 0.05, p_null = 0.5) {
+  binom_power_data(n = n, p_alt = p_alt, alpha = alpha, p_null = p_null) %>%
+    filter(reject == "reject") %>%
+    summarise(n = n, p_null = p_null, p_alt = p_alt, power = sum(alt_prob))
+}
+binom_power(n = 400, p_null = 1/3, p_alt = 1/4)
+binom_power(n = 400, p_null = 1/3, p_alt = 1/4)$power
+
+## ----binomial-power-sol03------------------------------------------------
+Plot_Data <- 
+  data_frame(
+    n = 1:1000,
+    power = sapply(n, function(n) binom_power(n = n, p_null = 1/3, p_alt = 1/4)$power)
+  )
+
+gf_line(power ~ n, data = Plot_Data)
+
+## ----binomial-power-sol04------------------------------------------------
+binom_power_plot <- function(n, p_alt, alpha = 0.05, p_null = 0.5) {
+  BPD <- binom_power_data(n = n, p_alt = p_alt, alpha = alpha, p_null = p_null) 
+  BPDnull <- BPD %>% mutate(case = factor("null", levels = c("null", "alternative")))
+  BPDalt <-  BPD %>% mutate(case = factor("alternative",  levels = c("null", "alternative")))
+  true_alpha <- sum( ~ null_prob, data = BPD %>% filter(cumsum_prob <= alpha))
+  power      <- sum( ~ alt_prob, data = BPD %>% filter(cumsum_prob <= alpha))
+  
+  gf_point(null_prob ~ x, color = ~ reject, alpha = 0.7, data = BPDnull) %>%
+    gf_segment(null_prob + 0 ~ x + x, color = ~ reject, alpha = 0.7, data = BPDnull) %>%
+    gf_point(alt_prob ~ x, color = ~ reject, alpha = 0.7, data = BPDalt) %>%
+    gf_segment(alt_prob + 0 ~ x + x, color = ~ reject, alpha = 0.7, data = BPDalt) %>%
+    gf_facet_grid( case ~ .) %>%
+    gf_lims(
+      x = range(c(
+        n * p_null + c(-1, 1) * sqrt(n * p_null * (1-p_null)) * 4,
+        n * p_alt + c(-1, 1) * sqrt(n * p_alt * (1-p_alt)) * 4)
+      )
+    ) %>%
+    gf_refine(scale_color_manual(values = c("navy", "red"))) %>%
+    gf_labs(
+      caption = paste("nominal alpha = ", format(round(alpha, 3)),
+                      "true alpha = ",    format(round(true_alpha, 3)), 
+                      "; power = ",       format(round(power, 3))))
+}
+
+binom_power_plot(n = 400, p_null = 1/3, p_alt = 1/4)
 
 ## ----mean-coins01--------------------------------------------------------
 vals <- 0:4
@@ -2862,9 +3012,9 @@ sqrt(v / 2 * (5-2) / (5-1))
 var(srs.means)   # N.B: This is the INCORRECT variance
 
 ## ----clt-finite-samples-sol----------------------------------------------
-x <- c(1, 2, 4, 4, 9)
+x <- c(1, 6, 6, 8, 9)
 mu <- sum(x * 0.2); mu                 # population mean
-v <- sum(x^2 * 0.2) - mu^2; v          # population variance
+v  <- sum(x^2 * 0.2) - mu^2; v         # population variance
 pairsums <- outer(x, x, "+")           # compute 25 sums
 pairmeans <- pairsums / 2
 
@@ -3144,7 +3294,7 @@ Sims <-
     upper = lower / 0.05^(1/n),
     cover = upper > theta
   )
-prop(cover ~ n, data = Sims)
+df_stats(cover ~ n, data = Sims, props)
 
 ## ----one-sided-ci-sol----------------------------------------------------
 zstar <- qnorm(0.95)
@@ -3944,13 +4094,13 @@ t.test( ~ (kiln - reg), data = Corn)
 
 ## ----golfballs-range, fig.keep = "none"----------------------------------
 stat <- function(x) { diff(range(x)) }  
-statTally(golfballs, rgolfballs, stat,
-	      xlab = "test statistic (range)")
+statTally(
+  golfballs, rgolfballs, stat, xlab = "test statistic (range)") 
 
 ## ----golfballs-range-fig, echo = FALSE, message = FALSE, results = "hide"----
 stat <- function(x) { diff(range(x)) }  
-statTally(golfballs, rgolfballs, stat,
-	      xlab = "test statistic (range)")
+statTally(
+  golfballs, rgolfballs, stat, xlab = "test statistic (range)") 
 
 ## ----golfballs-sample----------------------------------------------------
 rmultinom(1, prob = c(.3, .3, .2, .2), size = 486)
@@ -4344,7 +4494,7 @@ Sims <-
     status = c("lo", "good", "hi")[1 + (2 <= lo) + (2 < hi)])
 
 ## ----boott-sims03, fig.keep = "none"-------------------------------------
-tally(method ~ status, data = Sims, format = "proportion") / 400
+df_stats(status ~ method, data = Sims, props)
 
 ## ----boott-sims03-fig, echo = FALSE, results = "hide", opts.label = "fig1"----
 gf_linerange(lo + hi ~ .index, data = Sims,
@@ -4449,183 +4599,6 @@ uV <- sqrt( (uL/L)^2 + (uW/W)^2 + (uH/H)^2) * V; uV
 ## ----relative-uncertainty-sol, tidy=FALSE--------------------------------
 V <- 1.637 / 0.43; V
 uV <- sqrt( (0.02/.43)^2 + (0.006/1.637)^2 ) * V; uV
-
-## ----moments-binom-------------------------------------------------------
-x <- 0:20
-sum(x * dbinom(x, 20, 0.25))
-sum(x^2 * dbinom(x, 20, 0.25))
-sum(x^2 * dbinom(x, 20, 0.25)) - (sum(x * dbinom(x, 20, 0.25)))^2
-
-## ----moments-exp---------------------------------------------------------
-f1 <- function(x) { x * dexp(x, rate = 2) }
-f2 <- function(x) { x^2 * dexp(x, rate = 2) }
-integrate(f1, 0, Inf)
-integrate(f2, 0, Inf)
-
-## ----test-coin-sol-------------------------------------------------------
-binom.test(60, 100)
-prop.test(60, 100)
-
-## ----test-coin-power01-sol-----------------------------------------------
-binom.test(61, 100)
-
-## ----test-coin-power02-sol-----------------------------------------------
-prob <- c(seq(0, 0.4, by = 0.10), 0.45, 0.5, 0.55, seq(0.6, 1, by = 0.10))
-power <- pbinom(39, 100, prob) + 1- pbinom(60, 100, prob)
-print(cbind(prob, power))
-
-## ----test-coin-power03-sol, opts.label = "fig1"--------------------------
-prob <- seq(0, 1, by = 0.01)
-power <- pbinom(39, 100, prob) + 1 - pbinom(60, 100, prob)
-gf_line(power ~ prob) %>%
-  gf_labs(title = "Power to detect a biased coin with 100 flips",
-          x = "true probability of heads")
-
-## ----min-of-unif01-sol---------------------------------------------------
-n <- round((1:10)^(1.75)); prob <- 1 - (0.95)^n
-cbind(n, prob)
-
-## ----min-of-unif02-sol, opts.label = "fig1"------------------------------
-expand.grid(
-  y = seq(0, 1, by = 0.01),
-  n = c(1, 5, 10, 20)
-) %>% 
-  mutate(density = n * (1 - y)^(n-1),
-         n_string = paste("n =", n),
-         sample_size = factor(n_string, levels = unique(n_string))
-  ) %>% 
-  gf_line(density ~ y, color = ~ sample_size, na.rm = TRUE) %>%
-  gf_labs(title =  "Pdf of the mininum of a sample from Unif(0,1)") %>%
-  gf_lims(x = c(0, 0.50))
-
-## ----mix-normals01-sol---------------------------------------------------
-0.3 * pnorm(12, 8, 2) + 0.7 * pnorm(12, 16, 3)
-
-## ----mix-normals02-sol, opts.label = "fig1"------------------------------
-Plot_data <-
-  data_frame(
-    x = seq(0, 30, by = 0.25),
-    density = 0.3 * dnorm(x, 8, 2) + 0.7 * dnorm(x, 16, 3))
-gf_line(density ~ x, data = Plot_data) %>%
-  gf_labs(title = "pdf of a mixture of normals")
-
-## ----lognormal-sol, opts.label = "fig1"----------------------------------
-#note: these functions do not check for negative values 
-#       where they shouldn't be
-dlognormal <- function(x, mu = 0, sigma = 1) {
-    dnorm(log(x), mean = mu, sd = sigma) * 1 / x
-}
-rlognormal <- function(n, mu = 0, sigma = 1) {
-    normals <- rnorm(n, mean = mu, sd = sigma)
-    return(exp(normals))
-}
-plognormal <- function(x, mu = 0, sigma = 1) {
-    pnorm(log(x), mean = mu, sd = sigma) 
-}
-qlognormal <- function(p, mu = 0, sigma = 1) {
-    exp(qnorm(p, mean = mu, sd = sigma))
-}
-# some checks
-randomData <- rlognormal(100, mu = 0, sigma = 1/2)
-quant <- quantile(randomData)
-x <- qlognormal(c(0.25, 0.5, 0.75), mu = 0, sigma = 1/2); x
-plognormal(x, mu = 0, sigma = 1/2)
-plognormal(quant, mu = 0, sigma = 1/2)
-
-gf_dhistogram( ~ randomData)
-
-# x <- seq(0, 10, by = 0.25)
-# nx <- length(x)
-# mu <- c(-1, 0, 1)
-# nmu <- length(mu)
-# sigma <- c(1/8, 1/4, 1/2, 1, 2, 4)
-# nsigma <- length(sigma)
-# 
-# x <- rep(x, each = nmu * nsigma)
-# mu <- rep(rep(mu, nsigma), times = nx)
-# sigma <- rep(rep(sigma, each = nmu), times = nx)
-# density <- dlognormal(x, mu, sigma)
-
-Plot_data <- 
-  expand.grid(
-    x = seq(0, 10, by = 0.25),
-    mu = c(-1, 0, 1),
-    sigma = c(1/8, 1/4, 1/2, 1, 2, 4)
-  ) %>% 
-  mutate(
-    density = dlognormal(x, mu, sigma),
-    mu_lab = paste("mu", "=", mu),
-    mu = factor(mu),
-    sigma_lab = paste("sigma", "=", sigma)
-    )
-
-gf_line(density ~ x, data = Plot_data, 
-        color = ~ mu, group = ~ mu) %>%
-  gf_facet_wrap( ~ sigma_lab, scales = "free") %>%
-  gf_labs(title = "pdfs of lognormal distributions")
-
-## ----faithful-t----------------------------------------------------------
-t.test( ~ eruptions, data = faithful)
-
-## ----moments-function01-sol----------------------------------------------
-moment <- function(
-    k = 1,                                     # which moment
-    vals = 1:6,                                # dice by default
-    probs = rep(1 / length(vals), length(vals)), # uniform probs
-    centered = FALSE) {                        # center on mean of data?
-
-    if (length(k) > 1) {  # vectorize this (fancy)
-        return(sapply(k, moment, vals = vals, probs = probs, centered = centered))
-    }
-
-    if (centered) {
-        m = sum(vals * probs)
-    } else { 
-        m = 0
-    }
-    sum((vals-m)^k * probs)
-}
-
-moment(k = 1, 0:10, dbinom(0:10, 10, 0.4))
-moment(k = 2, 0:10, dbinom(0:10, 10, 0.4), centered = FALSE)
-moment(k = 2, 0:10, dbinom(0:10, 10, 0.4), centered = TRUE)
-10 * 0.4 * 0.6   # should match previous and next value
-moment(k = 2, 0:10, dbinom(0:10, 10, 0.4), centered = FALSE) - 
-    moment(k = 1, 0:10, dbinom(0:10, 10, 0.4), centered = FALSE)^2
-round(moment(k = 1:4, 0:10, dbinom(0:10, 10, 0.4), centered = FALSE), 5)
-round(moment(k = 1:4, 0:10, dbinom(0:10, 10, 0.4), centered = TRUE), 5)
-
-## ----moments-function02-sol----------------------------------------------
-moment.cont <- function(k = 1,       # which moment?
-        dist = dnorm,  
-        args = list(),                # arguments to dist()
-        range = c(-Inf, Inf),          
-        centered = FALSE) {           # centered on mean?
-
-    if (length(k) > 1) {  # vectorize this (fancy)
-        return(
-          sapply(k, moment.cont, dist = dist, 
-                 args = args, range = range, centered = centered))
-    }
-
-    if (centered) {
-        m = moment.cont(dist = dist, range = range, k = 1, centered = FALSE)
-    } else { 
-        m = 0
-    }
-    int.out <- integrate(
-                    function(x) { (x - m)^k * dist(x) }, 
-                    range[1], range[2])
-    return (int.out$value)
-}
-
-moment.cont(dunif, k = 1, centered = FALSE)
-moment.cont(dunif, k = 2, centered = FALSE)
-moment.cont(dunif, k = 2, centered = TRUE)
-moment.cont(dunif, k = 1:4, centered = FALSE)
-round(moment.cont(dunif, k = 1:4, centered = TRUE), 5)
-round(moment.cont(dnorm, k = 1:4, centered = TRUE), 5)
-round(moment.cont(function(x) {dnorm(x, 10, 3)}, k = 1:4, centered = TRUE), 5)
 
 
 ## ----Likelihood, child="Likelihood.Rnw", eval=includeChapter[5]----------
@@ -5155,7 +5128,7 @@ stdEr(ml.pois100)
 ## ----pois-mle, seed = 123------------------------------------------------
 # generate 5000 samples of size 10
 rdata <- do(5000) * rpois(10, 1)
-statTally(x, rdata, lrtStat)
+statTally(x, rdata, lrtStat)  
 
 ## ----pois-wald-----------------------------------------------------------
 SE <- stdEr(ml.pois10); SE
@@ -5291,10 +5264,23 @@ logLik(ml0)
 lrt.stat <- 2 * (logLik(ml) - logLik(ml0)); lrt.stat
 1 - pchisq(lrt.stat, df = 1)     # p-value based on asymptotic distribution
 
-## ----faithful-lrt03------------------------------------------------------
-lrt.stat <- 2 * (logLik(ml) - logLik(ml0)) %>% as.vector() 
-lrt.stat
-1 - pchisq(lrt.stat, df = 1)     # p-value based on asymptotic distribution
+## ----faithful-lrt03, echo = FALSE----------------------------------------
+gf_dhistogram( ~ duration, data = geyser, binwidth = 0.20, alpha = 0.2,
+               fill = "navy") %>%
+  gf_function(fun = dmix, 
+              args = list(
+                alpha =  mle[1],
+                mu1 =    mle[2], mu2 =    mle[3],
+                sigma1 = mle[4], sigma2 = mle[5]),
+                color = "gray30"
+  ) %>%
+  gf_function(fun = dmix, 
+              args = list(
+                alpha =  0.5,
+                mu1 =    mle0[1], mu2 =    mle0[2],
+                sigma1 = mle0[3], sigma2 = mle0[4]),
+                linetype = "dashed"
+  )
 
 ## ----faithful-lrt04, tidy = FALSE----------------------------------------
 ml0a <- maxLik(loglik.faithful, x = geyser$duration,
@@ -5428,13 +5414,13 @@ p <- function(a) {
 lo <- uniroot(function(a){p(a) - 0.05}, c(0.1, mle[1])) %>% value(); lo
 hi <- uniroot(function(a){p(a) - 0.05}, c(0.9, mle[1])) %>% value(); hi
 
-## ----golfballs-max, eval=FALSE, tidy = FALSE-----------------------------
-## golfballs <- c(137, 138, 107, 104)
-## statTally(golfballs, rgolfballs, max,
-##           xlab = "test statistic (max)")
+## ----golfballs-max, eval = TRUE, tidy = FALSE, fig.show = "hide"---------
+golfballs <- c(137, 138, 107, 104)  
+statTally(golfballs, rgolfballs, max, 
+          xlab = "test statistic (max)")
 
 ## ----golfballs-max-fig, echo = FALSE, message = FALSE, results = "hide"----
-golfballs <- c(137, 138, 107, 104)
+golfballs <- c(137, 138, 107, 104)  
 statTally(golfballs, rgolfballs, max, 
           xlab = "test statistic (max)")
 
@@ -5448,10 +5434,10 @@ G <- 2 * sum (o * log(o / e)); G       # lrt Goodness of fit statistic
 ## ----golfballs-lrt2------------------------------------------------------
 # function to compute G statistic from tabulated data
 G <- function(o) {e <- rep(486 / 4, 4); 2 * sum (o * log(o / e))}
-statTally(golfballs, rgolfballs, G)
+statTally(golfballs, rgolfballs, G)  
 
 ## ----golfballs-pearson01-------------------------------------------------
-E <- rep(486 / 4, 4)
+E <- rep(486 / 4, 4)  
 chisqstat <- function(x) { sum((x - E)^2 / E) }
 statTally(golfballs, rgolfballs, chisqstat, xlab = expression(X^2))
 
@@ -6510,10 +6496,13 @@ treb.dist(projectileWt = 44, interval = "prediction")
 ## ----trebuchet06, fig.keep = "none", tidy = FALSE, warning = FALSE-------
 gf_point(distance ~ projectileWt, data = Trebuchet2) %>%
   gf_lm() %>%
-  gf_ribbon(lwr + upr ~ projectileWt, fill = "skyblue",
-            data = cbind(Trebuchet2, predict(treb.model, interval = "prediction"))) %>%
-  gf_ribbon(lwr + upr ~ projectileWt, 
-            data = cbind(Trebuchet2, predict(treb.model, interval = "confidence"))) 
+  gf_ribbon(
+    lwr + upr ~ projectileWt, fill = "skyblue",
+    data = cbind(Trebuchet2, predict(treb.model, interval = "prediction"))
+    ) %>%
+  gf_ribbon(
+    lwr + upr ~ projectileWt, 
+    data = cbind(Trebuchet2, predict(treb.model, interval = "confidence"))) 
 # simpler way, using gf_lm()
 gf_point(distance ~ projectileWt, data = Trebuchet2) %>%
   gf_lm(interval = "prediction", fill = "skyblue") %>%
@@ -6522,10 +6511,13 @@ gf_point(distance ~ projectileWt, data = Trebuchet2) %>%
 ## ----trebuchet06-fig, results = "hide", echo = FALSE, tidy = FALSE, fig.keep = "last", warning = FALSE----
 gf_point(distance ~ projectileWt, data = Trebuchet2) %>%
   gf_lm() %>%
-  gf_ribbon(lwr + upr ~ projectileWt, fill = "skyblue",
-            data = cbind(Trebuchet2, predict(treb.model, interval = "prediction"))) %>%
-  gf_ribbon(lwr + upr ~ projectileWt, 
-            data = cbind(Trebuchet2, predict(treb.model, interval = "confidence"))) 
+  gf_ribbon(
+    lwr + upr ~ projectileWt, fill = "skyblue",
+    data = cbind(Trebuchet2, predict(treb.model, interval = "prediction"))
+    ) %>%
+  gf_ribbon(
+    lwr + upr ~ projectileWt, 
+    data = cbind(Trebuchet2, predict(treb.model, interval = "confidence"))) 
 # simpler way, using gf_lm()
 gf_point(distance ~ projectileWt, data = Trebuchet2) %>%
   gf_lm(interval = "prediction", fill = "skyblue") %>%
@@ -6708,9 +6700,16 @@ ddd <- data.frame(X = X, Y = Y, a = a, b = b, original = original)
 gf_point(y ~ x)
 
 ## ----tukey-buldge-many-fig, results = "hide", echo = FALSE, opts.label = "figbig"----
+ddd <- ddd %>% 
+  mutate(
+    afacet = factor(paste("a=", a, sep = "")),
+    bfacet0 = factor(paste("b=", b, sep = "")),
+    bfacet = factor(bfacet0, levels = rev(levels(bfacet0)))
+  )
+         
 gf_point(Y ~ X, data = ddd, color = ~original) %>%
-  gf_facet_grid(paste("b=", b, sep = "") ~ paste("a=", a, sep = ""), scale = "free") %>%
-  gf_theme(axis.ticks = element_blank(), axis.text = element_blank(), legend.position = "none")
+  gf_facet_grid(bfacet ~ afacet, scale = "free") %>%
+  gf_theme(axis.ticks = element_blank(), axis.text = element_blank(), legend.position = "none") 
 
 ## ----balldrop, fig.show = "hide"-----------------------------------------
 ball.model <- lm(time ~ height, BallDrop)
@@ -8041,7 +8040,7 @@ ut.lm %>%
   plot("temp", sub = "additive model")
 ut.lmint %>% 
   Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
-  plot("temp", sub = "interation model")
+  plot("temp", sub = "interation model", alternating = FALSE)
 
 ## ----utilities-kwh02-fig, echo = FALSE, results = "hide"-----------------
 # fit additive and interaction models
@@ -8056,7 +8055,7 @@ ut.lm %>%
   plot("temp", sub = "additive model")
 ut.lmint %>% 
   Effect(c("temp", "kwhpday"), . , partial.residuals = TRUE) %>% 
-  plot("temp", sub = "interation model")
+  plot("temp", sub = "interation model", alternating = FALSE)
 
 ## ----utilities-kwh03-----------------------------------------------------
 coef(ut.lmint)[1] +  coef(ut.lmint)[3] * 25
@@ -8515,6 +8514,8 @@ msummary(glht(airp.lm4, contr4))
 
 ## ----cholesterol01, fig.keep = "none"------------------------------------
 data(cholesterol, package = "multcomp")
+cholesterol <- cholesterol %>% 
+  mutate(trt = factor(gsub("drug", "", gsub("times*", "x", trt))))
 chol.lm <- lm(response ~ trt, data = cholesterol)
 plot(chol.lm, w = c(5, 2))       # diagnostic plots
 msummary(chol.lm)
@@ -8522,6 +8523,8 @@ anova(chol.lm)
 
 ## ----cholesterol01-fig, echo = FALSE, results = "hide"-------------------
 data(cholesterol, package = "multcomp")
+cholesterol <- cholesterol %>% 
+  mutate(trt = factor(gsub("drug", "", gsub("times*", "x", trt))))
 chol.lm <- lm(response ~ trt, data = cholesterol)
 plot(chol.lm, w = c(5, 2))       # diagnostic plots
 msummary(chol.lm)
@@ -9567,9 +9570,15 @@ gf_point(time_til_next ~ duration, data = faithfulLong)
 ## ----filter02, eval = FALSE, tidy = FALSE, fig.keep = "last", fig.show = "hide"----
 ## gf_point(time_til_next ~ duration,
 ##        data = faithful2 %>% filter( duration > 3))
+## 
 ## # this one will use a different viewing window
 ## gf_point(time_til_next ~ duration, data = faithful2)  %>%
 ##   gf_lims(x = c(3, NA))
+## 
+## # Data can also be chained directly into ggformula functions
+## faithful2 %>%
+##   filter( duration > 3) %>%
+##   gf_point(time_til_next ~ duration)
 
 ## ----summarise01---------------------------------------------------------
 HELPrct %>% 
@@ -9828,7 +9837,7 @@ fstats((1:20)^2)
 ## ----function04----------------------------------------------------------
 altfstats <- function(x) {
     cat(paste("  mean:", format(mean(x), 4), "\n"))
-    cat(paste(" edian:", format(median(x), 4), "\n"))
+    cat(paste("median:", format(median(x), 4), "\n"))
     cat(paste("    sd:", format(sd(x), 4), "\n"))
 }
 altfstats((1:20)^2)
@@ -10158,9 +10167,9 @@ b <- project(c(1, 0), c(1, -1)); b
 c <- project(c(1, 0), c(1, 2)); c
 d <- project(c(1, 2, 3), c(1, 1, 1)); d
 e <- project(c(1, 1, 1), c(1, 2, 3)); fractions(e)
-f <- project(c(1, 2, 3), c(1, -1, 0))
-g <- project(c(1, 2, 3, 4), c(1, 1, -1, -1))
-h <- project(c(1, 1, -1, -1), c(1, -1, 1, -1))
+f <- project(c(1, 2, 3), c(1, -1, 0)); f
+g <- project(c(1, 2, 3, 4), c(1, 1, -1, -1)); g
+h <- project(c(1, 1, -1, -1), c(1, -1, 1, -1)); h
 
 ## ----projections02-sol---------------------------------------------------
 a + b
@@ -10263,22 +10272,26 @@ dot(remainder, v2)    # should be 0
 knitr::opts_chunk$set(cache.path = "cache/Rev-")
 
 ## ----rev-data, fig.show='hide'-------------------------------------------
-names(batting)
-require(Hmisc)
-summary(HR~team, data=batting, fun=max,
-        subset=(year==2005&league=="AL"), nmin=1)
-histogram(~AB, data=batting, subset=year==2005)
-xyplot(HR~H, subset=(team=="DET" & year==2005), data=batting)
-bwplot(HR~league, data=batting, subset=year==2005)
+require(fastR2)
+names(Batting)
+Batting2005 <- Batting %>% filter(year == 2005)
+df_stats(HR ~ team | league, data = Batting2005, max)
 
-## ----rev-data-fig, echo=FALSE--------------------------------------------
-names(batting)
-require(Hmisc)
-summary(HR~team, data=batting, fun=max,
-        subset=(year==2005&league=="AL"), nmin=1)
-histogram(~AB, data=batting, subset=year==2005)
-xyplot(HR~H, subset=(team=="DET" & year==2005), data=batting)
-bwplot(HR~league, data=batting, subset=year==2005)
+gf_histogram( ~ AB | league, data = Batting2005)
+gf_point(HR ~ H, data = Batting2005 %>% filter(team == "DET"))
+gf_boxplot(HR ~ league, data = Batting2005) %>%
+  gf_refine(coord_flip())
+
+## ----rev-data-fig, echo = FALSE, results = "hide"------------------------
+require(fastR2)
+names(Batting)
+Batting2005 <- Batting %>% filter(year == 2005)
+df_stats(HR ~ team | league, data = Batting2005, max)
+
+gf_histogram( ~ AB | league, data = Batting2005)
+gf_point(HR ~ H, data = Batting2005 %>% filter(team == "DET"))
+gf_boxplot(HR ~ league, data = Batting2005) %>%
+  gf_refine(coord_flip())
 
 ## ----rev-moments-binom---------------------------------------------------
 x <- 0:20

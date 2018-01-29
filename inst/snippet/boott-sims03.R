@@ -1,2 +1,2 @@
-tally(method ~ status, data = Sims, format = "proportion") / 400
+df_stats(status ~ method, data = Sims, props)
 
