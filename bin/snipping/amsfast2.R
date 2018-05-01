@@ -4608,12 +4608,14 @@ knitr::opts_chunk$set(cache.path = "cache/Lik-")
 require(maxLik)
 
 ## ----dice-likelihood-sol-------------------------------------------------
-gf_dist("binom", params = list(size = 10, prob = 1/2), geom = "line") %>%
-gf_dist("binom", params = list(size = 10, prob = 1/3), geom = "line", col = "red") %>%
-gf_dist("binom", params = list(size = 10, prob = 1/5), geom = "line", col = "green") %>%
-gf_dist("binom", params = list(size = 10, prob = 1/2), geom = "point") %>%
-gf_dist("binom", params = list(size = 10, prob = 1/3), geom = "point", col = "red") %>%
-gf_dist("binom", params = list(size = 10, prob = 1/5), geom = "point", col = "green")
+expand.grid(
+  x = 0:10, size = 10, sides = c(4, 6, 10)) %>%
+  mutate(
+    die = factor(paste("D", sides, sep = ""), 
+                 levels = c("D4", "D6", "D10")),
+    probability = dbinom(x, size, 2 / sides)) %>%
+  gf_point(probability ~ x, color = ~ die) %>%
+  gf_line(probability ~ x, color = ~ die) 
 
 ## ----dice-10-sol---------------------------------------------------------
 pbinom(2, 10, 1/5)
@@ -4647,8 +4649,10 @@ mle <- ( - length(x) / sum(log(x))) - 1; mle
 # plant densities (lambda) for simulations
 density <- c(0.01, 0.1, 0.25, 0.5, 1, 2, 4, 10, 100)       
 sizes <- c(10, 20, 50)
-simulate <- function(lambda = 1, size = 10, area = 1, method = c("count", "distance")){
-  method <- match.arg(method) # allows for prefixes
+simulate <- 
+  function(lambda = 1, size = 10, area = 1, 
+           method = c("count", "distance")){
+    method <- match.arg(method) # allows for prefixes
   if (method == "count") {
     x <- rpois(size, lambda*area)
     plants <- sum(x)
@@ -4660,7 +4664,7 @@ simulate <- function(lambda = 1, size = 10, area = 1, method = c("count", "dista
     total.area <- pi * sum(y^2)
     mle <- plants / total.area  
   }
-  data.frame(
+  data_frame(
     size = size, lambda = lambda, method = method,
     estimate = mle, plants = plants, area = total.area,
     lambdaFac = paste0("l=", lambda),
@@ -4669,7 +4673,7 @@ simulate <- function(lambda = 1, size = 10, area = 1, method = c("count", "dista
 }
 
 ## ----plant-density02-sol, tidy=FALSE-------------------------------------
-Results <- c()
+Results <- c()  
 for (lambda in density) {
   for (size in sizes) {
     Results <- bind_rows(Results, 
@@ -4678,6 +4682,9 @@ for (lambda in density) {
 	) 
   }
 }
+Results <- 
+  Results %>% 
+  mutate(lambdaFac = reorder(lambdaFac, lambda))
 
 ## ----plant-density-bakeoff01-sol, tidy=FALSE-----------------------------
 # have a bake-off:
@@ -4694,23 +4701,17 @@ head(SummaryResults)
 ## ----plant-density-bakeoff02-sol, eval=FALSE-----------------------------
 ## log(estimate / lambda)
 
-## ----plant-density-plot01-sol, fig.height=8, tidy=FALSE------------------
-latticeExtra::useOuterStrips(
-  stripplot(method ~ log(estimate / lambda) | sizeFac + lambdaFac, 
-            data = Results, jitter = TRUE, alpha = .1, as.table = TRUE)
-)
-gf_jitter( method ~ log(estimate / lambda) | sizeFac ~ lambdaFac, 
-           data = Results, alpha = 0.1)
+## ----plant-density-plot01-sol, fig.height=8, fig.width = 7, tidy=FALSE----
+gf_jitter( 
+  method ~ log(estimate / lambda) | lambdaFac ~ sizeFac, 
+  data = Results, alpha = 0.1)
 
-## ----plant-density-plot02-sol, fig.height=8, tidy=FALSE, warning=FALSE----
-gf_violin(log(estimate / lambda) ~ method, data = Results,
-            color = ~ method, fill = ~method, alpha = 0.5) %>%
+## ----plant-density-plot02-sol, fig.height=8, fig.width = 7, tidy=FALSE, warning=FALSE----
+gf_violin(
+  log(estimate / lambda) ~ method, data = Results,
+  color = ~ method, fill = ~ method, alpha = 0.5, adjust = 2) %>%
   gf_refine(annotate("hline", yintercept = 0), coord_flip()) %>%  
   gf_facet_grid(lambdaFac ~ sizeFac) 
-
-gf_violin(log(estimate / lambda) ~ method | sizeFac ~ lambdaFac,
-          data = Results, group = ~ method) %>%
-  gf_refine(coord_flip())
 
 ## ----batting-average, echo = FALSE, results = "asis"---------------------
 set.seed(1234) 
@@ -4826,14 +4827,19 @@ loglik2 <- function(theta, x) {
     dbeta(x, theta[1], theta[2], log = TRUE) 
 }
 BA.boot <-
-  do(2000) * coef(maxLik(loglik2, x = resample(ba), start = c(shape1 = 100, shape2 = 100)))
+  do(2000) * coef(maxLik(loglik2, x = resample(ba), 
+                         start = c(shape1 = 100, shape2 = 100)))
 
 ## ----ba-boot02-sol, warning = FALSE--------------------------------------
+
 # coefficients from original sample
-cc <- coef(maxLik(loglik2, x = ba, start = c(shape1 = 100, shape2 = 100)))
+cc <- 
+  coef(maxLik(loglik2, x = ba, start = c(shape1 = 100, shape2 = 100)))
 # normalized bias estimates
-(mean( ~ shape1, data = BA.boot) - cc["shape1"]) / sd( ~ shape1, data = BA.boot)
-(mean( ~ shape2, data = BA.boot) - cc["shape2"]) / sd( ~ shape2, data = BA.boot)
+(mean( ~ shape1, data = BA.boot) - cc["shape1"]) / 
+   sd( ~ shape1, data = BA.boot)
+(mean( ~ shape2, data = BA.boot) - cc["shape2"]) / 
+   sd( ~ shape2, data = BA.boot)
 # 95% confidence intervals
 cdata( ~ shape1, data = BA.boot)
 cdata( ~ shape2, data = BA.boot)
@@ -4845,26 +4851,38 @@ gf_dhistogram( ~ shape2, data = BA.boot, binwidth = 50) %>%
 
 ## ----ba-boot03-sol-------------------------------------------------------
 # normalized bias estimate
-(mean( ~ shape2 / shape1, data = BA.boot) - cc["shape2"]/cc["shape1"]) / 
-  sd( ~ (shape2 / shape1), data = BA.boot)
+(mean( ~ shape2 / shape1, data = BA.boot) - 
+   cc["shape2"]/cc["shape1"]) / 
+   sd( ~ (shape2 / shape1), data = BA.boot)
 # 95% CI
 cdata( ~ (shape2 / shape1), data = BA.boot)
 # histogram of bootstrap distribution
-gf_dhistogram( ~ (shape2 / shape1), data = BA.boot, v = cc["shape2"]/cc["shape1"])
+gf_dhistogram( 
+  ~ (shape2 / shape1), data = BA.boot, v = cc["shape2"]/cc["shape1"])
 
 ## ----ba-boot04-sol-------------------------------------------------------
-cdata( ~ (shape2 / shape1), data = BA.boot) / (cc["shape2"]/cc["shape1"]) 
+cdata( ~ (shape2 / shape1), data = BA.boot) / 
+         (cc["shape2"]/cc["shape1"]) 
 cdata( ~ shape1, data = BA.boot) / cc["shape1"]
 cdata( ~ shape2, data = BA.boot) / cc["shape2"]
 
 ## ----ba-boot05-sol-------------------------------------------------------
+
 alpha <- 0.5 / 334
 BA.boot <- BA.boot %>%
   mutate(
-    min = qbeta(alpha, shape1 = shape1, shape2 = shape2),
+    min = qbeta(    alpha, shape1 = shape1, shape2 = shape2),
     max = qbeta(1 - alpha, shape1 = shape1, shape2 = shape2))
-(range_est(ba)["min"] - mean( ~ min, data = BA.boot)) / sd( ~ min, data = BA.boot)
-(range_est(ba)["max"] - mean( ~ max, data = BA.boot)) / sd( ~ max, data = BA.boot)
+
+min_est <- 
+  qbeta(    alpha, shape1 = cc["shape1"], shape2 = cc["shape2"])
+max_est <- 
+  qbeta(1 - alpha, shape1 = cc["shape1"], shape2 = cc["shape2"])
+
+# normalized bias
+(min_est - mean( ~ min, data = BA.boot)) / sd( ~ min, data = BA.boot)
+(max_est - mean( ~ max, data = BA.boot)) / sd( ~ max, data = BA.boot)
+
 gf_dhistogram( ~ min, data = BA.boot)
 gf_dhistogram( ~ max, data = BA.boot)
 cdata( ~ min, data = BA.boot, 0.95)
@@ -5039,7 +5057,8 @@ lik.unif <- function(theta, x) {
 }
 
 ## ----unif-mle-sol02, warning=FALSE---------------------------------------
-# works if we select a good starting point -- but warns about boundary issues.
+# works if we select a good starting point -- 
+#   but warns about boundary issues.
 maxLik(loglik.unif, start = 10, x = x)
 maxLik(loglik.unif, start = 10, x = x, method = "NM")
 maxLik(loglik.unif, start = 10, x = x, method = "BFGS")
@@ -5070,14 +5089,24 @@ loglik.hwe <- function(theta, x) {
 	dmultinom(x, sum(x), theta2probs(theta), log = TRUE)
 }
 
-geno<-c(83, 447, 470)
+geno <- c(83, 447, 470)
 maxLik(loglik.hwe, start = 0.5, x = geno)
 
 ## ----mix-normals03-sol---------------------------------------------------
-
+0.3 * pnorm(12, 8, 2) + 0.7 * pnorm(12, 16, 3)
 
 ## ----mix-normals04-sol---------------------------------------------------
-
+Plot_data <-
+  data_frame(
+    x = seq(0, 30, by = 0.10),
+    density = 0.3 * dnorm(x, 8, 2) + 0.7 * dnorm(x, 16, 3),
+    density1 = 0.3 * dnorm(x, 8, 2),
+    density2 = 0.7 * dnorm(x, 16, 3)
+    )
+gf_line(density ~ x, data = Plot_data, size = 1.5, alpha = 0.5) %>%
+  gf_line(density1 ~ x, data = Plot_data, color = "red") %>%
+  gf_line(density2 ~ x, data = Plot_data, color = "blue") %>%
+  gf_labs(title = "pdf of a mixture of normals")
 
 ## ----pois-lrt01, tidy = FALSE--------------------------------------------
 x <- c(1, 1, 0, 4, 2, 1, 3, 0, 0, 2);  tally(x)
@@ -5206,17 +5235,46 @@ plot(ml.binom2, hline = TRUE) %>%
   gf_labs(x = "log odds")
 
 ## ----logodds01-sol-------------------------------------------------------
-loglik.binom3 <- function(theta, x, n) {
-  x * log(exp(theta) / (1 + exp(theta))) + (n - x) * log(1 / (1 + exp(theta)))
+loglik.binom3 <- function(logodds, x, n) {
+  odds <- exp(logodds)
+  p <- odds / (1 + odds)
+  x * log(p) + (n -x) * log(1 - p)
 }
-ml.binom3 <- maxLik2(loglik.binom3, x = 35, n = 55, start = c(logodds = 0))
+ml.binom3 <- 
+  maxLik2(loglik.binom3, x = 35, n = 55, start = c(logodds = 0))
+
 logodds.hat <- coef(ml.binom3); logodds.hat
-p <- function(logodds) {
-  2 * (loglik.binom3(coef(ml.binom3), x=35, n=55) - loglik.binom3(logodds, x=35, n=55))
+
+# W = 2 * difference in log likelihoods
+W <- function(logodds) {
+  2 * (loglik.binom3(logodds.hat, x = 35, n = 55) - 
+       loglik.binom3(logodds,         x = 35, n = 55))
 }
-lo <- uniroot(function(logodds) p(logodds) - 0.5, c(-100, logodds.hat)) %>% value()
-hi <- uniroot(function(logodds) p(logodds) - 0.5, c(100, logodds.hat)) %>% value()
+
+# W = 2 * difference in log likelihoods
+pv <- function(logodds) {
+  1 - pchisq(2 * (loglik.binom3(logodds.hat, x = 35, n = 55) - 
+       loglik.binom3(logodds,         x = 35, n = 55)), df = 1)
+}
+
+# find endpoints of rejection region using W
+lo <- uniroot(function(logodds) W(logodds) - qchisq(0.95, df = 1), 
+              c(-100, logodds.hat)) %>% value()
+hi <- uniroot(function(logodds) W(logodds) - qchisq(0.95, df = 1), 
+              c(10, logodds.hat)) %>% value()
+
+# find endpoints of rejection region using pval
+lo2 <- uniroot(function(logodds) pv(logodds) - 0.05,
+              c(-100, logodds.hat)) %>% value()
+hi2 <- uniroot(function(logodds) pv(logodds) - 0.05, 
+              c(10, logodds.hat)) %>% value()
+
+# Likelihood interval for log odds
 c(lo, hi)
+c(lo2, hi2)
+
+# Wald interval for log odds
+logodds.hat + c(-1, 1) * qnorm(0.975) * stdEr(ml.binom3)
 
 ## ----logodds02-sol, tidy = FALSE, warning=FALSE--------------------------
 plot(ml.binom, hline = TRUE) %>%
@@ -5235,6 +5293,33 @@ odds.hat <- pi.hat / (1 - pi.hat); odds.hat
 coef(ml.binom2)
 log(odds.hat)
 coef(ml.binom3)
+
+## ------------------------------------------------------------------------
+l <- 
+  function(lambda, x.bar = 1.4, n = 10)  
+    -n * lambda  + log(lambda)  * n * x.bar
+
+l.star <- 
+  function(theta,  x.bar = 1.4, n = 10)  
+    -n * 1/theta + log(1/theta) * n * x.bar
+
+ml      <- maxLik(l,      start = c(lambda = 1))
+ml.star <- maxLik(l.star, start = c(theta  = 1))
+
+coef(ml)
+1/coef(ml)
+coef(ml.star)
+uniroot(
+  function(lambda0) 2 * (l(coef(ml)) - l(lambda0)) - qchisq(.95, 1), 
+  c(0, 1.4)) %>% value()
+1/ uniroot(
+  function(lambda0) 
+    2 * (l(coef(ml)) - l(lambda0)) - qchisq(.95, 1), 
+  c(0, 1.4)) %>% value()
+uniroot(
+  function(theta0) 
+    2 * (l.star(coef(ml.star)) - l.star(theta0)) - qchisq(.95, 1), 
+  c(1/1.4, 10)) %>% value()
 
 ## ----faithful-lrt01------------------------------------------------------
 data(geyser, package = "MASS")
@@ -5310,7 +5395,9 @@ plaplace2(3, lambda = 1, theta = 2)
 plaplace2(3, lambda = 1, theta = 2) - plaplace2(0, lambda = 2, theta = 1)
 
 ## ----laplace-mle01-sol---------------------------------------------------
-x <- c(1.00, -1.43, 0.62, 0.87, -0.66, -0.59, 1.30, -1.23, -1.53, -1.94)
+x <- 
+  c(1.00, -1.43, 0.62, 0.87, -0.66, -0.59, 1.30, -1.23, -1.53, -1.94)
+
 loglik.laplace <- function(theta, x) {
     m <- theta[1]; lambda <- theta[2]
     return(sum(log(0.5) + dexp(abs(x-m), rate = lambda, log = TRUE)))
@@ -5389,9 +5476,37 @@ gf_dhistogram(~ x, binwidth = 0.1) %>%
   gf_dist("foo", theta = 1.8)
 
 ## ----less-lazy-sol-------------------------------------------------------
-n <- length(x)
-theta.hat <- -sum(log(x)) / n  - 1
-W <- 2 * (n * log(theta.hat + 1) + theta.hat * sum(log(x)) )
+x <- 
+  c(0.64, 0.92, 0.73, 0.96, 0.98, 0.33, 0.80, 0.96, 0.81, 0.76, 
+    0.98, 0.75, 0.87, 0.82, 0.44, 0.96, 0.61, 0.32, 0.67, 0.98, 
+    0.96, 0.88, 0.85, 1.00, 0.86, 0.88, 0.80, 0.83, 0.64, 0.50)
+n <- length(x); n
+theta.hat <- -n / sum(log(x)) - 1; theta.hat
+W_obs <- 2 * (n * log(theta.hat + 1) + theta.hat * sum(log(x))); W_obs
+1 - pchisq(W_obs, df = 1)
+
+## ----<-------------------------------------------------------------------
+one_sim <- function(n = 30L) {
+  x <- runif(n)
+  theta.hat <- -n / sum(log(x)) - 1; theta.hat
+  W <- 2 * (n * log(theta.hat + 1) + theta.hat * sum(log(x)))
+  data_frame(n = n, theta.hat = theta.hat, W = W, pval = 1 - pchisq(W, df = 1))
+}
+
+Sims <- do(5000) * one_sim()
+head(Sims)
+# estimated p-value 
+# more replications needed to approximate better
+# but this crude estimate is at least consistent with the result above
+prop1( ~(W >= W_obs), data = Sims)
+binom.test( ~(W >= W_obs), data = Sims)
+
+## ------------------------------------------------------------------------
+gf_dhistogram(~ W, data = Sims, bins = 100) %>%
+  gf_dist("chisq", df = 1, color = "red") %>%
+  gf_lims(y = c(0,2))
+gf_qq( ~ W, data = Sims, distribution = "qchisq", dparams = list(df = 1))
+df_stats( ~ (W >= W_obs), data = Sims, props)
 
 ## ----faithful-ci, tidy = FALSE, warning=FALSE----------------------------
 # loglik defined above   
@@ -5563,10 +5678,10 @@ GOF <-
 data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, 
+GOF(data, cutpts = c(0, 3, 6, 12, Inf), iterlim = 1000, 
     start = c(5, 5))$table
-GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, start = c(5, 5))
-GOF(data, cutpts = c(0, 3, 5, 9, 13, Inf), iterlim = 1000, start = c(5, 5), 
+GOF(data, cutpts = c(0, 3, 6, 12, Inf), iterlim = 1000, start = c(5, 5))
+GOF(data, cutpts = c(0, 3, 6, 12, Inf), iterlim = 1000, start = c(5, 5), 
     pearson = TRUE)
 
 ## ----gof-gamma-----------------------------------------------------------
@@ -5574,12 +5689,13 @@ oldopt <- options(warn = -1)
 data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-ngamlik <- 
-  function(theta, x) { -sum(dgamma(x, theta[1], theta[2], log = TRUE)) }
+gamlik <- 
+  function(theta, x) { sum(dgamma(x, theta[1], theta[2], log = TRUE)) }
 pgamm <- 
   function(x, theta){ pgamma(x, theta[1], theta[2]) }
-GOF(data, ngamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf))
-GOF(data, ngamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), 
+GOF(data, gamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 6, 12, Inf))$table
+GOF(data, gamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 6, 12, Inf))
+GOF(data, gamlik, pgamm, start = c(1, 1), cutpts = c(0, 3, 6, 12, Inf), 
     pearson = TRUE)
 options(oldopt)
 
@@ -5587,11 +5703,12 @@ options(oldopt)
 data <- c(18.0, 6.3, 7.5, 8.1, 3.1, 0.8, 2.4, 3.5, 9.5, 39.7,
           3.4, 14.6, 5.1, 6.8, 2.6, 8.0, 8.5, 3.7, 21.2, 3.1,
           10.2, 8.3, 6.4, 3.0, 5.7, 5.6, 7.4, 3.9, 9.1, 4.0)
-nweiblik <- 
-  function(theta, x) { -sum(dweibull(x, theta[1], theta[2], log = TRUE)) }
+weiblik <- 
+  function(theta, x) { sum(dweibull(x, theta[1], theta[2], log = TRUE)) }
 pweib <- function(x, theta){ pweibull(x, theta[1], theta[2]) }
-GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf))
-GOF(data, nweiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 5, 9, 13, Inf), 
+GOF(data, weiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 6, 12, Inf))$table
+GOF(data, weiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 6, 12, Inf))
+GOF(data, weiblik, pweib, start = c(1, 1), cutpts = c(0, 3, 6, 12, Inf), 
     pearson = TRUE)
 
 ## ----hwe-gof-sol, warning=FALSE------------------------------------------
@@ -5604,7 +5721,7 @@ loglik <- function(theta, x) {
 	dmultinom(x, sum(x), theta2probs(theta), log = TRUE)
 }
 
-geno<-c(83, 447, 470)
+geno<-c(83, 447, 470) 
 ml <- maxLik(loglik, start = 0.5, x = geno); ml
 theta.hat <- coef(ml); theta.hat
 
@@ -5673,8 +5790,8 @@ testStats
 
 ## ----fisher-plants-chisq.test-sol----------------------------------------
 chisq.test(fisher.counts, p = theta2probs(theta.hat))
-# so we can grab that statistic and redo the p-value:
-X <- stat(chisq.test(fisher.counts, p = theta2probs(theta.hat))); X
+# so we can grab that statistic and redo the p-value:  
+X <- chisq.test(fisher.counts, p = theta2probs(theta.hat)) %>% stat; X
 1 - pchisq(X, df = 2)
 
 ## ----fisher-plants-f-sol, tidy=FALSE-------------------------------------
@@ -6928,7 +7045,7 @@ gf_point(GPA ~ ACT, data = ACTgpa) %>%
   gf_lm()
 act2gpa <- makeFun(grades.model)
 act2gpa(ACT = 25, interval = "confidence")
-act2gpa(ACT = 25, interval = "prediction")
+act2gpa(ACT = 30, interval = "prediction")
 
 ## ----drag-sol------------------------------------------------------------
 model1 <- lm(velocity^2 ~ force.drag, data = Drag)
@@ -7290,7 +7407,8 @@ pearson <- sum((observed - expected)^2 / expected); pearson
 1 - pchisq(lrt, df = 2)
 
 ## ----logit-probit-sol, fig.keep = "last"---------------------------------
-gf_fun(ilogit(3 + 2 * x) ~ x, xlim = c(-6, 3), size = 1.0, col = "gray70") %>%
+gf_fun(ilogit(3 + 2 * x) ~ x, xlim = c(-6, 3), 
+       size = 1.0, col = "gray70") %>%
 gf_fun(pnorm((1.5 + x) * sqrt(2 * pi)/2) ~ x, col = "red")
 
 ## ----runmargin-sol, fig.keep = "last", tidy = FALSE----------------------
