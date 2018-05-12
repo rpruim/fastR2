@@ -582,6 +582,7 @@ gf_boxplot( BA ~ factor(year), color = ~ league, data = Batting2)
 
 ## ----death-penalty01-----------------------------------------------------
 tally(death ~ victim, data = DeathPenalty)
+tally(death ~ defendant, data = DeathPenalty)  # this line was missing in the printed version
 
 ## ----death-penalty02-----------------------------------------------------
 tally(death ~ defendant | victim, data = DeathPenalty)

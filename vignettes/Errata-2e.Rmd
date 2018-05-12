@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 
 Location               | Issue
 ---------------------- | --------------------------------------------------------------------------------
+page 25                | printed: `tally(death ~ victim, data = DeathPenalty)`
+\phantom{s}            | correct: `tally(death ~ defendant, data = DeathPenalty)`
 \phantom{s}            | 
 Exercise 1.20          | `geyser` is in the `MASS` package (see page 14).  
 \phantom{s}            | Use `MASS::geyser` to access this data set.
