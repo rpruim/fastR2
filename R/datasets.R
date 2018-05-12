@@ -2136,10 +2136,10 @@ NULL
 #' @usage data(Unemployment)
 #' @format  A data.frame with 10 observations on the following 4 variables.
 #' \itemize{
-#'    item{code{unemp }}{unemployment rate}
-#'    item{code{production }}{[numeric]}
-#'    item{code{year }}{}
-#'    item{code{iyear }}{indexed year}
+#'    \item{\code{unemp }}{Millions of unemployed people}
+#'    \item{\code{production }}{Federal Reserve Board index of industrial production}
+#'    \item{\code{year }}{}
+#'    \item{\code{iyear }}{indexed year}
 #' }
 #' 
 #' @source 
