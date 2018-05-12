@@ -1,8 +1,8 @@
 Package: fastR2
 Type: Package
 Title: Foundations and Applications of Statistics Using R (2nd Edition)
-Version: 0.2.0.9001
-Date: 2018-05-01
+Version: 0.2.0.9002
+Date: 2018-05-12
 Author: Randall Pruim
 Maintainer: Randall Pruim <rpruim@calvin.edu>
 Description: Data sets and utilities to accompany the second edition of
