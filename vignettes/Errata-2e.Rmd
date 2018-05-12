@@ -1,0 +1,41 @@
+---
+title: "Errata"
+author: "Randall Pruim"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Errata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## *Foundations and Applications of Statistics*
+
+### Errata in the Second Edition 
+
+
+Location               | Issue
+---------------------- | --------------------------------------------------------------------------------
+\phantom{s}            | 
+Exercise 1.20          | `geyser` is in the `MASS` package (see page 14).  
+\phantom{s}            | Use `MASS::geyser` to access this data set.
+p. 373                 | printed: $W = -2 \log\left(\frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(\log(\hat \theta) - \log(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$; 
+\phantom{s}            | correct: $W = -2 \log\left( \frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(l(\hat \theta) - l(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$
+p. 388                 | printed: "The assymptotic distribution of $\Lambda$";  
+\phantom{s}            | correct: "The assymptotic distribution of $W = -2 \log(\Lambda)$"
+p. 389                 | printed: `makLik`; 
+\phantom{s}            | correct: `maxLik`
+Exercise 5.18, p. 446  | printed: "log of the odds ratio" 
+\phantom{s}            | correct: "log of the odds"
+page 447, line 1       | printed: "poison"; 
+\phantom{s}            | correct: "Poisson"
+page 498, line 5       | printed: "internally studentized residuls"; 
+\phantom{s}            | correct: "internally studentized residuals"
