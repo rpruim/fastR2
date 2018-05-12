@@ -10,3 +10,10 @@
 
 Concrete <- read.csv("Concrete.csv")
 use_data(Concrete)
+
+library(readxl)
+ConcreteAll <- read_excel("~/projects/github/fastR/data-raw/Concrete_Data.xls")
+names(ConcreteAll) <- 
+  c("cement", "slag", "ash", "water", "superP", "courseAg", "fineAg", "age", "strength")
+use_data(ConcreteAll)
+                        

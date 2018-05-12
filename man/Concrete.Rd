@@ -24,8 +24,7 @@ aggregate) and age.
 }
 \examples{
 
-data(ConcreteAll)
-data(Concrete28)
+data(Concrete)
 
 }
 \references{
