@@ -7,7 +7,6 @@ output:
     fig_caption: no
     toc: no
   html_document:
-    df_print: paged
     toc: no
   pdf_document:
     highlight: null
