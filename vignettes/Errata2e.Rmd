@@ -2,7 +2,13 @@
 title: "Errata"
 author: "Randall Pruim"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  pdf_document:
+    highlight: null
+    number_sections: no
+  knitr:::html_vignette:
+    toc: false
+    fig_caption: no
 vignette: >
   %\VignetteIndexEntry{Errata}
   %\VignetteEngine{knitr::rmarkdown}
