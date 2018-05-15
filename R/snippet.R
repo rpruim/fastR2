@@ -81,7 +81,7 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
     }
     op <- options(device.ask.default = ask)
     on.exit(options(op), add = TRUE)
-    for (file in available) {
+    for (file in re_order(available)) {
       fname <- basename(tools::file_path_sans_ext(file))
       if (echo) {
         cat(paste0("\n", "## snippet: ", fname, "\n"))
@@ -99,3 +99,11 @@ function (name, execute = TRUE, view = !execute, echo = TRUE,
       }
     }
 }
+
+# reorder vector of file names
+re_order <- function(files) {
+  figs <- grepl("-fig", files)
+  defigs <- sub("-fig", "", files[figs])
+  w <- which(! (defigs %in% files[!figs]))
+  c(files[!figs], files[figs][w])
+} 
