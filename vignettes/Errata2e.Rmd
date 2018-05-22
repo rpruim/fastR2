@@ -12,7 +12,9 @@ output:
     highlight: null
     number_sections: no
 vignette: |
-  %\VignetteIndexEntry{Errata} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Errata} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
