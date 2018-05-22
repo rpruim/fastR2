@@ -1,23 +1,15 @@
 
 ## Test environments
 
-  * local OS X install: 
-    * R version 3.4.1 Patched (2017-07-09 r72910)
-    * Platform: x86_64-apple-darwin15.6.0 (64-bit)
-    * Running under: macOS Sierra 10.12.6
+* local OS X install 
+  * R version 3.5.0 (2018-04-23)
+  * Platform: x86_64-apple-darwin15.6.0 (64-bit)
+  * Running under: macOS High Sierra 10.13.4
   
-  * win-builder via devtools
+* win-builder via devtools
 
-## Note
-
-I submitted this pacakge and three others last week, but for some reason this one did not make it 
-to CRAN like the others, so I'm resubmitting in cases something went wrong.
 
 ## R CMD check results
-
-This is a new package.  (Second edition version of previous fastR.)
-
-There were no ERRORs or WARNINGs.
 
 The following identificed as possibly mis-spelled words in DESCRIPTION:
   AMS 
@@ -29,4 +21,4 @@ are CORRECT.
 
 ## Downstream dependencies
 
-None currently, this is a first submission.
+None currently.
