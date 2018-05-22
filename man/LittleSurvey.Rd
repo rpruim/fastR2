@@ -54,10 +54,10 @@ multiple versions and distributed randomly to the students.
 5.1. How much time have you spent watching TV in the last week?
 
 5.2. How much time have you spent watching TV in the last week? 
-Choises: none; under 1; hour 1-2 hours; 2–4 hours; more than 4 hours
+Choises: none; under 1; hour 1-2 hours; 2-4 hours; more than 4 hours
 
 5.3. How much time have you spent watching TV in the last week? 
-Choises: under 1 hour; 1–2 hours; 2–4 hours; 4–8 hours;  more than 8 hours
+Choises: under 1 hour; 1-2 hours; 2-4 hours; 4-8 hours;  more than 8 hours
 
 6.1. Social science researchers have conducted extensive empirical studies
   and concluded that the expression "absence makes the heart grow fonder" is
@@ -95,12 +95,12 @@ Choises: under 1 hour; 1–2 hours; 2–4 hours; 4–8 hours;  more than 8 hours
 9.1. A national survey of college students revealed that professors at this college assign 
 "significantly more homework that the nationwide average for an institution of its type."
 How does this finding compare with your experience?  
-    Choises: a. That sounds about right to me; b that doesn’t sound right to me.
+    Choises: a. That sounds about right to me; b that doesn't sound right to me.
     
 9.2. A national survey of college students revealed that professors at this college assign 
 an amount of homework that "is fairly typical for institutions of its type."
 How does this finding compare with your experience?
-Choices: A that sounds about right to me; b that doesn’t sound right to me.
+Choices: A that sounds about right to me; b that doesn't sound right to me.
 }
 
 \examples{
