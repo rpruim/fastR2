@@ -4,7 +4,6 @@
 \alias{nlmax}
 \alias{nlmax,}
 \alias{nlmin}
-\alias{nlmin}
 \alias{summary.nlmax}
 \alias{summary.nlmin}
 \title{Nonlinear maximization and minimization}

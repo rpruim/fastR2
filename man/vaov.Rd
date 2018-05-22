@@ -3,7 +3,6 @@
 \name{vaov}
 \alias{vaov}
 \alias{vaov.formula}
-\alias{vaov.formula}
 \title{ANOVA vectors}
 \usage{
 vaov(x, ...)

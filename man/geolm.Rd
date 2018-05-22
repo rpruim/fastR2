@@ -3,7 +3,6 @@
 \name{geolm}
 \alias{geolm}
 \alias{to2d}
-\alias{to2d}
 \title{Geometric representation of linear model}
 \usage{
 geolm(formula, data = parent.env(), type = "xz", version = 1,
