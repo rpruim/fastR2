@@ -28,7 +28,7 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
     assign(n, dots[[n]], env2)
   }
   environment(fn) <- env2
-  result$loglik <- fn
+  result$loglik <- Vectorize(fn)
   class(result) <- c("maxLik2", class(result))
   result
 }
@@ -108,6 +108,10 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
     "2" = {
       se <- stdEr(ml)
       est <- coef(ml)
+      if (any(is.na(se))) {stop("Std. errors not available; unable to plot.")}
+      if (any(is.na(est) | is.nan(est))) {
+        stop("Parameter estimates not available; unable to plot")
+      }
       G <- expand.grid(
         seq(est[1] - 3 * se[1], est[1] + 3 * se[1], length.out = 50),
         seq(est[2] - 3 * se[2], est[2] + 3 * se[2], length.out = 50)
