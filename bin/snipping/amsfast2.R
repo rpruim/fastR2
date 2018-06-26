@@ -5486,7 +5486,7 @@ theta.hat <- -n / sum(log(x)) - 1; theta.hat
 W_obs <- 2 * (n * log(theta.hat + 1) + theta.hat * sum(log(x))); W_obs
 1 - pchisq(W_obs, df = 1)
 
-## ----<-------------------------------------------------------------------
+## ------------------------------------------------------------------------
 one_sim <- function(n = 30L) {
   x <- runif(n)
   theta.hat <- -n / sum(log(x)) - 1; theta.hat
