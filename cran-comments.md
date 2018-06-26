@@ -4,7 +4,7 @@
 * local OS X install 
   * R version 3.5.0 (2018-04-23)
   * Platform: x86_64-apple-darwin15.6.0 (64-bit)
-  * Running under: macOS High Sierra 10.13.4
+  * Running under: macOS High Sierra 10.13.5
   
 * win-builder via devtools
 
