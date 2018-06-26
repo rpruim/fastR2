@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](https://cran.r-project.org/package=fastR2)
+<!-- [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](https://cran.r-project.org/package=fastR2) -->
 
 fastR2
 =======
