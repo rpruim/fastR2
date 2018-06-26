@@ -1570,7 +1570,7 @@ NULL
 #' @name Pitching2005
 #' @rdname Pitching2005
 #' @docType data
-#' @format A data frame with 653 observations on the following 27 variables.
+#' @format A data frame with 653 observations on the following 26 variables.
 #' \itemize{ \item{playerID}{ unique identifier for each player}
 #' \item{yearID}{ year} 
 #' \item{stint}{ for players who played with
@@ -1591,7 +1591,7 @@ NULL
 #' \item{HR}{ home runs allowed} 
 #' \item{BB}{ walks (bases on balls) allowed} 
 #' \item{SO}{ strike outs} 
-#' \item{BAOpp}{ opposing hitters' batting average} 
+## \item{BAOpp}{ opposing hitters' batting average} 
 #' \item{ERA}{ earned run average}
 #' \item{IBB}{ intentional walks} 
 #' \item{WP}{ wild pitches}
