@@ -16,3 +16,4 @@
 ^data-raw$
 ^inst/snippet/\.R$
 ^docs$
+^revdep$
