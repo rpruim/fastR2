@@ -36,4 +36,4 @@ snippet("histogram01")
 #> > gf_histogram( ~ Sepal.Length, data = iris)
 ```
 
-<img src="README-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="README-snippet-1.png" style="display: block; margin: auto;" />

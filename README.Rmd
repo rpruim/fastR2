@@ -47,7 +47,7 @@ devtools::install_github("rpruim/fastR2")
 In addtion to data sets, `fastR2` contains a `snippet()` function that 
 loads and executes code found in the text.  Here is an example:
 
-```{r message=FALSE}
+```{r snippet, message = FALSE}
 require(fastR2)
 require(multcomp)
 snippet("histogram01")
