@@ -269,7 +269,12 @@ NULL
 #' @references Appeared in Devore's "Probability and Statsistics for Engineers and 
 #' the Sciences (6th ed).  The variables have been renamed.
 #' 
+#' #' Concrete Compressive Strength Data
 #' 
+#' These data were collected by I-Cheng Yeh to determine how the compressive
+#' strength of concrete is related to its ingredients (cement, blast furnace
+#' slag, fly ash, water, superplasticizer, coarse aggregate, and fine
+#' aggregate) and age.
 #' 
 #' @name ConcreteAll
 #' @rdname ConcreteAll
@@ -297,7 +302,7 @@ NULL
 #' 
 #' data(Concrete)
 #' 
-NULL
+"ConcreteAll"
 
 
 
@@ -878,7 +883,7 @@ NULL
 #' 
 #' data(Ice)
 #' gf_point(weight ~ skinfold, color = ~ sex, data = Ice)
-#' if (require(readr) && require(tidyr) && require(dplyr)) {
+#' if (require(readr) && require(tidyr)) {
 #'   Ice2 <- Ice %>% 
 #'   gather("key", "temp", b0:r12000) %>% 
 #'   separate(key, c("phase", "time"), sep = 1) %>% 
@@ -1543,7 +1548,7 @@ NULL
 #' 
 #' data(Pigs)
 #' tally( ~ black, data = Pigs )
-#' if (require(dplyr) && require(tidyr)) {
+#' if (require(tidyr)) {
 #'   Pigs %>% 
 #'   select(roll, black, pink) %>%
 #'   gather(pig, state, black, pink) %>%
@@ -2086,7 +2091,7 @@ NULL
 #' 
 #' data(Traffic)
 #' gf_line(cn.deaths ~ year, data = Traffic)
-#' if (require(dplyr) && require(tidyr)) {
+#' if (require(tidyr)) {
 #'   TrafficLong <- 
 #'     Traffic %>% 
 #'     select(-2) %>%

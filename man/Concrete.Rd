@@ -3,6 +3,7 @@
 \docType{data}
 \name{Concrete}
 \alias{Concrete}
+\alias{ConcreteAll}
 \title{Concrete Compressive Strength Data}
 \format{\code{Concrete} is a data frame with the following 
 variables.
@@ -15,6 +16,9 @@ variables.
 Data were obtained from the Machine Learning Repository
 (\url{http://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
 Yeh (\email{icyeh at chu.edu.tw}) who retains the copyright for these data.
+}
+\usage{
+ConcreteAll
 }
 \description{
 These data were collected by I-Cheng Yeh to determine how the compressive
@@ -30,6 +34,13 @@ data(Concrete)
 \references{
 Appeared in Devore's "Probability and Statsistics for Engineers and 
 the Sciences (6th ed).  The variables have been renamed.
+
+#' Concrete Compressive Strength Data
+
+These data were collected by I-Cheng Yeh to determine how the compressive
+strength of concrete is related to its ingredients (cement, blast furnace
+slag, fly ash, water, superplasticizer, coarse aggregate, and fine
+aggregate) and age.
 
 I-Cheng Yeh (1998), "Modeling of strength of high performance
 concrete using artificial neural networks," \cite{Cement and Concrete
