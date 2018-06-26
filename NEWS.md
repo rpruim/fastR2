@@ -1,6 +1,8 @@
 # fastR2 0.4.0
 
 * Code chunks updated during final proofing of the text.
+* ConcreteAll data set added to package.
+
 
 # fastR2 0.2.0
 
