@@ -48,8 +48,12 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
 #' @param ... additional arguments, currently ignored.
 
 #' @importFrom stats coef
-#' @importFrom dplyr filter
+## @importFrom dplyr filter
 #' @importFrom miscTools stdEr 
+#' @importFrom grid gpar 
+#' @importFrom ggplot2 ggplot aes stat_function geom_vline geom_hline labs
+#' @importFrom lattice levelplot
+#' @importFrom dplyr data_frame
 #' @export
 
 plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
@@ -68,21 +72,21 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
       Q <- function(.x) { ml$loglik(coef(ml)) - 1/2 * I(coef(ml)) * (.x - coef(ml))^2 }
       G <- data.frame(theta = c(coef(ml) - 3 * se, coef(ml) + 3 * se))
       p <- 
-        ggplot(G, aes(x = theta)) + 
-        stat_function(fun = ml$loglik, size = 1.2) +
-        stat_function(fun = Q, colour = "skyblue", size = 0.8, alpha = 0.7) +
-        geom_vline(xintercept = coef(ml), colour = "skyblue", linetype = "dotted", size = 1) +
-          labs(x = names(coef(ml)), y = "log-likelihood")
+        ggplot2::ggplot(G, aes(x = theta)) + 
+        ggplot2::stat_function(fun = ml$loglik, size = 1.2) +
+        ggplot2::stat_function(fun = Q, colour = "skyblue", size = 0.8, alpha = 0.7) +
+        ggplot2::geom_vline(xintercept = coef(ml), colour = "skyblue", linetype = "dotted", size = 1) +
+          ggplot2::labs(x = names(coef(ml)), y = "log-likelihood")
         
         if ("wald" %in% ci) {
           p <- p + 
-            geom_vline(xintercept = coef(ml) - 2 * se, colour = "skyblue", linetype = "dashed") +
-            geom_vline(xintercept = coef(ml) + 2 * se, colour = "skyblue", linetype = "dashed") 
+            ggplot2::geom_vline(xintercept = coef(ml) - 2 * se, colour = "skyblue", linetype = "dashed") +
+            ggplot2::geom_vline(xintercept = coef(ml) + 2 * se, colour = "skyblue", linetype = "dashed") 
         }
       if ("likelihood" %in% ci || hline) {
         # create data frame of x, y pairs on the log-likelihood function
         D <- 
-          data_frame(
+          dplyr::data_frame(
             x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
             y = suppressWarnings(ml$loglik(x))
           ) 
@@ -95,13 +99,13 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
         hi <- range(D$x)[2]
         
         p <- p + 
-          geom_vline(xintercept = lo, colour = "gray50", size = 0.5) +
-          geom_vline(xintercept = hi, colour = "gray50", size = 0.5)
+          ggplot2::geom_vline(xintercept = lo, colour = "gray50", size = 0.5) +
+          ggplot2::geom_vline(xintercept = hi, colour = "gray50", size = 0.5)
       }
       if (hline) {
         p <- p +
-          geom_hline(yintercept = max(D$y, na.rm = TRUE) - 2, colour = "skyblue",
-                     linetype = "dashed")
+          ggplot2::geom_hline(yintercept = max(D$y, na.rm = TRUE) - 2, 
+                              colour = "skyblue", linetype = "dashed")
       }
       p
     },
@@ -118,10 +122,11 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
       ) 
       names(G) <- c("p1", "p2")
       G$loglik <- apply(G, 1, ml$loglik)
-      levelplot( loglik ~ p1 + p2, data = G, contour = TRUE, 
-                 col.regions = grDevices::topo.colors(100),
-                 xlab = names(coef(ml))[1],
-                 ylab = names(coef(ml))[2]
+      lattice::levelplot(
+        loglik ~ p1 + p2, data = G, contour = TRUE, 
+        col.regions = grDevices::topo.colors(100),
+        xlab = names(coef(ml))[1],
+        ylab = names(coef(ml))[2]
       )
     }
   )

@@ -25,7 +25,7 @@ to 1956 can be attributed to the stricter enforcement.
 
 data(Traffic)
 gf_line(cn.deaths ~ year, data = Traffic)
-if (require(dplyr) && require(tidyr)) {
+if (require(tidyr)) {
   TrafficLong <- 
     Traffic \%>\% 
     select(-2) \%>\%

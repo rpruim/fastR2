@@ -55,7 +55,7 @@ worth 40 rather than 20.
 
 data(Pigs)
 tally( ~ black, data = Pigs )
-if (require(dplyr) && require(tidyr)) {
+if (require(tidyr)) {
   Pigs \%>\% 
   select(roll, black, pink) \%>\%
   gather(pig, state, black, pink) \%>\%

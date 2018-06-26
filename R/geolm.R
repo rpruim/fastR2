@@ -22,6 +22,7 @@ tryCatch(utils::globalVariables(c('gp')),
 #' @seealso \code{\link{lm}}.
 #' @keywords stats
 #' @importFrom stats effects lm 
+#' @importFrom lattice xyplot cloud
 
 #' @export
 #' @examples
@@ -69,7 +70,7 @@ function (formula, data = parent.env(), type = "xz", version = 1,
     aspect <- c(diff(range(d$y))/diff(range(d$x)), diff(range(d$z))/diff(range(d$x)))
     if (plot) {
         if (version == 1) {
-          return(xyplot(y ~ x, data = d, groups = gp, type = "l", 
+          return(lattice::xyplot(y ~ x, data = d, groups = gp, type = "l", 
                         main=deparse(formula),
                         lwd = 4, lty = 1, aspect = "iso", 
                         col = c("orange", "blue", "black", "forestgreen", "purple", "red"), 
@@ -77,7 +78,7 @@ function (formula, data = parent.env(), type = "xz", version = 1,
                  )
         }
         else {
-          return(cloud(z ~ x * y, data = d, groups = gp, aspect = aspect, 
+          return(lattice::cloud(z ~ x * y, data = d, groups = gp, aspect = aspect, 
                        main=deparse(formula),
                        col = c("orange", "blue", "black", "forestgreen",  "purple", "red"), 
                        xlab = "mean", ylab = "effect", 

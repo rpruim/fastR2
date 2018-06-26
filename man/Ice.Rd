@@ -54,7 +54,7 @@ of recovery} }
 
 data(Ice)
 gf_point(weight ~ skinfold, color = ~ sex, data = Ice)
-if (require(readr) && require(tidyr) && require(dplyr)) {
+if (require(readr) && require(tidyr)) {
   Ice2 <- Ice \%>\% 
   gather("key", "temp", b0:r12000) \%>\% 
   separate(key, c("phase", "time"), sep = 1) \%>\% 

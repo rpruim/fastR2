@@ -17,11 +17,7 @@
 #' trellis.par.set(theme=col.fastR())
 #' 
 
-#' @import lattice
-#' @import grid
 #' @import mosaic
-#' @import ggplot2
-#' @import ggformula
 #' @importFrom stats coef df qnorm
 NULL
 

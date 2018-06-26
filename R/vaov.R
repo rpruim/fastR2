@@ -31,12 +31,13 @@ function (x, ...)
 
 #' @rdname vaov
 #' @method vaov formula
+#' @importFrom lattice latticeParseFormula
 #' @export
 vaov.formula <-
 function (x, data = parent.frame(), ...) 
 {
     groupMeans <- funvec(x, data, mean)
-    form <- latticeParseFormula(x, data, ...)
+    form <- lattice::latticeParseFormula(x, data, ...)
     overallMeans <- rep(mean(form$left), length(form$left))
     df <- data.frame(form$right, form$left, overallMeans, groupMeans, 
         (form$left - overallMeans), (form$left - overallMeans)^2, 
