@@ -8,7 +8,13 @@ This package contains data sets and some utility functions to support [*Foundati
 Installation
 ------------
 
-You can install fastR2 from github with:
+The package can be installed from CRAN via
+
+``` r
+install.packages("fastR2")
+```
+
+or from github via
 
 ``` r
 # install.packages("devtools")
@@ -16,20 +22,6 @@ devtools::install_github("rpruim/fastR2")
 ```
 
 <!-- [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](https://cran.r-project.org/package=fastR2) -->
-### Installation
-
-The package can be installed from CRAN via
-
-``` r
-install.packages("fastR2")
-```
-
-or from github
-
-``` r
-devtools::install_github("rpruim/fastR2")
-```
-
 ### Snippets
 
 In addtion to data sets, `fastR2` contains a `snippet()` function that loads and executes code found in the text. Here is an example:
@@ -44,4 +36,4 @@ snippet("histogram01")
 #> > gf_histogram( ~ Sepal.Length, data = iris)
 ```
 
-<img src="README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="README-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />

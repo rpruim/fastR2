@@ -26,7 +26,12 @@ by Randall Pruim.
 
 ## Installation
 
-You can install fastR2 from github with:
+The package can be installed from CRAN via
+```{r cran-installation, eval = FALSE}
+install.packages("fastR2")
+```
+
+or from github via
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
@@ -36,16 +41,6 @@ devtools::install_github("rpruim/fastR2")
 
 <!-- [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fastR2)](https://cran.r-project.org/package=fastR2) -->
 
-### Installation
-
-The package can be installed from CRAN via
-```{r eval=FALSE}
-install.packages("fastR2")
-```
-or from github
-```{r eval=FALSE}
-devtools::install_github("rpruim/fastR2")
-```
 
 ### Snippets
 
