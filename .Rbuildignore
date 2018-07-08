@@ -10,7 +10,7 @@
 ^vignettes/figure$
 ^\.travis\.yml$
 ^README\.Rmd$
-^README-.*\.png$
+^README.*$
 ^cran-comments\.md$
 ^README\.html$
 ^data-raw$
