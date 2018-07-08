@@ -1,3 +1,13 @@
+# fastR2 1.1.0
+
+* Remove missing column from Pitching 2005
+* Fix `ConcreteAll` documentation
+
+# fastR2 1.0.0
+
+* Update code chunks for snippets to use ggformula
+* Improvements to plotting of objects created with `maxLik2()`
+
 # fastR2 0.4.0
 
 * Code chunks updated during final proofing of the text.
