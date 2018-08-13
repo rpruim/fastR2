@@ -10136,21 +10136,30 @@ Chicks %>% head(1)
 Chicks %>% tail(1)
 
 ## ----echo = FALSE, opts.label = "fig1"-----------------------------------
-require(weatherData, quietly = TRUE)
-Temps <- NewYork2013 %>% mutate(city = "NYC") %>%
-  bind_rows(Mumbai2013 %>% mutate(city = "Mumbai")) %>%
-  bind_rows(London2013 %>% mutate(city = "London")) %>%
-  mutate(date = lubridate::date(Time),
-         month = lubridate::month(Time)) %>% 
-  group_by(city, date) %>%
-  summarise(
-    hi = max(Temperature, na.rm = TRUE),
-    lo = min(Temperature, na.rm = TRUE),
-    mid = (hi + lo)/2
-  )   
-gf_linerange(lo + hi ~ date, color = ~ hi, data = Temps) %>%
-  gf_facet_grid(city ~ .) %>%
-  gf_refine(scale_colour_gradientn(colors = rev(rainbow(5))))
+# weatherData has been removed from CRAN
+#   require(weatherData, quietly = TRUE)
+#   Temps <- NewYork2013 %>% mutate(city = "NYC") %>%
+#     bind_rows(Mumbai2013 %>% mutate(city = "Mumbai")) %>%
+#     bind_rows(London2013 %>% mutate(city = "London")) %>%
+#     mutate(date = lubridate::date(Time),
+#            month = lubridate::month(Time)) %>% 
+#     group_by(city, date) %>%
+#     summarise(
+#       hi = max(Temperature, na.rm = TRUE),
+#       lo = min(Temperature, na.rm = TRUE),
+#       mid = (hi + lo)/2
+#     )   
+#   gf_linerange(lo + hi ~ date, color = ~ hi, data = Temps) %>%
+#     gf_facet_grid(city ~ .) %>%
+#     gf_refine(scale_colour_gradientn(colors = rev(rainbow(5))))
+
+# A similar plot can be made using mosaicData::Weather, but no merging
+# is required.
+
+gf_linerange(low_temp + high_temp ~ date, color = ~ high_temp, 
+             data = Weather) %>%
+  gf_facet_grid(city ~ year, scales = "free") %>%
+  gf_refine(scale_colour_viridis_c(begin = 0, end = 1, option = "C"))
 
 
 ## ----MathNotation, child="MathNotation.Rnw", eval=includeApp[2]----------

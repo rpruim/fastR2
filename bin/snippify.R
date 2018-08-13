@@ -4,6 +4,7 @@ snippify <- function(file, path, ...) {
   lines <- readLines(f)
   close(f)
 
+  chunkNames <- character(0)
   results <- character(0)
   headers <- which(grepl("## ----", lines))
   if (length(headers) < 1) return(results)
@@ -14,6 +15,7 @@ snippify <- function(file, path, ...) {
     chunkName <- sub("(## ----)(?<chunk>[^,]*)(.*)", "\\2", lines[start[i]], 
                      perl = TRUE)
     chunkName <- sub("-*$", "", chunkName)
+    chunkNames <- append(chunkNames, chunkName)
     if (is.character(chunkName) && 
         nchar(chunkName > 0) && 
         ! grepl("-sol", chunkName) && 
@@ -27,6 +29,7 @@ snippify <- function(file, path, ...) {
      
     }  
   }
+  return(chunkNames)
 }
 
 require(knitr)
@@ -34,7 +37,23 @@ require(knitr)
 setwd("snipping")
 
 purl("/Users/rpruim/projects/github/fast2e/Rnw/amsfast2.Rnw")
-snippify("amsfast2.R", path="../../inst/snippet")
+chunkNames <- snippify("amsfast2.R", path="../../inst/snippet")
+RChunks <-
+  data_frame(
+    full_name = chunkNames,
+    base_name = chunkNames %>% sub("[01].*", "", .) %>% sub("-fig|-sol", "", .),
+    fig = grepl("-fig", chunkNames),
+    sol = grepl("-sol", chunkNames)
+  ) %>%
+  filter(
+    ! grepl(" ", full_name), 
+    ! grepl("=", full_name), 
+    nchar(full_name) > 0, 
+    !sol, 
+    !fig) %>%
+  select(matches("name"))
+
+devtools::use_data(RChunks, overwrite = TRUE, internal = TRUE)
 
 setwd("..")
 
