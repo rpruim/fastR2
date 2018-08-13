@@ -17,7 +17,7 @@ Imports:
     maxLik,
     numDeriv,
     dplyr,
-    ggplot2,
+    ggplot2 (>= 3.0.0),
     lattice,
     miscTools
 Suggests:
