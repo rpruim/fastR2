@@ -47,6 +47,9 @@ page 447, line 1       | printed: poison
 \phantom{s}            | correct: Poisson
 page 498, line 5       | printed: internally studentized residuls 
 \phantom{s}            | correct: internally studentized residuals
+page 747, Exercise A.11 | Unfortunately, the `weatherData` package has been removed from CRAN.
+\phantom{s}            | Similar data now live in `mosaicData::Weather`, but the data for several cities are already contained in a single data frame, so there is no need to merge from multiple sources.
+
 
 
 
