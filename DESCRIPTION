@@ -1,10 +1,8 @@
 Package: fastR2
 Type: Package
 Title: Foundations and Applications of Statistics Using R (2nd Edition)
-Version: 1.1.0
-Date: 2018-06-26
+Version: 1.1.0.9000
 Authors@R: person(given = "Randall", family = "Pruim", role = c("aut", "cre"), email = "rpruim@calvin.edu")
-Maintainer: Randall Pruim <rpruim@calvin.edu>
 Description: Data sets and utilities to accompany the second edition of
     "Foundations and Applications of Statistics: an Introduction
     using R" (R Pruim, published by AMS, 2017), a text covering
@@ -14,7 +12,7 @@ Description: Data sets and utilities to accompany the second edition of
 License: GPL (>=2)
 Depends:
     R (>= 3.0.0),
-    mosaic
+    mosaic (>= 1.4.0)
 Imports:
     maxLik,
     numDeriv,
@@ -44,7 +42,7 @@ Suggests:
 VignetteBuilder: knitr
 LazyLoad: yes
 LazyData: yes
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0
 Encoding: UTF-8
 URL: https://github.com/rpruim/fastR2
 BugReports: https://github.com/rpruim/fastR2/issues
