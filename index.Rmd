@@ -1,7 +1,7 @@
 ---
 title: "Foundations and Applications of Statistics (2e)"
 author: "Randall Pruim"
-date: "6/26/2018"
+date: "8/13/2018"
 output: html_document
 ---
 

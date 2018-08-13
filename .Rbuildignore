@@ -11,6 +11,7 @@
 ^\.travis\.yml$
 ^README\.Rmd$
 ^README.*$
+^index.Rmd$
 ^cran-comments\.md$
 ^README\.html$
 ^data-raw$
