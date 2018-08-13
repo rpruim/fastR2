@@ -5,7 +5,11 @@
 #' R}.
 #' 
 #' \code{snippet} works much like \code{\link{demo}}, but the interface is
-#' simplified.
+#' simplified. Partial matching is used to select snippets, so any unique
+#' prefix is sufficient to specify a snippet.  Sequenced snippets (identified by
+#' trailing 2-digit numbers) will be executed in sequence if a unique prefix to
+#' the non-numeric portion is given.  To run just one of a sequence of snippets,
+#' provide the full snippet name.  See the examples.
 #' 
 #' @param name name of snippet
 #' @param lib.loc character vector of directory names of R libraries, or NULL.
@@ -34,6 +38,18 @@
 #' @keywords utilities
 #' @importFrom utils file_test head
 #' @export
+#' @examples
+#' snippet("normal01")
+#' # prefix works
+#' snippet("normal")
+#' # this prefix is ambiguous
+#' snippet("norm")
+#' # sequence of "histogram" snippets
+#' snippet("hist", execute = FALSE, echo = TRUE, view = FALSE)
+#' # just one of the "histogram" snippets
+#' snippet("histogram04", execute = FALSE, echo = TRUE, view = FALSE)
+#' # Prefix two short, but a helpful message is displayed
+#' snippet("h", execute = FALSE, echo = TRUE, view = FALSE)
 snippet <-
   function (name, execute = TRUE, view = !execute, echo = TRUE, 
             ask = getOption("demo.ask"), verbose = getOption("verbose"), 
@@ -54,20 +70,22 @@ snippet <-
         stop("No match found for ", name)
       }
       if (full_name_idx == 0) { # multiple matches
-        stop("Multiple matches found for `", name, "': ", 
+        message("Multiple matches found for `", name, "': \n  ", 
              paste(
                sort(grep(paste0("^", name), RChunks$full_name, value = TRUE)), 
                collapse = ", ")
         )
+        return(invisible(NULL))
       }
       matching_files <- 
         paste0(RChunks$full_name[full_name_idx], ".R")
     } else if (base_name_idx == 0) { # multiple matches
-      stop("Multiple matches found for `", name, "': ", 
-           paste(
-             sort(grep(paste0("^", name), unique(RChunks$base_name), value = TRUE)), 
-             collapse = ", ")
+      message("Multiple matches found for `", name, "': \n  ", 
+              paste(
+                sort(grep(paste0("^", name), unique(RChunks$base_name), value = TRUE)), 
+                collapse = ", ")
       )
+      return(invisible(NULL))
     } else {
       prefix <- unique(RChunks$base_name)[base_name_idx]
       matching_files <- 

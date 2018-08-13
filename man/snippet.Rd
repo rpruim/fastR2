@@ -49,7 +49,24 @@ R}.
 }
 \details{
 \code{snippet} works much like \code{\link{demo}}, but the interface is
-simplified.
+simplified. Partial matching is used to select snippets, so any unique
+prefix is sufficient to specify a snippet.  Sequenced snippets (identified by
+trailing 2-digit numbers) will be executed in sequence if a unique prefix to
+the non-numeric portion is given.  To run just one of a sequence of snippets,
+provide the full snippet name.  See the examples.
+}
+\examples{
+snippet("normal01")
+# prefix works
+snippet("normal")
+# this prefix is ambiguous
+snippet("norm")
+# sequence of "histogram" snippets
+snippet("hist", execute = FALSE, echo = TRUE, view = FALSE)
+# just one of the "histogram" snippets
+snippet("histogram04", execute = FALSE, echo = TRUE, view = FALSE)
+# Prefix two short, but a helpful message is displayed
+snippet("h", execute = FALSE, echo = TRUE, view = FALSE)
 }
 \seealso{
 \code{\link{demo}}, \code{\link{source}}.
