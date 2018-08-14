@@ -20,6 +20,7 @@
 #' printed.
 #' @param echo a logical. If \code{TRUE}, show the R input when executing.
 #' @param view a logical. If \code{TRUE}, snippet code is displayed 'as is'.
+#' @param eval a logical.  An alias for `execute`.
 #' @param execute a logical.  If \code{TRUE}, snippet code is executed.  (The
 #' code and the results of the execution will be visible if \code{echo} is
 #' \code{TRUE}.)
@@ -51,7 +52,7 @@
 #' # Prefix two short, but a helpful message is displayed
 #' snippet("h", execute = FALSE, echo = TRUE, view = FALSE)
 snippet <-
-  function (name, execute = TRUE, view = !execute, echo = TRUE, 
+  function (name, eval = TRUE, execute = eval, view = !execute, echo = TRUE, 
             ask = getOption("demo.ask"), verbose = getOption("verbose"), 
             lib.loc = NULL, character.only = FALSE, regex = NULL, max.files = 10L) 
   {

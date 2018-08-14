@@ -4,13 +4,15 @@
 \alias{snippet}
 \title{Display or execute a snippet of R code}
 \usage{
-snippet(name, execute = TRUE, view = !execute, echo = TRUE,
-  ask = getOption("demo.ask"), verbose = getOption("verbose"),
-  lib.loc = NULL, character.only = FALSE, regex = NULL,
-  max.files = 10L)
+snippet(name, eval = TRUE, execute = eval, view = !execute,
+  echo = TRUE, ask = getOption("demo.ask"),
+  verbose = getOption("verbose"), lib.loc = NULL,
+  character.only = FALSE, regex = NULL, max.files = 10L)
 }
 \arguments{
 \item{name}{name of snippet}
+
+\item{eval}{a logical.  An alias for `execute`.}
 
 \item{execute}{a logical.  If \code{TRUE}, snippet code is executed.  (The
 code and the results of the execution will be visible if \code{echo} is
