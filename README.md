@@ -28,7 +28,6 @@ In addtion to data sets, `fastR2` contains a `snippet()` function that loads and
 
 ``` r
 require(fastR2)
-require(multcomp)
 snippet("histogram01")
 #> 
 #> ## snippet: histogram01

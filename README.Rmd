@@ -49,7 +49,6 @@ loads and executes code found in the text.  Here is an example:
 
 ```{r snippet, message = FALSE}
 require(fastR2)
-require(multcomp)
 snippet("histogram01")
 ```
 
