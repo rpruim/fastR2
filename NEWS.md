@@ -1,3 +1,8 @@
+
+# fastR 1.2.0
+
+ * Use smart partial matching rather than regular expressions to identify snippets.
+ 
 # fastR2 1.1.0
 
 * Remove missing column from Pitching 2005
