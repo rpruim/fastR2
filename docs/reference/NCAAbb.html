@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fastR2</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.0.9000</span>
       </span>
     </div>
 
@@ -161,14 +161,14 @@ in tournaments (T)</p></li>
     <span class='kw'>lscore</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>homeTeamWon</span>, <span class='no'>ascore</span>, <span class='no'>hscore</span>)
   )
 <span class='no'>NCAA2010</span> <span class='kw'>%&gt;%</span> <span class='fu'>select</span>(<span class='no'>date</span>, <span class='no'>winner</span>, <span class='no'>loser</span>, <span class='no'>wscore</span>, <span class='no'>lscore</span>, <span class='no'>dscore</span>, <span class='no'>homeTeamWon</span>) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>()</div><div class='output co'>#&gt; # A tibble: 6 x 7
-#&gt;   date       winner         loser              wscore lscore dscore homeTeamWon
-#&gt;   &lt;date&gt;     &lt;chr&gt;          &lt;chr&gt;               &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;lgl&gt;      
-#&gt; 1 2009-11-09 Ohio St.       Alcorn St.            100     60     40 TRUE       
-#&gt; 2 2009-11-09 North Carolina Florida Internati…     88     72     16 TRUE       
-#&gt; 3 2009-11-09 Syracuse       Albany                 75     43     32 TRUE       
-#&gt; 4 2009-11-09 California     Murray St.             75     70      5 TRUE       
-#&gt; 5 2009-11-11 Syracuse       Robert Morris         100     60     40 TRUE       
-#&gt; 6 2009-11-11 North Carolina North Carolina Ce…     89     42     47 TRUE       </div></pre>
+#&gt;   date       winner        loser               wscore lscore dscore homeTeamWon
+#&gt;   &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt;                &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;lgl&gt;      
+#&gt; 1 2009-11-09 Ohio St.      Alcorn St.             100     60     40 TRUE       
+#&gt; 2 2009-11-09 North Caroli… Florida Internatio…     88     72     16 TRUE       
+#&gt; 3 2009-11-09 Syracuse      Albany                  75     43     32 TRUE       
+#&gt; 4 2009-11-09 California    Murray St.              75     70      5 TRUE       
+#&gt; 5 2009-11-11 Syracuse      Robert Morris          100     60     40 TRUE       
+#&gt; 6 2009-11-11 North Caroli… North Carolina Cen…     89     42     47 TRUE       </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
