@@ -36,7 +36,4 @@ aov(pollution ~ location, data = AirPollution)
 vaov(pollution ~ location, data = AirPollution)
 
 }
-\author{
-Randall Pruim
-}
 \keyword{stats}

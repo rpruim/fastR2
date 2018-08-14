@@ -14,7 +14,7 @@
 #' \code{groupMean}, \code{ObsVsGrand}, \code{STotal}, \code{ObsVsGroup},
 #' \code{SError}, \code{GroupVsGrand}, and \code{STreatment}. The usual SS
 #' terms can be computed from these by summing.
-#' @author Randall Pruim
+# @author Randall Pruim
 #' @keywords stats
 #' @export
 #' @examples
