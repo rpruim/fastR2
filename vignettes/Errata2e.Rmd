@@ -4,6 +4,7 @@ author: "Foundations and Applications of Statistics"
 date: "Second Edition"
 output:
   knitr:::html_vignette:
+    variant: html+multiline_tables
     fig_caption: no
     toc: no
   html_document:
@@ -25,31 +26,42 @@ knitr::opts_chunk$set(
 ```
 
 
+-------------------------------------------------------------------------------------------------------------------------------
+Page Location             Issue
+---- -------------------- -----------------------------------------------------------------------------------------------------
+25                        printed: `tally(death ~ victim, data = DeathPenalty)` <br>
+                          correct: `tally(death ~ defendant, data = DeathPenalty)`
 
-Location               | Issue
----------------------- | --------------------------------------------------------------------------------
-\phantom{s}            | 
-page 25                | printed: `tally(death ~ victim, data = DeathPenalty)`
-\phantom{s}            | correct: `tally(death ~ defendant, data = DeathPenalty)`
-Exercise 1.20          | `geyser` is in the `MASS` package (see page 14).  
-\phantom{s}            | Use `MASS::geyser` to access this data set.
-p. 373                 | printed: $W = -2 \log\left(\frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(\log(\hat \theta) - \log(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$
-\phantom{s}            | correct: $W = -2 \log\left( \frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(l(\hat \theta) - l(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$
-p. 380, lines 6, 11, 13 | printed: `pnorm()`, `pchisq()`, `pchisq()`
-\phantom{s}            | correct: `qnorm()`, `qchisq()`, `qchisq()`.  
-p. 388                 | printed: The assymptotic distribution of $\Lambda$  
-\phantom{s}            | correct: The assymptotic distribution of $W = -2 \log(\Lambda)$
-p. 389                 | printed: `makLik` 
-\phantom{s}            | correct: `maxLik`
-Exercise 5.18, p. 446  | printed: log of the odds ratio 
-\phantom{s}            | correct: log of the odds
-page 447, line 1       | printed: poison 
-\phantom{s}            | correct: Poisson
-page 498, line 5       | printed: internally studentized residuls 
-\phantom{s}            | correct: internally studentized residuals
-page 747, Exercise A.11 | Unfortunately, the `weatherData` package has been removed from CRAN.
-\phantom{s}            | Similar data now live in `mosaicData::Weather`, but the data for several cities are already contained in a single data frame, so there is no need to merge from multiple sources.
+     Exercise 1.20        `geyser` is in the `MASS` package (see page 14).  
+                          Use `MASS::geyser` to access this data set.
+                       
+373                       printed: $W = -2 \log\left(\frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(\log(\hat \theta) - \log(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$ <br>
+                          correct: $W = -2 \log\left( \frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(l(\hat \theta) - l(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$
 
+380  lines 6, 11, 13      printed: `pnorm()`, `pchisq()`, `pchisq()` <br>
+                          correct: `qnorm()`, `qchisq()`, `qchisq()`.  
 
+388                       printed: The assymptotic distribution of $\Lambda$   <br>
+                          correct: The assymptotic distribution of $W = -2 \log(\Lambda)$
+
+389                       printed: `makLik`  <br>
+                          correct: `maxLik`
+
+446  Exercise 5.18        printed: log of the odds ratio  <br>
+                          correct: log of the odds
+
+447  line 1               printed: poison  <br>
+                          correct: Poisson
+
+498  line 5               printed: internally studentized residuls  <br>
+                          correct: internally studentized residuals
+
+747  Exercise A.11        Unfortunately, the `weatherData` package has been 
+                          removed from CRAN.
+                          Similar data now live in `mosaicData::Weather`, 
+                          but the data for several cities are 
+                          already contained in a single data frame, 
+                          so there is no need to merge from multiple sources.
+-------------------------------------------------------------------------------------------------------------------------------
 
 
