@@ -67,7 +67,7 @@ snippet("norm")
 snippet("hist", execute = FALSE, echo = TRUE, view = FALSE)
 # just one of the "histogram" snippets
 snippet("histogram04", execute = FALSE, echo = TRUE, view = FALSE)
-# Prefix two short, but a helpful message is displayed
+# Prefix too short, but a helpful message is displayed
 snippet("h", execute = FALSE, echo = TRUE, view = FALSE)
 }
 \seealso{
