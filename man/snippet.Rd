@@ -64,11 +64,11 @@ snippet("normal")
 # this prefix is ambiguous
 snippet("norm")
 # sequence of "histogram" snippets
-snippet("hist", execute = FALSE, echo = TRUE, view = FALSE)
+snippet("hist", eval = FALSE, echo = TRUE, view = FALSE)
 # just one of the "histogram" snippets
-snippet("histogram04", execute = FALSE, echo = TRUE, view = FALSE)
+snippet("histogram04", eval = FALSE, echo = TRUE, view = FALSE)
 # Prefix too short, but a helpful message is displayed
-snippet("h", execute = FALSE, echo = TRUE, view = FALSE)
+snippet("h", eval = FALSE, echo = TRUE, view = FALSE)
 }
 \seealso{
 \code{\link{demo}}, \code{\link{source}}.
