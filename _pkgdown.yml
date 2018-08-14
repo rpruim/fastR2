@@ -1,0 +1,86 @@
+pandoc: 2.2.1
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  Errata2e: Errata2e.html
+reference:
+- title: Snippets
+  desc: Run snippets of R code from the text
+  contents:
+   - snippet
+- title: Other Functions
+  desc: ~
+  contents:
+  - '`col.fastR`'
+  - '`col.perc`'
+  - '`fastR-package`'
+  - '`geolm`'
+  - '`givenOrder`'
+  - '`information`'
+  - '`maxLik2`'
+  - '`nlmax`'
+  - '`plot.maxLik2`'
+  - '`rgolfballs`'
+  - '`snippet`'
+  - '`SSplot`'
+  - '`tdf`'
+  - '`undocumented`'
+  - '`vaov`'
+  - '`wilson.ci`'
+- title: Data
+  desc: ~
+  contents:
+  - '`ACTgpa`'
+  - '`AirPollution`'
+  - '`AirlineArrival`'
+  - '`BallDrop`'
+  - '`Batting`'
+  - '`Buckthorn`'
+  - '`Bugs`'
+  - '`Concrete`'
+  - '`CoolingWater`'
+  - '`Corn`'
+  - '`Cuckoo`'
+  - '`DeathPenalty`'
+  - '`Drag`'
+  - '`Endurance`'
+  - '`FamilySmoking`'
+  - '`Fumbles`'
+  - '`GPA`'
+  - '`golfballs`'
+  - '`GooosePermits`'
+  - '`HeliumFootballs`'
+  - '`Ice`'
+  - '`Inflation`'
+  - '`Jordan8687`'
+  - '`Kids`'
+  - '`LittleSurvey`'
+  - '`MIAA05`'
+  - '`MLB2004`'
+  - '`MathNoise`'
+  - '`NCAAbb`'
+  - '`NFL2007`'
+  - '`Noise`'
+  - '`Pallets`'
+  - '`PaperPlanes`'
+  - '`Pendulum`'
+  - '`PetStress`'
+  - '`Pheno`'
+  - '`Pigs`'
+  - '`Pitching2005`'
+  - '`Poison`'
+  - '`Punting`'
+  - '`RatPoison`'
+  - '`RubberBand`'
+  - '`Scent`'
+  - '`Soap`'
+  - '`Spheres`'
+  - '`Step`'
+  - '`Stereogram`'
+  - '`Students`'
+  - '`TasteTest`'
+  - '`TireWear`'
+  - '`Traffic`'
+  - '`Trebuchet`'
+  - '`Unemployment`'
+  - '`WorkingWomen`'
