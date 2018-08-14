@@ -44,5 +44,5 @@ LazyLoad: yes
 LazyData: yes
 RoxygenNote: 6.1.0
 Encoding: UTF-8
-URL: https://github.com/rpruim/fastR2
+URL: https://github.com/rpruim/fastR2, http://rpruim.github.io/fastR2/
 BugReports: https://github.com/rpruim/fastR2/issues
