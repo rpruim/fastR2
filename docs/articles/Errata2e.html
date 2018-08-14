@@ -93,107 +93,70 @@
     
 <table class="table">
 <colgroup>
-<col width="21%">
-<col width="78%">
+<col width="3%">
+<col width="16%">
+<col width="79%">
 </colgroup>
 <thead><tr class="header">
-<th>Location</th>
-<th>Issue</th>
+<th>Page</th>
+<th align="left">Location</th>
+<th align="left">Issue</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>page 25</td>
-<td>printed: <code>tally(death ~ victim, data = DeathPenalty)</code>
-</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>correct: <code>tally(death ~ defendant, data = DeathPenalty)</code>
+<td>25</td>
+<td align="left"></td>
+<td align="left">printed: <code>tally(death ~ victim, data = DeathPenalty)</code> <br> correct: <code>tally(death ~ defendant, data = DeathPenalty)</code>
 </td>
 </tr>
 <tr class="even">
-<td>Exercise 1.20</td>
-<td>
-<code>geyser</code> is in the <code>MASS</code> package (see page 14).</td>
+<td></td>
+<td align="left">Exercise 1.20</td>
+<td align="left">
+<code>geyser</code> is in the <code>MASS</code> package (see page 14). Use <code><a href="http://www.rdocumentation.org/packages/MASS/topics/geyser">MASS::geyser</a></code> to access this data set.</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Use <code><a href="http://www.rdocumentation.org/packages/MASS/topics/geyser">MASS::geyser</a></code> to access this data set.</td>
-</tr>
-<tr class="even">
-<td>p. 373</td>
-<td>printed: <span class="math inline">\(W = -2 \log\left(\frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(\log(\hat \theta) - \log(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2\)</span>
-</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>correct: <span class="math inline">\(W = -2 \log\left( \frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(l(\hat \theta) - l(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2\)</span>
+<td>373</td>
+<td align="left"></td>
+<td align="left">printed: <span class="math inline">\(W = -2 \log\left(\frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(\log(\hat \theta) - \log(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2\)</span> <br> correct: <span class="math inline">\(W = -2 \log\left( \frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(l(\hat \theta) - l(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2\)</span>
 </td>
 </tr>
 <tr class="even">
-<td>p. 380, lines 6, 11, 13</td>
-<td>printed: <code>pnorm()</code>, <code>pchisq()</code>, <code>pchisq()</code>
-</td>
+<td>380</td>
+<td align="left">lines 6, 11, 13</td>
+<td align="left">printed: <code>pnorm()</code>, <code>pchisq()</code>, <code>pchisq()</code> <br> correct: <code>qnorm()</code>, <code>qchisq()</code>, <code>qchisq()</code>.</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>correct: <code>qnorm()</code>, <code>qchisq()</code>, <code>qchisq()</code>.</td>
-</tr>
-<tr class="even">
-<td>p. 388</td>
-<td>printed: The assymptotic distribution of <span class="math inline">\(\Lambda\)</span>
-</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>correct: The assymptotic distribution of <span class="math inline">\(W = -2 \log(\Lambda)\)</span>
+<td>388</td>
+<td align="left"></td>
+<td align="left">printed: The assymptotic distribution of <span class="math inline">\(\Lambda\)</span> <br> correct: The assymptotic distribution of <span class="math inline">\(W = -2 \log(\Lambda)\)</span>
 </td>
 </tr>
 <tr class="even">
-<td>p. 389</td>
-<td>printed: <code>makLik</code>
+<td>389</td>
+<td align="left"></td>
+<td align="left">printed: <code>makLik</code> <br> correct: <code>maxLik</code>
 </td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>correct: <code>maxLik</code>
-</td>
+<td>446</td>
+<td align="left">Exercise 5.18</td>
+<td align="left">printed: log of the odds ratio <br> correct: log of the odds</td>
 </tr>
 <tr class="even">
-<td>Exercise 5.18, p. 446</td>
-<td>printed: log of the odds ratio</td>
+<td>447</td>
+<td align="left">line 1</td>
+<td align="left">printed: poison <br> correct: Poisson</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>correct: log of the odds</td>
+<td>498</td>
+<td align="left">line 5</td>
+<td align="left">printed: internally studentized residuls <br> correct: internally studentized residuals</td>
 </tr>
 <tr class="even">
-<td>page 447, line 1</td>
-<td>printed: poison</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>correct: Poisson</td>
-</tr>
-<tr class="even">
-<td>page 498, line 5</td>
-<td>printed: internally studentized residuls</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>correct: internally studentized residuals</td>
-</tr>
-<tr class="even">
-<td>page 747, Exercise A.11</td>
-<td>Unfortunately, the <code>weatherData</code> package has been removed from CRAN.</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Similar data now live in <code><a href="http://www.rdocumentation.org/packages/mosaicData/topics/Weather">mosaicData::Weather</a></code>, but the data for several cities are already contained in a single data frame, so there is no need to merge from multiple sources.</td>
+<td>747</td>
+<td align="left">Exercise A.11</td>
+<td align="left">Unfortunately, the <code>weatherData</code> package has been removed from CRAN. Similar data now live in <code><a href="http://www.rdocumentation.org/packages/mosaicData/topics/Weather">mosaicData::Weather</a></code>, but the data for several cities are already contained in a single data frame, so there is no need to merge from multiple sources.</td>
 </tr>
 </tbody>
 </table>
