@@ -127,10 +127,10 @@ R</em>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>snippet</span>(<span class='no'>name</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>view</span> <span class='kw'>=</span> !<span class='no'>execute</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"demo.ask"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"verbose"</span>),
-  <span class='kw'>lib.loc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>character.only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max.files</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
+    <pre class="usage"><span class='fu'>snippet</span>(<span class='no'>name</span>, <span class='kw'>eval</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='no'>eval</span>, <span class='kw'>view</span> <span class='kw'>=</span> !<span class='no'>execute</span>,
+  <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"demo.ask"</span>),
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"verbose"</span>), <span class='kw'>lib.loc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>character.only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max.files</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,6 +138,10 @@ R</em>.</p>
     <tr>
       <th>name</th>
       <td><p>name of snippet</p></td>
+    </tr>
+    <tr>
+      <th>eval</th>
+      <td><p>a logical.  An alias for `execute`.</p></td>
     </tr>
     <tr>
       <th>execute</th>
@@ -209,7 +213,7 @@ provide the full snippet name.  See the examples.</p>
 <span class='fu'>snippet</span>(<span class='st'>"norm"</span>)</div><div class='output co'>#&gt; <span class='message'>Multiple matches found for `norm': </span>
 #&gt; <span class='message'>  normal, normal-grid, normal-loglik, normal-mle</span></div><div class='input'><span class='co'># sequence of "histogram" snippets</span>
 <span class='fu'>snippet</span>(<span class='st'>"hist"</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>view</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in snippet("hist", execute = FALSE, echo = TRUE, view = FALSE): No snippet matching 'hist'</span></div><div class='input'><span class='co'># just one of the "histogram" snippets</span>
-<span class='fu'>snippet</span>(<span class='st'>"histogram04"</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>view</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in snippet("histogram04", execute = FALSE, echo = TRUE, view = FALSE): No snippet matching 'histogram04'</span></div><div class='input'><span class='co'># Prefix two short, but a helpful message is displayed</span>
+<span class='fu'>snippet</span>(<span class='st'>"histogram04"</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>view</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in snippet("histogram04", execute = FALSE, echo = TRUE, view = FALSE): No snippet matching 'histogram04'</span></div><div class='input'><span class='co'># Prefix too short, but a helpful message is displayed</span>
 <span class='fu'>snippet</span>(<span class='st'>"h"</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>view</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>Multiple matches found for `h': </span>
 #&gt; <span class='message'>  hatvalues, heavy-tails, helium-footballs, help, histogram, hugo</span></div></pre>
   </div>
