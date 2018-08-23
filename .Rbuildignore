@@ -19,3 +19,4 @@
 ^inst/snippet/\.R$
 ^docs$
 ^revdep$
+^.Rprofile$
