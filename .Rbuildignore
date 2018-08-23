@@ -9,6 +9,7 @@
 ^vignettes/framed\.sty$
 ^vignettes/figure$
 ^\.travis\.yml$
+^_pkgdown.yml$
 ^README\.Rmd$
 ^README.*$
 ^index.Rmd$
