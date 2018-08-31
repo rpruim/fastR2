@@ -2,9 +2,9 @@
 ## Test environments
 
 * local OS X install 
-  * R version 3.5.0 (2018-04-23)
+  * R version 3.5.1 (2018-07-02)
   * Platform: x86_64-apple-darwin15.6.0 (64-bit)
-  * Running under: macOS High Sierra 10.13.5
+  * Running under: macOS High Sierra 10.13.6
   
 * win-builder via devtools
 
