@@ -20,3 +20,4 @@
 ^docs$
 ^revdep$
 ^.Rprofile$
+^Rplots.pdf$
