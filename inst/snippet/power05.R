@@ -1,8 +1,9 @@
 ## binom_power <- function(n, p_alt, alpha = 0.05) {
 ##   p_null <- 0.50
-##   critical_low <- qbinom(    alpha/2, size = n, prob = p_null) - 1
-##   critical_hi  <- qbinom(1 - alpha/2, size = n, prob = p_null) + 1
-##   pbinom(critical_low, n, p_alt) + 1 - pbinom(critical_hi - 1, n, p_alt)
+##   # reject if X <= critical_lo or X >= critical_hi
+##   critical_lo <- qbinom(    alpha/2, size = n, prob = p_null) - 1
+##   critical_hi <- qbinom(1 - alpha/2, size = n, prob = p_null)
+##   pbinom(critical_lo, n, p_alt) + 1 - pbinom(critical_hi - 1, n, p_alt)
 ## }
 ## 
 ## PowerData <-
