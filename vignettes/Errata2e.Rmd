@@ -37,6 +37,9 @@ Page Location             Issue
                           
 285  last line            printed: $-2n\pi$  <br>
                           correct: $-n\pi$
+                          
+286  lines 9-10           printed: correct when $\pi_0 = 0$ but overestimates ... when $\pi_0 > 0$  
+                          correct: correct when $\pi_0 = 1/2$ but overestimates ... when $\pi_0 \neq 1/2$
                        
 373                       printed: $W = -2 \log\left(\frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(\log(\hat \theta) - \log(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$ <br>
                           correct: $W = -2 \log\left( \frac{L(\theta_0)}{L(\hat\theta)} \right) = 2 \left(l(\hat \theta) - l(\theta_0)\right) \approx I(\hat \theta) (\theta_0 - \hat\theta)^2$
