@@ -1,5 +1,5 @@
 set.seed(123)
-Data <- data_frame(
+Data <- tibble(
   n = 1:10000,
   x =  rcauchy(10000),
   running_mean =  cumsum(x) / (1:length(x))

@@ -14,7 +14,7 @@ utils::globalVariables(c(".index"))
 #' @param ... additional arguments (currently ignored)
 #' @param env an environment in which to evaluate the models.
 #' @importFrom ggplot2 aes
-## @importFrom dplyr data_frame
+## @importFrom dplyr tibble
 #' 
 #' @export
 #' @examples
@@ -42,7 +42,7 @@ SSplot <-
       n <- length(e)
       idx <- 0:length(e)
       idx <- union(idx[(idx + dfe) <= n], n)
-      dplyr::data_frame(df = idx, SS = cumsum(c(0,e^2))[1 + idx])
+      dplyr::tibble(df = idx, SS = cumsum(c(0,e^2))[1 + idx])
     }
     
     DD <- do(n) * SS(eval(model2$call, env))

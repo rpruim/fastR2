@@ -39,7 +39,7 @@ setwd("snipping")
 purl("/Users/rpruim/projects/github/fast2e/Rnw/amsfast2.Rnw")
 chunkNames <- snippify("amsfast2.R", path="../../inst/snippet")
 RChunks <-
-  data_frame(
+  dplyr::tibble(
     full_name = chunkNames,
     base_name = chunkNames %>% sub("[01].*", "", .) %>% sub("-fig|-sol", "", .),
     fig = grepl("-fig", chunkNames),

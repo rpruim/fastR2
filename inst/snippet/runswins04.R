@@ -1,5 +1,5 @@
 Aux_data <- 
-  data_frame(
+  tibble(
    runmargin = seq(-3.5, 3.5, by = 0.1),
    winP = makeFun(bb.glm)(runmargin = runmargin)
   )

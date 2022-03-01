@@ -1,6 +1,6 @@
 
 gf_line(y ~ x, 
-        data = data_frame(x = seq(-0.5, 1.5, by = 0.001), y = dunif(x)),
+        data = tibble(x = seq(-0.5, 1.5, by = 0.001), y = dunif(x)),
         group = ~ (x < 0) + (x<=1) ) %>%
   gf_labs(y = "f(x)")
 

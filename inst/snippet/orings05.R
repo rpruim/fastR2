@@ -8,7 +8,7 @@ dbinom(0, 6, prob = p2)               # 0 damaged O-rings
 pred_damage1 <- makeFun(orings.model)
 pred_damage2 <- makeFun(orings.model2)
 Pred_data <- 
-  data_frame(
+  tibble(
     temp = seq(30, 100, by = 2),
     pred1 = pred_damage1(temp),
     pred2 = pred_damage2(temp)

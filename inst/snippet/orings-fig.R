@@ -1,6 +1,6 @@
 pred_damage <- makeFun(orings.model)
 Pred_data <- 
-  data_frame(
+  tibble(
     temp = seq(30, 100, by = 2),
     pred = pred_damage(temp))
 gf_point(damage / 6 ~ temp, data = orings, alpha = 0.7) %>%

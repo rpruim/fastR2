@@ -1,7 +1,7 @@
 m <- max( ~ week1, data = Fumbles)
 xbar <- mean( ~ week1, data = Fumbles); xbar
 Week1 <-
-  data_frame(
+  tibble(
     fumbles = 0:m,
     `observed count` = 
       as.vector(tally( ~ factor(week1, levels = 0:m), data = Fumbles)),

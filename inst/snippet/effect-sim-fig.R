@@ -1,4 +1,4 @@
-D <- data_frame(
+D <- tibble(
   x1 = runif(100, 0, 10),
   x2 = runif(100, 0, 10),
   y1 = 5 + 2 * x1 + 3 * x2 + rnorm(100, sd = 4),

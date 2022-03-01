@@ -351,7 +351,7 @@ gf_freqpoly( ~ Sepal.Length, color = ~ Species, data = iris,
 ## ----echo=FALSE----------------------------------------------------------
 set.seed(123)
 mydata <-
-  data_frame(
+  tibble(
     `symmetric`  = rnorm(5000, 75, 20),
     `positively skewed` = rgamma(5000, shape = 3, rate = 1/10),
     `negatively skewed` = 150 - `positively skewed`) %>%
@@ -1234,7 +1234,7 @@ tally( ~ p.value < 0.05, data = Sims1075, format = "proportion")
 ## ----binomial-power-sol00, warning = FALSE, echo = FALSE, opts.label = "fig1"----
 binom_power_data <- 
   function(n, p_alt, alpha = 0.05, p_null = 0.5) {
-    data_frame(
+    tibble(
       x = 0:n,            # possible value of x
       null_prob = dbinom(x, n, p_null),  
       alt_prob  = dbinom(x, n, p_alt)
@@ -1280,7 +1280,7 @@ binom_power_plot(n = 50, p_null = 1/6, p_alt = 1/3)
 ## ----binomial-power-sol01------------------------------------------------
 binom_power_data <- 
   function(n, p_alt, alpha = 0.05, p_null = 0.5) {
-    data_frame(
+    tibble(
       x = 0:n,            # possible value of x
       null_prob = dbinom(x, n, p_null),  
       alt_prob  = dbinom(x, n, p_alt)
@@ -1308,7 +1308,7 @@ binom_power(n = 400, p_null = 1/3, p_alt = 1/4)$power
 
 ## ----binomial-power-sol03------------------------------------------------
 Plot_Data <- 
-  data_frame(
+  tibble(
     n = 1:1000,
     power = sapply(n, function(n) binom_power(n = n, p_null = 1/3, p_alt = 1/4)$power)
   )
@@ -1467,7 +1467,7 @@ favstats( ~ week1, data = Fumbles)
 m <- max( ~ week1, data = Fumbles)
 xbar <- mean( ~ week1, data = Fumbles); xbar
 Week1 <-
-  data_frame(
+  tibble(
     fumbles = 0:m,
     `observed count` = 
       as.vector(tally( ~ factor(week1, levels = 0:m), data = Fumbles)),
@@ -1595,7 +1595,7 @@ firstDigit <- function(x) {
 # rivers contains lengths (mi) of 141 major North American rivers
 # Rivers has first digits of lengths in miles and km
 Rivers <-
-  data_frame(
+  tibble(
     digit = 1:9,
     model = log10(digit + 1) - log10(digit),
     miles = as.numeric(tally( ~ firstDigit(rivers), format = "prop")),
@@ -1766,7 +1766,7 @@ integrate(f, 0, 1)
 integrate(f, 0, 1) %>% value()       # just the approximation value
 # find nearby fraction
 integrate(f, 0, 1) %>% value() %>% fractions() 
-gf_line(y ~ x, data = data_frame(x = seq(-1, 4, by = 0.01), y = f(x)),
+gf_line(y ~ x, data = tibble(x = seq(-1, 4, by = 0.01), y = f(x)),
         group = ~ (x > 3)) %>%
   gf_labs(y = "f(x)")
 
@@ -1780,7 +1780,7 @@ integrate(f, 0, 1)
 integrate(f, 0, 1) %>% value()       # just the approximation value
 # find nearby fraction
 integrate(f, 0, 1) %>% value() %>% fractions() 
-gf_line(y ~ x, data = data_frame(x = seq(-1, 4, by = 0.01), y = f(x)),
+gf_line(y ~ x, data = tibble(x = seq(-1, 4, by = 0.01), y = f(x)),
         group = ~ (x > 3)) %>%
   gf_labs(y = "f(x)")
 
@@ -1829,7 +1829,7 @@ integrate(f, 7, 15)
 ## ----unif-pdf-cdf-fig, echo=FALSE----------------------------------------
 
 gf_line(y ~ x, 
-        data = data_frame(x = seq(-0.5, 1.5, by = 0.001), y = dunif(x)),
+        data = tibble(x = seq(-0.5, 1.5, by = 0.001), y = dunif(x)),
         group = ~ (x < 0) + (x<=1) ) %>%
   gf_labs(y = "f(x)")
 
@@ -1858,7 +1858,7 @@ integrate(fV, 0, 4)
 gf_fun(fV(v) ~ v, xlim = c(-1, 5), n = 1000) %>%
   gf_lims(y = c(0, 1))
 # we can be clever if we do things manually
-gf_line(y ~ v, data = data_frame(v = seq(-1, 5, by = 0.01), y = fV(v)),
+gf_line(y ~ v, data = tibble(v = seq(-1, 5, by = 0.01), y = fV(v)),
         group =  ~(v < 0) + (v <=4)) %>%
   gf_lims(y = c(0, 1))
 
@@ -1869,7 +1869,7 @@ integrate(fV, 0, 4)
 gf_fun(fV(v) ~ v, xlim = c(-1, 5), n = 1000) %>%
   gf_lims(y = c(0, 1))
 # we can be clever if we do things manually
-gf_line(y ~ v, data = data_frame(v = seq(-1, 5, by = 0.01), y = fV(v)),
+gf_line(y ~ v, data = tibble(v = seq(-1, 5, by = 0.01), y = fV(v)),
         group =  ~(v < 0) + (v <=4)) %>%
   gf_lims(y = c(0, 1))
 
@@ -2371,7 +2371,7 @@ gf_dist("beta", shape1 = 0.5, shape2 = 0.5, col = "gray50") %>%
 ## ----qq-norm01, fig.keep="none"------------------------------------------
 x <- c(-0.16, 1.17, -0.43, -0.02, 1.06, 
        -1.35, 0.65, -1.12, 0.03, -1.44)
-Plot_data <- data_frame(
+Plot_data <- tibble(
   x.sorted = sort(x),
   p = seq(0.05, 0.95, by = 0.1),
   q = qnorm(p)
@@ -2382,7 +2382,7 @@ gf_point(x.sorted ~ q, data = Plot_data)
 ## ----qq-norm01-fig, echo=FALSE, results = "hide"-------------------------
 x <- c(-0.16, 1.17, -0.43, -0.02, 1.06, 
        -1.35, 0.65, -1.12, 0.03, -1.44)
-Plot_data <- data_frame(
+Plot_data <- tibble(
   x.sorted = sort(x),
   p = seq(0.05, 0.95, by = 0.1),
   q = qnorm(p)
@@ -2727,7 +2727,7 @@ mean(replicate(1000, simulate(24)))
 time <- c(49.0, 60.4, 8.9, 43.4, 34.8, 8.2, 13.6, 11.5, 99.4, 31.9)  
 mean(time)
 lambda.hat = 1 / mean(time); lambda.hat
-Plot_data <- data_frame(x = seq(0,121, by = 0.5), density = dexp(x, rate = lambda.hat))
+Plot_data <- tibble(x = seq(0,121, by = 0.5), density = dexp(x, rate = lambda.hat))
 
 gf_dhistogram( ~ time, n = 10, binwidth = 10, alpha = 0.5) %>%
   gf_line(density ~ x, data = Plot_data)
@@ -2984,7 +2984,7 @@ gf_line(runningMean ~ rep | run) %>%
 
 ## ----lln-cauchy-seed, fig.keep="none"------------------------------------
 set.seed(123)
-Data <- data_frame(
+Data <- tibble(
   n = 1:10000,
   x =  rcauchy(10000),
   running_mean =  cumsum(x) / (1:length(x))
@@ -3345,7 +3345,7 @@ all.equal(xList[-1], vList[-1])
 x <- seq(-5, 5, by = 0.05)
 l <- length(x)
 Plot_data <- 
-  data_frame(
+  tibble(
     pdf = c(dnorm(x), dt(x, df = 1), dt(x, df = 2), dt(x, df = 4), dt(x, df = 10)),
     distribution = rep(c(1000, 1, 2, 4, 10), each = l),
     x = rep(x, times = 5)
@@ -4667,7 +4667,7 @@ simulate <-
     total.area <- pi * sum(y^2)
     mle <- plants / total.area  
   }
-  data_frame(
+  tibble(
     size = size, lambda = lambda, method = method,
     estimate = mle, plants = plants, area = total.area,
     lambdaFac = paste0("l=", lambda),
@@ -5100,7 +5100,7 @@ maxLik(loglik.hwe, start = 0.5, x = geno)
 
 ## ----mix-normals04-sol---------------------------------------------------
 Plot_data <-
-  data_frame(
+  tibble(
     x = seq(0, 30, by = 0.10),
     density = 0.3 * dnorm(x, 8, 2) + 0.7 * dnorm(x, 16, 3),
     density1 = 0.3 * dnorm(x, 8, 2),
@@ -5493,7 +5493,7 @@ one_sim <- function(n = 30L) {
   x <- runif(n)
   theta.hat <- -n / sum(log(x)) - 1; theta.hat
   W <- 2 * (n * log(theta.hat + 1) + theta.hat * sum(log(x)))
-  data_frame(n = n, theta.hat = theta.hat, W = W, pval = 1 - pchisq(W, df = 1))
+  tibble(n = n, theta.hat = theta.hat, W = W, pval = 1 - pchisq(W, df = 1))
 }
 
 Sims <- do(5000) * one_sim()
@@ -7211,7 +7211,7 @@ msummary(orings.model)
 ## ----orings-fig, results = "hide", echo = FALSE--------------------------
 pred_damage <- makeFun(orings.model)
 Pred_data <- 
-  data_frame(
+  tibble(
     temp = seq(30, 100, by = 2),
     pred = pred_damage(temp))
 gf_point(damage / 6 ~ temp, data = orings, alpha = 0.7) %>%
@@ -7259,7 +7259,7 @@ dbinom(0, 6, prob = p2)               # 0 damaged O-rings
 pred_damage1 <- makeFun(orings.model)
 pred_damage2 <- makeFun(orings.model2)
 Pred_data <- 
-  data_frame(
+  tibble(
     temp = seq(30, 100, by = 2),
     pred1 = pred_damage1(temp),
     pred2 = pred_damage2(temp)
@@ -7295,7 +7295,7 @@ gf_point(winP ~ predWinP, data = BB) %>%
 
 ## ----runswins04, fig.keep = "none"---------------------------------------
 Aux_data <- 
-  data_frame(
+  tibble(
    runmargin = seq(-3.5, 3.5, by = 0.1),
    winP = makeFun(bb.glm)(runmargin = runmargin)
   )
@@ -7315,7 +7315,7 @@ BB %>% arrange(-abs(winPdiff)) %>% select(1, 22:24) %>% head()
 gf_point(winP ~ predWinP, data = BB) %>%
   gf_abline(slope = 1, intercept = 0)
 Aux_data <- 
-  data_frame(
+  tibble(
    runmargin = seq(-3.5, 3.5, by = 0.1),
    winP = makeFun(bb.glm)(runmargin = runmargin)
   )
@@ -8102,7 +8102,7 @@ lm(strength ~ limestone + water + limestone * water, data = Concrete) %>%
   msummary()
 
 ## ----effect-sim, fig.keep = "none", seed = 1234--------------------------
-D <- data_frame(
+D <- tibble(
   x1 = runif(100, 0, 10),
   x2 = runif(100, 0, 10),
   y1 = 5 + 2 * x1 + 3 * x2 + rnorm(100, sd = 4),
@@ -8122,7 +8122,7 @@ lm(y2 ~ x1 + x2 + x1*x2, data = D) %>%
   plot("x1", main = "interaction model; y2")
 
 ## ----effect-sim-fig, echo = FALSE, results = "hide", seed = 1234, opts.label = "fig1"----
-D <- data_frame(
+D <- tibble(
   x1 = runif(100, 0, 10),
   x2 = runif(100, 0, 10),
   y1 = 5 + 2 * x1 + 3 * x2 + rnorm(100, sd = 4),
@@ -8494,7 +8494,7 @@ anova(lm(yield ~ type, data = Study))
 group.means <- round(c(mean(yield ~ type, data = Study)), 1); group.means
 y.bar <- 5 * sum(group.means) / 15; y.bar
 group.sds <- round(sd(yield ~ type, data = Study), 3); group.sds
-data_frame(
+tibble(
   SSE = sum(4 * group.sds^2), MSE = SSE / 12, 
   SSM = sum(5 * (group.means - y.bar)^2), MSM = SSM / 2, 
   F = MSM/MSE, p = 1 - pf(F, 2, 12))

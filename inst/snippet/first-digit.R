@@ -4,7 +4,7 @@ firstDigit <- function(x) {
 # rivers contains lengths (mi) of 141 major North American rivers
 # Rivers has first digits of lengths in miles and km
 Rivers <-
-  data_frame(
+  tibble(
     digit = 1:9,
     model = log10(digit + 1) - log10(digit),
     miles = as.numeric(tally( ~ firstDigit(rivers), format = "prop")),

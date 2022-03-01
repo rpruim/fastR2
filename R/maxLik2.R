@@ -53,7 +53,7 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
 #' @importFrom grid gpar 
 #' @importFrom ggplot2 ggplot aes stat_function geom_vline geom_hline labs
 #' @importFrom lattice levelplot
-#' @importFrom dplyr data_frame
+#' @importFrom dplyr tibble
 #' @export
 
 plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
@@ -86,7 +86,7 @@ plot.maxLik2 <- function(x, y, ci = "Wald", hline = FALSE, ...) {
       if ("likelihood" %in% ci || hline) {
         # create data frame of x, y pairs on the log-likelihood function
         D <- 
-          dplyr::data_frame(
+          dplyr::tibble(
             x = seq(coef(ml) - 4 * se, coef(ml) + 4 * se, length.out = 1000),
             y = suppressWarnings(ml$loglik(x))
           ) 
