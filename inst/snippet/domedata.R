@@ -1,3 +1,3 @@
-data(domedata, package = "alr3") 
+data(domedata, package = "alr4") 
 msummary(domedata)
 

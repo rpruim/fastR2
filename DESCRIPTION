@@ -33,7 +33,7 @@ Suggests:
     multcomp,
     vcd,
     car,
-    alr3,
+    alr4,
     corrgram,
     BradleyTerry2,
     cubature,

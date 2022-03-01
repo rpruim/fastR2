@@ -8851,7 +8851,7 @@ confint(glht(lm(perc ~ employee + day, data = Pallets2), mcp(employee = "Tukey")
 plot(confint(glht(lm(perc ~ employee + day, Pallets2), mcp(employee = "Tukey"))))
 
 ## ----domedata------------------------------------------------------------
-data(domedata, package = "alr3") 
+data(domedata, package = "alr4") 
 msummary(domedata)
 
 ## ----domedata-step01-----------------------------------------------------
@@ -9265,7 +9265,7 @@ gf_point(resid(cooling.model3) ~ time, data = CoolingWater2)
 gf_point(resid(cooling.model3) ~ fitted(cooling.model3))
 
 ## ----rat-liver-----------------------------------------------------------
-data(rat, package = "alr3")  
+data(rat, package = "alr4")  
 rat.lm <- lm(y ~ BodyWt * LiverWt, data = rat)
 msummary(rat.lm)
 
