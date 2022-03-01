@@ -12,7 +12,7 @@ groove wear} }
 }
 \source{
 These data are available at DASL, the Data and Story Library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 Tread wear is estimated by two methods: weight loss and groove wear.

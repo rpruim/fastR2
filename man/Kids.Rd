@@ -24,7 +24,7 @@ popularity; 4 = least important)} }
 }
 \source{
 These data are available at DASL, the data and story library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 Subjects were students in grades 4-6 from three school districts in

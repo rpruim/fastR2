@@ -387,7 +387,7 @@ NA
 #' @references W.S. Gosset, "The Probable Error of a Mean," Biometrika, 6
 #' (1908), pp 1-25.
 #' @source These data are also available at DASL, the data and story library
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -421,7 +421,7 @@ NULL
 #' \code{wren}} }
 #' @references These data are also available from DASL, the data and story
 #' library 
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @source L.H.C. Tippett, \emph{The Methods of Statistics}, 4th Edition, John
 #' Wiley and Sons, Inc., 1952, p. 176.
 #' @keywords datasets
@@ -607,7 +607,7 @@ NULL
 #' \item{week2}{ number of fumbles on November 13, 2010}
 #' \item{week3}{ number of fumbles on November 20, 2010} }
 #' @source
-#' \url{http://www.teamrankings.com/college-football/stat/fumbles-per-game}
+#' \url{https://www.teamrankings.com/college-football/stat/fumbles-per-game}
 #' @keywords datasets
 #' @examples
 #' 
@@ -814,7 +814,7 @@ NULL
 #' controversy", \emph{The Columbus Dispatch} (November, 21, 1993), B7.
 #' @source These data are available from DASL, the data and story library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -968,7 +968,7 @@ NULL
 #' 63, 418-424.
 #' @source These data are available at DASL, the data and story library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1152,7 +1152,7 @@ NULL
 #' out} \item{A}{ assists} \item{TO}{ turn overs}
 #' \item{Blk}{ blocked shots} \item{Stl}{ steals}
 #' \item{Pts}{ points scored} \item{PTSG}{ points per game} }
-#' @source MIAA sports archives (\url{http://www.miaa.org/})
+#' @source MIAA sports archives (\url{https://www.miaa.org/})
 #' @keywords datasets
 #' @examples
 #' 
@@ -1792,7 +1792,7 @@ NULL
 #' \& Taste Treatment and Research Foundation, Chicago.
 #' @source These data are also available at DASL, the data and story library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1910,7 +1910,7 @@ NULL
 #' \code{fast}, \code{medium}, or \code{slow}} }
 #' @source These data are available at DASL, the data and story library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -1949,7 +1949,7 @@ NULL
 #' Cleveland, W. S. \emph{Visualizing Data}. 1993.
 #' @source These data are available at DASL, the data and story library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}.
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -2046,7 +2046,7 @@ NULL
 #' Treadware of Commercial Tires", \emph{Rubber Age}, 73:2 (May 1953).
 #' @source These data are available at DASL, the Data and Story Library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 
@@ -2190,7 +2190,7 @@ NULL
 #' @source These data are from the United States Department of Labor Statistics
 #' and are also available at DASL, the Data and Story Library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
-#' (\url{http://lib.stat.cmu.edu/DASL/}).
+#' (\url{https://dasl.datadescription.com/}).
 #' @keywords datasets
 #' @examples
 #' 

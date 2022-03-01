@@ -15,7 +15,7 @@ based on fumbles per game through games on November 26, 2010}
 \item{week3}{ number of fumbles on November 20, 2010} }
 }
 \source{
-\url{http://www.teamrankings.com/college-football/stat/fumbles-per-game}
+\url{https://www.teamrankings.com/college-football/stat/fumbles-per-game}
 }
 \description{
 This data frame gives the number of fumbles by each NCAA FBS team for the

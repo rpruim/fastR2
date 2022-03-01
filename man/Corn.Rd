@@ -11,7 +11,7 @@ A data frame with 11 observations on the following 2 variables.
 }
 \source{
 These data are also available at DASL, the data and story library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 William Gosset analyzed data from an experiment comparing the yield of

@@ -20,7 +20,7 @@ trial} \item{s1}{ time (in seconds) in first scented trial}
 }
 \source{
 These data are also available at DASL, the data and story library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 Subjects were asked to to complete a pencil and paper maze when they were

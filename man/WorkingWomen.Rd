@@ -13,7 +13,7 @@ A data frame with 19 observations on the following 3 variables.
 \source{
 These data are from the United States Department of Labor Statistics
 and are also available at DASL, the Data and Story Library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 The labor force participation rate of women in each of 19 U.S. cities in

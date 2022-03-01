@@ -30,6 +30,6 @@ gf_boxplot(length ~ species, data = Cuckoo)
 \references{
 These data are also available from DASL, the data and story
 library 
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \keyword{datasets}

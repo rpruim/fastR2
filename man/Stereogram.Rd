@@ -12,7 +12,7 @@ instructions) \code{VV} (visual instructions)} }
 }
 \source{
 These data are available at DASL, the data and story library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 Results of an experiment on the effect of prior information on the time to

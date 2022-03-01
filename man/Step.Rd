@@ -15,7 +15,7 @@ A data frame with 30 observations on the following 7 variables.
 }
 \source{
 These data are available at DASL, the data and story library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 An experiment was conducted by students at The Ohio State University in the

@@ -12,7 +12,7 @@ traveled by helium-filled football (yards)} }
 }
 \source{
 These data are available from DASL, the data and story library
-(\url{http://lib.stat.cmu.edu/DASL/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 Two identical footballs, one air-filled and one helium-filled, were used

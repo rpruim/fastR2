@@ -24,7 +24,7 @@ out} \item{A}{ assists} \item{TO}{ turn overs}
 \item{Pts}{ points scored} \item{PTSG}{ points per game} }
 }
 \source{
-MIAA sports archives (\url{http://www.miaa.org/})
+MIAA sports archives (\url{https://www.miaa.org/})
 }
 \description{
 Individual player statistics for the 2004-2005 Michigan Intercollegiate
