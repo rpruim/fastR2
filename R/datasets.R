@@ -296,7 +296,7 @@ NULL
 #' Research}, Vol. 28, No. 12, pp. 1797-1808.
 #' @source Data were obtained from the Machine Learning Repository
 #' (\url{http://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
-#' Yeh (\email{icyeh at chu.edu.tw}) who retains the copyright for these data.
+#' Yeh (\email{icyeh@chu.edu.tw}) who retains the copyright for these data.
 #' @keywords datasets
 #' @examples
 #' 
@@ -1542,7 +1542,7 @@ NULL
 #' which pigs were rolled (5 or 8 inches)} \item{start}{ starting
 #' position of the pigs (0 = both pigs backwards, 1 = one bacwards one
 #' forwards, 2 = both forwards)} }
-#' @source John C. Kern II, Duquesne University (\email{kern at mathcs.duq.edu})
+#' @source John C. Kern II, Duquesne University (\email{kern@mathcs.duq.edu})
 #' @keywords datasets
 #' @examples
 #' 
