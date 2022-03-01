@@ -4,7 +4,8 @@
 \name{MIAA05}
 \alias{MIAA05}
 \title{MIAA basketball 2004-2005 season}
-\format{A data frame with 134 observations on the following 27 variables.
+\format{
+A data frame with 134 observations on the following 27 variables.
 \itemize{ \item{Number}{ jersey number}
 \item{Player}{ player's name} \item{GP}{ games played}
 \item{GS}{ games started} \item{Min}{ minutes played}
@@ -20,7 +21,8 @@ rebounds} \item{Tot}{ total rebounds } \item{RBG}{ rebounds
 per game} \item{PF}{ personal fouls} \item{FO}{ games fouled
 out} \item{A}{ assists} \item{TO}{ turn overs}
 \item{Blk}{ blocked shots} \item{Stl}{ steals}
-\item{Pts}{ points scored} \item{PTSG}{ points per game} }}
+\item{Pts}{ points scored} \item{PTSG}{ points per game} }
+}
 \source{
 MIAA sports archives (\url{http://www.miaa.org/})
 }

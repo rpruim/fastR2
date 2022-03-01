@@ -5,11 +5,9 @@
 \alias{to2d}
 \title{Geometric representation of linear model}
 \usage{
-geolm(formula, data = parent.env(), type = "xz", version = 1,
-  plot = TRUE, ...)
+geolm(formula, data = parent.env(), type = "xz", version = 1, plot = TRUE, ...)
 
-to2d(x, y, z, type = NULL, xas = c(0.4, -0.3), yas = c(1, 0),
-  zas = c(0, 1))
+to2d(x, y, z, type = NULL, xas = c(0.4, -0.3), yas = c(1, 0), zas = c(0, 1))
 }
 \arguments{
 \item{formula}{a formula as used in \code{\link{lm}}.}

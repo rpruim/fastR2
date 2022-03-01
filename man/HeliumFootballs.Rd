@@ -4,10 +4,12 @@
 \name{HeliumFootballs}
 \alias{HeliumFootballs}
 \title{Punting helium- and air-filled footballs}
-\format{A data frame with 39 observations on the following 3 variables.
+\format{
+A data frame with 39 observations on the following 3 variables.
 \itemize{ \item{trial}{ trial number} \item{air}{ distance
 traveled by air-filled football (yards)} \item{helium}{ distance
-traveled by helium-filled football (yards)} }}
+traveled by helium-filled football (yards)} }
+}
 \source{
 These data are available from DASL, the data and story library
 (\url{http://lib.stat.cmu.edu/DASL/}).

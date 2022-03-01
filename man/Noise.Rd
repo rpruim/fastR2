@@ -4,12 +4,14 @@
 \name{Noise}
 \alias{Noise}
 \title{Noise}
-\format{A data frame with 50 observations on the following 5 variables.
+\format{
+A data frame with 50 observations on the following 5 variables.
 \itemize{ \item{id}{ subject identifier} \item{score}{ score
 on the test} \item{condition}{ numeric code for condition}
 \item{volume}{ a factor with levels \code{high} \code{low}
 \code{none}} \item{frequency}{ a factor with levels \code{continuous}
-\code{intermittent} \code{none}} }}
+\code{intermittent} \code{none}} }
+}
 \description{
 In order to test the effect of room noise, subjects were given a test under
 5 different sets of conditions: 1) no noise, 2) intermittent low volume, 3)

@@ -4,11 +4,13 @@
 \name{Pallets}
 \alias{Pallets}
 \title{Pallet repair data}
-\format{A data frame with 20 observations on the following 3 variables.
+\format{
+A data frame with 20 observations on the following 3 variables.
 \itemize{ \item{pallets}{ number of pallets repaired}
 \item{employee}{ a factor with levels \code{A} \code{B} \code{C}
 \code{D}} \item{day}{ a factor with levels \code{day1} \code{day2}
-\code{day3} \code{day4} \code{day5}} }}
+\code{day3} \code{day4} \code{day5}} }
+}
 \source{
 Michael Stob, Calvin College
 }

@@ -4,7 +4,8 @@
 \name{Kids}
 \alias{Kids}
 \title{Goals and popularity factors for school kids}
-\format{A data frame with 478 observations on the following 11 variables.
+\format{
+A data frame with 478 observations on the following 11 variables.
 \itemize{ \item{Gender}{ a factor with levels \code{boy}
 \code{girl}} \item{Grade}{ grade in school}
 \item{Age}{ student age} \item{Race}{ a factor with levels
@@ -19,7 +20,8 @@ Middle} \code{Elm} \code{Main} \code{Portage} \code{Ridge} \code{Sand}
 popularity; 4 = least important)} \item{Looks}{ rank of `beging
 handsome or pretty' (1 = most important for popularity; 4 = least important)}
 \item{Money}{ rank of `having lots of money' (1 = most important for
-popularity; 4 = least important)} }}
+popularity; 4 = least important)} }
+}
 \source{
 These data are available at DASL, the data and story library
 (\url{http://lib.stat.cmu.edu/DASL/}).

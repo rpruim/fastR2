@@ -4,10 +4,12 @@
 \name{Soap}
 \alias{Soap}
 \title{Dwindling soap}
-\format{A data frame with 15 observations on the following 3 variables.
+\format{
+A data frame with 15 observations on the following 3 variables.
 \itemize{ \item{date}{ } \item{day}{ days since start of soap
 usage and data collection} \item{weight}{ weight of bar of soap (in
-grams) } }}
+grams) } }
+}
 \source{
 Data collected by Rex Boggs and available from OzDASL
 (\url{http://www.statsci.org/data/}).

@@ -4,9 +4,11 @@
 \name{RubberBand}
 \alias{RubberBand}
 \title{Rubber band launching -- unfinished documentation}
-\format{A data frame with 16 observations on the following 2 variables.
+\format{
+A data frame with 16 observations on the following 2 variables.
 \itemize{ \item{Stretch}{ amount rubber band was stretched before
-launch} \item{Distance}{ distance rubber band traveled } }}
+launch} \item{Distance}{ distance rubber band traveled } }
+}
 \description{
 Results of an experiment comparing a rubber band travels to the amount it
 was stretched prior to launch.

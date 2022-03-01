@@ -21,3 +21,5 @@
 ^revdep$
 ^.Rprofile$
 ^Rplots.pdf$
+^_pkgdown\.yml$
+^pkgdown$

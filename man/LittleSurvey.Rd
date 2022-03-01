@@ -4,7 +4,8 @@
 \name{LittleSurvey}
 \alias{LittleSurvey}
 \title{Results from a little survey}
-\format{A data frame with 279 observations on the following 20 variables.
+\format{
+A data frame with 279 observations on the following 20 variables.
 \itemize{ \item{number}{ a number between 1 and 30}
 \item{colorVer}{ which version of the 'favorite color' question was
 on the survey. A factor with levels \code{v1} \code{v2}}
@@ -30,7 +31,8 @@ the survey} \item{play}{ a factor with levels \code{no} \code{yes}}
 on the survey} \item{disease}{ a factor with levels \code{A}
 \code{B}} \item{homeworkver}{ which of two versions of the 'homework'
 question was on the survey} \item{homework}{ a factor with levels
-\code{A} \code{B}} }}
+\code{A} \code{B}} }
+}
 \description{
 These data are from a little survey given to a number of students in
 introductory statistics courses. Several of the items were prepared in

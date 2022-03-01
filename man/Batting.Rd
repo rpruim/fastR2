@@ -4,7 +4,8 @@
 \name{Batting}
 \alias{Batting}
 \title{Major League Batting 2000-2005}
-\format{A data frame with 8062 observations on the following 22 variables.
+\format{
+A data frame with 8062 observations on the following 22 variables.
 \itemize{ \item{player}{ unique identifier for each player}
 \item{year}{ year} \item{stint}{ for players who were traded
 mid-season, indicates which portion of the season the data cover}
@@ -17,7 +18,8 @@ factor with levels \code{AA} \code{AL} \code{NL}} \item{G}{ games}
 \item{BB}{ bases on balls (walks)} \item{SO}{ strike outs}
 \item{IBB}{ intentional base on balls} \item{HBP}{ hit by
 pitch} \item{SH}{ a numeric vector} \item{SF}{ sacrifice fly}
-\item{GIDP}{ grounded into double play} }}
+\item{GIDP}{ grounded into double play} }
+}
 \description{
 Major League batting data for the seasons from 2000-2005.
 }

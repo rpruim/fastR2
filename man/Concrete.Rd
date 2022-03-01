@@ -5,17 +5,31 @@
 \alias{Concrete}
 \alias{ConcreteAll}
 \title{Concrete Compressive Strength Data}
-\format{\code{Concrete} is a data frame with the following 
+\format{
+\code{Concrete} is a data frame with the following 
 variables.
 \itemize{ 
 \item{limestone}{ percentage of limestone}
 \item{water}{ water-cement ratio}
 \item{strength}{ compressive strength (MPa) after 28 days}
-}}
+}
+
+\code{concreteAll} is a data frame with the following 9 variables.
+\itemize{ \item{cement}{ amount of cement (kg/m^3)}
+\item{slag}{ amount of blast furnace slag (kg/m^3)}
+\item{ash}{ amount of fly ash(kg/m^3)} 
+\item{water}{ amount of water (kg/m^3)} 
+\item{superP}{ amount of superplasticizer (kg/m^3)}
+\item{coarseAg}{ amount of coarse aggregate (kg/m^3)}
+\item{fineAg}{ amount of fine aggregate (kg/m^3)}
+\item{age}{ age of concrete in days }
+\item{strength}{ compressive strength measured in MPa} }
+\code{Concrete} is a subset of \code{ConcreteAll}.
+}
 \source{
 Data were obtained from the Machine Learning Repository
 (\url{http://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
-Yeh (\email{icyeh at chu.edu.tw}) who retains the copyright for these data.
+Yeh (\email{icyeh@chu.edu.tw}) who retains the copyright for these data.
 }
 \usage{
 ConcreteAll

@@ -6,7 +6,8 @@
 \alias{FUSION1}
 \alias{FUSION2}
 \title{FUSION type 2 diabetes study}
-\format{Data frames with the following variables.  \itemize{
+\format{
+Data frames with the following variables.  \itemize{
 \item{id}{ subject ID number for matching between data sets}
 \item{t2d}{ a factor with levels \code{case} \code{control}}
 \item{bmi}{ body mass index} \item{sex}{ a factor with levels
@@ -23,7 +24,8 @@ SNP} \item{allele1}{ first allele coded as 1 = A, 2 = C, 3 = G, 4 = T}
 \item{genotype}{ both alleles coded as a factor}
 \item{Adose}{ number of A alleles} \item{Cdose}{ number of C
 alleles} \item{Gdose}{ number of G alleles}
-\item{Tdose}{ number of T alleles} }}
+\item{Tdose}{ number of T alleles} }
+}
 \source{
 Similar to the data presented in
 

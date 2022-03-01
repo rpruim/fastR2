@@ -5,12 +5,14 @@
 \alias{TasteTest}
 \alias{Taste1}
 \title{Taste test data}
-\format{A data frame with 16 observations on 2 (\code{taste1}) or 4
+\format{
+A data frame with 16 observations on 2 (\code{taste1}) or 4
 (\code{tastetest}) variables.  \itemize{ \item{score}{ taste score
 from a group of 50 testers} \item{scr}{ a factor with levels
 \code{coarse} \code{fine}} \item{liq}{ a factor with levels \code{hi}
 \code{lo}} \item{type}{ a factor with levels \code{A} \code{B}
-\code{C} \code{D}} }}
+\code{C} \code{D}} }
+}
 \source{
 E. Street and M. G. Carroll, \emph{Preliminary evaluation of a food
 product}, Statistics: A Guide to the Unknown (Judith M. Tanur et al., eds.),

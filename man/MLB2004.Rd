@@ -4,7 +4,8 @@
 \name{MLB2004}
 \alias{MLB2004}
 \title{Major League Baseball 2004 team data}
-\format{A data frame with 30 observations on the following 20 variables.
+\format{
+A data frame with 30 observations on the following 20 variables.
 \itemize{ \item{Team}{ team city, a factor}
 \item{League}{ League, a factor with levels \code{AL} \code{NL}}
 \item{W}{ number of wins} \item{L}{ number of losses}
@@ -18,7 +19,8 @@
 \item{SB}{ number of stolen bases} \item{CS}{ number of times
 caught stealing} \item{BA}{ batting average}
 \item{SLG}{ slugging percentage} \item{OBA}{ on base average}
-}}
+}
+}
 \description{
 Team batting statistics, runs allowed, and runs scored for the 2004 Major
 League Baseball season.

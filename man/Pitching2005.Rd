@@ -4,7 +4,8 @@
 \name{Pitching2005}
 \alias{Pitching2005}
 \title{Major League Baseball 2005 pitching}
-\format{A data frame with 653 observations on the following 26 variables.
+\format{
+A data frame with 653 observations on the following 26 variables.
 \itemize{ \item{playerID}{ unique identifier for each player}
 \item{yearID}{ year} 
 \item{stint}{ for players who played with
@@ -32,7 +33,8 @@ time the player joins a new team}
 \item{BK}{ balks}
 \item{BFP}{ batters faced pitching} 
 \item{GF}{ ratio of ground balls to fly balls} 
-\item{R}{ runs allowed} }}
+\item{R}{ runs allowed} }
+}
 \description{
 Major League Baseball pitching statistics for the 2005 season.
 }

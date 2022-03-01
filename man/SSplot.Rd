@@ -4,9 +4,19 @@
 \alias{SSplot}
 \title{Sum of Squares Plots}
 \usage{
-SSplot(model1, model2, n = 1, col1 = "gray50", size1 = 0.6,
-  col2 = "navy", size2 = 1, col3 = "red", size3 = 1, ...,
-  env = parent.frame())
+SSplot(
+  model1,
+  model2,
+  n = 1,
+  col1 = "gray50",
+  size1 = 0.6,
+  col2 = "navy",
+  size2 = 1,
+  col3 = "red",
+  size3 = 1,
+  ...,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{model1}{a linear model}

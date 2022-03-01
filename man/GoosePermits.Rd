@@ -4,12 +4,14 @@
 \name{GooosePermits}
 \alias{GooosePermits}
 \title{Goose permits}
-\format{A data frame with 11 rows and 5 columns.  
+\format{
+A data frame with 11 rows and 5 columns.  
 Each row corresponds to a bid (in US dollars)
 offered for a goose permit.  The colums \code{keep} and \code{sell} indicate 
 how many hunters offered that bid kept or sold their permit, respectively.
 \code{n} is the sum of \code{keep} and \code{sell} and \code{prop_sell}
-is the proportion that sold.}
+is the proportion that sold.
+}
 \description{
 In a 1979 study by Bishop and Heberlein, 237 hunters were each offered one of 
 11 cash amounts (bids) ranging from $1 to $200 in return for their hunting permits.

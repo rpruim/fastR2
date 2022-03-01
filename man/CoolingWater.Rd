@@ -8,13 +8,15 @@
 \alias{CoolingWater3}
 \alias{CoolingWater4}
 \title{Cooling Water}
-\format{A data frame with the following variables.
+\format{
+A data frame with the following variables.
   \itemize{
       \item \code{time} time in seconds
       \item \code{temp} temperature in Celsius (
       \code{CoolingWater1}, \code{CoolingWater2}) or 
       Fahrenheit (\code{CoolingWater3}, \code{CoolingWater4})
-  }}
+  }
+}
 \source{
 These data were collected by Stan Wagon and his students at Macelester
 College to explore Newton's Law of Cooling and the ways that the law 
@@ -28,6 +30,12 @@ the surface of the water to minimize evaporation.
 }
 \usage{
 data(CoolingWater1)
+
+data(CoolingWater2)
+
+data(CoolingWater3)
+
+data(CoolingWater4)
 }
 \description{
 Temperature of a mug of water as it cools.

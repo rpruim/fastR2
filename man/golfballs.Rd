@@ -4,7 +4,9 @@
 \name{golfballs}
 \alias{golfballs}
 \title{Golf ball numbers}
-\format{The format is: num [1:4] 137 138 107 104}
+\format{
+The format is: num [1:4] 137 138 107 104
+}
 \source{
 Data collected by Allan Rossman in Carlisle, PA.
 }

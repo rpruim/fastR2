@@ -4,10 +4,12 @@
 \name{MathNoise}
 \alias{MathNoise}
 \title{Test performance and noise}
-\format{A data frame with 40 observations on the following 3 variables.
+\format{
+A data frame with 40 observations on the following 3 variables.
 \itemize{ \item{score}{ score on a mathematics test}
 \item{noise}{ a factor with levels \code{hi} \code{lo}}
-\item{group}{ a factor with levels \code{control} \code{hyper}} }}
+\item{group}{ a factor with levels \code{control} \code{hyper}} }
+}
 \source{
 Sydney S. Zentall and Jandira H. Shaw, Effects of classroom noise on
 perfor- mance and activity of second-grade hyperactive and control children,

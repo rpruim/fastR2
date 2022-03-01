@@ -4,7 +4,8 @@
 \name{NCAAbb}
 \alias{NCAAbb}
 \title{NCAA Division I Basketball Results}
-\format{Nine variables describing NCAA Division I basketball games.
+\format{
+Nine variables describing NCAA Division I basketball games.
 \itemize{ 
 \item{date}{ date on which game was played}
 \item{away}{ visiting team} 
@@ -16,7 +17,8 @@ in tournaments (T)}
 \item{location}{ where game was played}
 \item{season}{ a character indicating which season the game belonged to}
 \item{postseason}{ a logical indicating whether the game is a postseason game}
-}}
+}
+}
 \source{
 \url{http://kenpom.com}
 }

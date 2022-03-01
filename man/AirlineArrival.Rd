@@ -4,12 +4,14 @@
 \name{AirlineArrival}
 \alias{AirlineArrival}
 \title{Airline On-Time Arrival Data}
-\format{A data frame with 11000 observations on the following 3 variables.
+\format{
+A data frame with 11000 observations on the following 3 variables.
 \itemize{ 
   \item{airport}{ a factor with levels \code{LosAngeles},
     \code{Phoenix}, \code{SanDiego}, \code{SanFrancisco}, \code{Seattle}}
   \item{result}{ a factor with levels \code{Delayed}, \code{OnTime}}
-  \item{airline}{ a factor with levels \code{Alaska}, \code{AmericaWest}} }}
+  \item{airline}{ a factor with levels \code{Alaska}, \code{AmericaWest}} }
+}
 \source{
 Barnett, Arnold. 1994. ``How numbers can trick you.''
 \emph{Technology Review}, vol. 97, no. 7, pp. 38--45.

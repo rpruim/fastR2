@@ -4,10 +4,19 @@
 \alias{snippet}
 \title{Display or execute a snippet of R code}
 \usage{
-snippet(name, eval = TRUE, execute = eval, view = !execute,
-  echo = TRUE, ask = getOption("demo.ask"),
-  verbose = getOption("verbose"), lib.loc = NULL,
-  character.only = FALSE, regex = NULL, max.files = 10L)
+snippet(
+  name,
+  eval = TRUE,
+  execute = eval,
+  view = !execute,
+  echo = TRUE,
+  ask = getOption("demo.ask"),
+  verbose = getOption("verbose"),
+  lib.loc = NULL,
+  character.only = FALSE,
+  regex = NULL,
+  max.files = 10L
+)
 }
 \arguments{
 \item{name}{name of snippet}

@@ -4,10 +4,12 @@
 \name{Bugs}
 \alias{Bugs}
 \title{Bugs}
-\format{A data frame with 24 observations on the following 2 variables.
+\format{
+A data frame with 24 observations on the following 2 variables.
 \itemize{ \item{Color}{ color of card; one of \code{B}(lue)
 \code{G}(reen) \code{W}(hite) \code{Y}(ellow)} \item{NumTrap}{ number
-of insects trapped on the card} }}
+of insects trapped on the card} }
+}
 \source{
 M. C. Wilson and R. E. Shade, Relative attractiveness of various
 luminescent colors to the cereal leaf beetle and the meadow spittlebug,

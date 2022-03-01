@@ -4,10 +4,12 @@
 \name{PetStress}
 \alias{PetStress}
 \title{Pets and stress}
-\format{A data frame with 45 observations on the following 2 variables.
+\format{
+A data frame with 45 observations on the following 2 variables.
 \itemize{ \item{group}{ a factor with levels \code{C}ontrol,
 \code{F}riend, or \code{P}et} \item{rate}{ average heart rate while
-performing a stressful task} }}
+performing a stressful task} }
+}
 \source{
 K. M. Allen, J. Blascovich, J. Tomaka, and R. M. Kelsey, Presence of
 human friends and pet dogs as moderators of autonomic responses to stress in

@@ -4,12 +4,14 @@
 \name{Inflation}
 \alias{Inflation}
 \title{Inflation data}
-\format{A data frame with 23 observations on the following 5 variables.
+\format{
+A data frame with 23 observations on the following 5 variables.
 \itemize{ \item{country}{ country where data were collected}
 \item{ques}{ questionnaire index of independence}
 \item{inf}{ annual inflation rate, 1980-1989 (percent)}
 \item{legal}{ legal index of independence}
-\item{dev}{ developed (1) or developing (2) nation} }}
+\item{dev}{ developed (1) or developing (2) nation} }
+}
 \source{
 These data are available from OzDASL, the Australasian Data and
 Story Library (\url{http://www.statsci.org/data/}).

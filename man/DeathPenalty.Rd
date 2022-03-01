@@ -4,12 +4,14 @@
 \name{DeathPenalty}
 \alias{DeathPenalty}
 \title{Death Penalty and Race}
-\format{A data frame with 326 observations.  
+\format{
+A data frame with 326 observations.  
 \itemize{ \item{death}{ a factor with levels \code{Yes}
 \code{No}} \item{penalty}{ a factor with levels \code{death}
 \code{other}} \item{victim}{ a factor with levels 
 \code{Bl} \code{Wh})} \item{Defendant}{ a factor
-with levels \code{Bl} \code{Wh} } }}
+with levels \code{Bl} \code{Wh} } }
+}
 \source{
 Radelet, M. (1981). Racial characteristics and imposition of the
 death penalty. \emph{American Sociological Review}, 46:918--927.

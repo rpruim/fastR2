@@ -4,7 +4,8 @@
 \name{Pigs}
 \alias{Pigs}
 \title{Pass the Pigs}
-\format{A data frame with 6000 observations on the following 6 variables.
+\format{
+A data frame with 6000 observations on the following 6 variables.
 \itemize{ \item{roll}{ roll number (1-6000)}
 \item{blackScore}{ numerical code for position of black pig}
 \item{black}{ position of black pig coded as a factor}
@@ -13,9 +14,10 @@
 \item{score}{ score of the roll} \item{height}{ height from
 which pigs were rolled (5 or 8 inches)} \item{start}{ starting
 position of the pigs (0 = both pigs backwards, 1 = one bacwards one
-forwards, 2 = both forwards)} }}
+forwards, 2 = both forwards)} }
+}
 \source{
-John C. Kern II, Duquesne University (\email{kern at mathcs.duq.edu})
+John C. Kern II, Duquesne University (\email{kern@mathcs.duq.edu})
 }
 \description{
 This data set contains information collected from rolling the pair of pigs
