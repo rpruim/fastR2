@@ -3,7 +3,6 @@
 \docType{data}
 \name{Concrete}
 \alias{Concrete}
-\alias{ConcreteAll}
 \title{Concrete Compressive Strength Data}
 \format{
 \code{Concrete} is a data frame with the following 
@@ -13,26 +12,6 @@ variables.
 \item{water}{ water-cement ratio}
 \item{strength}{ compressive strength (MPa) after 28 days}
 }
-
-\code{concreteAll} is a data frame with the following 9 variables.
-\itemize{ \item{cement}{ amount of cement (kg/m^3)}
-\item{slag}{ amount of blast furnace slag (kg/m^3)}
-\item{ash}{ amount of fly ash(kg/m^3)} 
-\item{water}{ amount of water (kg/m^3)} 
-\item{superP}{ amount of superplasticizer (kg/m^3)}
-\item{coarseAg}{ amount of coarse aggregate (kg/m^3)}
-\item{fineAg}{ amount of fine aggregate (kg/m^3)}
-\item{age}{ age of concrete in days }
-\item{strength}{ compressive strength measured in MPa} }
-\code{Concrete} is a subset of \code{ConcreteAll}.
-}
-\source{
-Data were obtained from the Machine Learning Repository
-(\url{http://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
-Yeh (\email{icyeh@chu.edu.tw}) who retains the copyright for these data.
-}
-\usage{
-ConcreteAll
 }
 \description{
 These data were collected by I-Cheng Yeh to determine how the compressive
@@ -40,24 +19,7 @@ strength of concrete is related to its ingredients (cement, blast furnace
 slag, fly ash, water, superplasticizer, coarse aggregate, and fine
 aggregate) and age.
 }
-\examples{
-
-data(Concrete)
-
-}
 \references{
 Appeared in Devore's "Probability and Statsistics for Engineers and 
 the Sciences (6th ed).  The variables have been renamed.
-
-#' Concrete Compressive Strength Data
-
-These data were collected by I-Cheng Yeh to determine how the compressive
-strength of concrete is related to its ingredients (cement, blast furnace
-slag, fly ash, water, superplasticizer, coarse aggregate, and fine
-aggregate) and age.
-
-I-Cheng Yeh (1998), "Modeling of strength of high performance
-concrete using artificial neural networks," \cite{Cement and Concrete
-Research}, Vol. 28, No. 12, pp. 1797-1808.
 }
-\keyword{datasets}

@@ -269,6 +269,8 @@ NULL
 #' @references Appeared in Devore's "Probability and Statsistics for Engineers and 
 #' the Sciences (6th ed).  The variables have been renamed.
 #' 
+NULL
+ 
 #' #' Concrete Compressive Strength Data
 #' 
 #' These data were collected by I-Cheng Yeh to determine how the compressive
@@ -302,8 +304,7 @@ NULL
 #' 
 #' data(Concrete)
 #' 
-"ConcreteAll"
-
+NULL
 
 
 #' Cooling Water
@@ -364,7 +365,7 @@ NULL
 #' }
 #' 
 #' @keywords datasets
-NA
+NULL
 
 
 
