@@ -2,22 +2,16 @@
 ## Test environments
 
 * local OS X install 
-  * R version 3.5.1 (2018-07-02)
-  * Platform: x86_64-apple-darwin15.6.0 (64-bit)
-  * Running under: macOS High Sierra 10.13.6
+  * version  R version 4.1.2 (2021-11-01)
+  * os       macOS Catalina 10.15.7
+  * system   x86_64, darwin17.0
   
 * win-builder via devtools
 
+## Notes
 
-## R CMD check results
-
-The following identificed as possibly mis-spelled words in DESCRIPTION:
-  AMS 
-  Pruim 
-  2nd
-
-are CORRECT.
-
+* This is a minor update primarly to update some email addresses and URLs
+  in documentation.
 
 ## Downstream dependencies
 

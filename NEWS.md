@@ -1,16 +1,20 @@
 
 # fastR 1.2.0
 
- * Use smart partial matching rather than regular expressions to identify snippets.
+* Now using smart partial matching rather than regular expressions to identify snippets.
+* Updated some URLs and email addresses.
+* Add an errata item.
+* Updated a few internal things to reflect changes in other packages (`data_frame()` is
+  now `tibble()`, for example.)
  
 # fastR2 1.1.0
 
-* Remove missing column from Pitching 2005
-* Fix `ConcreteAll` documentation
+* Removed missing column from Pitching 2005
+* Fixed `ConcreteAll` documentation
 
 # fastR2 1.0.0
 
-* Update code chunks for snippets to use ggformula
+* Updated code chunks for snippets to use ggformula
 * Improvements to plotting of objects created with `maxLik2()`
 
 # fastR2 0.4.0
