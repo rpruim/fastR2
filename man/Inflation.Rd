@@ -14,7 +14,7 @@ A data frame with 23 observations on the following 5 variables.
 }
 \source{
 These data are available from OzDASL, the Australasian Data and
-Story Library (\url{http://www.statsci.org/data/}).
+Story Library (\url{https://dasl.datadescription.com/}).
 }
 \description{
 The article developed four measures of central bank independence and

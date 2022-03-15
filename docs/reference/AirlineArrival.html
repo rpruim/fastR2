@@ -12,7 +12,7 @@ flight was on time."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
     
     <a class="navbar-brand me-2" href="../index.html">fastR2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +136,7 @@ of Simpson's paradox.</p>
 <span class="r-in">  <span class="fu">group_by</span><span class="op">(</span><span class="va">airport</span>, <span class="va">airline</span>, <span class="va">result</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span class="r-in">  <span class="fu">summarise</span><span class="op">(</span>count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span class="r-in">  <span class="fu">group_by</span><span class="op">(</span><span class="va">airport</span>, <span class="va">airline</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, percent <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="va">total</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://www.mosaic-web.org/mosaic/reference/aggregating.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, percent <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="va">total</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">result</span> <span class="op">==</span> <span class="st">"Delayed"</span><span class="op">)</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `summarise()` has grouped output by 'airport', 'airline'. You can override</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> using the `.groups` argument.</span>
@@ -145,7 +145,7 @@ of Simpson's paradox.</p>
 <span class="r-in">  <span class="fu">group_by</span><span class="op">(</span><span class="va">airline</span>, <span class="va">result</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span class="r-in">  <span class="fu">summarise</span><span class="op">(</span>count <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span class="r-in">  <span class="fu">group_by</span><span class="op">(</span><span class="va">airline</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mosaic/man/aggregating.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, percent <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="va">total</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span class="r-in">  <span class="fu">mutate</span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://www.mosaic-web.org/mosaic/reference/aggregating.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, percent <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="va">total</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">result</span> <span class="op">==</span> <span class="st">"Delayed"</span><span class="op">)</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `summarise()` has grouped output by 'airline'. You can override using the</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `.groups` argument.</span>

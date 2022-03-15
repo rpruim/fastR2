@@ -12,7 +12,7 @@ grams) } }
 }
 \source{
 Data collected by Rex Boggs and available from OzDASL
-(\url{http://www.statsci.org/data/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 A bar of soap was weighed after showering to see how much soap was used each

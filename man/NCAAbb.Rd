@@ -20,7 +20,7 @@ in tournaments (T)}
 }
 }
 \source{
-\url{http://kenpom.com}
+\url{https://kenpom.com}
 }
 \description{
 Results of NCAA basketball games

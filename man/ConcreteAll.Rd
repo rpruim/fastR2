@@ -19,7 +19,7 @@
 }
 \source{
 Data were obtained from the Machine Learning Repository
-(\url{http://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
+(\url{https://archive.ics.uci.edu/ml/}) where they were deposited by I-Cheng
 Yeh (\email{icyeh@chu.edu.tw}) who retains the copyright for these data.
 }
 \description{

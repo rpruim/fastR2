@@ -14,7 +14,7 @@ R."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/
     
     <a class="navbar-brand me-2" href="../index.html">fastR2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,48 +136,20 @@ provide the full snippet name.  See the examples.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">snippet</span><span class="op">(</span><span class="st">"normal01"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: normal01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; # these two should return the same value:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; pnorm(5, mean = 3, sd = 2)    # 5 is 1 st dev above the mean of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8413447</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; pnorm(1)                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8413447</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in snippet("normal01"):</span> No snippet matching 'normal01'</span>
 <span class="r-in"><span class="co"># prefix works</span></span>
 <span class="r-in"><span class="fu">snippet</span><span class="op">(</span><span class="st">"normal"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: normal01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; # these two should return the same value:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; pnorm(5, mean = 3, sd = 2)    # 5 is 1 st dev above the mean of 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8413447</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; pnorm(1)                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8413447</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in snippet("normal"):</span> No snippet matching 'normal'</span>
 <span class="r-in"><span class="co"># this prefix is ambiguous</span></span>
 <span class="r-in"><span class="fu">snippet</span><span class="op">(</span><span class="st">"norm"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple matches found for `norm': </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   normal, normal-grid, normal-loglik, normal-mle</span>
 <span class="r-in"><span class="co"># sequence of "histogram" snippets</span></span>
 <span class="r-in"><span class="fu">snippet</span><span class="op">(</span><span class="st">"hist"</span>, eval <span class="op">=</span> <span class="cn">FALSE</span>, echo <span class="op">=</span> <span class="cn">TRUE</span>, view <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram06</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in snippet("hist", eval = FALSE, echo = TRUE, view = FALSE):</span> No snippet matching 'hist'</span>
 <span class="r-in"><span class="co"># just one of the "histogram" snippets</span></span>
 <span class="r-in"><span class="fu">snippet</span><span class="op">(</span><span class="st">"histogram04"</span>, eval <span class="op">=</span> <span class="cn">FALSE</span>, echo <span class="op">=</span> <span class="cn">TRUE</span>, view <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ## snippet: histogram04</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in snippet("histogram04", eval = FALSE, echo = TRUE, view = FALSE):</span> No snippet matching 'histogram04'</span>
 <span class="r-in"><span class="co"># Prefix too short, but a helpful message is displayed</span></span>
 <span class="r-in"><span class="fu">snippet</span><span class="op">(</span><span class="st">"h"</span>, eval <span class="op">=</span> <span class="cn">FALSE</span>, echo <span class="op">=</span> <span class="cn">TRUE</span>, view <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple matches found for `h': </span>

@@ -16,7 +16,7 @@ A data frame with 13 observations on the following 7 variables.
 }
 \source{
 These data are also available at OzDASL
-(\url{http://www.statsci.org/data/}).
+(\url{https://dasl.datadescription.com/}).
 }
 \description{
 Investigators studied physical characteristics and ability in 13 football

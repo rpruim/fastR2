@@ -13,7 +13,7 @@ vector} \item{design}{ design of plane (\code{hi performance} or
 }
 \source{
 These data are also available at OzDASL, the Australasian Data and
-Story Library (\url{http://www.statsci.org/data/}).
+Story Library (\url{https://dasl.datadescription.com/}).
 }
 \description{
 Student-collected data from an experiment investigating the design of paper

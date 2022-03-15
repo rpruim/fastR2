@@ -14,7 +14,7 @@ strength after taking placebo} }
 }
 \source{
 These data are available from OzDASL, the Australasian data and
-story library (\url{http://www.statsci.org/data/}).
+story library (\url{https://dasl.datadescription.com/}).
 }
 \description{
 The effect of a single 600 mg dose of ascorbic acid versus a sugar placebo
