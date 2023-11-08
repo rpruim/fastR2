@@ -6,7 +6,9 @@
 \title{ACT scores and GPA}
 \format{
 A data frame with 26 observations on the following 2 variables.
-\itemize{ \item{ACT}{ACT score} \item{GPA}{GPA} }
+\describe{ 
+\item{ACT }{ACT score} 
+\item{GPA }{GPA} }
 }
 \description{
 ACT scores and college GPA for a small sample of college students.

@@ -6,7 +6,8 @@
 \title{Inflation data}
 \format{
 A data frame with 23 observations on the following 5 variables.
-\itemize{ \item{country}{ country where data were collected}
+\describe{ 
+\item{country}{ country where data were collected}
 \item{ques}{ questionnaire index of independence}
 \item{inf}{ annual inflation rate, 1980-1989 (percent)}
 \item{legal}{ legal index of independence}

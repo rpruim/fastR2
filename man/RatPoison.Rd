@@ -6,7 +6,8 @@
 \title{Rat poison -- unfinished documentation}
 \format{
 A data frame with 20 observations on the following 3 variables.
-\itemize{ \item{consumption}{ a numeric vector}
+\describe{ 
+\item{consumption}{ a numeric vector}
 \item{flavor}{ a factor with levels \code{bread}
 \code{butter-vanilla} \code{plain} \code{roast beef}}
 \item{location}{ a factor with levels \code{A} \code{B} \code{C}

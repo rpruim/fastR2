@@ -6,7 +6,8 @@
 \title{Measuring spheres}
 \format{
 A data frame with 12 observations on the following 2 variables.
-\itemize{ \item{diameter}{ diameter of bearing (m)}
+\describe{ 
+\item{diameter}{ diameter of bearing (m)}
 \item{mass}{ mass of the bearing (kg) } }
 }
 \source{

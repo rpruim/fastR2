@@ -6,7 +6,8 @@
 \title{Major League Baseball 2005 pitching}
 \format{
 A data frame with 653 observations on the following 26 variables.
-\itemize{ \item{playerID}{ unique identifier for each player}
+\describe{ 
+\item{playerID}{ unique identifier for each player}
 \item{yearID}{ year} 
 \item{stint}{ for players who played with
 multiple teams in the same season, \code{stint} is increased by one each

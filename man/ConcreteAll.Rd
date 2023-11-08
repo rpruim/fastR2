@@ -6,7 +6,8 @@
 \title{#' Concrete Compressive Strength Data}
 \format{
 \code{concreteAll} is a data frame with the following 9 variables.
-\itemize{ \item{cement}{ amount of cement (kg/m^3)}
+\describe{ 
+\item{cement}{ amount of cement (kg/m^3)}
 \item{slag}{ amount of blast furnace slag (kg/m^3)}
 \item{ash}{ amount of fly ash(kg/m^3)} 
 \item{water}{ amount of water (kg/m^3)} 

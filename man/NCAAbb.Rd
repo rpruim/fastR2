@@ -6,7 +6,7 @@
 \title{NCAA Division I Basketball Results}
 \format{
 Nine variables describing NCAA Division I basketball games.
-\itemize{ 
+\describe{ 
 \item{date}{ date on which game was played}
 \item{away}{ visiting team} 
 \item{ascore}{ visiting team's score} 

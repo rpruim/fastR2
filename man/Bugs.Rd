@@ -6,8 +6,10 @@
 \title{Bugs}
 \format{
 A data frame with 24 observations on the following 2 variables.
-\itemize{ \item{Color}{ color of card; one of \code{B}(lue)
-\code{G}(reen) \code{W}(hite) \code{Y}(ellow)} \item{NumTrap}{ number
+\describe{ 
+\item{Color}{ color of card; one of \code{B}(lue)
+\code{G}(reen) \code{W}(hite) \code{Y}(ellow)} 
+\item{NumTrap}{ number
 of insects trapped on the card} }
 }
 \source{

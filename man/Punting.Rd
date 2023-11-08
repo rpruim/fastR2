@@ -6,7 +6,8 @@
 \title{American football punting}
 \format{
 A data frame with 13 observations on the following 7 variables.
-\itemize{ \item{distance}{ mean distance for 10 punts (feet) }
+\describe{ 
+\item{distance}{ mean distance for 10 punts (feet) }
 \item{hang}{ mean hang time (seconds) }
 \item{rStrength}{ right leg strength (pounds)}
 \item{lStrength}{ left leg strength (pounds)}

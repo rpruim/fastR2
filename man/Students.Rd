@@ -6,10 +6,14 @@
 \title{Standardized test scores and GPAs}
 \format{
 A data frame with 1000 observations on the following 6 variables.
-\itemize{ \item{ACT}{ ACT score} \item{SAT}{ SAT score}
+\describe{ 
+\item{ACT}{ ACT score} 
+\item{SAT}{ SAT score}
 \item{Grad}{ has the student graduated from college?}
-\item{gradGPA}{ college GPA at graduation} \item{hsGPA}{ high
-school GPA} \item{Cohort}{ year of graduation or expected graduation}
+\item{gradGPA}{ college GPA at graduation} 
+\item{hsGPA}{ high
+school GPA} 
+\item{Cohort}{ year of graduation or expected graduation}
 }
 }
 \description{

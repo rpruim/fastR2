@@ -6,8 +6,11 @@
 \title{Dwindling soap}
 \format{
 A data frame with 15 observations on the following 3 variables.
-\itemize{ \item{date}{ } \item{day}{ days since start of soap
-usage and data collection} \item{weight}{ weight of bar of soap (in
+\describe{ 
+\item{date}{ } 
+\item{day}{ days since start of soap
+usage and data collection} 
+\item{weight}{ weight of bar of soap (in
 grams) } }
 }
 \source{

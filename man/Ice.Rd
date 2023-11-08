@@ -29,25 +29,37 @@ for the elapsed time formed by concatenating the number of minutes and
 seconds. For example, \code{R1230} contains the temperatures 12 minutes and
 30 seconds after the ice had been removed.
 
-Variables include \itemize{ \item{Subject}{ identification number}
+Variables include 
+\describe{ 
+\item{Subject}{ identification number}
 \item{sex}{ a factor with levels \code{female} \code{male}}
-\item{weight}{ weight of subject (kg)} \item{Height}{ height
-of subject (cm)} \item{Skinfold}{ skinfold thickness}
-\item{calf}{ calf diameter (cm)} \item{Age}{ age of subject}
+\item{weight}{ weight of subject (kg)} 
+\item{Height}{ height of subject (cm)} 
+\item{Skinfold}{ skinfold thickness}
+\item{calf}{ calf diameter (cm)} 
+\item{Age}{ age of subject}
 \item{location}{ a factor with levels \code{intramuscular}
-\code{surface}} \item{Treatment}{ a factor with levels \code{crushed}
-\code{cubed} \code{wet}} \item{B0}{ baseline temperature at time 0}
+\code{surface}} 
+\item{Treatment}{ a factor with levels \code{crushed}
+\code{cubed} \code{wet}} 
+\item{B0}{ baseline temperature at time 0}
 \item{b30}{ baseline temperature 30 seconds after start}
 \item{b100}{ baseline temperature 1 minute after start}
 \item{b1930}{ baseline temperature 19 minutes 30 seconds start}
 \item{t0}{ treatment temperature at beginning of treatment}
 \item{t30}{ treatment temperature 30 seconds after start of
-treatment} \item{t100}{ treatment temperature 1 minute after start of
-treatment} \item{t1930}{ treatment temperature 19 minutes 30 seconds
-after start of treatment} \item{R0}{ recovery temperature at start of
-recovery} \item{r30}{ recovery temperature 30 seconds after start of
-recovery} \item{r100}{ recovery temperature 1 minute after start of
-recovery} \item{r12000}{ recovery temperature 120 minutes after start
+treatment} 
+\item{t100}{ treatment temperature 1 minute after start of
+treatment} 
+\item{t1930}{ treatment temperature 19 minutes 30 seconds
+after start of treatment} 
+\item{R0}{ recovery temperature at start of
+recovery} 
+\item{r30}{ recovery temperature 30 seconds after start of
+recovery} 
+\item{r100}{ recovery temperature 1 minute after start of
+recovery} 
+\item{r12000}{ recovery temperature 120 minutes after start
 of recovery} }
 }
 \examples{

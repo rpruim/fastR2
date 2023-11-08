@@ -6,8 +6,9 @@
 \title{NCAA football fumbles}
 \format{
 A data frame with 120 observations on the following 7 variables.
-\itemize{ \item{team}{ NCAA football team} \item{rank}{ rank
-based on fumbles per game through games on November 26, 2010}
+\describe{ 
+\item{team}{ NCAA football team} 
+\item{rank}{ rank based on fumbles per game through games on November 26, 2010}
 \item{W}{ number of wins through games on November 26, 2010}
 \item{L}{ number of losses through games on November 26, 2010}
 \item{week1}{ number of fumbles on November 6, 2010}

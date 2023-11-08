@@ -7,7 +7,8 @@
 \alias{Trebuchet2}
 \title{Trebuchet data}
 \format{
-Data frames with the following variables.  \itemize{
+Data frames with the following variables.  
+\describe{
 \item{object}{ the object serving as projectile\code{bean} \code{big
 washerb} \code{bigWash} \code{BWB} \code{foose} \code{golf} \code{MWB}
 \code{SWB} \code{tennis ball} \code{wood}}

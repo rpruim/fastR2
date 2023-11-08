@@ -7,7 +7,7 @@
 \format{
 \code{Concrete} is a data frame with the following 
 variables.
-\itemize{ 
+\describe{ 
 \item{limestone}{ percentage of limestone}
 \item{water}{ water-cement ratio}
 \item{strength}{ compressive strength (MPa) after 28 days}

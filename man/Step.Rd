@@ -6,11 +6,14 @@
 \title{Stepping experiment}
 \format{
 A data frame with 30 observations on the following 7 variables.
-\itemize{ \item{order}{ performance order}
+\describe{ 
+\item{order}{ performance order}
 \item{block}{ number of experimenter block}
 \item{restHR}{ resting heart rate (beats per minute)}
-\item{HR}{ final heart rate} \item{height}{ height of step
-(\code{hi} or \code{lo})} \item{freq}{ whether subject stepped
+\item{HR}{ final heart rate} 
+\item{height}{ height of step
+(\code{hi} or \code{lo})} 
+\item{freq}{ whether subject stepped
 \code{fast}, \code{medium}, or \code{slow}} }
 }
 \source{

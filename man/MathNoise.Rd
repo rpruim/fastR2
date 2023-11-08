@@ -6,7 +6,8 @@
 \title{Test performance and noise}
 \format{
 A data frame with 40 observations on the following 3 variables.
-\itemize{ \item{score}{ score on a mathematics test}
+\describe{ 
+\item{score}{ score on a mathematics test}
 \item{noise}{ a factor with levels \code{hi} \code{lo}}
 \item{group}{ a factor with levels \code{control} \code{hyper}} }
 }

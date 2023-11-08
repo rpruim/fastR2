@@ -6,7 +6,9 @@
 \title{Ball dropping data}
 \format{
 A data frame with 30 observations on the following 2 variables.
-\itemize{ \item{height}{ height in meters} \item{time}{ time in seconds} }
+\describe{ 
+\item{height}{ height in meters} 
+\item{time}{ time in seconds} }
 }
 \source{
 Steve Plath, Calvin College Physics Department

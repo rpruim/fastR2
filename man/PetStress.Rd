@@ -6,8 +6,10 @@
 \title{Pets and stress}
 \format{
 A data frame with 45 observations on the following 2 variables.
-\itemize{ \item{group}{ a factor with levels \code{C}ontrol,
-\code{F}riend, or \code{P}et} \item{rate}{ average heart rate while
+\describe{ 
+\item{group}{ a factor with levels \code{C}ontrol,
+\code{F}riend, or \code{P}et} 
+\item{rate}{ average heart rate while
 performing a stressful task} }
 }
 \source{

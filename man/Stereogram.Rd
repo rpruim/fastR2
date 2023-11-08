@@ -6,8 +6,10 @@
 \title{Stereogram fusion}
 \format{
 A data frame with 78 observations on the following 2 variables.
-\itemize{ \item{time}{time until subject was able to fuse a random
-dot stereogram} \item{group}{treatment group: \code{NV}(no visual
+\describe{ 
+\item{time}{time until subject was able to fuse a random
+dot stereogram} 
+\item{group}{treatment group: \code{NV}(no visual
 instructions) \code{VV} (visual instructions)} }
 }
 \source{

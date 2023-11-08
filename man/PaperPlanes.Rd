@@ -6,10 +6,14 @@
 \title{Paper airplanes}
 \format{
 A data frame with 16 observations on the following 5 variables.
-\itemize{ \item{distance}{ distance plane traveled (cm)}
-\item{paper}{ type of paper used} \item{angle}{ a numeric
-vector} \item{design}{ design of plane (\code{hi performance} or
-\code{simple})} \item{order}{ order in which planes were thrown} }
+\describe{ 
+\item{distance}{ distance plane traveled (cm)}
+\item{paper}{ type of paper used} 
+\item{angle}{ a numeric
+vector} 
+\item{design}{ design of plane (\code{hi performance} or
+\code{simple})} 
+\item{order}{ order in which planes were thrown} }
 }
 \source{
 These data are also available at OzDASL, the Australasian Data and

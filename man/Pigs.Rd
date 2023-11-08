@@ -6,13 +6,16 @@
 \title{Pass the Pigs}
 \format{
 A data frame with 6000 observations on the following 6 variables.
-\itemize{ \item{roll}{ roll number (1-6000)}
+\describe{ 
+\item{roll}{ roll number (1-6000)}
 \item{blackScore}{ numerical code for position of black pig}
 \item{black}{ position of black pig coded as a factor}
 \item{pinkScore}{ numerical code for position of pink pig}
 \item{pink}{ position of pink pig coded as a factor}
-\item{score}{ score of the roll} \item{height}{ height from
-which pigs were rolled (5 or 8 inches)} \item{start}{ starting
+\item{score}{ score of the roll} 
+\item{height}{ height from
+which pigs were rolled (5 or 8 inches)} 
+\item{start}{ starting
 position of the pigs (0 = both pigs backwards, 1 = one bacwards one
 forwards, 2 = both forwards)} }
 }

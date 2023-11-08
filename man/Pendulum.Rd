@@ -6,9 +6,11 @@
 \title{Pendulum data}
 \format{
 A data frame with 27 observations on the following 3 variables.
-\itemize{ \item{length}{ length of the pendulum (in meters)}
+\describe{ 
+\item{length}{ length of the pendulum (in meters)}
 \item{period}{ average time of period (in seconds) over several
-swings of the pendulum} \item{delta.length}{ an estimate of the
+swings of the pendulum} 
+\item{delta.length}{ an estimate of the
 accuracy of the length measurement} }
 }
 \source{

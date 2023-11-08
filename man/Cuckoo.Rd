@@ -6,7 +6,8 @@
 \title{Cuckoo eggs in other birds' nests}
 \format{
 A data frame with 120 observations on the following 2 variables.
-\itemize{ \item{length}{ length of egg (mm)}
+\describe{ 
+\item{length}{ length of egg (mm)}
 \item{species}{ a factor with levels \code{hedge sparrow}
 \code{meadow pipet} \code{pied wagtail} \code{robin} \code{tree pipet}
 \code{wren}} }

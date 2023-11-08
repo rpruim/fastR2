@@ -6,7 +6,8 @@
 \title{Corn Yield}
 \format{
 A data frame with 11 observations on the following 2 variables.
-\itemize{ \item{reg}{ yield of regular corn (lbs/acre)}
+\describe{ 
+\item{reg}{ yield of regular corn (lbs/acre)}
 \item{kiln}{ yield of kiln-dried corn (lbs/acre)} }
 }
 \source{

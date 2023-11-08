@@ -6,8 +6,10 @@
 \title{Endurance and vitamin C}
 \format{
 A data frame with 15 observations on the following 5 variables.
-\itemize{ \item{Vitamin}{ number of repetitions until reaching 50%
-maximal grip after taking viatimin} \item{First}{ which treatment was
+\describe{ 
+\item{Vitamin}{ number of repetitions until reaching 50%
+maximal grip after taking viatimin} 
+\item{First}{ which treatment was
 done first, a factor with levels \code{Placebo} \code{Vitamin}}
 \item{Placebo}{ number of repetitions until reaching 50% maximal grip
 strength after taking placebo} }

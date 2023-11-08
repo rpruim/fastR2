@@ -6,7 +6,7 @@
 \title{Airline On-Time Arrival Data}
 \format{
 A data frame with 11000 observations on the following 3 variables.
-\itemize{ 
+\describe{ 
   \item{airport}{ a factor with levels \code{LosAngeles},
     \code{Phoenix}, \code{SanDiego}, \code{SanFrancisco}, \code{Seattle}}
   \item{result}{ a factor with levels \code{Delayed}, \code{OnTime}}
