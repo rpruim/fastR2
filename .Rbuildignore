@@ -3,6 +3,7 @@
 ^.*\.swp$
 ^.*\.swo$
 ^RBuildIgnore$
+^RBuildignore$
 ^.*Rcheck.*$
 ^bin$
 ^fastR_.*gz$
