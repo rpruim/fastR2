@@ -1,4 +1,8 @@
 
+# fastR 1.2.4
+
+* Minor edits to improve documentation
+
 # fastR 1.2.0
 
 * Now using smart partial matching rather than regular expressions to identify snippets.

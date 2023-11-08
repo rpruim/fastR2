@@ -2,17 +2,17 @@
 ## Test environments
 
 * local OS X install 
-  * version  R version 4.1.2 (2021-11-01)
-  * os       macOS Catalina 10.15.7
-  * system   x86_64, darwin17.0
+  * R version 4.2.1 (2022-06-23)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Ventura 13.5
   
 * win-builder via devtools
 
 ## Notes
 
-* This is a minor update primarly to update some email addresses and URLs
-  in documentation.
+* This is a minor update primarily to address some documentation issues that are now
+flagged by CRAN checks.
 
-## Downstream dependencies
+## revdepcheck
 
-None currently.
+*Wow, no problems at all. :)*
