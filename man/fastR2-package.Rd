@@ -4,7 +4,6 @@
 \name{fastR2-package}
 \alias{fastR2}
 \alias{fastR2-package}
-\alias{fastR-package}
 \alias{fastR}
 \title{fastR2: Foundations and Applications of Statistics Using R (2nd Edition)}
 \description{

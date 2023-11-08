@@ -10,7 +10,7 @@
 #' Applications of Statistics: An Introduction Using R} by Randall Pruim.
 #' 
 #' @name fastR2-package
-#' @aliases fastR-package fastR
+#' @aliases fastR
 #' @docType package
 #' @author Randall Pruim
 #' 

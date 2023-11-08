@@ -44,6 +44,6 @@ summary(Scent)
 }
 \references{
 Hirsch, A. R., and Johnston, L. H. "Odors and Learning," Smell
-\& Taste Treatment and Research Foundation, Chicago.
+& Taste Treatment and Research Foundation, Chicago.
 }
 \keyword{datasets}

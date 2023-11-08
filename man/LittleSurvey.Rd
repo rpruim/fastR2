@@ -8,28 +8,28 @@
 A data frame with 279 observations on the following 20 variables.
 \describe{ 
 \item{number}{ a number between 1 and 30}
-\item{colorVer}{ which version of the 'favorite color' question was
+\item{colorver}{ which version of the 'favorite color' question was
 on the survey. A factor with levels \code{v1} \code{v2}}
 \item{color}{ favorite color if among predefined choices.  A factor
 with levels \code{} \code{black} \code{green} \code{other} \code{purple}
 \code{red}} 
-\item{otherColor}{ favorite color if not among choices
+\item{othercolor}{ favorite color if not among choices
 above.} 
-\item{animalVer}{ which version of the 'favorite color'
+\item{animalver}{ which version of the 'favorite color'
 question was on the survey. A factor with levels \code{v1} \code{v2}}
 \item{animal}{ favorite animal if among predefined choices.  A factor
 with levels \code{} \code{elephant} \code{giraffe} \code{lion}
 \code{other}.} 
-\item{otherAnimal}{ favorite animal if not among the
+\item{otheranimal}{ favorite animal if not among the
 predefined choices.} 
-\item{pulseVer}{ which version of the 'pulse'
+\item{pulsever}{ which version of the 'pulse'
 question was on the survey} 
 \item{pulse}{ self-reported pulse}
-\item{TVver}{ which of three versions of the TV question was on the
+\item{tvver}{ which of three versions of the TV question was on the
 survey} 
-\item{tvBox}{ a factor with levels \code{<1} \code{>4}
+\item{tvbox}{ a factor with levels \code{<1} \code{>4}
 \code{>8} \code{1-2} \code{2-4} \code{4-8} \code{none} \code{other}}
-\item{tvHours}{ a numeric vector} 
+\item{tvhours}{ a numeric vector} 
 \item{surprisever}{ which of
 two versions of the 'surprise' question was on the survey}
 \item{surprise}{ a factor with levels \code{no} \code{yes}}

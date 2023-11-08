@@ -7,11 +7,11 @@
 \format{
 A data frame with 15 observations on the following 5 variables.
 \describe{ 
-\item{Vitamin}{ number of repetitions until reaching 50%
+\item{vitamin}{ number of repetitions until reaching 50%
 maximal grip after taking viatimin} 
-\item{First}{ which treatment was
+\item{first}{ which treatment was
 done first, a factor with levels \code{Placebo} \code{Vitamin}}
-\item{Placebo}{ number of repetitions until reaching 50% maximal grip
+\item{placebo}{ number of repetitions until reaching 50% maximal grip
 strength after taking placebo} }
 }
 \source{

@@ -7,8 +7,8 @@
 \format{
 A data frame with 30 observations on the following 20 variables.
 \describe{ 
-\item{Team}{ team city, a factor}
-\item{League}{ League, a factor with levels \code{AL} \code{NL}}
+\item{team}{ team city, a factor}
+\item{league}{ League, a factor with levels \code{AL} \code{NL}}
 \item{W}{ number of wins} 
 \item{L}{ number of losses}
 \item{G}{ number of games} 

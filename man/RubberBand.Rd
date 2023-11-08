@@ -7,9 +7,9 @@
 \format{
 A data frame with 16 observations on the following 2 variables.
 \describe{ 
-\item{Stretch}{ amount rubber band was stretched before
+\item{stretch}{ amount rubber band was stretched before
 launch} 
-\item{Distance}{ distance rubber band traveled } }
+\item{distance}{ distance rubber band traveled } }
 }
 \description{
 Results of an experiment comparing a rubber band travels to the amount it

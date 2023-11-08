@@ -43,7 +43,7 @@ if (require(tidyr)) {
 \references{
 Donald T. Campbell and H. Laurence Ross. "The Connecticut
 Crackdown on Speeding: Time-Series Data in Quasi-Experimental Analysis",
-\emph{Law \& Society Review} Vol. 3, No. 1 (Aug., 1968), pp. 33-54.
+\emph{Law & Society Review} Vol. 3, No. 1 (Aug., 1968), pp. 33-54.
 
 Gene V. Glass. "Analysis of Data on the Connecticut Speeding Crackdown as a
 Time-Series Quasi-Experiment" \emph{Law & Society Review}, Vol. 3, No. 1

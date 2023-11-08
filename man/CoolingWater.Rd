@@ -11,10 +11,10 @@
 \format{
 A data frame with the following variables.
   \describe{
-      \item \code{time} time in seconds
-      \item \code{temp} temperature in Celsius (
-      \code{CoolingWater1}, \code{CoolingWater2}) or 
-      Fahrenheit (\code{CoolingWater3}, \code{CoolingWater4})
+      \item{\code{time}}{ time in seconds}
+      \item{\code{temp}}{ temperature in Celsius (\code{CoolingWater1}, \code{CoolingWater2}) 
+      or Fahrenheit (\code{CoolingWater3}, \code{CoolingWater4})
+      }
   }
 }
 \source{

@@ -7,8 +7,8 @@
 \format{
 A data frame with 134 observations on the following 27 variables.
 \describe{ 
-\item{Number}{ jersey number}
-\item{Player}{ player's name} 
+\item{number}{ jersey number}
+\item{player}{ player's name} 
 \item{GP}{ games played}
 \item{GS}{ games started} 
 \item{Min}{ minutes played}

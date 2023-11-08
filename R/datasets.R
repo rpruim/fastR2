@@ -244,9 +244,9 @@ NULL
 #' @docType data
 #' @format A data frame with 24 observations on the following 2 variables.
 #' \describe{ 
-#' \item{Color}{ color of card; one of \code{B}(lue)
+#' \item{color}{ color of card; one of \code{B}(lue)
 #' \code{G}(reen) \code{W}(hite) \code{Y}(ellow)} 
-#' \item{NumTrap}{ number
+#' \item{trapped}{ number
 #' of insects trapped on the card} }
 #' @source M. C. Wilson and R. E. Shade, Relative attractiveness of various
 #' luminescent colors to the cereal leaf beetle and the meadow spittlebug,
@@ -341,10 +341,10 @@ NULL
 #' @format 
 #'   A data frame with the following variables.
 #'   \describe{
-#'       \item \code{time} time in seconds
-#'       \item \code{temp} temperature in Celsius (
-#'       \code{CoolingWater1}, \code{CoolingWater2}) or 
-#'       Fahrenheit (\code{CoolingWater3}, \code{CoolingWater4})
+#'       \item{\code{time}}{ time in seconds}
+#'       \item{\code{temp}}{ temperature in Celsius (\code{CoolingWater1}, \code{CoolingWater2}) 
+#'       or Fahrenheit (\code{CoolingWater3}, \code{CoolingWater4})
+#'       }
 #'   }
 #' @source
 #' These data were collected by Stan Wagon and his students at Macelester
@@ -472,12 +472,11 @@ NULL
 # The factors are coded more
 # succinctly in \code{deathPen}, but otherwise the data are the same.
 #' \describe{ 
+#' \item{id}{ a subject id}
+#' \item{victim}{ a factor with levels \code{Bl} \code{Wh})} 
+#' \item{defendant}{ a factor with levels \code{Bl}, \code{Wh} } 
 #' \item{death}{ a factor with levels \code{Yes}, \code{No}} 
-#' \item{penalty}{ a factor with levels \code{death}
-#' \code{other}} 
-#' \item{victim}{ a factor with levels 
-#' \code{Bl} \code{Wh})} 
-#' \item{Defendant}{ a factor with levels \code{Bl}, \code{Wh} } 
+#' \item{penalty}{ a factor with levels \code{death} \code{other}} 
 #' }
 #' @source Radelet, M. (1981). Racial characteristics and imposition of the
 #' death penalty. \emph{American Sociological Review}, 46:918--927.
@@ -553,11 +552,11 @@ NULL
 #' @docType data
 #' @format A data frame with 15 observations on the following 5 variables.
 #' \describe{ 
-#' \item{Vitamin}{ number of repetitions until reaching 50%
+#' \item{vitamin}{ number of repetitions until reaching 50%
 #' maximal grip after taking viatimin} 
-#' \item{First}{ which treatment was
+#' \item{first}{ which treatment was
 #' done first, a factor with levels \code{Placebo} \code{Vitamin}}
-#' \item{Placebo}{ number of repetitions until reaching 50% maximal grip
+#' \item{placebo}{ number of repetitions until reaching 50% maximal grip
 #' strength after taking placebo} }
 #' @references Keith, R. E., and Merrill, E. (1983).  The effects of vitamin C
 #' on maximum grip strength and muscular endurance.  \emph{Journal of Sports
@@ -592,9 +591,8 @@ NULL
 #' @docType data
 #' @format A data frame with 5375 observations on the following 2 variables.
 #' \describe{ 
-#' \item{Student}{ a factor with levels \code{DoesNotSmoke}
-#' \code{Smokes}} 
-#' \item{Parents}{ a factor with levels
+#' \item{student}{ a factor with levels \code{DoesNotSmoke} \code{Smokes}} 
+#' \item{parents}{ a factor with levels
 #' \code{NeitherSmokes} \code{OneSmokes}} \code{BothSmoke} }
 #' @references The data also appear in
 #' 
@@ -827,10 +825,11 @@ NULL
 #' @docType data
 #' @format A data frame with 271 observations on the following 4 variables.
 #' \describe{ 
+#' \item{act}{ ACT score}
+#' \item{gpa}{ college grade point average} 
 #' \item{satm}{ SAT mathematics score}
 #' \item{satv}{ SAT verbal score} 
-#' \item{act}{ ACT score}
-#' \item{GPA}{ college grade point average} }
+#' }
 #' @keywords datasets
 #' @examples
 #' 
@@ -1007,27 +1006,27 @@ NULL
 #' @docType data
 #' @format A data frame with 478 observations on the following 11 variables.
 #' \describe{ 
-#' \item{Gender}{ a factor with levels \code{boy}
+#' \item{gender}{ a factor with levels \code{boy}
 #' \code{girl}} 
-#' \item{Grade}{ grade in school}
-#' \item{Age}{ student age} 
-#' \item{Race}{ a factor with levels
-#' \code{Other} \code{White}} 
-#' \item{Urban.Rural}{ a factor with levels
+#' \item{grade}{ grade in school}
+#' \item{age}{ student age} 
+#' \item{race}{ a factor with levels
+#' \code{other} \code{White}} 
+#' \item{urban.rural}{ a factor with levels
 #' \code{Rural} \code{Suburban} \code{Urban}} 
-#' \item{School}{ a factor
+#' \item{school}{ a factor
 #' with levels \code{Brentwood Elementary} \code{Brentwood Middle} \code{Brown
 #' Middle} \code{Elm} \code{Main} \code{Portage} \code{Ridge} \code{Sand}
 #' \code{Westdale Middle}} 
-#' \item{Goals}{ a factor with levels
+#' \item{goals}{ a factor with levels
 #' \code{Grades} \code{Popular} \code{Sports}} 
-#' \item{Grades}{ rank of
+#' \item{grades}{ rank of
 #' `make good grades' (1 = most important for popularity; 4 = least important)}
-#' \item{Sports}{ rank of `beging good at sports' (1 = most important for
+#' \item{sports}{ rank of `beging good at sports' (1 = most important for
 #' popularity; 4 = least important)} 
-#' \item{Looks}{ rank of `beging
+#' \item{looks}{ rank of `beging
 #' handsome or pretty' (1 = most important for popularity; 4 = least important)}
-#' \item{Money}{ rank of `having lots of money' (1 = most important for
+#' \item{money}{ rank of `having lots of money' (1 = most important for
 #' popularity; 4 = least important)} }
 #' @references Chase, M. A., and Dummer, G. M. (1992), "The Role of Sports as a
 #' Social Determinant for Children," Research Quarterly for Exercise and Sport,
@@ -1061,28 +1060,28 @@ NULL
 #' @format A data frame with 279 observations on the following 20 variables.
 #' \describe{ 
 #' \item{number}{ a number between 1 and 30}
-#' \item{colorVer}{ which version of the 'favorite color' question was
+#' \item{colorver}{ which version of the 'favorite color' question was
 #' on the survey. A factor with levels \code{v1} \code{v2}}
 #' \item{color}{ favorite color if among predefined choices.  A factor
 #' with levels \code{} \code{black} \code{green} \code{other} \code{purple}
 #' \code{red}} 
-#' \item{otherColor}{ favorite color if not among choices
+#' \item{othercolor}{ favorite color if not among choices
 #' above.} 
-#' \item{animalVer}{ which version of the 'favorite color'
+#' \item{animalver}{ which version of the 'favorite color'
 #' question was on the survey. A factor with levels \code{v1} \code{v2}}
 #' \item{animal}{ favorite animal if among predefined choices.  A factor
 #' with levels \code{} \code{elephant} \code{giraffe} \code{lion}
 #' \code{other}.} 
-#' \item{otherAnimal}{ favorite animal if not among the
+#' \item{otheranimal}{ favorite animal if not among the
 #' predefined choices.} 
-#' \item{pulseVer}{ which version of the 'pulse'
+#' \item{pulsever}{ which version of the 'pulse'
 #' question was on the survey} 
 #' \item{pulse}{ self-reported pulse}
-#' \item{TVver}{ which of three versions of the TV question was on the
+#' \item{tvver}{ which of three versions of the TV question was on the
 #' survey} 
-#' \item{tvBox}{ a factor with levels \code{<1} \code{>4}
+#' \item{tvbox}{ a factor with levels \code{<1} \code{>4}
 #' \code{>8} \code{1-2} \code{2-4} \code{4-8} \code{none} \code{other}}
-#' \item{tvHours}{ a numeric vector} 
+#' \item{tvhours}{ a numeric vector} 
 #' \item{surprisever}{ which of
 #' two versions of the 'surprise' question was on the survey}
 #' \item{surprise}{ a factor with levels \code{no} \code{yes}}
@@ -1216,8 +1215,8 @@ NULL
 #' @docType data
 #' @format A data frame with 134 observations on the following 27 variables.
 #' \describe{ 
-#' \item{Number}{ jersey number}
-#' \item{Player}{ player's name} 
+#' \item{number}{ jersey number}
+#' \item{player}{ player's name} 
 #' \item{GP}{ games played}
 #' \item{GS}{ games started} 
 #' \item{Min}{ minutes played}
@@ -1267,8 +1266,8 @@ NULL
 #' @docType data
 #' @format A data frame with 30 observations on the following 20 variables.
 #' \describe{ 
-#' \item{Team}{ team city, a factor}
-#' \item{League}{ League, a factor with levels \code{AL} \code{NL}}
+#' \item{team}{ team city, a factor}
+#' \item{league}{ League, a factor with levels \code{AL} \code{NL}}
 #' \item{W}{ number of wins} 
 #' \item{L}{ number of losses}
 #' \item{G}{ number of games} 
@@ -1360,10 +1359,10 @@ NULL
 #' \describe{ 
 #' \item{date}{ date on which game was played}
 #' \item{visitor}{ visiting team} 
-#' \item{VisitorScore}{ score for visiting team} 
-#' \item{Home}{ home team} 
-#' \item{HomeScore}{ score for home team} 
-#' \item{Line}{ `betting line'}
+#' \item{visitorScore}{ score for visiting team} 
+#' \item{home}{ home team} 
+#' \item{homeScore}{ score for home team} 
+#' \item{line}{ `betting line'}
 #' \item{totalLine}{ 'over/under' line (for combined score of both teams)} }
 #' @keywords datasets
 #' @examples
@@ -1877,9 +1876,9 @@ NULL
 #' @docType data
 #' @format A data frame with 16 observations on the following 2 variables.
 #' \describe{ 
-#' \item{Stretch}{ amount rubber band was stretched before
+#' \item{stretch}{ amount rubber band was stretched before
 #' launch} 
-#' \item{Distance}{ distance rubber band traveled } }
+#' \item{distance}{ distance rubber band traveled } }
 #' @keywords datasets
 #' @examples
 #' 
@@ -1925,7 +1924,7 @@ NULL
 #' \item{s2}{ time (in seconds) in second scented trial}
 #' \item{s3}{ time (in seconds) in third scented trial} }
 #' @references Hirsch, A. R., and Johnston, L. H. "Odors and Learning," Smell
-#' \& Taste Treatment and Research Foundation, Chicago.
+#' & Taste Treatment and Research Foundation, Chicago.
 #' @source These data are also available at DASL, the data and story library
 # (\url{ftp://sunsite.univie.ac.at/mirrors/lib.stat.cmu.edu/DASL/.index.html}).
 #' (\url{https://dasl.datadescription.com/}).
@@ -2121,11 +2120,11 @@ NULL
 #' \describe{ 
 #' \item{ACT}{ ACT score} 
 #' \item{SAT}{ SAT score}
-#' \item{Grad}{ has the student graduated from college?}
+#' \item{grad}{ has the student graduated from college?}
 #' \item{gradGPA}{ college GPA at graduation} 
 #' \item{hsGPA}{ high
 #' school GPA} 
-#' \item{Cohort}{ year of graduation or expected graduation}
+#' \item{cohort}{ year of graduation or expected graduation}
 #' }
 #' @keywords datasets
 #' @examples
@@ -2237,7 +2236,7 @@ NULL
 #' \item{ri}{ deaths per 100,000 in in Rhode Island} }
 #' @references Donald T. Campbell and H. Laurence Ross. "The Connecticut
 #' Crackdown on Speeding: Time-Series Data in Quasi-Experimental Analysis",
-#' \emph{Law \& Society Review} Vol. 3, No. 1 (Aug., 1968), pp. 33-54.
+#' \emph{Law & Society Review} Vol. 3, No. 1 (Aug., 1968), pp. 33-54.
 #' 
 #' Gene V. Glass. "Analysis of Data on the Connecticut Speeding Crackdown as a
 #' Time-Series Quasi-Experiment" \emph{Law & Society Review}, Vol. 3, No. 1

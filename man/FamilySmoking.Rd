@@ -7,9 +7,8 @@
 \format{
 A data frame with 5375 observations on the following 2 variables.
 \describe{ 
-\item{Student}{ a factor with levels \code{DoesNotSmoke}
-\code{Smokes}} 
-\item{Parents}{ a factor with levels
+\item{student}{ a factor with levels \code{DoesNotSmoke} \code{Smokes}} 
+\item{parents}{ a factor with levels
 \code{NeitherSmokes} \code{OneSmokes}} \code{BothSmoke} }
 }
 \source{
