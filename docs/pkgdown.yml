@@ -1,7 +1,7 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pandoc: 3.1.6.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Errata2e: Errata2e.html
-last_built: 2022-03-15T23:00Z
+last_built: 2023-11-09T13:07Z
 
