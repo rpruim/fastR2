@@ -7,13 +7,13 @@
 maxLik2(loglik, ..., env = parent.frame())
 }
 \arguments{
-\item{loglik}{a log-likelihood function as for \code{\link{maxLik}}}
+\item{loglik}{a log-likelihood function as for [maxLik::maxLik()].}
 
-\item{...}{additional arguments passed to \code{\link{maxLik}}}
+\item{...}{additional arguments passed to [maxLik::maxLik()].}
 
 \item{env}{an environment in which to evaluate \code{loglik}.}
 }
 \description{
-This version of \code{\link{maxLik}} stores additional information in the 
+This version of [max::maxLik()] stores additional information in the 
 returned object enabling a plot method.
 }

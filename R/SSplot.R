@@ -6,7 +6,7 @@ utils::globalVariables(c(".index"))
 #' sum of squares resulting from adding predictors to a model.
 #' 
 #' @param model1 a linear model
-#' @param model2 a linear model, often using \code{\link{rand}()}.
+#' @param model2 a linear model, often using [mosaic::rand()].
 #' @param n an integer specifying how many times to regenerate 
 #'   \code{model2}.
 #' @param col1,col2,col3 Colors for the line segments in the plot

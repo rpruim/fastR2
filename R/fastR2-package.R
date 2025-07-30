@@ -11,7 +11,6 @@
 #' 
 #' @name fastR2-package
 #' @aliases fastR
-#' @docType package
 #' @author Randall Pruim
 #' 
 #' Maintainer: Randall Pruim <rpruim@@calvin.edu>
@@ -25,6 +24,6 @@
 
 #' @import mosaic
 #' @importFrom stats coef df qnorm
-NULL
+"_PACKAGE"
 
 

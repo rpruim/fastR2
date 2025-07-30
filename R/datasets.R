@@ -1242,7 +1242,7 @@ NULL
 #' \item{Stl}{ steals}
 #' \item{Pts}{ points scored} 
 #' \item{PTSG}{ points per game} }
-#' @source MIAA sports archives (\url{https://www.miaa.org/})
+#' @source MIAA sports archives (\url{https://miaa.org/})
 #' @keywords datasets
 #' @examples
 #' 

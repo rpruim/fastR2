@@ -2,7 +2,6 @@
 % Please edit documentation in R/fastR2-package.R
 \docType{package}
 \name{fastR2-package}
-\alias{fastR2}
 \alias{fastR2-package}
 \alias{fastR}
 \title{fastR2: Foundations and Applications of Statistics Using R (2nd Edition)}
@@ -22,6 +21,14 @@ trellis.par.set(theme=col.fastR())
 R. Pruim, \cite{Foundations and Applicaitons of Statistics: An Introduction Using R}, AMS, 2011.
 }
 \seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/rpruim/fastR2}
+  \item \url{http://rpruim.github.io/fastR2/}
+  \item Report bugs at \url{https://github.com/rpruim/fastR2/issues}
+}
+
+
 Useful links:
 \itemize{
   \item \url{https://github.com/rpruim/fastR2}

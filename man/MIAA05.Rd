@@ -36,7 +36,7 @@ A data frame with 134 observations on the following 27 variables.
 \item{PTSG}{ points per game} }
 }
 \source{
-MIAA sports archives (\url{https://www.miaa.org/})
+MIAA sports archives (\url{https://miaa.org/})
 }
 \description{
 Individual player statistics for the 2004-2005 Michigan Intercollegiate

@@ -6,11 +6,11 @@
 #' @param bw whether color scheme should be "black and white"
 #' @param lty vector of line type codes
 #' @return Returns a list that can be supplied as the \code{theme} to
-#' \code{\link{trellis.par.set}()}.
+#' [lattice::trellis.par.set()].
 #' @note This theme was used in the production of the book \cite{Foundations
 #' and Applications of Statistics}
 #' @author Randall Pruim
-#' @seealso \code{\link{trellis.par.set}}, \code{\link{show.settings}}
+#' @seealso [lattice::trellis.par.set()], [lattice::show.settings()]
 #' @keywords graphics
 #' @importFrom grDevices colorRampPalette gray heat.colors 
 #' @export

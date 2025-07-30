@@ -21,6 +21,6 @@ be added}
 \item{...}{additional arguments, currently ignored.}
 }
 \description{
-See \code{\link{maxLik2}} and \code{\link{maxLik}} for how to create
+See [maxLik2()] and [maxLik::maxLik()] for how to create
 the objects this method prints.
 }

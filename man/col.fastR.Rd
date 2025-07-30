@@ -13,7 +13,7 @@ col.fastR(bw = FALSE, lty = 1:7)
 }
 \value{
 Returns a list that can be supplied as the \code{theme} to
-\code{\link{trellis.par.set}()}.
+[lattice::trellis.par.set()].
 }
 \description{
 A theme for use with lattice graphics.
@@ -30,7 +30,7 @@ trellis.par.set(theme=col.fastR())
 show.settings()
 }
 \seealso{
-\code{\link{trellis.par.set}}, \code{\link{show.settings}}
+[lattice::trellis.par.set()], [lattice::show.settings()]
 }
 \author{
 Randall Pruim

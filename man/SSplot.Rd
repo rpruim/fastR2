@@ -21,7 +21,7 @@ SSplot(
 \arguments{
 \item{model1}{a linear model}
 
-\item{model2}{a linear model, often using \code{\link{rand}()}.}
+\item{model2}{a linear model, often using [mosaic::rand()].}
 
 \item{n}{an integer specifying how many times to regenerate 
 \code{model2}.}

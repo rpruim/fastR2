@@ -2,12 +2,12 @@ utils::globalVariables("theta")
 
 #' Augmented version of maxLik
 #' 
-#' This version of \code{\link{maxLik}} stores additional information in the 
+#' This version of [max::maxLik()] stores additional information in the 
 #' returned object enabling a plot method.
 #' 
 #' 
-#' @param loglik a log-likelihood function as for \code{\link{maxLik}}
-#' @param ... additional arguments passed to \code{\link{maxLik}}
+#' @param loglik a log-likelihood function as for [maxLik::maxLik()].
+#' @param ... additional arguments passed to [maxLik::maxLik()].
 #' @param env an environment in which to evaluate \code{loglik}.
 #' @importFrom numDeriv grad 
 #' @importFrom maxLik maxLik 
@@ -35,7 +35,7 @@ maxLik2 <- function(loglik, ..., env = parent.frame()) {
 
 #' plot method for augment maxLik objects
 #' 
-#' See \code{\link{maxLik2}} and \code{\link{maxLik}} for how to create
+#' See [maxLik2()] and [maxLik::maxLik()] for how to create
 #' the objects this method prints.
 #' 
 #' @param x an object of class \code{"maxLik2"}
