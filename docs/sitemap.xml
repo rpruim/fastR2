@@ -1,240 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Errata2e.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ACTgpa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AirPollution.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AirlineArrival.html</loc>
-  </url>
-  <url>
-    <loc>/reference/BallDrop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Batting.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Buckthorn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Bugs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Concrete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ConcreteAll.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CoolingWater.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Corn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Cuckoo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/DeathPenalty.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Drag.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Endurance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/FUSION.html</loc>
-  </url>
-  <url>
-    <loc>/reference/FamilySmoking.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Fumbles.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GPA.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GoosePermits.html</loc>
-  </url>
-  <url>
-    <loc>/reference/HeliumFootballs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Ice.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Inflation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Jordan8687.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Kids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/LittleSurvey.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MIAA05.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MLB2004.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MathNoise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NCAAbb.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NFL2007.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Noise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Pallets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PaperPlanes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Pendulum.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PetStress.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Pigs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Pitching2005.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Poison.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Punting.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RatPoison.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RubberBand.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SSplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Scent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Soap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Spheres.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Step.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Stereogram.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Students.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TasteTest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TireWear.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Traffic.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Trebuchet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Unemployment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/WorkingWomen.html</loc>
-  </url>
-  <url>
-    <loc>/reference/col.fastR.html</loc>
-  </url>
-  <url>
-    <loc>/reference/col.perc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fastR-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fastR2-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geolm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/givenOrder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/golfballs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/information.html</loc>
-  </url>
-  <url>
-    <loc>/reference/maxLik2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nlmax.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.maxLik2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rgolfballs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/snippet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tdf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/undocumented.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vaov.html</loc>
-  </url>
-  <url>
-    <loc>/reference/wilson.ci.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/Errata2e.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/ACTgpa.html</loc></url>
+<url><loc>/reference/AirPollution.html</loc></url>
+<url><loc>/reference/AirlineArrival.html</loc></url>
+<url><loc>/reference/BallDrop.html</loc></url>
+<url><loc>/reference/Batting.html</loc></url>
+<url><loc>/reference/Buckthorn.html</loc></url>
+<url><loc>/reference/Bugs.html</loc></url>
+<url><loc>/reference/Concrete.html</loc></url>
+<url><loc>/reference/ConcreteAll.html</loc></url>
+<url><loc>/reference/CoolingWater.html</loc></url>
+<url><loc>/reference/Corn.html</loc></url>
+<url><loc>/reference/Cuckoo.html</loc></url>
+<url><loc>/reference/DeathPenalty.html</loc></url>
+<url><loc>/reference/Drag.html</loc></url>
+<url><loc>/reference/Endurance.html</loc></url>
+<url><loc>/reference/FUSION.html</loc></url>
+<url><loc>/reference/FamilySmoking.html</loc></url>
+<url><loc>/reference/Fumbles.html</loc></url>
+<url><loc>/reference/GPA.html</loc></url>
+<url><loc>/reference/GoosePermits.html</loc></url>
+<url><loc>/reference/HeliumFootballs.html</loc></url>
+<url><loc>/reference/Ice.html</loc></url>
+<url><loc>/reference/Inflation.html</loc></url>
+<url><loc>/reference/Jordan8687.html</loc></url>
+<url><loc>/reference/Kids.html</loc></url>
+<url><loc>/reference/LittleSurvey.html</loc></url>
+<url><loc>/reference/MIAA05.html</loc></url>
+<url><loc>/reference/MLB2004.html</loc></url>
+<url><loc>/reference/MathNoise.html</loc></url>
+<url><loc>/reference/NCAAbb.html</loc></url>
+<url><loc>/reference/NFL2007.html</loc></url>
+<url><loc>/reference/Noise.html</loc></url>
+<url><loc>/reference/Pallets.html</loc></url>
+<url><loc>/reference/PaperPlanes.html</loc></url>
+<url><loc>/reference/Pendulum.html</loc></url>
+<url><loc>/reference/PetStress.html</loc></url>
+<url><loc>/reference/Pigs.html</loc></url>
+<url><loc>/reference/Pitching2005.html</loc></url>
+<url><loc>/reference/Poison.html</loc></url>
+<url><loc>/reference/Punting.html</loc></url>
+<url><loc>/reference/RatPoison.html</loc></url>
+<url><loc>/reference/RubberBand.html</loc></url>
+<url><loc>/reference/SSplot.html</loc></url>
+<url><loc>/reference/Scent.html</loc></url>
+<url><loc>/reference/Soap.html</loc></url>
+<url><loc>/reference/Spheres.html</loc></url>
+<url><loc>/reference/Step.html</loc></url>
+<url><loc>/reference/Stereogram.html</loc></url>
+<url><loc>/reference/Students.html</loc></url>
+<url><loc>/reference/TasteTest.html</loc></url>
+<url><loc>/reference/TireWear.html</loc></url>
+<url><loc>/reference/Traffic.html</loc></url>
+<url><loc>/reference/Trebuchet.html</loc></url>
+<url><loc>/reference/Unemployment.html</loc></url>
+<url><loc>/reference/WorkingWomen.html</loc></url>
+<url><loc>/reference/col.fastR.html</loc></url>
+<url><loc>/reference/col.perc.html</loc></url>
+<url><loc>/reference/fastR-package.html</loc></url>
+<url><loc>/reference/fastR2-package.html</loc></url>
+<url><loc>/reference/geolm.html</loc></url>
+<url><loc>/reference/givenOrder.html</loc></url>
+<url><loc>/reference/golfballs.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/information.html</loc></url>
+<url><loc>/reference/maxLik2.html</loc></url>
+<url><loc>/reference/nlmax.html</loc></url>
+<url><loc>/reference/plot.maxLik2.html</loc></url>
+<url><loc>/reference/rgolfballs.html</loc></url>
+<url><loc>/reference/snippet.html</loc></url>
+<url><loc>/reference/tdf.html</loc></url>
+<url><loc>/reference/undocumented.html</loc></url>
+<url><loc>/reference/vaov.html</loc></url>
+<url><loc>/reference/wilson.ci.html</loc></url>
 </urlset>
+
